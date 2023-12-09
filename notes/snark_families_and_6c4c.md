@@ -6,10 +6,7 @@ Here's a list of snark families with proven Berge&ndash;Fulkerson conjecture, wh
 
 "It has therefore become customary to define a snark as an uncolourable cubic cyclically 4-edge-connected graph with girth at least 5."
 
-## Loupekhine (Loupekine) snarks of first and second kind
-
-(For some reason, there are 2 versions of this snark family name)
-https://en.wikipedia.org/wiki/Loupekine_snarks
+## Loupekhine (Loupekine) snarks of type 1 and 2
 
 ## Watkins snark
 
