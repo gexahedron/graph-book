@@ -19,3 +19,11 @@ Because this family of snarks has a strong Petersen coloring, we get a free resu
 
 ## Conjectures around o6c4c
 
+Let's define some terminology:
+- $s0$ — number of circuits (circuit is a connected cycle; there are 12 in the solution for Petersen graph)
+- $s1$ — number of rich edges (15 for Petersen graph)
+- $s2$ — half of the number of perfect matchings with even number of rich edges (so in general it’s equal to 0, 1, 2 or 3) (0 for Petersen graph)
+
+Then:
+- If $or = 0$, then $s2 = 3$;
+- If $or = 0$, then $s0$ has same parity as $s1$;
