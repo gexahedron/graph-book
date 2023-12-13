@@ -9,9 +9,9 @@ https://en.wikipedia.org/wiki/Snark_(graph_theory)
 ## Question of triviality
 "It has therefore become customary to define a snark as an uncolourable cubic cyclically 4-edge-connected graph with girth at least 5."
 
-TODO: why we ask for cyclically 4-edge connected cubic graphs, why not consider also (cyclically) 3-edge connected?
+TODO: why we ask for cyclically 4-edge connected cubic graphs, why not consider also cyclically 3-edge connected (same as 3-edge connected) graphs?
 
-Here we consider snarks with girth > 3, so we don't include e. g. Tietze's graph. But usually, even girth 4 is not considered.
+Also, here we consider snarks with girth > 3, so we don't include e. g. Tietze's graph. But usually, even girth 4 is considered as a trivial case.
 
 ## Petersen graph
 
@@ -22,6 +22,8 @@ Here we consider snarks with girth > 3, so we don't include e. g. Tietze's graph
 ## Blanuša snarks of type 1 and 2
 
 ## Double-star snark
+
+## Watkins snark
 
 ## BDS snarks
 
@@ -34,7 +36,18 @@ Here we consider snarks with girth > 3, so we don't include e. g. Tietze's graph
 (For some reason, there are 2 versions of this snark family name)
 https://en.wikipedia.org/wiki/Loupekine_snarks
 
-## Watkins snark
+## Permutation snarks
+
+## Binary (Hist) snarks
+
+## Máčajová-Škoviera rotation snarks
+
+## TODO: Boolean snarks
+
+## TODO: not-(yet)-found snarks
+
+- 7-cyclically connected snarks
+- Cayley snarks
 
 ## TODO: Snark constructions
 
