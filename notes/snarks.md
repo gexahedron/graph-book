@@ -27,8 +27,6 @@ Also, here we consider snarks with girth > 3, so we don't include e. g. Tietze's
 
 ## BDS snarks
 
-## Small snarks (upto 36 vertices)
-
 ## Flower snarks
 
 ## Loupekhine (Loupekine) snarks of type 1 and 2
@@ -43,6 +41,24 @@ https://en.wikipedia.org/wiki/Loupekine_snarks
 ## Máčajová-Škoviera rotation snarks
 
 ## TODO: Boolean snarks
+
+## Small snarks (upto 36 vertices)
+
+## Critical snarks
+
+## Bicritical snarks
+
+## Strictly critical snarks
+
+There are no strictly critical snarks of any order smaller than 32.
+
+There exist strictly critical snarks of order n for every even integer $n \ge 32$.
+
+## Irreducible snarks
+
+## Higher girth snarks
+
+## 6-cyclically connected snarks
 
 ## TODO: not-(yet)-found snarks
 
