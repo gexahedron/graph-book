@@ -15,7 +15,7 @@ We will abbreviate this construction as o6c4c.
 
 ### Generalised Blanuša snark of type 1 with an odd number of A-blocks
 
-Because this family of snarks has a strong Petersen coloring (TODO: add reference), we get a corollary for free, that they also have an o6c4c solution.
+Because this family of snarks has a strong Petersen colouring (TODO: add reference), we get a corollary for free, that they also have an o6c4c solution.
 
 ## Conjectures around o6c4c
 
