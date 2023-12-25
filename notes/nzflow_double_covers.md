@@ -44,6 +44,7 @@ Nevertheless, looks like most (or almost all) snarks have 233-flows. Here are th
 
 For 234-flows we have even less counterexamples, it even looks like it's just a single family (but of course this could break after, say, 34 or more vertices): 10.05g1, 20.05g1, 26.05g141
 
+- TODO: visualize these graphs
 - TODO: check 28 vertices and more
 
 - TODO: 235-flows: check the list above
@@ -57,28 +58,32 @@ Snarks can't have o23k-flows, because otherwise $f1-f2$ would give a nz4-flow fo
 
 Looks like there do exist 333-flows for all snarks (verified for small "nontrivial" snarks with $\le 28$ vertices).
 
-- Side note: it's also possible to ask for subgraphs to have same edge count (checked for same snarks), although we are not sure what this could be useful for.
+- Side note: it's also possible to ask for subgraphs to have same edge count (checked for same small snarks), although we are not sure what this could be useful for.
 
 ## o333-flows
 
-TODO: list counterexamples
+- TODO: list counterexamples
+- TODO: can we ask for 333-flows, where only 1 or 2 pairs of nz3-flows is oriented?
 
 ## o334-flows
 
 Looks like there do exist o334-flows for all snarks (verified for small "nontrivial" snarks).
 
-$f1 - f2$ provides nz5-flow for the original graph.
+Also, $f1 - f2$ provides nz5-flow for the original graph.
 
-- TODO: re-verify
 - TODO: explore this construction more
 
 ## More constructions
 
 TODOs:
-- 2223-flows
+- ? 2223-flows
 - o2233-flows
 
-## Trivial stuff
+## Full spectrum
 
-- o22222-flows = o5cdc
 - o55-flows = nz5
+- o244-flows + o334-flows + 333-flows
+- o2233-flows + (? 2223-flows)
+- o22222-flows = o5cdc
+
+Also, interesting to note that for orientable conjectures the sum of flow values is always expected to be 10 in the best possible case ($5+5, 2+4+4, 3+3+4, 2+2+3+3, 2+2+2+2+2$).
