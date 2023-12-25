@@ -126,3 +126,46 @@ Conjecture: there are $4k+2$ vertices in the graph.
 ## o244-flows
 
 TODO
+
+## o6c4c vs nz-mod6 flow
+
+Looks like we can always find some o6c4c where we can weight cycles and sum them mod $6$ such that we get a nz-mod6 flow (verified for small "nontrivial" snarks with $\le 28$ vertices).
+
+TODO: check weights
+
+## Snarks, where o6c4c doesn't produce nz-mod5 flow
+
+- 18.05: g2
+- 24.05: g30
+- 26.05: g6, g7, g29, g98, g100, g126, g134, g139, g167, g177, g181, g206, g208, g236, g261, g279
+- 28.05: 101 snarks (out of 2900)
+
+## Snarks, where o6c4c doesn't produce nz5 flow
+
+- 18.05: g2
+- 20.05: g1
+- 22.05: g20
+- 24.05: g6, g17, g27, g28, g30, g31
+- TODO: 26.05, 28.05
+
+- TODO: looks like the same list is for snarks without "nz-modb"
+
+## TODO: o6c4c with nz5
+
+Let's assume that we can build nz5 from o6c4c.
+
+- Conjecture: we can only have one of following types of weights for 6 cycles:
+  - -4 -3 -2 0 0 0
+  - -4 -2 -1 0 0 0
+  - -3 -2 -1 0 0 0
+  - -3 -1 0 0 0 1
+  - -2 -1 0 0 0 1
+  - -2 -1 0 0 0 2
+  - -2 0 0 0 1 2
+  - -1 0 0 0 1 2
+  - -1 0 0 0 1 3
+  - 0 0 0 1 2 3
+  - 0 0 0 1 2 4
+  - 0 0 0 2 3 4
+    
+## TODO: oriented vs ignored
