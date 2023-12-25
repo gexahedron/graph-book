@@ -36,6 +36,7 @@
 - shortest 3-cycle cover
 - shortest 4-cycle cover
 - ? shortest oriented-cycle cover
+- ? circular flow
 - realization as icosidodecahedron/dodecadodecahedron
 - $Z_5$-connectivity
 - $TC3$
