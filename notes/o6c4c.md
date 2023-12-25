@@ -51,10 +51,12 @@ o6c4c landscape:
 - has 2cdcs
 - has nz-mod5, but no nz5
 - or2
+- strong Petersen colouring
 - s1s0diff <= 0 (28.05) or -1 (30.05)
 - no chords
 
 more subtle:
+- odd or count is different from even or count
 - any_chords_frequency[1] = 0 (+any_chords_frequency[2] = 0)
 - non-zero nz5 or-sums
 - solutions with multiple orientations
@@ -68,15 +70,21 @@ more subtle:
 If you check the solution for Petersen graph, you can notice that it's possible to split all circuits into 2 separate cycle covers, so that we get 2 6cdc covers.
 - TODO: insert illustration here
 - TODO: write out conjectures:
-    - total_poor_comps > 1
+    - TODO?: $s1 \ne 18$
+    - total_poor_comps > 1 (TODO: except for Petersen graph?)
     - odd_poor_2-factors = 0
-    - s2 is either 0 or 3
+    - s2 is either 0 or 3 (s2uu = 3)
     
     - if the solution is orientable (so we have o6c4c) then
+        - or_sums are divisible by 5
+        - $or \ge 3$
         - s0 is even
         - or + s1 is even (or same as saying that t4 is even)
 
 ## $or = 0$ solutions
+
+TODO:
+- check 244-flows
 
 Snarks with $or = 0$:
 - 20.05: g5
@@ -87,18 +95,27 @@ Snarks with $or = 0$:
 
 So, quite a lot of small snarks have at least 1 o6c4c solution with 0 oriented vertices
 
+## $or = 2$ solutions
+
+- $s2 \ne 0$
+- $or = 2, s2 = 3$ behaves exactly like $or = 0$ case
+
 ## onlyrich (with o6c4c)
 
-- 10.05: g1
+Conjecture: there are $4k+2$ vertices in the graph.
+
+- 10.05: g1 (Petersen graph)
 - 22.05: g1
 - 26.05: g172, g173, g226, g243, g253, g254, g255, g257, g280
-- 28.05: none
 - 30.05: g307, g4099, g4541, g10117, g13042, g13252, g13796, g14094, g22848, g22915, g22916, g24295, g24381, g26256, g26257, g27826
+
+- TODO (kind-of-counterexample): 30.05g14094: s0+s1+s2 % 2 = 0, instead of 1
 
 ## (kind-of-counterexample) onlyrich 6c4c, but no o6c4c
 
 - TODO: 30.05g3269
 - TODO: are there any others?
+- TODO: do we still have $4k+2$ vertices here?
 
 ## $s1 \ge 15$
 
