@@ -1,11 +1,11 @@
 # Berge&ndash;Fulkerson conjecture and related conjectures
 
 ```mermaid
-flowchart LR
-  pc[Petersen colouring] --> 6c4c{Berge-Fulkerson\nBerge\n6c4c\nNZ244-flows}
+flowchart TB
+  pc[Petersen colouring] --> 6c4c[<b>Berge-Fulkerson\nBerge\n6c4c\nNZ244-flows</b>]
   o6c4c([o6c4c]) --> 6c4c
-  rgraph{{r-graph BF}} --[r=3]--> 6c4c
   o244([oNZ244-flows]) --> 6c4c
+  rgraph{{r-graph BF}} --[r=3]--> 6c4c
   6c4c --> fr[Fan-Raspaud\nFano 4-flow]
   fr --> fano5[Fano 5-flow]
   
@@ -20,6 +20,10 @@ flowchart LR
   s4:::theorem
   fr --> s4[S4]
 ```
+
+TODO:
+- Mazzuoccolo conjectures
+- Does S4 follow from Fano 5-flow?
 
 ## Berge&ndash;Fulkerson conjecture
 
