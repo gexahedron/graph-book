@@ -13,6 +13,8 @@ TODO: why we ask for cyclically 4-edge connected cubic graphs, why not consider 
 
 Also, here we consider snarks with girth > 3, so we don't include e. g. Tietze's graph. But usually, even girth 4 is considered as a trivial case.
 
+TODO: dumbbell graph
+
 ## Petersen graph
 
 ## Descartes snark
@@ -60,10 +62,16 @@ There exist strictly critical snarks of order n for every even integer $n \ge 32
 
 ## 6-cyclically connected snarks
 
+## Frumious snarks
+
 ## TODO: not-(yet)-found snarks
 
 - 7-cyclically connected snarks
 - Cayley snarks
+
+What about:
+- ? matroids
+- ? signed graphs
 
 ## TODO: Snark constructions
 
