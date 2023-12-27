@@ -1,5 +1,9 @@
 # Petersen graph
 
+## Circuits
+
+## Cycles
+
 ## Nowhere-zero 5-flows
 
 ## Nowhere-zero modular 5-flows
@@ -16,11 +20,13 @@
 
 ## Oriented Berge&ndash;Fulkerson cover (o6c4c)
 
-## Oriented 244-flows
+## Oriented 244-flows (o244-flows)
 
 ## 333-flows
 
 ## o333-flows
+
+## o2233-flows
 
 ## Normal 5-edge colouring (aka Petersen colouring)
 
@@ -30,7 +36,7 @@
 
 ## Tree-Cycle-Matching decomposition
 
-## TODO: more
+## TODO: even more
 
 - faithful circuit cover
 - shortest 3-cycle cover
