@@ -3,6 +3,12 @@
     ./snarkhunter-64 22 5 s S C4
     then it will be the 2151st.
 
+
+234-flows
+20.05g1
+26.05g141
+
+
 - 28.05g611:
     // if (total_poor_comps == 1) {
     //   assert(s0 % 2 == 0); // breaks on 28.05g611
