@@ -62,7 +62,13 @@ Looks like there do exist 333-flows for all snarks (verified for small "nontrivi
 
 ## o333-flows
 
-- TODO: list counterexamples
+Some snarks also have o333-flows, here are the exceptions:
+- 10 vertices: none
+- 18 vertices: none
+- 20 vertices: g1, g6
+- 22 vertices: g3, g7, g11, g12, g14, g19, g20
+- 24 vertices: g1, g3, g16, g17, g21, g24, g25, g27, g28, g30, g31, g35, g36, g37
+- TODO: check 26 vertices
 - TODO: can we ask for 333-flows, where only 1 or 2 pairs of nz3-flows is oriented?
 
 ## o334-flows
@@ -76,8 +82,9 @@ Also, $f1 - f2$ provides nz5-flow for the original graph.
 ## More constructions
 
 TODOs:
-- ? 2223-flows
-- o2233-flows
+- o2233-flows - checked 10, 18, 20 and 22 vertices, all snarks have this construction
+- TODO: can we build any kind of nz-flow from o2233-flows?
+- can we build 2223-flows?
 
 ## Full spectrum
 
