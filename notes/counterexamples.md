@@ -1,7 +1,11 @@
 - There's a conjecture about bipartizing matchings: http://www.sciencedirect.com/science/article/pii/S0012365X07000672 (Conjecture 3.11) - which states that every snark has at least 1 dominating circuit with 2 bipartizing matchings. I've tried to understand, why they ask for 2 and not 3 bipartizing matchings, and have found a counterexample on 28 vertices which for any dominating circuit doesn't have 3 bipartizing matchings, only 2 or 1;
-    - And it also works for oriented 5-cycle double cover, where we want at least one of the cycles to be the dominating circuit. If the snarks are generated as 5-edge connected, e. g.
-    ./snarkhunter-64 22 5 s S C4
-    then it will be the 2151st.
+- And same counterexample also works for oriented 5-cycle double cover, where we want at least one of the cycles to be the dominating circuit. In a sense, that we can't find any o5cdc with dominating circuit.
+If the snarks are generated as 5-edge connected, e. g.
+./snarkhunter-64 22 5 s S C4
+then it will be the 2151st.
+28.05g2151
+TODO: recheck o5cdc claim
+TODO: recheck "circuit" claim, in a sense that we can find "dominating cycle" with 3BMs for this snark, and o5cdc with this "dominating cycle"
 
 
 234-flows
