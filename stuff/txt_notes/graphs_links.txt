@@ -1,0 +1,223 @@
+http://www.fields.utoronto.ca/activities/21-22/Stinson66
+
+difference sets
+http://www.fields.utoronto.ca/talks/Constructions-Difference-Sets-Groups-Order-4d
+http://www.fields.utoronto.ca/talks/Linking-Difference-Sets-and-Partial-Difference-Sets
+http://www.fields.utoronto.ca/talks/Packings-Partial-Difference-Sets
+
+Alspach conjecture
+http://www.fields.utoronto.ca/talks/Relative-Non-Zero-Sum-Heffter-Arrays-and-Orthogonal-Path-Decompositions
+On strongly sequenceable abelian groups
+https://adam-journal.eu/index.php/ADAM/article/view/1291
+On Sequences in Cyclic Groups with Distinct Partial Sums
+https://arxiv.org/pdf/2203.16658.pdf
+Bode and H. Harborth, Directed paths of diagonals within polygons
+...
+Alspach and G. Liversidge, On strongly sequenceable abelian groups
+...
+Alspach, D. L. Kreher and A. Pastine. The Friedlander-Gordon-Miller Conjecture is true
+...
+
+Alexey Pokrovskiy, "Proof of Ringel's conjecture"
+https://www.youtube.com/watch?v=xdSRtb5FCxE
+
+Rainbow structures, Latin squares & graph decompositions - Benny Sudakov
+https://www.youtube.com/watch?v=kso0_05sWHY
+
+Two conjectures of Ringel, by Katherine Staden
+https://www.youtube.com/watch?v=y__eMa94E0Q
+
+https://houseofgraphs.org/meta-directory/snarks
+
+The SL (2, R) action on spaces of differentials (Lecture 01) by Jayadev Athreya
+https://www.youtube.com/watch?v=TKQj_-_OSvE&list=PL04QVxpjcnjhep32tLHo6q9IyNNgD5mn4&index=19
+
+EXPLICIT JENKINS–STREBEL REPRESENTATIVES OF ALL STRATA OF
+ABELIAN AND QUADRATIC DIFFERENTIALS
+ANTON ZORICH
+https://arxiv.org/pdf/1011.0395.pdf
+
+MULTIPLE SADDLE CONNECTIONS ON FLAT SURFACES AND
+THE PRINCIPAL BOUNDARY OF THE MODULI SPACES OF
+QUADRATIC DIFFERENTIALS
+HOWARD MASUR AND ANTON ZORICH
+http://homepages.math.uic.edu/~masur/principal2006_submit.pdf
+
+slides
+Asymptotic geometry of square-tiled surfaces of large genus,
+Masur-Veech volumes and count of meanders
+Anton Zorich
+https://webusers.imj-prg.fr/~anton.zorich/Expositions%202021/2021_Tyurin_October_26.pdf
+
+Антон Зорич
+https://www.youtube.com/results?search_query=%D0%90%D0%BD%D1%82%D0%BE%D0%BD+%D0%97%D0%BE%D1%80%D0%B8%D1%87
+https://www.mathnet.ru/rus/person22153
+
+Crossing the transcendental divide: from
+translation surfaces to algebraic curves
+Turku Ozlum Celik, Samantha Fairchild, Yelena Mandelshtam
+https://arxiv.org/pdf/2211.00304.pdf
+
+An approximation of holomorphic 1-forms
+on Riemann surfaces by holomorphic
+1-cochains
+https://www.cajpn.org/refs/thesis/16D-Yamaki.pdf
+
+CONFORMAL COCHAINS
+SCOTT O. WILSON
+https://qcpages.qc.cuny.edu/~swilson/periods.pdf
+
+https://math.ucr.edu/home/baez/week294.html
+
+blogpost
+Flow-coloring duality
+https://www.jakobhansen.org/2019/04/09/flow-coloring-duality/
+
+A categorification for the flow polynomial of graphs
+https://core.ac.uk/download/pdf/159498439.pdf
+
+HODGE LAPLACIANS ON GRAPHS
+LEK-HENG LIM
+https://arxiv.org/pdf/1507.05379.pdf
+
+SIGNAL PROCESSING ON CELL COMPLEXES
+https://arxiv.org/pdf/2110.05614.pdf
+
+The orientation morphism: from graph cocycles to
+deformations of Poisson structures
+https://iopscience.iop.org/article/10.1088/1742-6596/1194/1/012017/pdf
+
+blogpost
+Cochains on graphs
+https://calculus123.com/wiki/Cochains_on_graphs
+
+UNIFORM 1-COCHAINS AND GENUINE LAMINATIONS
+BARIS COSKUNUZER
+https://arxiv.org/pdf/math/0304094.pdf
+
+FROM VEERING TRIANGULATIONS TO LINK
+SPACES AND BACK AGAIN
+SAUL SCHLEIMER AND HENRY SEGERMAN
+http://homepages.warwick.ac.uk/~masgar/Maths/veering_to_circular.pdf
+
+The Geometry of R–covered foliations
+Danny Calegari
+https://authors.library.caltech.edu/1193/1/CALgt00.pdf
+
+COARSE HYPERBOLICITY AND CLOSED ORBITS FOR
+QUASIGEODESIC FLOWS
+STEVEN FRANKEL
+https://arxiv.org/pdf/1507.04320.pdf
+https://www.youtube.com/watch?v=Pp6u41hcS-4&ab_channel=InstituteforAdvancedStudy
+
+ENDPERIODIC AUTOMORPHISMS OF SURFACES AND
+FOLIATIONS
+JOHN CANTWELL, LAWRENCE CONLON, AND SERGIO R. FENLEY
+https://arxiv.org/pdf/1006.4525.pdf
+
+veering triangulations
+https://www.google.com/search?q=veering+triangulations&newwindow=1&rlz=1C5CHFA_enDE954DE954&sxsrf=APwXEdcEV65bI-LNhW_EOK6-btph099pFA:1682769711951&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiIkq3Xhc_-AhV2h_0HHQRdDWAQ_AUoAXoECAIQAw&biw=1440&bih=711&dpr=2#imgrc=kxTrzGVuSudWUM
+
+Taut branched surfaces from veering
+triangulations
+Michael Landry
+https://arxiv.org/pdf/1703.00336.pdf
+
+Stable loops and almost transverse surfaces
+Michael Landry
+https://arxiv.org/pdf/1903.08709.pdf
+
+Veering triangulations admit strict angle structures
+Craig D. Hodgson, J. Hyam Rubinstein, Henry Segerman
+and Stephan Tillmann
+https://arxiv.org/pdf/1011.3695.pdf
+
+pseudo-anosov flow
+https://www.google.com/search?q=pseudo-anosov+flow&rlz=1C5CHFA_enDE954DE954&oq=pseudo-anosov+flow&aqs=chrome..69i57j0i22i30j0i390i650l3.3909j0j7&sourceid=chrome&ie=UTF-8#bsht=Cgdic2h3Y2hwEgQIBDAB
+
+
+The Euler Characteristic in Combinatorial Geometry
+https://www.jstor.org/stable/2312880
+
+The Euler characteristic of some lattices of paths
+https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=20219ed309afcc801e183df8d296ff87ca313ee9
+
+
+dimer model on Riemann surfaces
++
+pfaffian Petersen graph
+https://thomas.math.gatech.edu/PAP/pfafsurv.pdf
++
+Lemma 4.4.7
+Figure 16
+https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=c87ca5db4779ebc0ca42916627422f9390735bfe
+
+
+Teichmüller Curves in Genus Two: Square-Tiled Surfaces and Modular Curves
+https://dash.harvard.edu/bitstream/handle/1/40050128/DURYEV-DISSERTATION-2018.pdf?sequence=4
+
+orientable "degree 4 cover"
+
+"Antipodal" maps on regular graphs?
+https://mathoverflow.net/questions/64746/antipodal-maps-on-regular-graphs
+
+nowhere vanishing harmonic 1-form riemann surface
+
+https://math.stackexchange.com/questions/4262844/nowhere-vanishing-harmonic-1-forms-on-3-manifolds
+
+https://www.researchgate.net/publication/365424658_Nowhere_vanishing_holomorphic_one-forms_on_varieties_of_Kodaira_codimension_one
+
+https://mattbaker.blog/2013/08/21/the-jacobian-of-the-skeleton-and-the-skeleton-of-the-jacobian/
+
+https://ncatlab.org/nlab/show/circle+principal+bundle
+
+Seiberg-Witten Monopole Equations And Riemann Surfaces
+https://arxiv.org/abs/hep-th/9703057
+
+GENERALIZED SEIBERG-WITTEN EQUATIONS ON
+RIEMANN SURFACE
+https://arxiv.org/pdf/1502.01486.pdf
+
+"u(1) bundle" "riemann surface"
+
+Yang–Mills–Higgs theory on a compact Riemann surface 
+https://pubs.aip.org/aip/jmp/article-abstract/28/10/2343/1031094/Yang-Mills-Higgs-theory-on-a-compact-Riemann?redirectedFrom=fulltext
+
+Spin structure
+https://en.m.wikipedia.org/wiki/Spin_structure
+
+Magnetic monopoles over topologically
+non trivial Riemann Surfaces
+https://arxiv.org/pdf/hep-th/9603035.pdf
+
+𝑈(1)
+-connection
+https://math.stackexchange.com/questions/189504/u1-connection
+
+"canonical map" "hyperplane" "riemann surface"
+
+Crossing the transcendental divide: from
+translation surfaces to algebraic curves
+https://arxiv.org/pdf/2211.00304.pdf#page29
+
+
+SQUARE-TILED CYCLIC COVERS
+https://webusers.imj-prg.fr/~anton.zorich/Papers/SQUARE_TILED_CYCLIC_COVERS.pdf#page29
+
+Harmonic morphisms onto Riemann surfaces
+and generalized analytic functions
+http://www.numdam.org/item/10.5802/aif.1080.pdf
+
+"coloring" "flows" "riemann surfaces"
+
+chip firing flows graphs
+
+Integral flow and cycle chip-firing on graphs
+https://arxiv.org/abs/2006.13397
+
+Chip-firing Using M-Bases
+https://www.brown.edu/academics/math/sites/math/files/Zelesko,%20Nathan.pdf
+
+bott periodicity "riemann surface"
+
+Matroids, motives and conjecture of Kontsevich

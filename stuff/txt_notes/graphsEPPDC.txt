@@ -1,0 +1,883 @@
+Project: Proving EPPDC (Bondy) conjecture
+(and then TODO: find a stronger conjecture)
+
+notes:
+    - граф перестроек динамичный в том смысле
+        - что второй конец у пути может поменяться на другой
+            - вершины те же, а пометка на ребре другая
+        + проход по ребру меняет направление ребра
+
+TODO:
+    - построить контрпример всего:
+        - есть контрпример, где
+            - рассматриваем только v1,v2
+            - check_connectivity=True
+            - и backtrack не спасает
+            - но спасает check_connectivity=False, или v1,v2=v2,v1
+        - надо упростить и улучшить его:
+            - v1,v2=v2,v1 - продублировать граф
+            - check_connectivity=False - упростить граф
+            - backtrack не спасает - II как есть
+        - notes: есть ещё первый контрпример, где
+            - v1,v2=v2,v1
+            - check_connectivity=False не помогает
+            - но спасает backtrack
+    - UPD: просто так упростить не получится!
+
+TODO:
+    - попробовать упростить backtrack
+        - ? и возможно тогда check_connectivity=False не понадобится
+    - понять, есть ли примеры, где надо как минимум 2 бектрека
+    - глянуть внимательно "check_connectivity=False"
+    - можно пытаться строить контрпримеры (worst cases)
+        - учитывая близость вершин в eppdc
+        - например брать почти соседние вершины как кандидаты в плохие рёбра
+    - научиться стартовать с произвольного решения, а не только с нуля
+    - научиться что-то доказывать
+    - перебрать все пути в графе переходов
+
+proof:
+    - у нас есть исходный граф G, и граф концов EPPDC
+    - допустим, что
+        - граф G связный
+        - EPPDC произвольный
+    - part1: пытаемся добавить ребро b -> a
+        - то есть чтоб в 'b' кончался 1 путь
+        - в 'a' кончалось 3 пути
+    - строим граф перестроек вокруг вершины 'a'
+        - допустим, что backtrack неизбежен
+        - TODO: как выглядит этот граф перестроек?
+    ...
+    - part2.v1: пытаемся добавить ребро a -> b
+        - и допустим, что в part1 не было backtrack
+        - в 'b' кончается 1 путь, а должно 2
+        - в 'a' кончается 3 пути, а должно 2
+    - строим граф перестроек вокруг вершины 'b'
+        - допустим, что backtrack неизбежен
+        ...
+    - part2.v2: допустим в part1 был backtrack
+    ...
+    - part3: допустим мы сделали backtrack в part1 или в part2
+        - TODO: доказать, что стало лучше
+        - TODO: доказать, что мы делаем всегда backtrack вокруг одной конкретной вершины
+
+maybe TODO:
+    - попробовать не трогать "semi" переходы
+        good - точно хорошее ребро
+        semigood - не good ребро, но нам "повезло"
+        bad - не good ребро и нам не "повезло"
+    - что, если всегда выбирать пути нечётной длины в графе переходов?
+    - выяснить правильный/лучший порядок добавления рёбер в граф
+    - усилить EPPDC и поддерживать EPPDC с усиленными требованиями при добавлении нового ребра
+        - в этом смысле возможно, что мы научимся делать это таким образом
+            что нам не понадобится добавлять "check_connectivity=False"
+
+========================================
+
+notes:
+    - до меня тут дошло, что в оригинальном доказательстве небольшая неточность
+        граф перестроек на самом деле динамично меняется,
+        когда мы перебрасываем рёбра
+        но если я правильно понимаю,
+        то в исходном доказательстве можно выбрать всегда
+        такой набор перестроек,
+        что динамичность на это никак не влияет
+        типа, выбрать простой путь от u0 до \infty, не проходя по циклам
+        - хотя кажется, что на EPPDC это тоже не влияет всё
+        - даже если мы попробуем делать part1 и part2 одновременно
+        - то есть, динамичность его ровно в том, что когда мы прошли по ребру - то это ребро надо повернуть в обратную сторону
+        - но в целом нам это не помогает никак
+
+
+TODO: чекнуть пример, где
+        - мы не используем v1,v2=v2,v1
+        - мы не используем "check_connectivity=False"
+        - и типа не можем сделать backtrack?
+    - перепроверить аккуратно и визуально всякие контрпримеры
+        - чтоб избежать всякие баги
+
+- что если делать part1 и part2 одновременно?
+    - как будто бы это не спасает от backtrack'ов
+    в том же графе, где сломан v1,v2=v2,v1 для part1 без backtrack
+        - "check_connectivity=False" тоже не спасает
+    - тут только backtrack можно сделать
+
+
+- понять как работать с графом EPPDC
+
+- DONE: и узнать, консистентно ли на рёбра кидать понятия bad/good/semi
+    - ответ - нет
+
+- как перебрать все решения эффективно? мешают циклы
+    - если только полным перебором
+
+- DONE: построить решение, где есть граф переходов вида
+    u0 -> u1
+    u0 -> u2
+    u1 -good> u2, u1 -bad> \inf
+    u2 -good> u1, u2 -bad> \inf
+    - или доказать, что такое невозможно
+        - например потому, что понятие -good> вообще неконсистентно
+        например если
+            u0 -> u1 -good> u2 -bad> u1
+            u0 -> u2 -good> u1 -bad> u2
+        вообще понять
+        что если u0 -> u1 -bad> \inf,
+        но при этом u0 -> u2 -good> u1 -?> \inf, и последнее ребро становится good на самом деле
+    - DONE: нет, так не бывает!
+    - если u0 -> u1 -bad> \inf в такое конфигурации, то тогда
+        u0 -> u2 -good> u1 -good> \inf
+
+
+?, current status:
+    - несмотря на то, что я не могу найти контрпримеров
+    - я думаю, что в текущем виде подход не совсем рабочий
+        - вижу потенциально как создать проблему для part1
+            - для этого нужно построить примерно 10 путей
+            - НЕ ФАКТ, правда, что мы можем такой пример достичь итеративным добавлением рёбер
+        - допустим даже мы используем v1,v2=v2,v1 (кажется это принципиально ничего не меняет)
+            - просто ещё один такой же граф путей сделать
+    - вероятно надо придумать путь обхода
+
+
+TODO: current search is also ineffective, inexhaustive, stochastic
+    need to fix this
+
+TODO, algorithm+hacks, current status:
+    - backtrack (in part1 and part2)
+    - common vertex
+        - TODO: find an example, where we need to backtrack 2 edges
+            - aka where we can't backtrack only 1 edge
+    - count_switches / checked_switches
+    - v1,v2 = v2,v1 (DOING: do we need this now?)
+        - looks like we would need "check_connectivity=False", if we remove this trick
+    - TODO: do we need to always check for connectivity in between steps?
+        - maybe yes, removing it didn't help with v1,v2=v2,v1 breaking in part1
+            - TODO: we could also try not to check connectivity in part1 even after the end of it, but this will always produce non-zero result for any v1,v2; and it also complicates the matters for part2, i think
+    +
+    - bfs vs knuth
+    - start from tree (probably not enough randomization here)
+    - add edges in random order (maybe the order is not the best one, or not the worst one)
+
+TODO, proof, current status:
+    - DOING: try to remove v1,v2=v2,v1; it would help with simplifying the proof i think
+    - we can't guarantee to find an extension in part1
+        - ? even if we find one - it doesn't guarantee progress in part2
+    - so we have some kind of mix for part1+part2
+    - we can have a bactrack in either of them
+    - ? common vertex for backtrack
+    - ? best order of adding edges to the graph (+ best starting tree) (+ best solution for tree)
+
+TODO, counterexamples:
+    - trying to remove v1,v2=v2,v1
+        - found an example, where we need to add "check_connectivity=False" to part1 to backtrack
+        - try to find a harder counterexample, where this connectivity=False doesn't help
+    - find an example, where we need backtrack in part1
+        where backtracking by any path we can't find any extension in part2
+        - same + "check_connectivity=False"
+
+========================================
+
+
+TODO, worst edge:
+    - recheck cases, where worst_min = 1
+        with bigger thresh value
+    - i think i found 1 example
+
+DONE:
+    - break part1, where we don't check for connectivity in between
+    - same example works
+
+n=11; seed=848962982; rep0=91; rep1=1
+edge_idx=12
+worst 0 0 (8, 10)
+path=[0, 2, 6, 10, 7]
+path=[6, 8, 5]
+path=[4, 8, 9, 3, 5]
+path=[4, 7, 3, 5, 8, 2]
+path=[9, 8, 4, 7, 2]
+path=[7, 8, 6, 3, 2, 1]
+path=[8, 1, 2, 6, 3, 7, 10, 0]
+path=[1, 9, 3]
+path=[9, 1, 8, 7, 2, 10]
+path=[6, 10, 2, 3]
+path=[8, 2, 0, 10]
+
+
+TODO: print out eppdc
+    and check cases where v1,v2=v2,v1 helps
+    and why we always find a solution in part1
+    and why we only need 1 backtrack
+
+TODO: try other randomization schemes
+    - both for the starting tree
+    - and for the non-tree edge order
+
+proof:
+    - part1: prove that we can find 1 eppdc-like extension
+        or find a counterexample!
+    - part2: prove that we need at most 1 backtrack to fix the eppdc
+        or find a counterexample!
+
+TODO:
+    - не каждое успешное решение в part1 подходит для part2
+        (или же у меня в коде бага)
+        - глянуть что за примеры
+        почему какие-то решения в part1 прокатывают, а какие-то нет
+        и можно ли свести число хороших решений к нулю
+            - можно
+
+WILD THOUGHTS:
+    - part1
+        - есть мысль, что неработающие решения для v1,v2
+            как-то помогают работать решениям для v2,v1
+        - see
+            - hex board game matroid
+            - brouwer fixed point theorem
+            - https://www.hexwiki.net/index.php/Bridg-It
+            - ? matroid theory
+
+UPD: maybe we only need 1 backtrack; actually, any 1 backtrack could work
+
+TODO, Current status, proof/algorithm:
+    - i was looking at backtracked edges
+    - e. g.:
+        - max_bactracked_edges=[(5, 3), (0, 5), (4, 5)]
+        - max_bactracked_edges=[(2, 1), (4, 1), (0, 1)]
+    - and now have an idea, that we only need to "fix/backtrack/explore/restore"
+        - only around one of 2 vertices of the new edge
+    - like we don't need to have a deep backtrack inside the graph, going through some path
+    - like it would always be a star around 1 vertex
+
+- part2: prove that we can find a sequence of backtracks that ends at some point
+
+i think right now there are 3 main new ingredients:
+    - backtrack
+    - v1, v2 = v2, v1
+    - random.shuffle(v1_paths)
+        - TODO: replace with dfs?
+
+
+Current status, proof:
+    - we need a proof by induction, adding 1 edge at a time
+        - part1
+            - start with eppdc
+            - looks like one of the (v1, v2) or (v2, v1) can fail, even with backtrack
+                - the other direction doesn't fail, though
+            ...
+        - part2
+            - we could need a backtrack, so we need a proof that this will be a finite procedure and successful for one of the part1 extensions
+                - I think the proof can get quite hard here
+                - because probably right now we have a lot of freedom here to choose an edge for backtrack
+                - or maybe we need some kind of measure to optimize
+            ...
+    - original Lemma 1. Let D: digraph with vertex set V(D) = {x, v_1, v_2, ..., v_q, y}:
+        - (1) for each v_i, 1 <= i <= q, d_in(v_i) <= 2, d_out(v_i) = 2;
+        - (2) d_out(x) - d_in(x) >= 1.
+        Then there exists a directed path from x to y.
+
+
+TODO:
+- remove randomness
+    - maybe it's not needed in part2
+    - UPD: no, wait, it's needed also in part2?
+
+
+Current status, TODO, algorithm:
+    - check out the example where "v1, v2 = v2, v1" is important
+    - right now I never switch to backtrack in the middle of "extend" method
+        - is it important?
+
+    - A lot of other FIXMEs:
+        - remove randomness
+        - if (v1 != original_v1) and do_backtrack and len(path_vertices) >= 3
+        - iteration_count/use_backtrack in retries + infinite loop
+
+
+Current algorithm, seems to work (but it's a bit complicated):
+    - build a tree, with dfs solution
+    - try to iteratively add an edge / "extend_with_backtrack"
+        - part1: v1, v2 or v2, v1
+        - part2: the other way around
+        - we switch between (v1, v2) and (v2, v1) for part1
+        - we do this 20 times without backtrack in part2
+        - then 180 times, but in part2 we also can immediately backtrack
+            - probably we don't need so much iterations here
+        - if we backtrack, we change (v1, v2) pair to (v3, v2)
+        - continue trying part1 and part2 with new edge
+        - also, part2 now always backtracks
+    - adding an edge / "extend_with_backtrack":
+        - check the ...
+
+==================
+
+- remove randomness (Current status)
+    - harder than i thought
+    - i think we need to randomize for each step in "extend" method
+    - even when we switched the edge
+    - which sounds strange? because i think only 1 choice could work, without backtracking
+
+
+- add backtrack to part1; and try to remove "v1,v2=v2,v1" trick
+
+- also, additional questions:
+    - backtrack in part1 - could it make sense?
+        - i think we can try that, but then part2 should be run without backtrack
+        - maybe this will help to get rid of "v1,v2=v2,v1" trick, btw
+
+
+- DONE: remove iteration_count/upper_bound from extend_with_backtrack
+    - do proper search for the extension path in eppdc / remove "iteration_count" from "extend"
+        - it's a bit complicated with added backtrack
+
+DONE:
+    - when trying to restart the edge we do
+        v1, v2 = v2, v1
+        - do we need this?
+        DONE: looks like we need this
+    - do we still need to backtrack? i think yes, but useful to recheck again
+        DONE: looks like we need this
+
+
+
+Current status:
+    - seems like backtrack is still not good enough
+    - but (temporarily) disconnected ppdc in part1 seems to fix everything!
+    - TODO:
+        - maybe remove check for original_v1 in
+            if (v1 != original_v1) and do_backtrack and len(path_vertices) >= 3:
+            - also, what about length check here?
+            - check out cases where we could backtrack in part1
+
+n=6; seed=512529409; rep0=243
+success1=<State.FAIL: 1>, success2=<State.FAIL: 1>, edge_idx=8 vs 10
+(v1, v2) = (2, 1)
+[4, 1, 5, 0, 2]
+[0, 5, 2, 3, 4, 1]
+[5, 4, 3, 0, 1]
+[4, 2, 0, 3, 1, 5]
+[3, 1, 0, 4, 5, 2]
+[3, 2, 4, 0]
+
+n=6; seed=45553947; rep0=471
+success1=<State.FAIL: 1>, success2=<State.FAIL: 1>, edge_idx=6 vs 10
+(v1, v2) = (5, 3)
+[1, 4, 2, 5, 0]
+[0, 3, 1, 4, 2, 5]
+[2, 0, 1, 3]
+[1, 0, 4]
+[2, 3, 0, 4, 5]
+[4, 5, 0, 2, 3]
+
+n=6; seed=541542663; rep0=6171
+success1=<State.FAIL: 1>, success2=<State.FAIL: 1>, edge_idx=5 vs 10
+(v1, v2) = (2, 3)
+[0, 1, 2, 4, 5, 3]
+[4, 2, 0]
+[1, 5, 0, 3]
+[4, 5, 1, 2]
+[5, 0, 3, 1]
+[5, 3, 1, 0, 2]
+
+
+Current status:
+    - added backtrack - now we don't have fails
+    - TODO: how about a stronger conjecture (so, e. g., we could get rid of backtracking)
+        - v1. choose best eppdc candidate for expansion
+        - v2. choose best ordering of edges and best starting tree eppdc
+        ...
+    - Or maybe prove, that backtracking always stops
+
+
+Current status:
+    - okay, maybe I was a bit too optimistic
+    - but the fails are rare nonetheless
+        - looks like backtrack always helps
+    - TODO: why we fail sometimes though?
+        - n=5 never fails
+    - ! maybe because we need a stronger conjecture!
+        - so that we will reject some eppdc, that would potentially break later
+        - but reject them in hope that the alternative still exists for other edge extension choices
+    - перешёл на knuth labeling; сломать кажется тяжелее, но сломалось
+
+
+n=6; seed=486768299; rep0=46
+success1=False, success2=False, edge_idx=3 vs 10
+(v1, v2) = (5, 0)
+[5, 1, 0, 4]
+[2, 1, 5, 3]
+[1, 0, 3, 4]
+[5, 3, 4, 0]
+[3, 0, 2, 1]
+[2, 0]
+
+
+
+Current status: code seems to work, and always* produce a EPPDC
+    *: need to fix a couple of bugs related to randomness
+    TODO: - need to work out a proof, by induction
+    - looks like
+        - no backtracks needed
+        - no upper bounds needed on the number of steps in the algorithm
+        - (? FALSE?) it doesn't depend on the choice of whether we do (v1,v2) first, or (v2,v1)
+        - we can always iteratively add an edge to EPPDC to produce a bigger EPPDC
+        - we can always choose between the 2 options in part1
+
+
+outdated stuff:
+    TODO: eppdc, maybe try to prove it for:
+        - TODO: check out proof for Kn graphs
+        - full bipartite Km,n graphs
+        - union of 2 trees
+        - planar graphs
+        - odd degree graphs
+        - Line graphs
+            - of trees
+            - ...
+        - (odd-) regular graphs
+        ...
+
+    TODO: eppdc, code:
+        - текущий статус
+            - backtrack довольно редко включается как опция, возможно при правильном подходе он не нужен вовсе (например, шаффлить направление рёбер)
+            - если шаффлить выбор направления ребра - то всегда можно найти путь до полного графа
+            - хотелось бы понять детерминированно, какой выбор направления ребра лучше попробовать первым (aka stronger conjecture)
+                - TODO: существует ли путь до полного графа, где нет backtrack'инга?
+            - кажется, что проблема не в выборе между (v1,v2)+(v2,v1) или наоборот, а в том какие пути выбраны для удлинения
+
+    TODO: eppdc:
+        - допустим мы пытаемся решить какой-то граф
+        - существует ли какой-то порядок рёбер, который гарантирует сходимость алгоритма без backtrack'инга для любых выборов продолжений и ориентаций рёбер?
+        - например, как будто бы, если речь про граф где e=n+1 (дерево с 2 добавленными рёбрами), то достаточно, чтоб последние 2 ребра не были соседями
+        - как это закодить - полным перебором?
+
+    DONE: eppdc, failed spectacularly (UPD: there was a flaw in the algorithm):
+        - it's not like there's a specific order of edges with specific orientations, that will fail always;
+        - it's more of a bad choice of path extensions after first added edge
+        - looks like cases for n=6 and n=8 differ from n=7 and n=9
+            - because for n=6 and n=8 they never fail spectacularly on a particular second edge orientation
+            - because for n=7 and n=9, when we switch tree eppdc to knuth traversal, they stop failing spectacularly; n=6 and n=8 still fail
+
+    TODO: eppdc, code:
+        - DONE: have a first iteration of the code
+        - TODO: find a stronger conjecture, e. g.:
+            - TODO: can we (always) group paths into pairs, to get smth similar to union of trees?
+                - DONE: maybe this would lead to better behaving eppdc solutions?
+                - no, here's a hard case
+                    [6, 0, 3, 4, 5]
+                    [0, 5, 3, 6, 7, 1]
+
+                    [6, 5, 1, 0, 4, 3, 7, 2]
+                    [7, 0, 6, 1, 3]
+
+                    [4, 5, 0, 1, 6, 7, 2]
+                    [4, 2, 6, 3, 7, 5, 1]
+
+                    [3, 5, 7, 0]
+                    [7, 1, 3, 0, 4, 2, 6, 5]
+            - TODO: maybe we can do smth similar to cdc?
+                - where we ask not not have 2 consecutive edges in 2 different paths
+                e. g., in the example above we have 4, 2, 6 twice in 2 different paths
+
+
+
+
+n=6; seed=151669526; rep0=34
+success1=False, success2=False, edge_idx=6
+[0, 1, 3, 2]
+[0, 2, 5, 3, 1]
+[3, 0, 4, 2, 5]
+[1, 5, 3, 2, 0, 4]
+[2, 4, 1, 5]
+[3, 0, 1, 4, 5]
+
+n=8; seed=434897521; rep0=45
+success1=False, success2=False, edge_idx=20
+[7, 0, 1, 5, 2, 6, 4, 3]
+[1, 6, 2, 0, 5, 3, 7, 4]
+[7, 5, 3, 1, 4, 2, 0, 6]
+[2, 1, 7, 3, 6, 5, 4]
+[3, 4, 7, 0, 6, 1, 2, 5]
+[0, 1, 7, 5, 4, 2, 3, 6]
+[1, 5, 6, 7, 2, 3, 0, 4]
+[0, 3, 1, 4, 6, 7, 2]
+
+debug_path=[7, 0, 1, 5, 2, 6, 4, 3]
+debug_path=[1, 6, 2, 0, 4, 7, 3, 5]
+debug_path=[7, 5, 3, 1, 4, 2, 0, 6]
+debug_path=[2, 1, 7, 3, 6, 5, 4]
+debug_path=[3, 4, 7, 0, 6, 1, 2, 5]
+debug_path=[6, 3, 2, 4, 5, 7, 1, 0]
+debug_path=[1, 5, 6, 7, 2, 3, 0, 4]
+debug_path=[2, 7, 6, 4, 1, 3, 0, 5]
+  part2.x: adding edge (5, 0)
+before rebuild
+  part2.x: not eppdc; tried 6
+
+
+failure
+debug_path=[7, 0, 1, 5, 2, 6, 4, 3]
+debug_path=[1, 6, 2, 0, 4, 7, 3, 5]
+debug_path=[7, 5, 3, 1, 4, 2, 0, 6]
+debug_path=[2, 1, 7, 3, 6, 5, 4]
+debug_path=[3, 4, 7, 0, 5, 2, 1, 6]
+debug_path=[6, 3, 2, 4, 5, 7, 1, 0]
+debug_path=[1, 5, 6, 7, 2, 3, 0, 4]
+debug_path=[2, 7, 6, 4, 1, 3, 0, 5]
+
+3-7-6-3
+    0
+
+2-4-1-5-2
+
+
+n=6; seed=445360293; rep0=18
+success1=False, success2=False, edge_idx=4 vs 10
+(v1, v2) = (5, 3)
+[1, 3, 4, 0, 5, 2]
+[5, 2, 3, 0]
+[5, 1, 0, 3]
+[0, 5, 1, 3, 2]
+[4, 3]
+[4, 0, 1]
+
+
+n=6; seed=486768299; rep0=46
+success1=False, success2=False, edge_idx=3 vs 10
+(v1, v2) = (5, 0)
+[5, 1, 0, 4]
+[2, 1, 5, 3]
+[1, 0, 3, 4]
+[5, 3, 4, 0]
+[3, 0, 2, 1]
+[2, 0]
+
+
+n=6; seed=534752233; rep0=46
+success1=False, success2=False, edge_idx=3 vs 10
+(v1, v2) = (0, 1)
+[2, 1, 5, 4, 0, 3]
+[1, 2, 0, 5]
+[1, 5, 0]
+[5, 4, 3, 0, 2]
+[4, 3]
+[4, 0]
+
+
+перешёл на knuth labeling; сломать кажется тяжелее, но сломалось
+n=6; seed=500768003; rep0=9
+success1=False, success2=False, edge_idx=9 vs 10
+(v1, v2) = (0, 4)
+[2, 0, 5, 3, 1]
+[4, 2, 5, 1, 3, 0]
+[5, 4, 3, 2, 1, 0]
+[5, 2, 1, 4, 3]
+[4, 5, 3, 2, 0, 1]
+[2, 4, 1, 5, 0, 3]
+
+
+- (?) disconnected part1
+    maybe it's not needed
+- TODO: how many circuits can we get to here?
+
+- find an example, where we need disconnected ppdc after part1
+
+
+0 1 2
+2 0 1
+1 2 0
+все одинаковые
+
+
+0 1 2 3
+3 1 0 2
+2 0 3 1
+1 2 3 0
+
+разные
+01, 02, 03
+одинаковые
+12, 31, 23
+
+
+
+n=11; seed=848962982; rep0=91; rep1=1
+edge_idx=12
+worst 0 0 (8, 10)
+path=[0, 2, 6, 10, 7]
+path=[7, 8, 6, 3, 2, 1]
+path=[1, 9, 3]
+path=[3, 2, 10, 6]
+path=[6, 8, 5]
+path=[5, 3, 9, 8, 4]
+path=[4, 7, 3, 5, 8, 2]
+path=[2, 7, 4, 8, 9]
+path=[9, 1, 8, 7, 2, 10]
+path=[10, 0, 2, 8]
+path=[8, 1, 2, 6, 3, 7, 10, 0]
+
+10=a
+
+разные
+12, 18, 19, 27, 28, 35, 37, 39, 47, 48, 58, 68, 6a, 78, 7a, 89
+одинаковые
+02, a0, 26, 2a, 32, 63
+=> 02 26 63 32 2a a0
+
+
+path=[0_2_6, 10, 7]
+path=[7, 8, 6_3_2, 1]
+path=[3_2_10, 6]
+path=[9, 1, 8, 7, 2_10]
+path=[10_0_2, 8]
+path=[8, 1, 2_6_3, 7, 10_0]
+
+
+012a34b67
+a:
+    210a34b67
+    012a76b43
+    210a76b43
+b:
+    43a210b67
+    012a34b76
+    43a210b76
++
+    210b67a34
+
+
+
+
+
+
+
+изучаю backtrack
+
+TURN ON BACKTRACK1
+edge_idx=12 before part 1; adding edge (8, 10)
+[0, 2, 6, 10, 7]
+[6, 8, 5]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[7, 8, 6, 3, 2, 1]
+[8, 1, 2, 6, 3, 7, 10, 0]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[8, 2, 0, 10]
+
+[0, 10, 7, 3, 6, 2, 1, 8] => [0, 10, 8, 1, 2, 6, 3, 7]
+debug_path=[0, 2, 6, 10, 7]
+debug_path=[6, 8, 5]
+debug_path=[4, 8, 9, 3, 5]
+debug_path=[4, 7, 3, 5, 8, 2]
+debug_path=[9, 8, 4, 7, 2]
+debug_path=[7, 8, 6, 3, 2, 1]
+debug_path=[0, 10, 8, 1, 2, 6, 3, 7]
+debug_path=[1, 9, 3]
+debug_path=[9, 1, 8, 7, 2, 10]
+debug_path=[6, 10, 2, 3]
+debug_path=[8, 2, 0, 10]
+
+[0, 2, 6, 10, 7] => [0, 2, 6, 10]
+  BACKTRACKED_SUCCESS; after backtrack rebuild
+    debug_path=[0, 2, 6, 10]
+    debug_path=[6, 8, 5]
+    debug_path=[4, 8, 9, 3, 5]
+    debug_path=[4, 7, 3, 5, 8, 2]
+    debug_path=[9, 8, 4, 7, 2]
+    debug_path=[1, 2, 3, 6, 8, 7]
+    debug_path=[0, 10, 8, 1, 2, 6, 3, 7]
+    debug_path=[1, 9, 3]
+    debug_path=[9, 1, 8, 7, 2, 10]
+    debug_path=[6, 10, 2, 3]
+    debug_path=[8, 2, 0, 10]
+
+adding edge (10, 8 )
+edge_idx=12 part2 success: State.SUCCESS
+edge_idx=12 after part 2
+[0, 2, 6, 10, 8]
+[6, 8, 5]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[1, 2, 3, 6, 8, 7]
+[0, 10, 8, 1, 2, 6, 3, 7]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[8, 2, 0, 10]
+rep0=91 edge_idx=12 PART1 backtrack!
+edge_idx=12 backtrack edge (8, 10); now try (7, 10)
+
+part1
+[0, 10, 8, 1, 2, 6, 3, 7] => [0, 10, 7, 3, 6, 2, 1, 8]
+debug_path=[0, 2, 6, 10, 8]
+debug_path=[6, 8, 5]
+debug_path=[4, 8, 9, 3, 5]
+debug_path=[4, 7, 3, 5, 8, 2]
+debug_path=[9, 8, 4, 7, 2]
+debug_path=[1, 2, 3, 6, 8, 7]
+debug_path=[0, 10, 7, 3, 6, 2, 1, 8]
+debug_path=[1, 9, 3]
+debug_path=[9, 1, 8, 7, 2, 10]
+debug_path=[6, 10, 2, 3]
+debug_path=[8, 2, 0, 10]
+
+[10, 0, 2, 8] => [10, 8, 2, 0]
+debug_path=[0, 2, 6, 10, 8]
+debug_path=[6, 8, 5]
+debug_path=[4, 8, 9, 3, 5]
+debug_path=[4, 7, 3, 5, 8, 2]
+debug_path=[9, 8, 4, 7, 2]
+debug_path=[1, 2, 3, 6, 8, 7]
+debug_path=[0, 10, 7, 3, 6, 2, 1, 8]
+debug_path=[1, 9, 3]
+debug_path=[9, 1, 8, 7, 2, 10]
+debug_path=[6, 10, 2, 3]
+debug_path=[10, 8, 2, 0]
+
+[8, 10, 6, 2, 0] => [8, 10, 0, 2, 6]
+debug_path=[8, 10, 0, 2, 6]
+debug_path=[6, 8, 5]
+debug_path=[4, 8, 9, 3, 5]
+debug_path=[4, 7, 3, 5, 8, 2]
+debug_path=[9, 8, 4, 7, 2]
+debug_path=[1, 2, 3, 6, 8, 7]
+debug_path=[0, 10, 7, 3, 6, 2, 1, 8]
+debug_path=[1, 9, 3]
+debug_path=[9, 1, 8, 7, 2, 10]
+debug_path=[6, 10, 2, 3]
+debug_path=[10, 8, 2, 0]
+
+part1.x: adding edge (6, 10)
+edge_idx=12 part1 success: State.SUCCESS
+edge_idx=12 after part 1;
+[8, 10, 0, 2, 6]
+[5, 8, 6, 10]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[1, 2, 3, 6, 8, 7]
+[0, 10, 7, 3, 6, 2, 1, 8]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[10, 8, 2, 0]
+
+adding edge (10, 7)
+edge_idx=12 part2 success: State.SUCCESS
+edge_idx=12 after part 2
+[8, 10, 0, 2, 6]
+[5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[1, 2, 3, 6, 8, 7]
+[0, 10, 7, 3, 6, 2, 1, 8]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[10, 8, 2, 0]
+
+
+было
+n=11
+n=11; seed=848962982; rep0=91; method='knuth'; rep1=1
+selected_edge_idx = 12
+adding_edge = (8, 10)
+[0, 2, 6, 10, 7] => [0, 2, 6, 10, 8]
+[6, 8, 5]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[7, 8, 6, 3, 2, 1]
+[8, 1, 2, 6, 3, 7, 10, 0] => [0, 10, 8, 1, 2, 6, 3, 7]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[8, 2, 0, 10]
+
+промежуточно:
+[0, 2, 6, 10, 8] => [8, 10, 0, 2, 6]
+[6, 8, 5] => [5, 8, 6, 10] => [5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[1, 2, 3, 6, 8, 7]
+[0, 10, 8, 1, 2, 6, 3, 7] => [0, 10, 7, 3, 6, 2, 1, 8] (вернулось обратно!)
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[8, 2, 0, 10] => [10, 8, 2, 0]
+
+стало
+[8, 10, 0, 2, 6]
+[5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[1, 2, 3, 6, 8, 7]
+[0, 10, 7, 3, 6, 2, 1, 8]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[10, 8, 2, 0]
+
+backtracked_edges=(8, 10), (7, 10)
+
+суммарно, без промежуточного этапа:
+[0, 2, 6, 10, 7] => [8, 10, 0, 2, 6]
+[6, 8, 5] => [5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[7, 8, 6, 3, 2, 1]
+[8, 1, 2, 6, 3, 7, 10, 0]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+[8, 2, 0, 10] => [10, 8, 2, 0]
+
+поэтапно:
+[0, 10, 7, 3, 6, 2, 1, 8] =1.i> [0, 10, 8, 1, 2, 6, 3, 7] =4.iii> [0, 10, 7, 3, 6, 2, 1, 8]
+[0, 2, 6, 10, 7] =2.i> [0, 2, 6, 10] =3.ii> [0, 2, 6, 10, 8] =6.iii> => [8, 10, 0, 2, 6]
+[10, 0, 2, 8] =5.iii> [10, 8, 2, 0]
+[6, 8, 5] =7.iii> [5, 8, 6, 10] =8.iv> [5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[7, 8, 6, 3, 2, 1]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]
+
+8 -> 10
+этапы:
+    1.i: add 8-10, remove 7-10
+    2.i: remove another 7-10 (backtrack)
+    3.ii: add 8-10
+7->10
+    4.iii: add 7-10, remove 8-10
+    5.iii: add 8-10, remove 0-10
+    6.iii: add 0-10, remove 6-10
+    7.iii: add 6-10
+    8.iv: add 7-10
+
+backtrack as decorator?
+    1: remove 10->7 (the other one remains?)
+    2: add 10->8 (? starting from adding 10->8 to same path where we removed 10->7)
+    3,4,5: add 8->10
+    6: add 10->7
+[0, 10, 7, 3, 6, 2, 1, 8]
+[0, 2, 6, 10, 7] =1> [0, 2, 6, 10] =2> [0, 2, 6, 10, 8] =4> => [8, 10, 0, 2, 6]
+[10, 0, 2, 8] =3> [10, 8, 2, 0]
+[6, 8, 5] =5> [5, 8, 6, 10] =6> [5, 8, 6, 10, 7]
+[4, 8, 9, 3, 5]
+[4, 7, 3, 5, 8, 2]
+[9, 8, 4, 7, 2]
+[7, 8, 6, 3, 2, 1]
+[1, 9, 3]
+[9, 1, 8, 7, 2, 10]
+[6, 10, 2, 3]

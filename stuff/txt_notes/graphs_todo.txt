@@ -1,0 +1,33 @@
+код
+	начальные комменты - выкинуть, или проверить на консистентность - даты неправильно отформатированы, где-то нет описания
+	в момент когда я распилю код по cpp, h и data у меня сломаются смешанные структуры типа petersen_5cdc_to_pet_5cdc
+	поубирать все глобальные переменные в структуры
+		чтоб не делать везде clear
+	добавить assert'ов, что нужные структуры построены (типа циклов)
+	определиться с языком - build, gen, find
+	пофиксить число звёздочек или выкинуть эти строчки
+	// TODO: add in every experiment structure, which will hold all additional data
+	рефакторинг больших функций
+	унификация точек входа в эксперимент
+	добавление флагов типа find_all, print_debug
+	поправить changelog.md
+	удалить common.h
+	написать bghm парсер
+	определиться - британский или американский английский
+	// TODO: add some kind of documentation, e. g., doxygen-style
+	// TODO: break lines before 100 ruler
+	// TODO: lint
+	// TODO: fix indentation space count
+
+misc
+	блог
+		1. o6c4c
+  		- ссылку на эксперименты, код
+  		- выписать список графов, для которых построен 6c4c
+  		2. про индукцию в Z_6
+	статьи
+		раскидать по папкам
+		почитать
+			Cycle double covers and non-separating cycles
+			Topological crystals
+		скачать

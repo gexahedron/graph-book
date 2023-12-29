@@ -1,0 +1,21 @@
+blogposts todo:
+    - разобраться с 244 dominating circuit
+    - сгенерить картинку для Petersen graph с правильным порядком циклов
+        - нет такого
+        - в том смысле что 244 dominating circuit чётной длины
+    - почистить код для o6c4c
+    - глянуть ещё раз s1, s2, s3, or=0, or=1; может какие-то неравенства сочинить
+    - глянуть ситуацию с nz5 потоками и or вершинами
+        - уточнить - это nz5 или nz-mod5 или это неважно
+
+
+- написать thank you Jan Goedgebeur, за inspiration по коду (? и за базу данных со снарками)
+
+spinning diagrams
+https://x.st/spinning-diagrams-with-css/
+
+красиво
+    https://tavianator.com/2023/futex.html
+    https://rust-lang.github.io/mdBook/guide/installation.html
+    https://en.algorithmica.org/hpc/architecture/indirect/
+    

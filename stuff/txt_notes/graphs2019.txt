@@ -1,0 +1,2070 @@
+todo
+  ribbon graph <->
+  strebel differential (или quadratic differential) <->
+    очень сложная штука для явного построения
+  lagrangian flow (тут правда надо уметь строить strebel differential) <->
+  quadratic differential <->
+  seiberg-witten curve <->
+      meromorphic differential on a Riemann surface called the Seiberg–Witten curve
+  ideal triangulation <->
+  BPS quiver <->
+  skeleton diagram
+  разобраться в происходящем
+
+==========================================
+
+dretodot is a tool for drawing graphs in dreadnaut format; it produces a .dot file which can be rendered by Graphviz. Click below for a short video tutorial.
+
+==========================================
+
+
+todo
+  в статье The Homology of Abelian Covers of Knotted Graphs
+  написано, что
+  возьмём M - homology 3-sphere
+  и рассмотрим regular branched cover Mтильда -> M
+  тогда Mтильда - manifold - только и только если у нас trivalent граф
+  это полезно?
+  ещё в статье рассматриваются циклы в графе
+  ещё упомянуты мосты
+  и конкретно для графа петерсена указаны 6 циклов из решения 6c4c
+  а ещё в теореме 8.8 какие-то любопытные вычисления группы гомологий
+  а ещё там встречаются non-separating circuits
+  а ещё там есть групповое описание циклов в графе
+
+
+done:
+  чётный цикл из 6c4c/244-flows - это non-separating cycle или нет?
+    нет - ломается на 18 вершинах
+  тот же вопрос про o6c4c, o244-flows
+    тоже ломается там же
+
+
+done:
+  o6c4c и 14 гипотез vs o244-flows
+  может можно что-то вытащить?
+  я такое изучал уже (вроде бы)
+  но глянул быстренько ещё раз - ничего интересно тут не вытащить
+
+
+done
+  интересно, что
+  если глянуть раскраску S2 для графа петерсена
+
+              .0
+
+              .4
+      .6
+                      .8
+          .1
+                 .9
+
+            .2
+               .5
+
+         .7
+                  .3
+
+    0 6: x4     0, 0    0, 0    2, 0
+    0 4: x4x0  -1, 1    0, 1   -1, 0
+    0 8: x0     1,-1    0,-1   -1, 0
+    1 9: x3x1   1, 0   -1, 1    0, 1
+    1 5: x1x4   0,-1    1, 0    1,-1
+    1 6: x3x4  -1, 1    0,-1   -1, 0
+    2 7: x2x3   1, 0   -1, 1    0,-1
+    2 4: x2x0   1, 0    1,-1    0, 1
+    2 9: x0x3  -2, 0    0, 0    0, 0
+    3 8: x1     0, 1    1, 0    1,-1
+    3 5: x1x2   0, 0   -2, 0    0, 0
+    3 7: x2     0,-1    1, 0   -1, 1
+    4 5: x4x2   0, 1    1, 0   -1, 1
+    6 7: x3    -1, 1    0,-1    1, 0
+    8 9: x0x1   1, 0    1,-1    0,-1
+
+  то чётные перестановки векторов соответствуют одному и тому же цвету в раскраске Петерсена
+  (x0,x1,x2,x3,x4 - это базис в Z_2^5)
+  27 15 08
+  1, 0   -1, 1    0,-1
+  0,-1    1, 0    1,-1
+  1,-1    0,-1   -1, 0
+  не, не соответствуют
+  04 19 37
+  -1, 1    0, 1   -1, 0
+   1, 0   -1, 1    0, 1
+   0,-1    1, 0   -1, 1
+
+  зато базис соответствует! правда чисто комбинаторно
+  по цветам
+  08 15 27
+    x0 x1x4 x2x3
+  38 24 16
+    x1 x2x0 x3x4
+  37 19 04
+    x2 x3x1 x4x0
+  67 45 89
+    x3 x4x2 x0x1
+  06 29 35
+    x4 x0x3 x1x2
+
+done
+  понять что происходит в статье The Homology of Abelian Covers of Knotted Graphs
+  частично понял
+  кажется неинтересно - 15 цветов для графа петерсена
+  тогда вопрос
+  эти цвета получаются из базиса мультипликативной группы Z_2^5
+  - может ли этот базис соответствовать векторам со сферы S2?
+    например, у меня вектора описываются шестёрками вида
+    a,b,c,d,e,f
+    координаты точек
+    a+b*phi, c+d*phi, e+f*phi
+    где phi - (1+sqrt(5))/2 - золотое сечение
+  - а то, что в каждой вершине мы получаем произведение равное единице - фактом, что у нас поток на графе
+    правда непонятно откуда ориентацию брать
+    а может надо некоммутативность навернуть? при смене ориентации ребра
+    там типа на каждом написано произведение двух элементов из базиса
+    например, x_4 * x_0
+    а мы возьмём и для противоположной ориентации сделаем x_0 * x_4
+  вроде бы не получается ничего
+  можно считать, что эти цвета как-то связаны с раскраской петерсена
+
+todo
+  мы можем взять вложение графа в R3
+  и глянуть на его дополнение
+  это 3-manifold
+  вопрос - он hyperbolic или нет?
+  и ещё - он fibered over circle или нет?
+  хотя даже не все узлы и зацепления гиперболичны
+
+todo; hard (probably won't try)
+  For any spatial embedding of a snark, Theorem 1.11 guarantees the existence of a representation pi(K) -> SO(3)
+  это из статьи Кронхаймера-Мровки (ещё варианты - Кронхеймер, Мрувка)
+  pi(K) - fundamental group of the complement of a spatial graph K
+  теперь вопрос
+  SO(3) - это группа вращения сферы S2
+  возьмём любое вложение любого снарка
+  например графа Петерсена
+  какое представление мы получим?
+  связано ли оно как-нибудь с задачей про раскраску сферы S2?
+
+
+done
+  и букву N из NExp
+  сделать наследование в классе графа
+    типа наследую просто всякие векторы и прочее
+    из соответствующих h файлов
+  правда компилировать стало сложно - надо makefile каждый раз переписывать
+    зато быстро!
+
+todo:
+  oriented cremona-richmond configuration
+  - можно ли её найти в S2? в S3? в S4?
+    надо полагать, что в s2 и в s3 её нельзя найти
+    раз в ней нет ни nz5, ни nz6
+    и раз я думаю, что s2 и s3 красятся в nz5
+
+done:
+  в статье Kral "Projective, affine and abelian colorings of cubic graphs"
+  уже было показано, что если есть поток вершинами конфигурации дезарга
+  тогда у графа есть 5cdc
+  так же там показано, что
+  6c4c <=> Cremona-Richmond configuration
+  вопрос
+  o6c4c - это что?
+  можно ли удвоить Cremona-Richmond конфигурацию как-нибудь?
+  о, интересно - тут всё сложнее получается гораздо
+    6c4c описывался тройками вида ab|cd|ef
+    а когда мы хотим добавить ориентацию - нужно ещё учесть - это oriented вершина или unoriented
+  понял!
+  чтоб описать вектор
+  надо указать 4 цикла из 6 (15 вариантов) + 6 вариантов их направить
+  получается 90 векторов (15 * 6 = 90)
+  каждый вектор участвует в 3 тройках -> получаем конфигурацию!
+    типа, берём 4 цикла 1,2,3,4
+    1 и 2 входят, 3 и 4 выходят
+    так мы описали вектор
+    теперь нужно понять, кто из них параллелен 1 - получается 3 варианта
+    а дальше вершина нашего графа достраивается однозначно
+    upd: наврал - 5 троек получается, а не 3
+    потому что те 2 цикла, которые мы добавляем сбоку
+    у них может варьироваться ориентация
+  получается 150 троек
+  получается конфигурация (с доп. структурой ops)
+    upd: да, формально это всё ещё конфигурация
+    у каждой вершины степень 5
+    у каждого ребра степень 3
+    + структура ops
+  - какой тут поток? явно не nz5
+    может nz6?
+    nz7 прокатил
+    nz5 не нашёлся
+    nz6 тоже не нашёлся
+    значит, нет универсального способа сделать nz6, только nz7 и понятно как
+    (но в каждом частном случае вроде удавалось из o6c4c сделать nz6)
+
+todo:
+  кстати, гиперграфы
+  а для них можно ввести понятие потока?
+  если есть структура ops - то точно можно
+  а вот что делать с desargues configuration?
+    не могу найти для него потока никакого
+
+done:
+  какой поток у конфигурации дезарга?
+    видимо нет
+  какой поток у cremona-richmond configuration?
+    видимо nz3
+  а вообще видимо нужен ops (+противоположные тройки), чтоб этот вопрос был осмысленным
+
+done:
+  eikosany - это desargues граф
+  https://en.wikipedia.org/wiki/Desargues_graph
+  It is the Levi graph of the Desargues configuration
+  It is the bipartite double cover of the Petersen graph, formed by replacing each Petersen graph vertex by a pair of vertices and each Petersen graph edge by a pair of crossed edges.
+
+wont do:
+  может можно сформулировать гипотезу
+  а-ля cycle-continuous mapping
+  только граф петерсена заменим на гиперграф на 20 точках?
+  да ещё и oriented
+  не буду делать - и так понятно что это за набор, и как графы ему соответствуют
+  а именно - покраска в эти вектора - это в точности o5cdc
+
+todo:
+  какой двойственный гиперграф для этой конфигурации?
+  если я мысленно пойму как ab bc ca превратить в de
+  а тройку ba cb ab превратить в ed, тогда этот гиперграф самодвойственный
+    наверно можно так - если максимум положительный - тогда лексикографически, de, иначе ed
+    не, нельзя
+  ab bc ca
+  ab bd da
+  ab be ea
+  a=1, b=2, c=3, d=4, e=5
+  1 1 -2 ed
+  1 2 -3 ec (а надо ce)
+  1 3 -4 dc
+
+done:
+  как визуализировать эту конфигурацию?
+  как нарисовать этот гиперграф на плоскости?
+  так как я понял, что это удвоенный дезарг, то примерно понятно как нарисовать
+
+todo:
+  в этой конфигурации из 20 точек
+  есть ли в ней 3 hamiltonian cycles, которые образуют balanced triple cover?
+
+todo:
+  можно ли раскрасить S3?
+
+wont do:
+  проверить, что в этой конфигурации
+  те же 5 потоки, что и в графе петерсена
+  например, посчитать сколько раз встречается каждое число в потоке
+    блин, чё-т я туплю - в графе петерсена 15 рёбер, а тут 10 пар или 20 вершин
+    напрямую их не сравнить никак
+  но как вариант, вот из графа петерсена
+  4,4,4,3,3,3,2,2,2,2,1,1,1,1,1
+
+done:
+  поделил конфигурацию на 2 (убрал ops)
+  0, 2, 5, 7, 9, 10, 14, 15, 16, 17
+  triples:  0  7  5
+  triples: 14  0 15
+  triples: 17 16  0
+  triples:  2  5 17
+  triples:  7  2 16
+  triples:  9 10  2
+  triples: 15  9  7
+  triples:  5 14  9
+  triples: 10 17 14
+  triples: 16 15 10
+  какой здесь поток?
+  что это за конфигурация? это дезарг или это недезарг?
+  недезарг - это вот:
+    https://en.wikipedia.org/wiki/Desargues_configuration#/media/File:Non-Desargues_configuration.svg
+    https://upload.wikimedia.org/wikipedia/commons/f/f8/Non-Desargues_configuration.svg
+  это дезарг!
+  правда не знаю какая перестановка
+
+done:
+  в этой конфигурации из 20 точек
+  какой в ней поток можно уместить?
+  nz5
+  0: -4
+  1: 4
+  2: -2
+  3: 2
+  4: -3
+  5: 1
+  6: -1
+  7: 3
+  8: -1
+  9: 1
+  10: -1
+  11: 1
+  12: -2
+  13: 2
+  14: -2
+  15: 2
+  16: -1
+  17: 3
+  18: -3
+  19: 1
+
+done:
+  проверил S3
+  конкретно - вершины 600-cell
+  прокатило! до 28.05 включительно работает
+  а вроде и меньшее число вершин прокатывает
+  более того - есть 20 векторов (включая противоположные - то есть 10 пар)
+  которых хватает на все графы (проверил до 28.05 включительно)
+  что это за набор?
+  это какой-то гиперграф (3-uniform), где у каждой вершины степень 3, и у каждого ребра степень 3
+  скорее всего это будет типа bipartite double cover of desaruges configuration,
+    что бы это ни значило
+    так и есть!
+
+  ops: 0 1
+  ops: 2 3
+  ops: 4 7
+  ops: 5 6
+  ops: 8 9
+  ops: 10 11
+  ops: 12 15
+  ops: 13 14
+  ops: 16 19
+  ops: 17 18
+  вот равномерно пошафленные тройки (хочу нарисовать их на плоскости)
+  triples:  0  7  5     -4  3  1
+  triples:  1  4  6
+  triples: 13  0 15      2 -4  2
+  triples: 14  1 12
+  triples: 17 19  0      3  1 -4
+  triples: 18 16  1
+  triples:  2  6 17
+  triples:  3  5 18
+  triples:  7  2 16
+  triples:  4  3 19
+  triples:  9 11  2
+  triples:  8 10  3
+  triples: 15  9  4
+  triples: 12  8  7
+  triples:  5 14  9
+  triples:  6 13  8
+  triples: 10 17 14
+  triples: 11 18 13
+  triples: 16 15 10
+  triples: 19 12 11
+
+  0: -4
+  1: 4
+  2: -2
+  3: 2
+  4: -3
+  5: 1
+  6: -1
+  7: 3
+  8: -1
+  9: 1
+  10: -1
+  11: 1
+  12: -2
+  13: 2
+  14: -2
+  15: 2
+  16: -1
+  17: 3
+  18: -3
+  19: 1
+
+  каждая вершина - это 3 буквы из 6 abcdef
+  например abc
+  ops - это дополнения друг до друга, например
+  0 = abc, 1 = def
+  что такое тройка тогда?
+  о!
+  берём цифры, берём какую-нибудь перестановку (но не сдвиг), и рассматриваем все 6 её сдвигов
+    я хотел вместо перестановки какую-нибудь функцию простую, но не придумал ничего для Z6
+  0 5 7
+  3 5 18
+  11 13 18
+  0 13 15
+  лень проверять
+  видимо я неправ тут - выше разобрался, что тут двойное покрытие для конфигурации Дезарга
+  о, догнал
+  это 20 вершин вида:
+   . 12 13 14 15
+  21  . 23 24 25
+  31 32  . 34 35
+  41 42 43  . 45
+  51 52 53  . 54
+  а каждая тройка - это циклического вида набор ab bc ca
+  а значение в вершине ab - это разность b-a
+
+todo:
+  что это
+  Grassmann homomorphism
+  In the last two decades Hajos’ theorem (Theorem 3) became very popular among graph theorists. Hajos like theorems were established for the list chromatic number by Gravier [7] and Kr ́al [17], for the circular chromatic number by Zhu [30], for the signed chromatic number by Kang [16], for the chromatic number of edge weighted graphs by Mohar [19], for graph homomorphisms by Nesetril [22], and for Grassmann homomorphism (a homomorphism concept that provides a common generalization of graph colorings, hypergraph colorings and nowhere-zero flows) by Jensen [14].
+
+done:
+  что это за 246 точек на сфере?
+  получал ли я их раньше?
+  если взять веса не до 3, а до 4 - будет 414 точек (тут находится nz5 поток)
+  если до 5 - 678 точек (раскраска слишком долго красит это всё)
+  если до 6 - 870
+  текущий вердикт - закодил в плюсах перебор потока с этими векторами
+    проверил веса <= 4
+    в итоге на снарках на 18 вершинах нет потоков с этими векторами (точками на сфере)
+    проверил 4 графа 26.04, где есть oriented petersen colouring
+      в них прокатывают вектора с весом == 1 (как и для графа петерсена)
+
+todo:
+  попробовать сделать раскраску сферы
+  чтоб она пыталась сохранить непрерывность
+
+done:
+height
+least common denominator of coordinates
+x1**2+x2**2+x3**2=y**2
+=>
+(+-x1/y, +-x2/y, +-x3/y)
+получаю 8 точек (а может в них надо просто кинуть весь набор 1,2,3,4,-1,-2,-3,-4?)
+а, интересно, возможно мне тут тоже надо просто добавить ещё один корень
+в 2d это был sqrt(3)
+может здесь sqrt(5)? стопудов, да
+  я что-то подобное уже делал в переборе точек на сфере
+надо более умный перебор троек сделать
+или золотое сечение
+вершины икосододекаэдра - чётные перестановки координат
+  0,0,+-phi
+  +-1/2, +-phi/2, +-(1+phi)/2
+как раз получается
+  тут точки с высотой 1 и 2
+  и ещё отнормировать надо на phi
+типа идея такая
+  перебираем тройки x1, x2, x3 такие что
+  высота <= k*phi
+  xi = a + b * phi
+  и что они без единого общего знаменателя
+    это можно по парам (a,b) понять
+  (a + b phi)**2 = a**2+2ab phi + b**2 phi**2 = (a**2 + b**2) + b(2a + b) phi
+  y**2 = k**2 * phi**2 = k**2 + k**2 phi
+  ну вот и оценка сверху на самом деле: a1**2+b1**2+a2**2+b2**2+a3**2+b3**2 =k**2
+  1,0; 0,1; 1,1 => да, действительно
+result: а вот интересно
+  пробовал только положительные веса - и можно было просто ограничиться весами 1 и 2 - получаю всегда 54 точки
+  взял отрицательные
+  и веса от -2 до 2
+  и внезапно получил 246 точек
+
+
+todo:
+  hyperbolic 3-manifolds that fiber over the circle
+  Three-manifolds which fiber over the circle
+
+done:
+  может этих 54 векторов (точек на сфере) хватает для покраски всех снарков?
+  как я это проверять буду : )
+    - запишу список в файл
+    - считаю этот список из файла
+      впрочем у меня есть генератор этих точек
+    - дальше я так-то даже знаю - какие пары могу из них сложить
+    и какими тройками воспользоваться
+    - и добиваю перебор
+  результат - не хватило
+
+
+done:
+  попробовать другие объекты, не S2
+    а например spherical dodecahedral space
+  ну или же мысль такая
+  что надо попробовать заменить S2 на S3
+  и раскрасить S3 в 1,2,3,4,...
+    и поискать раскраску для графов через вектора S3, а не S2
+  (S6-flow - это теорема, из-за o7c4c; и тут даже я так понимаю конечный набор точек вообще)
+  (в общем-то как и в S1 vs Z3 - там же тоже хватит 6 точек)
+  конкретно - взять 120-cell или 600-cell
+  ещё конкретнее - взять вершины 600-cell и поискать там тройки векторов
+    а их там полно
+    и да, тут точно есть граф петерсена - вершины похожи на икосододекаэдр
+  попробовал - нашёл 20 точек
+  ориентированную конфигурацию дезарга
+
+done : (
+  https://ncatlab.org/nlab/show/spherical+space+form
+  A spherical space form is a quotient space Sn/G of a round Riemannian n-sphere (n≥2) by a subgroup G of its isometry group, which acts freely and properly discontinuously.
+  соответственно у меня
+  S2, G = H3 - тут можно что-то вытащить?
+  не, нельзя
+  https://math.stackexchange.com/questions/136126/the-only-finite-group-which-can-act-freely-on-even-dimensional-spheres-is-c-2
+
+
+тут до меня дошло:
+  что для графов-снарков, где справедлив oriented petersen colouring,
+  для них так же прокатывает тот же самый набор точек на сфере S2, что и для графа петерсена
+
+
+
+
+done:
+z3-flow mapping
+для тестирования - глянуть примеры,
+  где есть oriented petersen colouring, z3-flow пример там должен найтись
+могу ли я по-быстрому проверить, что построенный petersen colouring на самом деле oriented?
+  26.04g332
+  26.04g1092
+  26.04g1234
+    success!  cycles: 11+5+5+5; 13+13; 5+6+5+5+5; 5+5+11+5; 6+5+5+5+5; 13+13
+  26.04g1297
+    success!  cycles: 10+5+6+5; 13+13; 10+5+6+5; 6+10+5+5; 13+13; 10+5+6+5
+  тут даже везде ненулевое число poor рёбер
+
+есть o6c4c с одними только RICH рёбрами (типа берём любое ребро, оно в 4 слоях, смотрим на его контекст, какие пары рёбер оно соединяет; типа ребро RICH - если все 4 пары реализуются, и poor если только 2 из них)
+а есть strong petersen colouring
+и выясняется, что они не связаны друг с другом
+вот, здесь ничего доказывать не надо пока что, просто хотел записать уже
+  типа для 22.05g1 есть o6c4cRICH, но нет strong petersen colouring
+  для 26.04g332 и 26.04g1092 есть strong petersen colouring, но нет o6c4cRICH (да и 6c4cRICH тоже нет)
+  тем не менее, они оба есть у: 10.05g1, 26.05g255, 26.05g280
+
+
+todo?
+foliations
+https://ncatlab.org/nlab/show/foliation
+Ieke Moerdijk, Janez Mrčun, Introduction to foliations and Lie groupoids
+all compact foliations
+http://www.mi-ras.ru/~snovikov/23.pdf
+http://www.numdam.org/article/AIF_1976__26_1_265_0.pdf
+WADSLEY, Geodesic foliations by circles
+Besse, A., Manifolds all of whose Geodesics are closed
+
+
+todo:
+строю гомологии здесь
+или не строю
+например
+теория Морса
+там есть критические точки
+у них есть индекс
+C_k = Sum (свободная сумма абелевых групп) _ {x \ in crit(f), ind(x) = k} Z<x>
+вот
+допустим у меня критические точки - это oriented вершины
+а есть ли у меня индексы?
+i am not sure
+
+
+todo:
+  есть красивые мысли про потоки на графах
+  что они сидят в ядре оператора лапласа
+  тут же фактически ведь какая-то теория ходжа сидит?
+  The cut and flow spaces of G are respectively the row space and kernel of its
+  boundary matrix ∂, regarded as a map of modules over a ring A (typically either Z, R, or Zk).
+  Cuts and flows arise in algebraic graph theory and are connected to the critical group and the chip-firing game: see, e.g., [1] or [21, Chapter 14]. Over Z, we consider in addition the space of tensions, or integer vectors of whom some multiple is in the cut space. (Over a field or a finite ring, all tensions are cuts.) For a generalization of cuts and flows to cell complexes, see [18].
+  1. Roland Bacher, Pierre de la Harpe, and Tatiana Nagnibeda, The lattice of integral flows and the lattice of integral cuts on a finite graph, Bull. Soc. Math. France 125 (1997), no. 2, 167–198.
+  18. Art M. Duval, Caroline J. Klivans, and Jeremy L. Martin, Cuts and flows of cell complexes, Preprint, arXiv:1206.6157, 2012.
+
+
+todo:
+очень важный вопрос
+который кажется стоит поисследовать
+это про декомпозиции всякие
+на более слабые потоки типа Z3 и Z4
+
+==========================================
+
+
+todo:
+  теперь имея группу
+  надо понять её свойства
+  являются ли она арифметической?
+  найти модулярную форму
+
+N = 90 = 2 * 45 = e * m
+1/2 mod 45 = 23
+1/5 mod 2 = 1
+c: mod e = 0, mod m = 1
+то есть c чётно, c = 46
+d: mod e = 1, mod m = 0
+d нечётно, d = 45
+a = L^c, b=R^c, l=L^d, r=R^d
+s = l^20 * r ^ 1 * l ^ {-4} * r ^ {-1}
+[x,y]=x^-1 y^-1 x y
+
+- a commutes with r
+L:
+1->23->29->20->16->17->28->8->4->
+2->5->19->26->27->22->
+3->9->13->15->6->
+7->25->30->12->10->
+11->24->21->18->14->
+R:
+2->3->7->27->18->15->19->30->24->
+1->21->28->25->20->6->
+4->5->16->14->10->
+8->9->11->29->26->
+12->13->17->22->23->
+
+L^c=L^46
+
+так, окей
+вроде бы не конгруэнц-подгруппа выходит
+a не коммутирует с r
+
+так
+level
+Definition 2.2. The level of a modular subgroup Γ, as specified by permutations L and R, is defined to be the order of L (or the order of R, since L is conjugate to R−1).
+L - перестановка вершин в гранях
+получается level=lcm(9,6,5,5,5)=90
+
+Theorem 2.3. Let N be the level of a modular subgroup Γ. Γ is a congruence subgroup if and only if it contains Γ(N).
+
+TODO
+нужно вычислить подгруппу для графа Петерсена
+один из кандидатов - это Г_0(15)
+
+TODO:
+и кстати интересный момент -  o4cdc
+для тетраэдра - знаем ответ
+что с другими графами? какие там подгуппы?
+
+In parallel, bipartite graphs on Riemann surfaces, especially of genus 1 – called “dimer models” or brane tilings – have been a long subject in physics within the context of contructing supersymmetric gauge theories from branes in string theory [9,10] (cf. [13] for a rapid review), which has been for a number of years having a fruitful dialogue with the algebraic geometry (especially Calabi-Yau varieties) and quiver representation community (cf. a rather comprehensive treatment in [5]). The inter-play between the physics of the gauge theory, the algebraic geometry of the underlying toric Calabi-Yau geometry probed by the branes and the representation theory of the quiver structure which encodes both has been inspiring many new directions of research
+[9] S. Franco, A. Hanany, K. D. Kennaway, D. Vegh and B. Wecht, “Brane dimers and quiver gauge theories,”
+JHEP 0601, 096 (2006) [hep-th/0504110].
+[10] S. Franco, A. Hanany, D. Martelli, J. Sparks, D. Vegh and B. Wecht, “Gauge theories from toric geometry and
+brane tilings,” JHEP 0601, 128 (2006) [hep-th/0505211].
+[13] Y. H. He, “Bipartita: Physics, Geometry & Number Theory,” arXiv:1210.4388 [hep-th]. Proc. 29th Int. Col-
+loq. on Group-Theoretical Methods in Physics.
+
+
+Now, as detailed in Singerman and Wolfart [26], there is a direct connection between the Schreier coset graphs and the dessins d'enfants for each class of Hecke subgroups: the dessins d'enfants for a certain conjugacy class of subgroups of a Hecke group Hn can be constructed from the Schreier coset graphs by replacing each positively oriented n-gon with a white node, and inserting a black node into every edge. Conversely, the Schreier coset graphs can be constructed from the dessins by replacing each white node with a positively oriented n-gon, and removing the black node from every edge. Crucially, the dessin constructed in this way is the same dessin as that associated to the Belyi map for the surface XG as discussed above, where G is the conjugacy class of Hecke subgroups under consideration [24, 26].
+
+This last result means that our chain of connections between Hecke groups and dessins d'enfants has come full circle: for a given conjugacy class of subgroups G of a Hecke group Hn, there is an associated (compactified) surface XG; in each case there exists a Belyi map β:XG→ℙ1
+. Every such Belyi map has a unique associated dessin, which in turn can be translated into a Schreier coset graph for a certain conjugacy class of Hecke subgroups—precisely the G from which we began!
+
+
+
+дрор бар натан в одной из статей
+Lie algebras and the Four Color Theorem
+показал, что теорему четырёх красок
+можно переформулировать в виде утверждения
+про функционалы на ориентированных тривалентных графах
+на алгебрах ли
+For a connected oriented trivalent graph G, W_sl(2)(G) = 0 implies W^top_sl(N)(G) = 0.
+так вот
+есть мысль, что o5cdc можно подобным образом переформулировать
+
+ещё вопрос
+правда же что
+ocdc на кубических графах без мостов - это ровно те же графы, что и Strebel graphs?
+Theorem 4.2 (Strebel) There exists a unique element ω ∈ ΩS such that the graph is cellular, i.e. all faces are discs (no cylinder). ω is called the Strebel differential, and the graph of its critical horizontal trajectories is called the Strebel graph.
+не, вроде неправда
+причём неправда конкретно про мосты
+
+
+
+There are also applications of explicit Belyi maps to algebraic solutions of differential equations [100]: as we will see in Section 4, subgroups of finite index of triangle groups correspond to certain Bely ̆ı maps, and the uniformizing differential equations for these groups (resp. their solutions) can be obtained by pulling back suitable hypergeometric differential equations (resp. hypergeometric functions)
+вот например кейс подмножества особых belyi maps
+
+
+Prove that any bridgeless cubic graph can be viewed as a Schreier representation of a map.
+а что не так с не bridgeless?
+
+
+
+
+TODO
+  у октаэдра есть генератор вида
+  x*y^-1*x*y*x*y*x^-1*y^-2*x^-1
+  особенность, что тут два раза подряд y^-1 (в виде y^-2)
+  в генераторах вложения графа Петерсена я такого не заметил, (x или x^-1) чередуются с (y или y^-1)
+  интересно проверить для других вложений
+
+
+E=(1,2)(3,4)(5,6)(7,8)(9,10)(11,12)(13,14)(15,16)(17,18)(19,20)(21,22)(23,24)(25,26)(27,28)(29,30)
+V=(1,3,5)(4,7,9)(10,11,13)(15,14,17)(6,16,19)(2,21,23)(8,27,25)(12,29,24)(18,22,28)(20,30,26)
+
+L=E V^-1
+1->2->23
+2->1->5
+3->4->9
+4->3->1
+5->6->19
+6->5->3
+7->8->25
+8->7->4
+9->10->13
+10->9->7
+11->12->24
+12->11->10
+13->14->15
+14->13->11
+15->16->6
+16->15->17
+17->18->28
+18->17->14
+19->20->26
+20->19->16
+21->22->18
+22->21->2
+23->24->29
+24->23->21
+25->26->30
+26->25->27
+27->28->22
+28->27->8
+29->30->20
+30->29->12
+
+1->23->29->20->16->17->28->8->4->
+2->5->19->26->27->22->
+3->9->13->15->6->
+7->25->30->12->10->
+11->24->21->18->14->
+
+9, 6, 5, 5, 5
+ага, это грани
+ожидаемо, лол
+
+R=EV
+
+V=(1,3,5)(4,7,9)(10,11,13)(15,14,17)(6,16,19)(2,21,23)(8,27,25)(12,29,24)(18,22,28)(20,30,26)
+1->2->21
+2->1->3
+3->4->7
+4->3->5
+5->6->16
+6->5->1
+7->8->27
+8->7->9
+9->10->11
+10->9->4
+11->12->29
+12->11->13
+13->14->17
+14->13->10
+15->16->19
+16->15->14
+17->18->22
+18->17->15
+19->20->30
+20->19->6
+21->22->28
+22->21->23
+23->24->12
+24->23->2
+25->26->20
+26->25->8
+27->28->18
+28->27->25
+29->30->26
+30->29->24
+
+1->21->28->25->20->6->
+2->3->7->27->18->15->19->30->24->
+4->5->16->14->10->
+8->9->11->29->26->
+12->13->17->22->23->
+
+
+считаю класс смежности подгруппы Гекке
+для вложения графа Петерсена в Риманову поверхность с родом 1
+
+f:=FreeGroup("x", "y");
+H3:=f/[f.1^2,f.2^3];
+hom:=GroupHomomorphismByImages(H3,Group(
+(1,2)(3,4)(5,6)(7,8)(9,10)(11,12)(13,14)(15,16)(17,18)(19,20)(21,22)(23,24)(25,26)(27,28)(29,30),
+(1,3,5)(4,7,9)(10,11,13)(15,14,17)(6,16,19)(2,21,23)(8,27,25)(12,29,24)(18,22,28)(20,30,26)),
+GeneratorsOfGroup(H3),
+[(1,2)(3,4)(5,6)(7,8)(9,10)(11,12)(13,14)(15,16)(17,18)(19,20)(21,22)(23,24)(25,26)(27,28)(29,30),
+(1,3,5)(4,7,9)(10,11,13)(15,14,17)(6,16,19)(2,21,23)(8,27,25)(12,29,24)(18,22,28)(20,30,26)]);
+
+petersen_group:=PreImage(hom,Stabilizer(Image(hom),1));
+iso:=IsomorphismFpGroup(petersen_group);
+
+[ <[ [ 1, 1 ] ]|(y*x)^2*y*(x^-1*y^-1)^2*x^-1>,
+  <[ [ 2, 1 ] ]|y*x*y^-1*x*y*x^-1*y^-1*x^-1*y*x^-1>,
+  <[ [ 3, 1 ] ]|y^-1*x*y*x*y^-1*x^-1*y*x^-1*y^-1*x^-1>,
+  <[ [ 4, 1 ] ]|(y^-1*x)^2*(y*x^-1)^3>,
+  <[ [ 5, 1 ] ]|(y*x)^2*y^-1*x*(y*x^-1)^2*y>,
+  <[ [ 6, 1 ] ]|y*(x*y^-1)^3*x^-1*y^-1*x^-1*y>
+ ] -> [ F1, F2, F3, F4, F5, F6 ]
+
+
+x =
+0 -1
+1 0
+
+y =
+0 -1
+1 1
+
+(y*x)^2*y*(x^-1*y^-1)^2*x^-1
+F1 = (y@x)@(y@x)@y@(xi@yi)@(xi@yi)@xi
+ 1 -2
+-3  7
+
+y*x*y^-1*x*y*x^-1*y^-1*x^-1*y*x^-1
+F2 = y@x@yi@x@y@xi@yi@xi@y@xi
+ 5 -3
+-8  5
+
+y^-1*x*y*x*y^-1*x^-1*y*x^-1*y^-1*x^-1
+F3 = yi@x@y@x@yi@xi@y@xi@yi@xi
+-5  8
+ 3 -5
+
+(y^-1*x)^2*(y*x^-1)^3
+F4 = (yi@x)@(yi@x)@(y@xi)@(y@xi)@(y@xi)
+ 7 -2
+-3  1
+
+(y*x)^2*y^-1*x*(y*x^-1)^2*y
+F5 = (y@x)@(y@x)@yi@x@(y@xi)@(y@xi)@y
+-1 -4
+ 3 11
+
+y*(x*y^-1)^3*x^-1*y^-1*x^-1*y
+F6 = y@(x@yi)@(x@yi)@(x@yi)@xi@yi@xi@y
+ 4  5
+-5 -6
+длины путей - 10,10,10,10,11,11
+
+
+f:=FreeGroup("x", "y");
+H3:=f/[f.1^2,f.2^3];
+hom:=GroupHomomorphismByImages(H3,Group(
+(1,2)(3,4)(5,6)(7,8)(9,10)(11,12)(13,14)(15,16)(17,18)(19,20)(21,22)(23,24)(25,26)(27,28)(29,30),
+(1,19,18)(2,3,29)(4,5,26)(6,7,22)(8,9,28)(10,11,30)(12,13,24)(14,15,25)(16,17,27)(20,23,21)),
+GeneratorsOfGroup(H3),
+[(1,2)(3,4)(5,6)(7,8)(9,10)(11,12)(13,14)(15,16)(17,18)(19,20)(21,22)(23,24)(25,26)(27,28)(29,30),
+(1,19,18)(2,3,29)(4,5,26)(6,7,22)(8,9,28)(10,11,30)(12,13,24)(14,15,25)(16,17,27)(20,23,21)]);
+
+petersen_group:=PreImage(hom,Stabilizer(Image(hom),1));
+iso:=IsomorphismFpGroup(petersen_group);
+
+[ <[ [ 1, 1 ] ]|(y*x)^2*(y*x^-1)^3>,
+  <[ [ 2, 1 ] ]|y*x*y^-1*x*y*(x^-1*y^-1)^2*x^-1>,
+  <[ [ 3, 1 ] ]|y^-1*x*y*x*(y^-1*x^-1)^2*y*x^-1>,
+  <[ [ 4, 1 ] ]|(y^-1*x)^2*(y*x^-1)^2*y^-1*x^-1>,
+  <[ [ 5, 1 ] ]|(y*x)^2*y^-1*x*(y*x^-1)^2*y>,
+  <[ [ 6, 1 ] ]|y*(x*y^-1)^3*x^-1*y^-1*x^-1*y> ]
+-> [ F1, F2, F3, F4, F5, F6 ]
+
+
+F1 = (y@x)@(y@x)@(y@xi)@(y@xi)@(y@xi)
+ 1 0
+-5 1
+F2 = y@x@yi@x@y@(xi@yi)@(xi@yi)@xi
+-2 5
+3 -8
+F3 = yi@x@y@x@(yi@xi)@(yi@xi)@y@xi
+-7  5
+ 4 -3
+F4 = (yi@x)@(yi@x)@(y@xi)@(y@xi)@yi@xi
+-5  7
+ 2 -3
+F5 = (y@x)@(y@x)@yi@x@(y@xi)@(y@xi)@y
+-1 -4
+ 3 11
+F6 = y@(x@yi)@(x@yi)@(x@yi)@xi@yi@xi@y
+ 4  5
+-5 -6
+длины путей - 10,10,10,10,11,11
+
+
+==========================================
+
+
+а вот в тему грэма-хэггквиста
+Schreier graphs: transitivity and coverings.
+
+o5cdc
+с другой стороны! возможно это неинтересные вложения?
+Ribbon Graphs, Quadratic Differentials on Riemann Surfaces, and Algebraic Curves Defined over Q¯
+Explicit Jenkins-Strebel representatives of all strata of Abelian and quadratic differentials
+Jenkins-Strebel Differentials on the Riemann Sphere with Four Simple Poles
+Constructing Strebel differentials via Belyi maps on the Riemann sphere
+Holomorphic quadratic differentials on graphs and the chromatic polynomial
+Partial duality of hypermaps
+тут ещё возможно есть где-то связь с chord diagrams
+  Graphs on surfaces and Khovanov homology
+  A Chord Diagram of a Ribbon Surface-Link
+  Ribbon graphs and bialgebra of Lagrangian subspaces
+    To each ribbon graph we assign a so-called L-space, which is a Lagrangian subspace in an even-dimensional vector space with the standard symplectic form. This invariant generalizes the notion of the intersection ma- trix of a chord diagram
+даёт особый вложенный граф
+ribbon graph с возможностью раскраски граней в 5 цветов, без мостов
+что это за подмножество такое?
+надо изучить
+там же
+strebel differential / quadratic differential
+hypermaps
+For a metric ribbon graph with edge length 1,
+an algebraic curve over Q\bar and a
+Strebel differential on it is constructed
+  нужно глянуть эту конструкцию
+  Theorem 6.5.
+  Let Γmet be a metric ribbon graph with no vertices of degree less than 3. It gives rise to an algebraic curve defined over Q if all the edges have the same length, which can be chosen to be 1. The metric ribbon graph determines a unique Belyi map
+  f : C(Γmet) −→ P1
+  such that the child’s drawing associated with f is the edge refinement of Γmet. The Strebel differential q on C(Γmet) is the pull-back of the building block q0 of (4.12)
+  via the Belyi map, i.e.,
+  Conversely, every nonsingular algebraic curve over Q can be constructed from a trivalent metric ribbon graph with edge length 1.
+ещё важно
+Strebel differentials with integral lengths and Argyres-Douglas singularities
+  the condition for a quadratic differential to be Strebel
+  is transcendental and expressed in terms of elliptic functions
+  но!
+  In this paper we restrict our study to Strebel differentials with some integral properties. More explicitly, we impose that the lengths of the edges of the associated ribbon graphs be integers. This condition leads to a huge simplification of the problem: it replaces transcendental equations by polynomial equations. The idea of restricting to Strebel differentials with this property came from physics; in particular, from supersymmetric gauge theories, where a generating function of chiral operators can naturally be interpreted as an abelian differential on a Riemann surface with integral periods
+также
+https://mathoverflow.net/questions/146971/is-there-an-algorithm-to-compute-efficiently-the-dessin-denfant-from-a-belyi-pa
+https://arxiv.org/abs/1311.2529 - This is a survey of computing Belyi maps from the designs
+
+modular forms of level 5
+https://golem.ph.utexas.edu/category/2008/02/modular_forms.html
+On level 5, there are 12 cusps (holes poked in the surface), the vertices of an icosahedron.
+оп-па
+правда утверждается, что это не каспы, видимо речь про точки орбифолда
+
+Pictures of Modular Curves
+типа tiling
+https://golem.ph.utexas.edu/category/2010/10/test.html
+https://golem.ph.utexas.edu/category/2010/10/pictures_of_modular_curves_ii.html
+https://golem.ph.utexas.edu/category/2010/11/pictures_of_modular_curves_iii.html
+https://golem.ph.utexas.edu/category/2010/11/pictures_of_modular_curves_iv.html
+https://golem.ph.utexas.edu/category/2010/11/pictures_of_modular_curves_v.html
+https://golem.ph.utexas.edu/category/2010/12/pictures_of_modular_curves_vi.html
+https://golem.ph.utexas.edu/category/2010/12/pictures_of_modular_curves_vii.html
+https://golem.ph.utexas.edu/category/2010/12/pictures_of_modular_curves_vii_1.html
+https://golem.ph.utexas.edu/category/2011/01/pictures_of_modular_curves_ix.html
+https://golem.ph.utexas.edu/category/2011/01/pictures_of_modular_curves_x.html
+https://golem.ph.utexas.edu/category/2011/01/pictures_of_modular_curves_xi.html
+
+
+todo
+pppdc на связных графах
+  на полных графах конструкция работает
+  на деревьях
+    умею по конструкции Кнута строить разбиение на пути
+    и вроде бы по индукции умею их направлять
+    надо построить "граф пересечения путей друг с другом"
+    вроде бы он является деревом
+    так что индукция должна прокатить
+  в общем случае это не пересечение путей друг с другом - не дерево
+
+todo
+pppdc, доказательство
+  строим дерево
+  видимо не любое
+  нужно выбрать порядок рёбер такой, что
+  нам никогда не понадобится добавлять ребро из чётной степени в чётную
+  надо попробовать придумать такой порядок
+  что дальше не очень понятно, но может вдруг прокатит стандартное доказательство?
+  не прокатит
+
+ppdc
+  в оригинальном доказательстве - есть же свобода выбора?
+
+ppdc
+  закодить
+
+
+o6c4c vs multiloop chord diagrams
+  эта история чем-нибудь кончилась?
+  можно ещё из o6c4c создавать 3-graph'ы
+  типа первым ребром будет хорда, вторым - вдоль цикла, третье - против цикла
+  и да, мы получаем хитрое подмножество 3-graph'ов, ожидаемо
+
+connected chord diagrams and bridgeless maps
+o6c4c vs multiloop chord diagrams
+  Delta-matroids were introduced by A. Bouchet [4] for the purpose of studying embedded graphs, whence their relationship with (multiloop) chord diagrams is by no means unexpected one can define both the first and the second Vassiliev moves for binary delta-matroids and introduce a 4-term relation for them in such a way that the mapping taking a chord diagram to its delta-matroid respects the corresponding 4-term relations
+  Some evidence for the existence of such a relationship can be found, for example, in [2], where the Tutte polynomial for embedded graphs has been introduced. The authors show that this polynomial depends on the delta-matroid of the embedded graph rather than the graph itself and satisfies the Vassilev 4-term relation.
+
+  TODO:
+    кажется намечается небольшой research проект
+    с одной стороны имеем
+      connected chord diagrams and bridgeless maps
+    а с другой стороны имеем
+      Delta-matroids were introduced by A. Bouchet [4] for the purpose of studying embedded graphs, whence their relationship with (multiloop) chord diagrams is by no means unexpected
+      one can define both the first and the second Vassiliev moves for binary delta-matroids and introduce a 4-term relation for them in such a way that the mapping taking a chord diagram to its delta-matroid respects the corresponding 4-term relations
+    и ещё имеем
+      Some evidence for the existence of such a relationship can be found, for example, in [2], where the Tutte polynomial for embedded graphs has been introduced. The authors show that this polynomial depends on the delta-matroid of the embedded graph rather than the graph itself and satisfies the Vassilev 4-term relation.
+
+  TODO: мб bridgeless map vs двойные покрытия на графе без мостов?
+    когда у нас настоящее двойное покрытие
+    получаем bridgeless map
+    обладает ли chord diagram каким-нибудь интересным свойством при этом?
+
+  TODO: bridgeless map <-> connected chord diagram
+    чему соответствует поток на map'е или двойное покрытие циклами?
+
+
+pppdc
+  попробовать полные графы
+  K_{2n+1}
+  с зафиксированным направлением рёбер
+
+
+ищу непрерывные аналогии
+non vanishing flow manifolds
+graph laplace flow
+https://en.wikipedia.org/wiki/Laplacian_matrix#Graphs
+
+
+planar tree packing оказывается не гипотеза, а теорема
+ уже 3 года как
+ доказана конструктивно, круто
+
+
+можно oppdc попробовать решить так
+  стартуем наоборот, с полного графа
+  а дальше удаляем рёбра
+  и нужно попробовать сначала переписать док-во ppdc в таком виде
+  а потом подумать, есть ли какой, скажем, инвариант,
+     или скажем какая-нибудь мера сложности решения
+  ага, видимо это провальная идея
+    потому что я могу стартовать с k4, и прийти к k3
+    то есть как минимум надо ещё связность графа постоянно просить
+    и так-то я ещё могу порядок рёбер выбрать в каком-то смысле
+  или заценить ещё appdc
+    может их надо вместе решать сразу?
+    или один из другого как-то делается
+  про appdc я знаю 1 контрпример, и не знаю, есть ли ещё (потому что сложно перебрать все возможные biconnected графы)
+    и этот контрпример странный
+
+oppdc
+  можно изучить пространство решений на конкретном зафиксированном связном графе
+  а именно, поставить всякие разные вопросы:
+    какие из рёбер можно выбрать в качестве начальных/конечных в путях? и есть ли тут какая структура
+    или наоборот, какие из рёбер могут сидеть в середине пути
+    или какие пары рёбер в вершине могут быть соседями в каком-нибудь пути
+    интересно ещё - насколько топологически мы теряем в решениях в сравнении с ppdc
+  если граф дерево
+    один из вариантов - строим обход дерева, в виде цикла, который по всем рёбрам 2 раза идёт
+    и мы должны этот цикл разрубить в n местах
+  ещё интересно изучить пример K7 (или K9)
+  или пример почти дерева
+  OPPDC
+    G is a union of two arbitrary trees
+    Each vertex of G has odd degree
+    It is known that every symmetric orientation of K2n+2, n ≥ 3, has a decomposition into 2n + 1 directed Hamiltonian cycles [8]. This decomposition forms an OPPDC for K2n+1, n ≥ 3, by deleting a fix vertex from each cycle.
+    Tillson, A Hamiltonian decomposition of K_{2m}
+    так, это уже интереснее
+    теория чисел вылезает
+    сильно, увидел решение для K9, на базе латинского квадрата (римского квадрата)
+    ага, а для остальных графов он не нужен, оказывается
+  Hence the minimal graph G 􏰃which has no OPPDC has all degrees at least four􏰅
+  minimal counterexample to this conjecture is 2-connected and 3-edge-connected
+
+K5
+0 1 2 3 4
+3 0 1 4 2
+
+
+  0 1 2 3 4
+1 v . . . .
+2   v . . .
+3 >   v . .
+4   v > v .
+
+
+  0 1 2 3 4
+0 . > > v v
+1 v . > > v
+2 v v . > >
+3 > v v . >
+4 > > v v .
+
+0 1 2 3 4
+
+
+  0 1 2 3 4
+0 . > > v v
+1 1 . > > v
+2 v 1 . > >
+3 > v 1 . >
+4 > > v 1 .
+
+
+0 1 2 3 4
+2 4 0 1 3
+
+  0 1 2 3 4
+0 . > > v v
+1 . . > > v
+2 v 1 . > >
+3 > 1 1 . >
+4 1 > 1 1 .
+
+
+0 1 2 3 4
+2 4 0 1 3
+4 1 2 3 0
+
+  0 1 2 3 4
+0 . > > v v
+1 . . > > v
+2 v . . > >
+3 1 1 . . >
+4 1 1 1 1 .
+
+
+0 1 2 3 4
+2 4 0 1 3
+4 1 2 3 0
+1 3 4 0 2
+0 2
+
+  0 1 2 3 4
+0 . > > v v
+1 . . > > v
+2 1 . . > >
+3 1 . . . >
+4 . 1 1 . .
+
+
+0 1 2 3 4
+2 4 0 1 3
+4 1 2 3 0
+1 3 4 0 2
+3 0 2 4 1
+найс
+(решение выглядит рандомновато;
+  есть 2 куска 1 2 3 и больше таких нет)
+
+  0 1 2 3 4
+0 . > > v v
+1 . . > > v
+2 1 . . > >
+3 1 . . . >
+4 . 1 1 . .
+
+  0 1 2 3 4
+0 . > > v v
+1 v . > > v
+2 v v . > >
+3 > v v . >
+4 > > v v .
+
+
+а может придумать наоборот - parallel ppdc?
+  типа давайте попробуем каждое ребро накрыть 2 раза в одну и ту же сторону, а не в разные
+    в какую конкретно сторону - решим сами
+  то есть ориентация вдоль каждого пути консистентна
+  при этом у рёбер изначально нет ориентации
+  но мы можем выбрать какую-то, но только одну
+  сразу первый вопрос - как ориентировать деревья?
+  даже проще - как ориентировать звёзды?
+  S3, например
+  ага, S3 легко
+  ага, звёзды легко
+  видимо деревья по индукции можно решить, начиная с корня
+  можно ли воспользоваться решением кнута? где длины всех путей не больше 3
+  да, вроде прокатывает
+  можно ли K4 и K5 разметить?
+  K3 можно
+  K4 можно
+  K5 можно
+
+в appdc тот же вопрос первый
+  как построить решение для деревьев?
+  можно ли воспользоваться решением кнута? где длины всех путей не больше 3
+  да, вроде прокатывает
+  вроде все полные графы легко строятся (из graceful+ labeling'ов)
+
+идея
+возьмём регулярный граф
+вероятно граф кэли
+посмотрим на гипотезу грэма-хэггквиста
+и попробуем провести аналогию с непрерывным чем-нибудь
+тогда мысль такая, что
+  группа G - это группа из principal bundle'а
+  разбиение на циклы - это хз, разбиение на циклы? foliation? связность?
+  разбиение на деревья - это 1-формы?
+ладно, кажется такие аналогии не работают
+  всё-таки 1-формы линейны
+если рассматривать это как fibration
+  типа S1 -> S3 -> S2
+  можно поискать точные последовательности в графах
+  может boundary  оператор какой вылезет
+
+
+что если взять сферу римана
+и спроецировать её на комплексную плоскость
+а потом для каждой точки найти её цепную дробь
+а по цепной дроби научится вычислять число из множества {-4,-3,-2,-1,1,2,3,4}
+что найти nz5 поток на сфере
+?
+
+что такое поток вообще
+типа элемент ядра
+boundary оператора
+что это?
+  это не функция E -> V?
+  которая суммирует числа на рёбрах и выдаёт их в вершины
+что такое ненулевой поток
+
+есть ли связь между теорией ходжа и nowhere-zero потоками на графах?
+аналог nowhere-zero flow на многообразии
+  это в общем-то буквально nowhere-zero flow
+
+
+unit vector flow, nz6 поток
+была мысль заменить сферу на плоскость (или на гиперболическую плоскость)
+типа, была симметрия 2,3,5 (2 видимо про ребро, 3 видимо про вершину, 5 видимо про сферу, додекаэдры и nz5 потоки)
+раз у нас 6 поток - то хочется глянуть 2,3,6 симметрию
+но на сфере такого не бывает, зато бывает на плоскости
+хотя у сферы есть преимущество в компактности
+может надо рассмотреть тор?
+или какую риманову поверхность?
+https://en.wikipedia.org/wiki/Wallpaper_group
+
+
+Theorem 4.11. The edges in a three-cut in a normally colored graph G have three different colors.
+  ну у меня всё равно нет снарков с нетривиальным three cut, вроде бы
+Theorem 3.1. Every generalized Blanuša snark of type 1 with an odd number of A-blocks is strongly Petersen-colorable.
+Theorem 2.2. [5] A cubic graph is strongly Petersen-colorable if and only if it has a normal 5-edge-coloring, and the set of poor edges forms a cocycle.
+[5] F. Jaeger, On five-edge-colorings of cubic graphs and nowhere-zero flow problems
+
+
+
+
+можно такую гипотезу выдвинуть:
+  из strong petersen colouring - следует o6c4c, где poor рёбра образуют cutset
+  это верно до 26 вершин включительно, что ни о чём толком не говорит, потому что мало примеров
+  да, это правильная гипотеза
+  тут ещё и множества rich/poor рёбер соответствуют друг другу в обоих понятиях
+  нашёл исключение про соответствия множеств - 26.04g1092
+
+
+[8] I. Kra H. M. Farkas. Riemann Surfaces. Graduate Texts in Mathematics. Springer, 2nd edition, 1992
+[9] J. D. Fay, Theta Functions on Riemann Surfaces, Lecture Notes in Mathematics, Springer Berlin Heidelberg, Vol. 352, 1973
+[10] Mumford D., Tata lectures on Theta, Modern Birkh ̈auser Classics, Birkha ̈user, Boston, 1984, volume I (no. 28), II (no. 43), III (no. 97)
+
+я хочу поизучать компактные римановы поверхности
+чтоб поискать аналогии с bridgeless cubic graphs
+
+
+
+s2 — half of the number of perfect matchings with even number of rich edges (so in general it’s equal to 0, 1, 2 or 3) (0 for Petersen graph)
+
+t4    -4- было: ребро rich, обе вершины unoriented
+           стало: противоположности сонаправленны
+
+or = 0 => s2 = 3 (aka even_rich_matchings = 6)
+or = 0 => s0 has same parity as s1
+or != 1
+2x6cdcs => s2 = 0 | s2 = 3
+2x6cdcs => odd_poor_2-factors = 0
+2x6cdcs, o6c4c => s0 чётный
+2x6cdcs, o6c4c => or + s1 чётно (<=> t4 чётно)
+2x6cdcs, o6c4c => or != 0 (для снарков)
+
+nh8: 2x6cdcs, o6c4c => or >= 2
+nh9: t2 <= 1 => s0 чётно
+nh10: t2 <= 1 => s0 чётно
+nh11: t2 = 0 => s0+s1+s2 чётно
+nh12: t4 != 0
+nh13: t4 <= 8 => s0 чётно
+	тут надо бОльшие графы изучить, наверняка сломается
+	но до 26.05 вроде работает <= 8
+nh14: mod5 = 1, mod6 = 1 => t4 >= 6; s1 = 15 (граф Петерсена) | s1 >= 22
+nh15: mod5 = 0, mod6 = 0 => s1 >= 19; or >= 2; t1 какой-то сильно ограниченный (<= 5 до 26.05)
+	может это случайность про t1
+nh16: mod5 = 1, mod6 = 0 => s0 чётно; t3 >= 11; or > 2
+
+новое
+2x6cdcs, o6c4c =>
+	нет вершин вида
+	u t3 t3 t4
+	u t4 t4 t4
+несложно доказать строго
+
+==========================================
+
+интересно, что в половине решений
+t1 = 0 (todo: точно выписать статистику)
+и из этого факта ничего не вытягивается
+
+ничего другого не вылезло интересного
+а не, нашёл
+t4f[0] = 0 => parity = 1
+выглядит как подмножество or = 0
+а, очевидно, да
+t4f[0]=1, t4f[0]=2
+
+t4f[0]=3 уже бывает в parity = 0
+
+10.05-26.05
+par: 0                       vs par: 1
+	orf
+		0 : 0-8                    0 : 0-12
+		1 : 0-10                   1 : 0-14
+		2 : != 1, 0-18             2 : 0-22, != 21
+		3 : 5-22                   3 : 4-26, != 25
+	t1f
+		0 : 13-26, != 15,25        0 : 10-26, != 11,25
+		1 : 0-10, != 9             1 : 0-10, != 9
+		2 : 0-5                    2 : 0-6
+		3 : 0-2                    3 : 0-3
+	t2f
+		0 : 5-26, != 25            0 : 4-26, != 25
+		1 : 0-16                   1 : 0-17, 20
+		2 : 0-10                   2 :
+		3 : 0-8                    3 :
+	t3f
+		0 : 0-17                   0 :
+		1 : 1-17                   1 : 0-19
+		2 : 0-22, != 19,21         2 :
+		3 : 0-13                   3 :
+	t3of
+		0 : 0-2                    0 :
+		1 : 0-5                    1 :
+		2 : 0-10, != 9             2 :
+		3 : 0-10                   3 :
+	t3uf
+		0 : 0-17                   0 :
+		1 : 0-16                   1 :
+		2 : 0-12                   2 :
+		3 : 0-3                    3 :
+	t4f
+		0 : 3-22                   0 : 0-22
+		1 : 0-14                   1 :
+		2 : 0-16                   2 :
+		3 : 0-11                   3 :
+
+в общем не очень интересно
+t1f[0] = 10,12 любопытно только
+
+посчитаю частоту рёбер вокруг вершин
+систематически
+t1		-1- было:  ребро poor, обе вершины oriented
+			стало: совпадающие тройки сонаправленны
+
+t2		-2- было:  ребро poor, обе вершины unoriented
+			стало: совпадающие тройки разнонаправленны
+
+t3		-3- было:  ребро rich, одна вершина oriented, одна unoriented
+			стало: противоположности разнонаправленны
+
+t4		-4- было:  ребро rich, обе вершины unoriented
+			стало: противоположности сонаправленны
+
+итак
+rf
+t1f
+t2f
+t3f
+t3of
+t3uf
+t4f
+смотрю по всем, по par=0, par=1, or=0, 2x6cdc
+
+or=0
+ожидаемо неинтересны t1f, t3f, t3of, t3uf
+остальные частоты бывают произвольными по чётности
+
+теперь 2x6cdc, неориентированный случай
+ничего интересного не вижу
+
+получается если и рассматривать par=0, par=1, то то только t1f, t3f, t3of, t3uf
+	ничего интересного не вижу
+
+а ещё остаётся 2x6cdcs, o6c4c
+	не вижу ничего интересного, кроме уже найденного t4f[3] = 0
+
+дальше если и есть что
+то только суммы
+
+
+done, prove!
+очень странно
+выглядит, что
+2x6cdcs, o6c4c => t4f[3] = 0
+мне кажется это или очевидно должно быть, или неправда, или я это проверял уже?
+странно
+проглядел что ли получается
+да
+так и есть
+доказать вроде несложно
+
+
+nah
+In a cubic graph with a perfect matching, the edges that are not in the perfect matching form a 2-factor. By orienting the 2-factor, the edges of the perfect matching can be extended to paths of length three, say by taking the outward-oriented edges. This shows that every cubic, bridgeless graph decomposes into edge-disjoint paths of length three.
+к вопросу про ориентирование паросочетания
+а, постой
+я думал тут будет ориентация
+а она тут только на 2-факторе
+
+todo:
+  чтобы понять, как работать с perfect matching'ами
+  я должен идеально и на подсознании понимать
+  доказательство теоремы петерсена
+
+  for every cubic, bridgeless graph G = (V, E)
+  for every set U ⊆ V
+  the number of connected components in the graph
+  induced by V − U with an odd number of vertices
+  is at most the cardinality of U.
+  Then by Tutte theorem G contains a perfect matching.
+
+  Let Gi be a component with an odd number of vertices in the graph induced by the vertex set V − U. Let Vi denote the vertices of Gi and let mi denote the number of edges of G with one vertex in Vi and one vertex in U. By a simple double counting argument we have that \sum\nolimits_{v\in V_i} \deg_G(v) = 2|E_i| + m_i,
+  where Ei is the set of edges of Gi with both vertices in Vi. Since \sum\nolimits_{v \in V_i} \deg_G(v)= 3 |V_i| is an odd number and 2|Ei| is an even number it follows that mi has to be an odd number. Moreover, since G is bridgeless we have that mi ≥ 3.
+
+  Let m be the number of edges in G with one vertex in U and one vertex in the graph induced by V − U. Every component with an odd number of vertices contributes at least 3 edges to m, and these are unique, therefore, the number of such components is at most m/3. In the worst case, every edge with one vertex in U contributes to m, and therefore m ≤ 3|U|. We get |U|\geq\frac{1}{3}m\geq |\{\text{components with an odd number of vertices}\}|, which shows that the condition of Tutte theorem holds.
+
+  ну ладно
+  это я понял
+  вот теорема татта сильно непрозрачнее
+
+  Tutte theorem:
+  A graph, G = (V, E),
+  has a perfect matching
+  if and only if
+  for every subset U of V,
+  the subgraph induced by V − U has at most |U| connected components with an odd number of vertices
+
+
+todo:
+  нужно скорректировать
+  s1 - circuits_even_poor - or
+  видно, что при всех самых малых значениях я получаю parity = 1
+  но я не могу вычислить эту границу, она убегает
+  значит надо одно из чисел поправить в этой формуле
+
+done:
+  s1-s0=or
+  интересны ли такие кейсы?
+  нет, не интересны
+
+done:
+  s1-circuits_even_poor-or интересен?
+  до 26.05 - да
+  в смысле что если эта разность <= 0 - получаю PAR = 1
+  на 26.05 есть плохие кейсы с 1 и 2, а на 24.05 и меньше - нет
+  так что надо изучить 28.05, наверняка сломается
+  сломалось на 28.05g57
+
+24.05
+8738
+24+644+242+24+772=19%
+-1  -2  -4 -6  0
+
+
+todo:
+  не знаю проверял или нет
+  взять все цепи из всех 6c4c
+  и убедиться, что я всегда могу собрать nz-mod5 поток
+
+done:
+  глянуть на решение в 20.05g1, где or = 11
+
+g1: another 6c4c: profile: rprrrrrprpppprrprrrrrrrrrrrrrr; s0= 12; s1= 23; s2= 2; par: 1 vs 1; u_op2f: 2; doubles: 0; u_comps: 3 1; u_morecomps: 2 3 1; circuit lens: l0 (-1 9 ) l1 (9 -1 ) l2 (11 5 ) l3 (-1 9 ) l4 (-1 9 ) l5 (11 5 ); no 2 cdcs; circuits:
+layer: 0; vertices: 4 5 12 13 10 6 7 3 8 14 0 4 ; rich-poor len: -1
+layer: 0; vertices: 9 11 2 15 17 16 19 18 1 9 ; rich-poor len: 9
+layer: 1; vertices: 4 5 12 18 1 9 8 3 19 16 17 14 0 4 ; rich-poor len: 9
+layer: 1; vertices: 15 7 6 10 13 11 2 15 ; rich-poor len: -1
+layer: 2; vertices: 10 13 11 9 1 6 7 3 8 14 17 15 2 4 0 10 ; rich-poor len: 11
+- layer: 2; vertices: 12 18 19 16 5 12 ; rich-poor len: 5
+- layer: 3; vertices: 10 6 1 18 19 3 7 15 2 4 0 10 ; rich-poor len: -1
+- layer: 3; vertices: 12 13 11 9 8 14 17 16 5 12 ; rich-poor len: 9
+- layer: 4; vertices: 10 6 1 9 8 14 0 10 ; rich-poor len: -1
+- layer: 4; vertices: 4 5 16 17 15 7 3 19 18 12 13 11 2 4 ; rich-poor len: 9
+- layer: 5; vertices: 10 13 12 18 1 6 7 15 17 14 0 10 ; rich-poor len: 11
+- layer: 5; vertices: 4 5 16 19 3 8 9 11 2 4 ; rich-poor len: 5
+NEW 6C4C with o6c4c
+g1: new o6c4c: or: 11; t1+t3: 27; s0: 12; s1: 23; s2: 2; PAR: 1 (1); t1: 6; t2: 1; t3: 21; t4: 2; o244: 1
+opc2f: 2; o_op2f: 2; t4f: 16 4 0 0; o_comps: 3 1; o_morecomps: 2 3 1; mod5: 1; mod6: 0; orverts: 0 1 2 3 4 5 7 8 13 17 19 ;
+Printing graph:
+0:  10(e0)  4(e1) 14(e2)
+1:  9(e3) 18(e4)  6(e5)
+2:  15(e6)  4(e7) 11(e8)
+3:  8(e9) 19(e10) 7(e11)
+4:  0(e1) 2(e7) 5(e12)
+5:  4(e12)  12(e13) 16(e14)
+6:  1(e5) 10(e15) 7(e16)
+7:  3(e11)  6(e16)  15(e17)
+8:  3(e9) 14(e18) 9(e19)
+9:  1(e3) 8(e19)  11(e20)
+10: 0(e0) 6(e15)  13(e21)
+11: 2(e8) 9(e20)  13(e22)
+12: 5(e13)  18(e23) 13(e24)
+13: 10(e21) 11(e22) 12(e24)
+14: 0(e2) 8(e18)  17(e25)
+15: 2(e6) 7(e17)  17(e26)
+16: 5(e14)  19(e27) 17(e28)
+17: 14(e25) 15(e26) 16(e28)
+18: 1(e4) 12(e23) 19(e29)
+19: 3(e10)  16(e27) 18(e29)
+dominating circuit: 0 4 5 16 17 15 2 11 13 10 6 7 3 19 18 1 9 8 14 0
+
+0:  10(e0)  4(e1) 14(e2)
+1:  9(e3) 18(e4)  6(e5)
+2:  15(e6)  4(e7) 11(e8)
+3:  8(e9) 19(e10) 7(e11)
+4:  0(e1) 2(e7) 5(e12)
+5:  4(e12)  12(e13) 16(e14)
+7:  3(e11)  6(e16)  15(e17)
+8:  3(e9) 14(e18) 9(e19)
+13: 10(e21) 11(e22) 12(e24)
+17: 14(e25) 15(e26) 16(e28)
+19: 3(e10)  16(e27) 18(e29)
+0 2 4 5
+1
+3 7 8 19
+13
+17
+
+14       11
+  \     /
+10-0-4-2-15
+      \
+       5-12
+        \
+         16
+
+  9-1-18-...
+     \
+      6
+       \
+16      7-15
+  \    /
+   19-3-8-14
+  /      \
+...       9
+
+6:  10(e15)
+9:  11(e20)
+10: 6(e15)
+11: 9(e20)
+12: 18(e23)
+18: 12(e23)
+unor
+здесь нет цикла, только паросочетание
+
+
+nah
+не знаю пробовал или нет
+есть мысль для каждой из конфигураций or вершин
+проверить, есть ли hist дерево, в котором все or вершины являются внутренними (со степенью 3)
+(но не все снарки обладают такими деревьями)
+(и это точно не всегда работает)
+откуда такая шиза:
+  я расклассифицировал вершины на 6 типов
+  хотелось взять снарк
+  и взять 6c4c
+  и придумать способ детерминированно выбрать ориентацию цепей
+  для графа петерсена вроде бы подходит способ - выбрать базисное остовное дерево
+  и ориентировать вдоль кратчайшего пути в дереве между 2 листьями
+  тут
+    есть везение, что листьев всегда 2
+  дальше это дерево особенное
+    дополнение к нему - это цепь длины 6
+  у цепи длины 6 есть симметрия
+    которая хорошо согласуется с набором or вершин
+  в этом дереве все or вершины - внутренние
+  собственно вот
+  там ещё про ориентацию цепей есть интересный аспект, но это
+  TODO чуть позже
+  а ещё в теории тут вылезает оценка сверху на возможное число or вершин
+  типа E - V + 1 = v/2 + 1
+  но подозреваю, что на практике их сильно меньше этой границы
+  (почему я именно такую оценку вывел? не могу понять
+  это вроде должна быть оценка на длину цепи/цикла, чётной длины, который в дополнении к hist сидит
+  то есть логичнее оценка v - (e-v+1) = v/2 - 1
+  но эта оценка ломается на 20.05g1, or = 11, и на 20.05g6, or = 10)
+- non-hist snarks (2 примера)
+  оу, и в них 38 вершин
+  глянул оба из них
+  у них вообще нет решений с or < 3
+но есть примеры
+где это всё даже и не близко вообще
+  тот же 20.05g1 с or = 11
+
+done:
+  я знаю, что бывает or = 0, есть гипотеза, что or != 1, а какой максимум?
+  (при условии, что это снарк, иначе неинтересно)
+  оценка такая: or <= v/2 + 1 (достигается только на 20.05g1)
+  10: 3
+  18: 7
+  20: 11
+  22: 10
+  24: 11
+  26: 12
+  38: >= 18
+  оценка совпадает с e - v + 1, однако
+
+
+TODO:
+  являются ли чем-нибудь особенными графы или решения с or = 0, or = 2?
+  интересно, как я это хотел бы понять?
+
+TODO
+2x6cdcs => odd_poor_2-factors = 0
+  надо глянуть high girth снарки
+  прокатит эта гипотеза или нет
+  girth > 20 где-то нужен (> 17 точно)
+
+
+or != 1
+идея
+фиксируем дерево
+а дополнение к нему как базис
+теперь можно ориентировать все цепи детерминированным образом
+  вопрос - можно ли?
+  вроде нет на самом деле
+и посчитать первоначальный инвариант
+и потом посмотреть - как он должен неизменяться при развороте любой из цепей
+  (я так умею показывать, что чётность or вершин не меняется)
+
+
+or != 1
+нужно научиться делать вот что
+беру рандомную ориентацию
+и классифицирую вершины в общем случае
+и выписываю тотальный инвариант
+и дальше думаю,
+  как из него вывести невозможность or == 1
+  и как доказать этот инвариант
+но проблема видимо будет в том, что это опять история про чётности
+  а может и не проблема, может я могу их посчитать сразу
+какие бывают вершины
+   0  0  0 or
+   0  0  0 unor
+   0 -2  2 or0
+   0 -2  2 or2
+   0 -4  4
+   4 -2 -2 in
+  -4  2  2 out
+насчитал 6 типов (последние 2 можно объединить)
+допустим я разворачиваю цикл
+  000 or   <-> 022 or0
+  000 unor <-> 022 or2
+  022 or0  <-> 022 or2
+  022 or0  <-> 044
+  022 or2  <-> 422 in
+  022 or2  <-> 422 out
+вроде всё
+ну вроде тут граф переходов двудольный
+
+422                     000 or
+    \                     /
+      022 or2 <-> 022 or0
+    /                     \
+000 unor                  044
+
+у меня вроде есть готовый код
+где я смотрю на входные выходные потоки
+  и дополнительно проверяю сколько уникальных пар рёбер
+  и этого хватает для классификации
+или это было в другом месте
+или мне приснилось это вообще
+надо найти начальное положение
+и понять, что при 422 = 022or = 022or0 = 044 = 0
+  не бывает or == 1
+
+
+or != 1
+изучаю, какие бывают наборы вершин
+типа, допустим вершина v ориентирована,
+  мы можем проориентировать все цепи с нею
+  а дальше надо понять - вылезет ещё хоть одна or вершина или нет?
+allorverts: 3 4 16 ; 3 6 17 ; 4 9 17 ; 6 9 16 ;
+  судя по вот этому набору - необязательно
+  типа если начать с вершины 3
+2 4 5 3 0
+7 3 5 4 13
+layer: 0; vertices: 14 15 8 12 13 10 11 9 2 4 5 3 0 14
+layer: 1; vertices: 14 0 3 7 6 1 9 11 10 13 12 8 15 14
+layer: 2; vertices: 12 0 14 10 11 8 15 6 7 3 5 4 13 12
+layer: 3; vertices: 5 16 17 7 3 5
+layer: 4; vertices: 12 0 3 7 17 2 9 11 8 12
+layer: 5; vertices: 12 8 11 9 1 16 5 3 0 12
+ага
+тут есть вершина 4, но она накрыта 2 раза
+и 16 тоже
+и 17
+и 6
+хотят тут ситуация ровно как в графе петерсена
+и все накрыты так, что нельзя сказать - ориентированы они или нет
+layer: 0; vertices: 16 1 6 7 17 16
+layer: 1; vertices: 17 2 4 5 16 17
+layer: 2; vertices: 9 2 17 16 1 9
+layer: 3; vertices: 12 13 4 2 9 1 6 15 8 11 10 14 0 12
+layer: 4; vertices: 16 5 4 13 10 14 15 6 1 16
+layer: 5; vertices: 17 7 6 15 14 10 13 4 2 17
+
+
+allorverts: 0 5 7 9 11 ; 1 4 7 13 15 ; 3 6 8 12 17 ;
+
+
+or != 1
+layer: 0; vertices: 14 15 8 12 13 10 11 9 2 4 5 3 0 14 ; rich-poor len: -1
+layer: 1; vertices: 14 15 8 12 13 10 11 9 1 6 7 3 0 14 ; rich-poor len: -1
+layer: 2; vertices: 12 13 4 5 3 7 6 15 8 11 10 14 0 12 ; rich-poor len: -1
+layer: 3; vertices: 12 13 4 2 9 1 6 15 8 11 10 14 0 12 ; rich-poor len: -1
+layer: 4; vertices: 12 8 11 9 2 17 7 3 0 12 ; rich-poor len: -1
+layer: 5; vertices: 12 8 11 9 1 16 5 3 0 12 ; rich-poor len: -1
+0, 6, 17
+layer: 0; vertices: 16 17 7 6 1 16 ; rich-poor len: 5
+layer: 1; vertices: 17 16 5 4 2 17 ; rich-poor len: 5
+layer: 2; vertices: 9 2 17 16 1 9 ; rich-poor len: 5
+layer: 3; vertices: 5 16 17 7 3 5 ; rich-poor len: 5
+layer: 4; vertices: 16 5 4 13 10 14 15 6 1 16 ; rich-poor len: -1
+layer: 5; vertices: 17 7 6 15 14 10 13 4 2 17 ; rich-poor len: -1
+
+
+
+2x6cdcs => odd_poor_2-factors = 0
+  попробуем по кейсам пройтись
+  возьмём 2-фактор
+  пускай в нём 2 цепи одинаковой длины, паросочетание соединяет одну цепь с другой
+  пускай в нём ровно 1 poor ребро
+  обе цепи нечётной длины, если я рассматриваю снарк
+  первая цепь идёт в первую половину
+  вторая цепь идёт во вторую половину
+  рассмотрим окрестность poor ребра
+  рядом 2 rich ребра
+  остальные слои:
+    - в одном окрестность та же, цепь идёт в другую половину
+    - в двух других окрестность противоположная, кто куда идёт сходу непонятно, но ситуация симметричная
+    - в двух оставшихся poor ребро участвует в паросочетании
+  если это poor ребро сидит в каком-нибудь цикле длины 4
+    тогда противоположное ребро тоже будет poor автоматически (из-за паросочетаний)
+
+
+2x6cdcs => odd_poor_2-factors = 0
+  можно расклассифицировать рёбра из идеального паросочетания
+  - те, которые соединяют первую половину с собой
+  - те, которые соединяют вторую половину с собой
+  - те, которые соединяют половинки друг с другом
+  посчитаю нечётность poor и rich рёбер в каждом слое в каждом из 3 классов
+    odd_poor_pm_both
+      выглядит чётным
+    odd_rich_pm_both
+      выглядит чётным
+    odd_rich_pm_first+odd_rich_pm_second
+      выглядит чётным
+    odd_poor_pm_first+odd_poor_pm_second
+      выглядит чётным
+  так
+  уже конкретнее стало
+  получается, что и паросочетание в этом процессе участвует
+
+  посчитать по каждому ребру
+  сколько раз оно соединяло разные половинки, а сколько половинку с собой
+  poor_both_halfs_frequency 0 1 2
+  rich_both_halfs_frequency 0 1 2
+  :
+  0 0 0 0 0 15
+  8 0 0 0 0 19
+  1 0 4 8 0 17
+  4 0 3 9 0 14
+  3 0 10 7 0 13
+
+  пока что вижу, что до 24.05 включительно
+    poor_both_halfs_frequency[1] = 0
+    rich_both_halfs_frequency[1] = 0
+  это полезно!
+  наверно это даже легко доказать
+  да, это очевидно
+
+
+TODO
+  всегда ли можно в 6c4c так разбить цепи на 2 кучки
+  что вышеперечисленные чётности появятся?
+  или не всегда?
+  и чтоб
+  poor_both_halfs_frequency[1] = 0
+  rich_both_halfs_frequency[1] = 0
+  может от этого и оттолкнуться?
+    типа я точно знаю, какие рёбра соединяют разные цепи
+    и значит есть ограничение на раскраску цепей
+    может это вообще критерий того, что можно разбить на 2x6cdcs?
+
+TODO:
+  допустим у нас нет 2x6cdcs
+  насколько далеки мы от этого в решении?
+  можно ли придумать меру близости к разбиваемости на 2x6cdcs?
+
+
+попробую взять граф с 2x6cdc
+  и посмотреть
+  почему в нём odd_poor_2-factors = 0
+
+Symplectic basis of cycles
+A choice of symplectic basis of cycles, is called a marking or Torelli marking of Σ.
+это не есть аналог perfect matching?
+
+or = 0 => s2 = 3
+но s2 не зависит от orverts
+
+2x6cdcs => odd_poor_2-factors = 0
+  число 2-факторов
+  с нечётным числом poor рёбер
+  равно 0
+  то есть
+  везде чётное число poor рёбер
+  как так
+  возьмём одну из половинок 6cdc
+  да, причём тут нет ориентаций
+  нет ничего - or,t1,t2,t3,t4
+  только poor и rich
+  значит надо научиться клеить по соседствам
+  или так
+  допустим попалось poor ребро
+  каждое poor ребро меняет чётность
+  poor ребро говорит о том, что в обоих 6cdc кусок в конструкции локально совпадает
+
+  edmonds perfect matching polytope
+  вот эти 6 векторов - они где в политопе? на краях? ну да
+
+  w - fractional perfect matching
+  w(∂X) ≥ 1 for each X ⊆ V (H) with X of odd cardinality
+  надо будет изучить вот эти конструкции X of odd cardinality
+  или odd cuts
+
+  как переписываются poor и rich рёбра в этом смысле?
+  типа какие-то рёбра ходят вместе группами
+
+  rich
+  ...1...0...1...0...
+  ...1...0...0...1...
+  ...0...1...1...0...
+  ...0...1...0...1...
+
+  poor
+  ...1...0...1...0...
+  ...1...0...1...0...
+  ...0...1...0...1...
+  ...0...1...0...1...
+
+
+==========================================
+
+todo:
+	проверить or != 1 для o7c4c
+	да и другие гипотезы можно тоже
+
+
+oriented Berge-Fulkerson, разбираюсь со статьями, пытаюсь накинуть ориентацию на циклы/цепи:
+(скорее всего ничего не удастся обобщить, потому что индукция будет везде ломаться
+на том, что в исходном графе ориентация цепей была независима,
+а в новом графе цепи будут склеиваться)
+(хотя с другой стороны
+остаётся ещё лазейка в духе что
+ориентация рёбер/цепей будет одновременно везде меняться и согласованно)
+
+
+treelike snarks - док-во в Matching covers of cubic graphs, вроде бы строются явно
+
+flower snarks, Goldberg snarks - ON FULKERSON CONJECTURE: строятся какие-то FR-triples; A note on Berge–Fulkerson coloring - док-во через 244-flow-covers, где он и вводится
+
+cubic graphs with a circuit missing only one vertex (incl. hypohamiltonian cubic graphs), bridgeless cubic graphs with a 2-factor consisting of two circuits - Covering a cubic graph by 5 perfect matchings
+
+infinite families of snarks - Berge-Fulkerson coloring for infinite families of snarks - Hagglund constructed two graphs Blowup(K4, C) and Blowup(Prism, C4). Based on these two graphs, Chen constructed infinite families of bridgeless cubic graphs M0,1,2,...,k−2,k−1 which is obtained from cyclically 4-edge-connected and having a Fulkerson-cover cubic graphs G0, G1, . . . , Gk−1 by recursive process. Доказывают через 244-flow-covers. Further- more the counterexample presented has the interesting property that no 2-factor can be part of a cycle double cover.
+
+Loupekine snarks, Loupekine snarks constructed from the generalised Blanuša snarks - Fulkerson’s Conjecture and Loupekine snarks; примерно о тех же графах - Loupekine snarks of first and second kind and the Watkins snark - Berge–Fulkerson Conjecture on Certain Snarks
+
+а вот ещё мило, тоже про Hägglund графы - Semi blowup and blowup snarks and Berge-Fulkerson Conjecture - там прям нарисованы решения
+-> попробовал, напрямую не прокатывает
+(но возможно сами решения ориентировать возможно)
+
+
+
+s2 — half of the number of perfect matchings with even number of rich edges (so in general it’s equal to 0, 1, 2 or 3) (0 for Petersen graph)
+
+t: or = 0, снарк <=> t3 = 0, снарк
+h1: or = 0 => s2 = 3
+h2: or = 0 => s0 has same parity as s1
+h3: or != 1
+h4: 2x6cdcs => s2 = 0 | s2 = 3
+h5: 2x6cdcs => odd_poor_2-factors = 0
+h6: 2x6cdcs, o6c4c => s0 чётно
+h7: 2x6cdcs, o6c4c => or + s1 чётно
+nh8: 2x6cdcs, o6c4c => or >= 2
+nh9: t2 <= 1 => s0 чётно
+nh10: t2 <= 1 => s0 чётно
+nh11: t2 = 0 => s0+s1+s2 чётно
+nh12: t4 != 0
+nh13: t4 <= 8 => s0 чётно
+	тут надо бОльшие графы изучить, наверняка сломается
+	но до 26.05 вроде работает <= 8
+nh14: mod5 = 1, mod6 = 1 => t4 >= 6; s1 = 15 (граф Петерсена) | s1 >= 22
+nh15: mod5 = 0, mod6 = 0 => s1 >= 19; or >= 2; t1 какой-то сильно ограниченный (<= 5 до 26.05)
+	может это случайность про t1
+nh15: mod5 = 1, mod6 = 0 => s0 чётно; t3 >= 11; or > 2
+
+if we have o6c4c, nz-mod5 and don’t have nz-mod6, then or > 2 and s0 is even
+
+
+t4 бывает 1, но это редкий зверь
+g16: new o6c4c: or: 09; t1+t3: 26; s0: 14; s1: 26; s2: 1; PAR: 1 (1); t1: 1; t2: 6; t3: 25; t4: 1; o244: 4; opc2f: 1; o_op2f: 2; t4f: 20 2 0 0; o_comps: 3 1; o_morecomps: 1 3 1; mod5: 1; mod6: 0; orverts: 0 1 6 8 9 15 17 18 20 ;
+на 22.05 нашлось
+до 26.05 больше ничего нет
+
+vertex_types (vt): 15 штук (в графе петерсена их 10)
+	я решил посчитать, сколько есть vt на or вершинах и на unor вершинах
+	и посмотрел что в пересечении
+	2x6cdcs очень хорошо локализуется по таким числам
+
+бывает ли or = 0 и 2x6cdcs одновременно? (на 10.05 и 18.05 нет графов с or = 0)
+    на 20.05 - нет
+	на 22.05 - нет
+	на 24.05 - нет
+	на 26.05 - нет
+а вообще в этом случае мы получили бы:
+	s0 чётный
+	s1 чётный
+	s2 = 3
+	odd_poor_2-factors = 0
+
+то есть вызревает гипотеза, что
+	h8: 2x6cdcs, o6c4c => or >= 2
+	точнее это только для снарков может быть верно
+	и вроде легко показать почему or = 0 делает граф неснарком:
+		надо цвета накинуть
+		а как
+	почему я подумал что легко
+
+	ТАКОЙ ВОПРОС
+	когда я собираю 2x6cdcs
+	смотрим на ребро - ориентацию - она повторится или нет
+	если ребро соединяет 2 unoriented вершины - я всегда получаю совпадающую ориентацию?
+	(потому что если ребро соседне с oriented вершиной, то там как раз с ориентациями всё ок, всё будет в разные стороны)
+	если ребро rich - то да, потому что это t4 ребро
+	про poor ребро видимо не факт
+t2		-2- было:  ребро poor, обе вершины unoriented
+			стало: совпадающие тройки разнонаправленны
+	видимо как повезёт, но может это зависит от соседних рёбер
+
+t1		-1- ребро poor, обе вершины oriented
+or = 0 => t1 = 0
+
+t2		-2- ребро poor, обе вершины unoriented
+t4		-4- ребро rich, обе вершины unoriented
+
+
+
+итак
+есть 4 интересных кейса:
+	2x6cdcs
+	o6c4c, 2x6cdcs
+	o6c4c, or = 0
+	o6c4c, t2 = 0
+есть несколько примечательных чисел, которые жёстко фиксируются в этих кейсах:
+	or
+	s0 - number of circuits
+	s1 - number of rich edges
+	s2 - half of the number of perfect matchings with even number of rich edges
+	  s2 = even_rich_matchings / 2
+	odd_poor_2-factors
+
+
+что ещё попробовать?
+
+
+odd_poor_2-factors
+	число слоёв/2-факторов
+	где нечётное число poor рёбер
+
+
+
+
+or != 1
+например
+берём граф петерсена
+навешиваем or вершину куда-либо
+и дальше интересный эффект
+  про соседние с ней я точно могу сказать, что они неориентированы
+  потому что так устроены цепи в решении (или это свойство паросочетания?)
+  а про остальные не могу
+насколько это обобщается до других графов?
+  я вроде как-то подобное проверял и оно не обобщается по-простому
+насколько это полезно?
+интересный момент - если в o7c4c такого вывода сделать нельзя (что or != 1) - то очевидно дело в паросочетаниях
+  o7c4c перебирать надо хитро - чтоб они не включали в себя o6c4c
+  и подразбитые слои на 2 слоя
+
+h6: 2x6cdcs, o6c4c => s0 чётный
+тоже любопытно и без понятия почему так
+
+
+
+
+or != 1
+почему?
+  наверно потому, что граф замкнут, так сказать
+  если бы он был бесконечным, то наверно я бы мог построить такой пример
+  может попробовать?
+
+->-.->-
+   .
+   .
+
+. . .-<-
+    |
+    v
+    |
+
+-<-. . .
+   |
+   ^
+   |
+
+
+ну или ещё один способ понять в чём проблема - глянуть любой 3-regular граф без мостов
+и понять - почему или где вылезет ещё одна or вершина
+вероятно у них есть какая-то геометрия
+но я так и не догнал какая, как она зависит от графа
+
+возьмём все пары рёбер
+их - 3n штук
+n чётно
+посчитаем - сколько раз встретился каждый из вариантов для каждой пары
+и чё?
+возможно надо посчитать - сколько цепей с нечётным числом or вершин? я наверняка такое число считал
+  посчитал
+  получаю все возможные чётные числа (понятно почему чётные)
+  а чего я ожидал?
+  я думал, что увижу, например, всегда 0
+ну тогда можно попробовать понять, например,
+  сколько раз каждая из or вершин встречается в odd_or_цепях
+
+
+
+
+22.05
+g6: new o6c4c: or: 07; ooc: 10; ovt: 5; bvt: 0; t1+t3: 19; s0: 14; s1: 31; s2: 2; PAR: 1 (1); vt: 14; t1: 2; t2: 0; t3: 17; t4: 14; o244: 3; opc2f: 2; o_op2f: 2; t4f: 8 4 6 4; o_comps: 2 1; o_morecomps: 2 3 2; mod5: 1; mod6: 1; orverts: 0 1 3 9 13 17 19 ;
+
+хм
+
+как интересно!
+o6c4c
+  кажется t2=0 - это новый SEAL
+    и ещё s0 по ходу чётно будет всегда
+    очень любопытно!
+  у меня уже наверно был SEAL в виде t1+t2=0
+    а бывает ли 2x6cdcs при t2=0?
+    до 26.05 не встретил примеров, кроме графа Петерсена
+  а бывает ли в o6c4c t1+t2=0?
+    нашёл такое в 10.05 и в 22.05g1 (до 26.05)
+
+
+
+
+фиксируем граф
+выбираем какой-нибудь набор orverts
+можно ли сказать про такие решения что-нибудь общее? помимо совпадения множеств orverts?
+  t1, t3 зависят от orverts - очевидно почему - они чётко определяются набором or вершин
+  остальные кажутся независимы - s1, s2, t2, t4, PAR, opc2f, o_op2f, t4f, o_comps, o_morecomps, mod5, ovt, bvt, vt, mod6, s0
+  s0 падал дольше всех
+  пример для 20.05:
+  g3: new o6c4c: or: 03; ovt: 3; bvt: 2; t1+t3: 09; s0: 13; s1: 26; s2: 1; PAR: 0 (0); vt: 12; t1: 0; t2: 4; t3: 9; t4: 17; o244: 0; opc2f: 1; o_op2f: 2; t4f: 4 3 8 5; o_comps: 3 1; o_morecomps: 1 3 2; mod5: 0; mod6: 0; orverts: 5 7 19 ;
+  g3: new o6c4c: or: 03; ovt: 3; bvt: 0; t1+t3: 09; s0: 14; s1: 17; s2: 2; PAR: 1 (1); vt: 11; t1: 0; t2: 13; t3: 9; t4: 8; o244: 0; opc2f: 3; o_op2f: 2; t4f: 12 2 4 2; o_comps: 1 1; o_morecomps: 3 3 3; mod5: 0; mod6: 0; orverts: 5 7 19 ; same_orverts_diff_s0; SEAL;
+
+
+
+o244 = 0 - никаких интересных зависимостей не вижу
+
+
+
+todo
+  доразобраться в док-ве graceful labeling

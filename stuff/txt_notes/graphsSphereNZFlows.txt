@@ -1,0 +1,667 @@
+TODO:
+    On d-dimensional nowhere-zero r-flows on a graph
+    DAVIDE MATTIOLO (KU Leuven)
+    A d-dimensional nowhere-zero r-flow, or (r, d)-NZF, on a graph G is a flow where the value on each edge is an element of Rd whose (Euclidean) norm lies in the interval [1, r − 1]. Such a notion is a natural generalization of the well-known concept of circular nowhere-zero r-flow (i.e. d = 1).
+    The d-dimensional flow number φd(G) of a bridgeless graph G is the minimum of the real numbers r such that G admits an (r, d)-NZF. For every bridgeless graph G, the 5-flow Conjecture claims that φ1(G) ≤ 5, while a conjecture by Jain suggests that φd(G) = 1, for all d ≥ 3. In this talk we address the problem of finding a possible upper-bound also for the remaining case d = 2. This is a joint work with Giuseppe Mazzuoccolo, Gloria Tabarelli and Jozef Rajnik.
+
+
+TODO:
+    Figure 14. Six lenses that together display the structure of the 24-cell. Each figure represents a one-sixth lens in the 3-sphere with dihedral angle π/3 between its front and back hemispheres. They are arranged so that every front hemisphere is identified with the back hemisphere of the next one when ordered in a counter-clockwise way.
+
+TODO:
+    GQ(4,2) in elliptic space
+    https://fgmarcelis.wordpress.com/gq42-in-elliptic-space/
+
+Current plan:
+    - visualize 50/40 with colors
+    - understand why nz6flow doesn't break
+    - Gleason's theorem
+        Gleason's theorem for R3 says that if f is a nonnegative function on the unit sphere with the property that f (x) + f (y) + f (z) is a fixed constant for each triple x, y, z of mutually orthogonal unit vectors, then f is a quadratic form.
+        - получается противоположные точки одинаково раскрашены
+    - consider rational sphere
+
+
+TODO:
+    - могу из icosidodecahedron вытаскивать (плотную) кучу точек, которые все почему-то очень быстро красятся в nz6flow
+    - интересно было бы визуализировать цвета точек
+
+
+DONE:
+    - rotate1
+
+DONE:
+    - стартовать с чего-то другого чем icosidodecahedron
+
+
+TODO:
+    - если добавить в конфигурацию 150/140 дополнительный фильтр рандомный
+        например
+        - if random.random() > 0.5:
+            continue
+        - то можно получить наборы ещё меньше, которые только в nz6flow красятся
+        - например 50/40
+
+DOING:
+    - изучаю контрпример к nz-mod5flow (зато есть nz6flow)
+        - понять почему он ломает nz-mod5flow
+        - можно ли уменьшить
+        - посчитать координаты точно, математически
+        - сделать блогпост
+    - есть ли контрпримеры к nz-mod6flow?
+    - ускорение перебора
+        - попытаться ещё больше ускорить
+            - пропихивая сложные вершины как можно ближе к началу
+                - но так, чтоб не сломать причинно следственные связи
+        - ? почему текущая оптимизация backtrack не фейлится на известных мне кейсах?
+            - кажется она ломается на более сложных конфигурациях
+    - соседние пятёрки цветов в icosidodecahedron, всегда 26 наборов nz-mod5flow
+    - ? icosidodecahedron gasket для nz6flow
+    - всегда ли nz-modk = nzk?
+    - можно ли другие снарки вложить в сферу?
+
+TODO:
+    - нашёл конфигурацию в ~ 518 вершин / 600 trinities
+    - и в этой конфигурации якобы нет nz-mod5flow!
+        - я бы хотел это показать более строго
+        - как будто бы много лишних trinities
+    - если добавить вершины icosidodecahedron, то почему-то
+        514 вершин / 574 trinities
+        510 вершин / 500 trinities
+    514 вершин / 572 trinities
+
+    - ускорить find_flow
+    - сделать вычисления точными - почему-то число точек вечно плавает
+        при EPS = LESS_EPS = 1e-6 вроде всегда 510 вершин / 500 trinities
+
+    - TODO: ага, я могу визуально на глаз понять и посчитать, сколько должно быть вершин
+        510 выглядит как правда
+            12 * 10 + 30 + 20 * 18 = 510
+    
+    - TODO: ну кстати судя по всему, нужна только часть точек, интересно какая
+        - UPD: нашёл конфигурацию 270 / 260
+            где нет nz-mod5flow
+            но есть nz-mod6flow; есть даже nz6flow
+        - ещё есть конфигурация 330 / 320
+            в ней то же самое
+        150/140: есть nz5flow
+        - UPD: о, есть другая конфигурация 150/140!
+            нет nz-mod5
+            есть nz6flow
+    UPD: у всей конфигурации в 510 вершин есть nz6flow (как и nz-mod6flow)
+
+
+TODO:
+    - всё ещё остаётся вопрос:
+        - что может быть можно вложить любой cubic граф, без полной раскраски всей сферы
+        - эквивалентны ли раскраски nz-modk и nzk?
+        - какие ещё графы вкладываемы, кроме K4 и Petersen graph?
+    - возможно существует nz6flow для сферы?
+
+
+DONE:
+    - есть подозрение, что я перебираю не все nz5flow
+    - потому что
+        - с одной стороны unit vector flows + sphere coloring даёт nz5flow
+        - с другой - я не могу раскрасить generalized petersen graph в nz4flow на сфере
+            - хотя это не снарк
+        TODO: а хотя возможно тут есть nz-mod4flow
+    UPD: нашёл nz4flow и nz-mod4flow для generalized petersen graph
+
+
+
+DONE:
+    - ещё можно попробовать понизить EPS
+        - возникла конфигурация, где точек в 2 раза больше, они очень рядом друг с другом парами, как будто icosidodecahedron удвоился
+        - но при этом почему-то trinities не разваливается на 2 отдельных по 20 троек
+        - ещё нашёл как будто бы конфигурацию в 120 точек, 80 trinity, тоже все точки кластеризуются вокруг icosidodecahedron
+            - при этом trinities распадаются на 2 графа, если идентифицировать opposite points, то это будут графы на 20 вершин, и судя по всему это не снарки
+            - но при этом как будто бы нет nz4flow (UPD: есть, была бага)
+        - кажется это всё вариации на тему generalized petersen graph
+
+TODO:
+    - интересно, что во всех раскрасках в nz-mod5flow всегда 26 наборов пятёрок
+
+
+TODO:
+    - group flow
+        - Z4: 1+1+2=0, and that's it
+        - Klein four group, The Cayley table of the group is (putting c = ab):
+              | 0  a  b  c
+            --+-----------
+            0 | 0  a  b  c
+            a | a  0  c  b
+            b | b  c  0  a
+            c | c  b  a  0
+            a+b+c=0, and that's it
+            - icosidodecahedron should be again the counterexample, i think
+                because of Petersen graph, it's not 3-edge-colorable
+        - дальше уже order 8 идёт
+
+
+TODO:
+    - ещё можно генерить наборы точек через повороты матрицами
+        - примерно как здесь
+        https://en.wikipedia.org/wiki/Snub_dodecahedron#Cartesian_coordinates
+
+DONE:
+    - каждая точка задаёт мини-окружность
+        где сидят точки-спутницы в тройках
+        а также есть ограничение на их значение
+    - эти мини-окружности возможно пересекаются друг с другом?
+    - да, пересекаются; но новых icosidodecahedron'ов получить так не получилось
+
+
+TODO:
+    Twarock-Konevtsova tilings
+    Hamish Todd - это тоже Konevtsova/Lorman - Structures of Spherical Viral Capsids as Quasicrystalline Tilings
+
+TODO:
+    https://arxiv.org/pdf/1111.3301v1.pdf
+    On Searching for Small Kochen-Specker Vector Systems (extended version)
+
+    Proposition 1. Any embeddable graph is 4-colourable.
+    Theorem 2. Deciding whether a square-free 4-colourable graph is 101-colourable is NP-complete.
+    Theorem 3. Graph embeddability can be decided in PSPACE.
+    For a graph with 30 vertices, the corresponding constraint system requires
+    90 real variables (or rather, assuming the graph has at least one triangle, 81
+    variables since we can quotient out rotational symmetries by fixing the vectors associated with one of its triangles). Unfortunately, current real arithmetic
+    solvers cannot in practice handle systems containing more than just a handful
+    of real variables. Thm. 3 is therefore mainly of theoretical interest at the present
+    time.
+    Proposition 4. A graph G is embeddable iff the polynomial PG has a real root.
+
+TODO:
+    - было бы прикольно построить набор точек, где
+        на (каждый) great circle попадает больше 6 точек
+
+
+DONE:
+    # no nz4flow, has nz5flow, 30 points, Petersen graph
+        icosidodecahedron / dodecadodecahedron
+        smaller part of icosidodecahedron
+        pentakis icosidodecahedron
+        disdyakis triacontahedron
+        deltoidal hexecontahedron
+        geodesic rhombic triacontahedron pattern 2
+        geodesic rhombic triacontahedron pattern 4 [2, 2]
+        great disdyakis triacontahedron
+
+DONE:
+    icosidodecahedron anti-rational map
+        T = x**30 - 522 * x**25 * y**5 - 10005 * x**20 * y**10 - 10005 * x**10 * y**20 + 522 * x**5 * y**25 + y**30
+        dT/dx = 30 (x^29 - 435 x^24 y^5 - 6670 x^19 y^10 - 3335 x^9 y^20 + 87 x^4 y^25)
+        dT/dy = -30 (87 x^25 y^4 + 3335 x^20 y^9 + 6670 x^10 y^19 - 435 x^5 y^24 - y^29)
+        =>
+        anti-rational uses \bar z, we write z for simplicity
+        nom = degrees of y in -dT/dy =
+            -z^29 - 435 z^24 + 6670 z^19 + 3335 z^9 + 87 z^4
+        denom = degrees of y in dT/dx =
+            87 z^25 - 3335 z^20 - 6670 z^10 - 435 z^5 + 1
+        
+        (-z^29 - 435 z^24 + 6670 z^19 + 3335 z^9 + 87 z^4)/(87 z^25 - 3335 z^20 - 6670 z^10 - 435 z^5 + 1)
+
+        derivative
+        (-348 z^3 (-1 + 11 z^5 + z^10)^3 (1 + 228 z^5 + 494 z^10 - 228 z^15 + z^20))/(1 - 435 z^5 - 6670 z^10 - 3335 z^20 + 87 z^25)^2
+
+
+TODO:
+    окружности, центры rhombic triacontahedron / вершины icosidodecahedron:
+        - раскрасить в nz5flow; раскрасить не полностью ромб, а вписанные окружности
+            https://mathworld.wolfram.com/GoldenRhombus.html
+            - чекнуть, что нет противоречий для раскрашенных точек
+                - DONE: есть противоречия!
+                    - но если взять min_dist / 3, то противоречий нет
+                        - причём больше радиус взять не получается
+                        то есть даже на min_dist / 2.99 есть противоречия
+                    min_dist - это кстати не диаметр и не радиус вписанной окружности
+                    а расстояние между соседними точками ромбов
+                    - UPD: правда противоречия всё ещё есть, если пытаться взять 2 покрашенных точки, и одну непокрашенную
+                        - тогда как будто бы надо уменьшить до min_dist / 6
+                    - UPD2/TODO: но возможно их нельзя использовать по новой? потому что мы можем с ними сделать новые противоречивые тройки?
+                - DONE?: попробовать более симметричные раскраски для icosidodecahedron точек
+                    - вроде ничего не меняет
+            - построить (apollonian) gasket и попробовать ещё докрасить, и тоже без противоречий
+        - DOING: глянуть на соседние пятёрки ромбов, что это за наборы
+            - DOING: попробовать более симметричные раскраски
+                - интересно, что в разных раскрасках в nz-mod5flow всегда 26 наборов пятёрок
+        - также наверно придётся построить nz-mod5flow
+    - попробовать все положительные веса потоков перекинуть на одну полусферу
+        DONE: попробовал, работает
+        DONE: работает для icosidodecahedron, но для бОльших наборов не работает
+
+
+TODO:
+    - возьмём произвольный great circle, и на нём 3 точки, triple points
+    - они попадают ровно в 2 icosidodecahedron конфигурации
+        - можно прокрутить 10 раз вокруг вершины и вернуться в исходный great circle
+            - TODO: по-моему у меня даже код уже есть на эту тему
+    - TODO: нужно понять - как эту конструкцию итерировать как фрактал
+
+TODO:
+    - я думаю главная цель на сейчас - это сделать грамотную визуализацию
+        - для троек точек на great circles
+        - в riemann sphere, или на complex 2d plane
+    - например глянуть как ложится rhombic triacontahedron на плоскость
+
+TODO:
+    - from icosahedron points on Riemann sphere
+        - convert coordinates to complex coordinates
+            Convenient Cartesian coordinates for the vertices of an icosidodecahedron with unit edges are given by the even permutations of: (0, 0, ±φ), (±1/2,±φ/2,±φ**2/2) where φ is the golden ratio, (1 + √5)/2.
+        - take some complex fractal function with icosahedral symmetry
+        - check the sums of triple points, = 0
+        - check the sums of antipodal points, = 0
+
+        - antipodal points: p1, p2
+            p1 => z1
+            p2 => z2 = -1/(\bar z1)
+            f(p1)+f(p2) = 0
+            =>
+            f(z1)+f(-1/(\bar z1)) = 0
+            <= например - f(1/z) = 1/f(z), f(\bar z) = \bar (f(z))
+            вообще - нам достаточно знать функцию в радиусе <= 1
+            а вне него - восстанавливается однозначно
+            соответственно и у фрактала такая же симметрия должна быть
+        
+            - Antipode Preserving Cubic Maps: the Fjord Theorem
+                f(z) = z**2 * (q - z) / (1 + q.conjugate() * z)
+                1/f(z) = (1/z)**2 * (1/z + q.conjugate()) / (q/z - 1) != f(1/z)
+            
+            - Möbius transformation
+            f(z) = (az+b)/(cz+d)
+            f(-1/z') = (-a/z' + b) / (-c/z' + d)
+            f(z)+f(-1/(\bar z)) = 0
+
+            (az+b)/(cz+d) + (bz' - a) / (dz' - c) = 0
+            (az+b)(dz' - c) + (bz' - a)(cz+d) = 0
+            adzz' - acz + bdz' - bc + bczz' + dbz' - acz - ad = 0
+            zz' (ad + bc) + z (-2ac) + z' (2bd) - (bc + ad) = 0
+            (bc + ad) (|z|**2 - 1) - 2acz + 2bdz' = 0
+            |z|**2 - 1 = 0
+            => 
+            2bdz' = 2acz
+            z' = |z|**2/z
+            2bd = 2ac z**2
+            z**2 = bd/ac
+
+
+TODO:
+    - вот всякие rational maps, having icosahedral symmetry
+    > The roots of this polynomial, considered as points on the Riemann sphere, are located at the vertices of a suitably oriented and scaled icosahedron.
+    то есть допустим получаем нули в вершинах icosidodecahedron'а
+    но мне надо перейти к цветам как-то?
+    - была такая мысль - типа как во фрактале Ньютона
+        - мы предполагаем почему-то, что вершины icosidodecahedron - это аттракторы
+            TODO: critically-finite rational maps?
+                DONE?: вроде да
+                This strong kind of critical finiteness produces a map in which the basins of attraction at the superattracting vertices have full measure on the sphere.
+        - а дальше для каждой точки Riemann sphere делаем итерации этой map
+        и смотрим в какой аттрактор упадёт - тем и покрасим
+    - для 30 midpoint точек нам нужен map:
+        z**30 - 522 * z**25 - 10005 * z**20 - 10005 * z**10 + 522 * z**5 + 1
+        homogenous coordinates:
+        x**30 - 522 * x**25 * y**5 - 10005 * x**20 * y**10 - 10005 * x**10 * y**20 + 522 * x**5 * y**25 + y**30
+
+
+TODO:
+	поизучать newton method
+	https://math.stackexchange.com/questions/1469554/polyhedral-symmetry-in-the-riemann-sphere
+	https://mathoverflow.net/questions/393578/if-i-have-zeros-at-the-vertices-of-an-icosahedron-where-should-the-poles-go
+	дальше ещё порисовать окружности большие, но в такой проекции на плоскость
+	и анимировать на ней выбор тройки точек (или рандомизировать)
+	и тогда сразу будет видно, как тройки пересекают границы фракталов
+
+
+! TODO
+- поизучать Julia sets, Fatou sets
+- что ещё интересно - единичная окружность на комплексной плоскости
+	это большая окружность на римановой сфере
+также у меня есть идея для sphere colouring
+типа - рассмотрим 3 точки на большой окружности
+мы знаем что сумма должна быть 0, хорошо
+можно ослабить это условие - рассмотреть это как симметрию сферы
+сфера - риманова сфера
+комплексная плоскость
+хочу поискать фракталы с подходящим инвариантом
+PSU(2) соответствует поворотам сферы SO(3)
+=> можно заняться алгеброй!
+https://en.wikipedia.org/wiki/Möbius_transformation
+A maximal compact subgroup of the Möbius group M is given by (Tóth 2002)[5]
+M0 = {z -> (uz-\bar(v)) / (vz + \bar(u)), |u|^2+|v|^2=1},
+and corresponds under the isomorphism M ≅ PSL(2,C) to the projective special unitary group PSU(2,C) which is isomorphic to the special orthogonal group SO(3) of rotations in three dimensions, and can be interpreted as rotations of the Riemann sphere. Every finite subgroup is conjugate into this maximal compact group, and thus these correspond exactly to the polyhedral groups, the point groups in three dimensions.
+Icosahedral groups of Möbius transformations were used by Felix Klein to give an analytic solution to the quintic equation in (Klein 1888); a modern exposition is given in (Tóth 2002).[6]
+можно ещё вот этим ограничиться
+If we require the coefficients a, b, c, d of a Möbius transformation to be integers with ad − bc = 1, we obtain the modular group PSL(2,Z), a discrete subgroup of PSL(2,R) important in the study of lattices in the complex plane, elliptic functions and elliptic curves. The discrete subgroups of PSL(2,R) are known as Fuchsian groups; they are important in the study of Riemann surfaces.
+
+
+
+nah:
+- или что это типа должна быть мб какая-то конструкция
+типа что мы каждой точке даём значения в Z5, не нули
+причём a+b=0, если a и b противоположны, и то же для треугольников,
+и!
+что любой поворот сферы это какой-то элемент PSU(2,C) и
+это умножение в Z5 на ненулевой элемент
+вот хочется такую конструкцию найти
+собственно nah - можно ли такое с икосододэкаэдром проверить?
+	как будто бы так нельзя сделать
+DONE: легко проверить, что имея скажем 1+1+3=0,
+мы можем сделать поворот 1->1->3->1
+а значит у нас нет элемента для умножения в Z5
+
+
+
+TODO, papers:
+    https://en.wikipedia.org/wiki/Kochen–Specker_theorem
+    +
+    Peres - Two simple proofs of the Kochen Specker theorem
+    возможно полезно для sphere flow colouring
+
+
+    Scott Crass - Critically-Finite Dynamics on the Icosahedron
+        https://www.mdpi.com/2073-8994/12/1/177
+        тут где-то есть формула для икосододекаэдра
+
+    CLASSIFICATION OF CRITICALLY FIXED ANTI-RATIONAL MAPS
+    LUKAS GEYER
+    https://arxiv.org/pdf/2006.10788.pdf
+
+    Dynamics of a soccer ball
+    Scott Crass
+    https://arxiv.org/pdf/1404.3170.pdf
+
+    Completely solving the quintic by iteration
+    Scott Crass
+    https://arxiv.org/pdf/2006.01876.pdf
+
+    Canonical decomposition of rational maps
+    Misha Hlushchanka
+    https://utrechtgeometrycentre.nl/wp-content/uploads/2021/04/210601-Mikhail-Hlushchanka.pdf
+    slide 6
+
+    Circle packings, kissing reflection groups and critically fixed anti-rational maps
+    https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/circle-packings-kissing-reflection-groups-and-critically-fixed-antirational-maps/4D6EBFED3870869E098536F8356A5A85
+    https://www.researchgate.net/publication/357880331_Circle_packings_kissing_reflection_groups_and_critically_fixed_anti-rational_maps
+
+
+    "riemann sphere decomposition fatou set"
+
+
+
+https://mathoverflow.net/questions/435868/a-property-of-even-continuous-functions-on-the-sphere
+вопрос про 3 точки и функцию на сфере
+
+
+
+
+про сферу:
+- Barth sextic
+	тут есть вершины икосододекаэдра
+	но есть и ещё один додекаэдр - может из него тоже вытащить вершин?
+- https://blogs.ams.org/visualinsight/2015/01/01/icosidodecahedron-from-projected-d6-root-polytope/
+- Pentakis icosidodecahedron
+- в целом есть проблема с каким-либо наивным подходом к раскраске сферы:
+	- сфера симметрична
+	- nz5 раскраска икосододэкаэдра - нет
+		то есть она существует, но не симметрична
+	ну и это всё плюс к тому, что видимо раскраска нигде не будет непрерывной
+	или везде разрывной
+	мб фрактальной
+- или возможно надо найти 5 объектов, типа 5 ориентированных циклов графа Петерсена
+1+1-2=0:
+  1+1+3=0
+  4+4+2=0
+ну как минимум можно попробовать разделить сферу на 2 класса точек:
+  1 и 4
+  2 и 3
+  todo:
+  значит, нужно разбить сферу на 2 цвета так, что
+  в любой большой треугольник попадает 2 точки одного цвета, и 1 другого
+  причём противоположные точки на сфере покрашены в один и тот же цвет
+todo:
+  conway: 110 antipodal points
+    N = 55. The 110 antipodal points can be taken to be the union of the vertex sets of a dodecahedron (20), an icosidodecahedron (30) and a truncated icosahedron (60) — see Fig. 9. The 15 lines through the icosidodecahedral points “rattle”.
+  потестить ещё вот эти наборы точек
+  http://neilsloane.com/packings/index.html#II
+  http://neilsloane.com/packings/dim3/
+  можно ещё заюзать hopf fibration и перенести точки с s3 на s2
+  Group Codes (Slepian 1958)
+  Subsequent articles 70s – 90s: Biglieri, Elia, Loelinger, Caire, Ingemarsson
+  Geometrically Uniform Codes (Forney 1991)
+  spherical codes
+
+  ещё вариант - взять одну точку за базис
+  и взять группу
+  и применить группу к этой точке, сгенерив остальные
+  например
+  https://cp4space.hatsya.com/2020/11/29/an-attempt-to-understand-the-monster-group/
+
+  +
+  "Dodecadodecahedron"  Golay Code
+  http://homepages.wmich.edu/~drichter/golay.htm
+    web archive
+    https://web.archive.org/web/20221127015857/http://homepages.wmich.edu/~drichter/golay.htm
+  https://blogs.ams.org/visualinsight/2015/12/01/golay-code/
+
+  +
+  мысль, что
+  противоположные точки на сфере z1, z2:
+  z1 * \bar(z2) = -1
+  а значит можно глянуть какие-нибудь комплексно-значные штуки с этой симметрией (а лучше антисимметрией)
+  todo: а интересно, что может означать соотношение, что точки сидят на равностороннем треугольнике:
+  z <-> a, b, c; z = a / (1 - c) + i * b / (1 - c) = x+iy
+  	a = 2x/(|z|^2+1); b=2y/(|z|^2+1); c=(|z|^2-1)/(|z|^2+1)
+  z1: a1, b1, c1; a1^2+b1^2+c1^2=1
+  z2: a2, b2, c2; a2^2+b2^2+c2^2=1
+  z3: a3, b3, c3; a3^2+b3^2+c3^2=1
+  a1+a2+a3=0, b1+b2+b3=0, c1+c2+c3=0
+  a3=-a1-a2, b3=-b1-b2; c3=-c1-c2
+  z3=-(a1+a2)/(1+c1+c2)-i(b1+b2)/(1+c1+c2)
+
+  пусть a2=-a1, b2=-b1, c2=-c1
+  	=> z2 = -a/(1+c)-ib/(1+c)
+  	\bar(z2) = -a/(1+c)+ib/(1+c)
+  	z1*\bar(z2)=-1, действительно
+
+  + равномерное распределение точек по сфере
+  http://blog.marmakoide.org/?p=1
+
+
+  функция белого для икосододэкаэдра
+  производная:
+  	derivative of -6912 * (z**20 + 228 * z**15 + 494 * z**10 - 228 * z**5 + 1)**3 * (z**11 - 11 * z**6 - z)**5 / (z**30 - 522 * z**25 - 10005 * z**20 - 10005 * z**10 + 522 * z**5 + 1)**4
+
+  	https://www.wolframalpha.com/input/?i=derivative+of+-6912+*+%28z**20+%2B+228+*+z**15+%2B+494+*+z**10+-+228+*+z**5+%2B+1%29**3+*+%28z**11+-+11+*+z**6+-+z%29**5+%2F+%28z**30+-+522+*+z**25+-+10005+*+z**20+-+10005+*+z**10+%2B+522+*+z**5+%2B+1%29**4
+
+  http://extremelearning.com.au/how-to-evenly-distribute-points-on-a-sphere-more-effectively-than-the-canonical-fibonacci-lattice/
+
+  https://en.wikipedia.org/wiki/Polytope_compound
+  https://en.wikipedia.org/wiki/Compound_of_five_truncated_cubes
+  https://en.wikipedia.org/wiki/Snub_icosidodecadodecahedron
+
+  https://www.facebook.com/groups/xenharmonicmath/permalink/2002342306572648/?comment_id=2002443846562494&reply_comment_id=2002876419852570
+	points on the sphere
+	Nikolya Ulyanov You first take each val <a b c| and weight the coordinates by 1/log(p), so you get the weighted val <a/log(2) b/log(3) c/log(5)|.
+	Once you get the weighted val, you then need to rotate the coordinate system so that one coordinate is the projection along the "JIP" or "Just Intonation Point" <1 1 1|, which is the red dot at the center, and the other coordinates are something orthogonal to that. If you do all the math with the QR decomposition, that means you end up multiplying your vals on the right by this matrix
+	[ -0.4082 0.7071 -0.5774]
+	[ -0.4082 -0.7071 -0.5774]
+	[ 0.8165 0.0000 -0.5774]
+	You then get new coordinates <a' b' c'| for the same val. That last coordinate c' is the projection along the JIP, so to get the 2D projection we just totally drop that coordinate. So our answer is just <a' b'|. So we plot (a, b) and we're done.
+	I looked at all of the vals with Linf norm <= 15 (or 20 I think), prior to the weighting and rotation, and then just plotted the original <a b c| for each one, with the font size being larger if a) the val has lower weighted L2 norm, and b) if the val is closer to the JIP (I use a weighted linear combination of both that I just played with until it looked good). And that was it
+
+  	image
+   		https://www.facebook.com/photo.php?fbid=10105545921680397&set=p.10105545921680397&type=3
+
+    a,b,c
+    1, phi, phi^2, phi^3=1
+
+
+cohomology fractals
+Cannon and Thurston discovered that Peano curves arise naturally in hyperbolic geometry [CT07]. They proved that for every closed hyperbolic three-manifold, equipped with a fibration over the circle, there is a map from the circle to the sphere that is continuous, finite to one, and surjective. Furthermore this Cannon–Thurston map is equivariant with respect to the action of the fundamental group. We review their construction in Section 3; Figure 1.1a shows an approximation.
+Cannon–Thurston map есть в Indra's Pearls
+
+
+Platonic tilings of Riemann surfaces
+https://westy31.home.xs4all.nl/Geometry/Geometry.html
+https://westy31.nl/Geometry/Geometry.html
+
+
+
+x,y,z
+x**2+y**2+z**2=1
+x,y,z задаёт вектор
+также можно перпендикулярно ему задать плоскости
+также их можно пересечь со сферой
+
+x,y,z
+yz,xz,-2xy
+
+Showing all rotations of the Riemann sphere are of the form
+    (az-c.conjugate()) / (cz+a.conjugate())
+https://math.stackexchange.com/questions/2427517/showing-all-rotations-of-the-riemann-sphere-are-of-the-form-fracaz-barcc
+
+
+
+
+
+
+
+case2 7 , 163 vs 0 vs 58 142 141 | 5 1 0
+case2 7 , 163 vs 0 vs 58 32 76 | 2 0 4
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 58 32 76 | 2 0 4
+case2 7 , 163 vs 0 vs 339 171 368 | 5 1 0
+case2 7 , 163 vs 0 vs 32 272 40 | 4 0 2
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 32 272 40 | 4 0 2
+case2 7 , 163 vs 0 vs 339 171 368 | 5 1 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 58 32 76 | 2 0 4
+case2 7 , 163 vs 0 vs 58 142 141 | 4 2 0
+case2 7 , 163 vs 0 vs 339 171 368 | 5 1 0
+debug3 6 7 7
+
+debug3 0 6 6
+all_color_candidates {0, 129, 142, 335, 184, 412}
+v 0 0
+v 184 0
+case2 7 , 163 vs 0 vs 427 480 133 | 3 3 0
+case2 7 , 163 vs 0 vs 69 608 40 | 2 4 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 14 58 37 | 4 0 2
+case2 7 , 163 vs 0 vs 58 142 141 | 2 4 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 339 171 368 | 2 4 0
+case2 7 , 163 vs 0 vs 69 608 40 | 2 4 0
+case2 7 , 163 vs 0 vs 58 142 141 | 2 4 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 58 32 76 | 3 0 3
+case2 7 , 163 vs 0 vs 14 58 37 | 4 0 2
+debug3 6 7 7
+
+debug3 0 6 6
+all_color_candidates {0, 76, 110, 308, 21, 184}
+v 0 0
+v 184 0
+case2 7 , 163 vs 0 vs 69 608 40 | 3 3 0
+case2 7 , 163 vs 0 vs 339 171 368 | 5 1 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 14 58 37 | 1 0 5
+case2 7 , 163 vs 0 vs 69 608 40 | 3 3 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 58 142 141 | 3 3 0
+case2 7 , 163 vs 0 vs 14 58 37 | 1 0 5
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 339 171 368 | 5 1 0
+case2 7 , 163 vs 0 vs 14 58 37 | 1 0 5
+case2 7 , 163 vs 0 vs 69 608 40 | 3 3 0
+debug3 6 7 7
+debug3 0 6 6
+all_color_candidates {0, 129, 142, 335, 184, 412}
+v 0 0
+v 184 0
+case2 7 , 163 vs 0 vs 58 32 76 | 1 0 5
+case1 46 , 79 vs 43 232 240 | 4 1 3
+case1 46 , 79 vs 43 232 240 | 2 5 3
+case2 46 , 79 vs 0 vs 8 232 480 | 2 0 4
+debug3 9 46 46
+case2 9 , 200 vs 0 vs 264 58 582 | 1 5 0
+case1 10 , 79 vs 43 232 240 | 2 5 4
+case2 10 , 79 vs 0 vs 8 232 480 | 2 0 4
+case1 10 , 79 vs 43 232 240 | 4 1 4
+debug3 9 10 10
+debug3 8 9 9
+case1 10 , 79 vs 43 232 240 | 4 1 4
+case2 10 , 79 vs 0 vs 8 232 480 | 2 0 4
+case1 10 , 79 vs 43 232 240 | 2 5 4
+debug3 9 10 10
+case2 9 , 200 vs 0 vs 264 58 582 | 1 5 0
+debug3 8 9 9
+case1 10 , 79 vs 43 232 240 | 2 5 4
+case1 10 , 79 vs 43 232 240 | 4 1 4
+case2 10 , 79 vs 0 vs 8 232 480 | 2 0 4
+debug3 9 10 10
+case1 10 , 79 vs 43 232 240 | 4 1 3
+case1 10 , 79 vs 43 232 240 | 2 5 3
+case2 10 , 79 vs 0 vs 8 232 480 | 2 0 4
+debug3 9 10 10
+debug3 8 9 9
+case2 10 , 79 vs 0 vs 8 232 480 | 2 0 4
+case1 10 , 79 vs 43 232 240 | 4 1 3
+case1 10 , 79 vs 43 232 240 | 2 5 3
+debug3 9 10 10
+case2 9 , 200 vs 0 vs 264 58 582 | 1 5 0
+debug3 8 9 9
+debug3 0 8 8
+all_color_candidates {0, 257, 707, 433, 568, 184}
+v 0 0
+v 184 0
+case2 7 , 163 vs 0 vs 427 480 133 | 4 2 0
+case1 10 , 79 vs 43 232 240 | 3 1 1
+case2 10 , 79 vs 0 vs 8 232 480 | 5 0 1
+debug3 9 10 10
+case2 10 , 79 vs 0 vs 8 232 480 | 5 0 1
+case2 52 , 456 vs 0 vs 66 76 519 | 1 5 0
+case2 52 , 456 vs 0 vs 147 480 323 | 5 1 0
+case2 52 , 456 vs 0 vs 519 480 254 | 5 1 0
+debug3 51 52 52
+case2 52 , 456 vs 0 vs 147 480 323 | 5 1 0
+case2 65 , 92 vs 0 vs 98 8 377 | 2 4 0
+case2 102 , 122 vs 0 vs 466 37 451 | 1 5 0
+case2 102 , 122 vs 0 vs 11 351 320 | 3 3 0
+case2 102 , 122 vs 0 vs 51 57 8 | 2 0 4
+debug3 10 102 102
+debug3 9 10 10
+case2 10 , 79 vs 0 vs 8 232 480 | 5 0 1
+debug3 9 10 10
+debug3 7 9 9
+case2 7 , 163 vs 0 vs 427 480 133 | 1 5 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 69 608 40 | 2 4 0
+case2 7 , 163 vs 0 vs 58 32 76 | 5 0 1
+case2 7 , 163 vs 0 vs 427 480 133 | 1 5 0
+debug3 6 7 7
+case2 9 , 129 vs 0 vs 142 58 141 | 2 4 0
+case2 10 , 79 vs 0 vs 8 232 480 | 5 0 1
+debug3 9 10 10
+case2 10 , 79 vs 0 vs 8 232 480 | 5 0 1
+case2 11 , 122 vs 0 vs 15 163 172 | 2 4 0
+case2 11 , 122 vs 0 vs 11 351 320 | 4 2 0
+case2 11 , 122 vs 0 vs 51 57 8 | 2 0 4
+debug3 10 11 11
+debug3 9 10 10
+debug3 7 9 9
+case2 7 , 163 vs 0 vs 58 32 76 | 2 0 4
+case2 7 , 163 vs 0 vs 427 480 133 | 4 2 0
+debug3 6 7 7
+case2 7 , 163 vs 0 vs 69 608 40 | 2 4 0
+case2 7 , 163 vs 0 vs 427 480 133 | 1 5 0
+case2 7 , 163 vs 0 vs 427 480 133 | 4 2 0
+case2 7 , 163 vs 0 vs 58 32 76 | 4 0 2
+debug3 6 7 7
+debug3 0 6 6
+all_color_candidates {0, 76, 110, 308, 21, 184}
+v 0 0
+v 184 0
+990 cur_found: 6 False
+found [6] False
+component_count 1

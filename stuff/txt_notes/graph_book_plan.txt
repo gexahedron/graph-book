@@ -1,0 +1,331 @@
+# Graph Book
+
+## plans for the week, 18.12-24.12:
+- nz5 vs 33pp - count both
+- check remark:
+    - интересно, что в графе петерсена одно nz5 порождает 2 разных o5cdc
+    - можно ли из них что-нибудь слепить ещё?
+    - o2233-flows?
+- run has_nz5 for 26.05, compare with has_nzmodb
+- check has_nz5 for interesting parameters
+- render book
+- построить nz5 по o6c4c (через libarmadillo)
+- Fan-Raspaud triples
+- retry 333-flows from o6c4c and other stories
+- o2233-flows vs o5cdc
+- create DB, at least for o6c4c solutions
+    - actually several DBs
+        - per snark
+        - per solution
+- add 1 counterexample
+    - 3BMs
+    - 234-flows
+- after DB: compare statements, 6c4c vs o6c4c
+    - s1 >= 15
+    - has_2cdcs
+- identify some snarks in HoG db
+- write out statements of conjectures
+- clean up o6c4c code
+- write some proofs for practicing
+
+- check o6c4c with o244-flows - or_sum, …
+- check example where we have 33pp, but not 333pp
+
+## TODO: How to add References
+https://jupyterbook.org/en/stable/content/references.html
+https://jupyterbook.org/en/stable/tutorials/references.html
+https://jupyterbook.org/en/stable/content/citations.html
+
+## My successes:
+- S2 nz6
+    - + mysterious count of neighbour quintuples of colors for icosidodecahedron, it was always 26
+- o6c4c
+- o6c4c or_sums; 2 approaches
+- some counterexamples
+- openproblemgarden errata
+* code for strong Petersen colouring conjecture and getting list of snarks with it
+* oriented 9-cycle 6-cover conjecture (o9c6c) (but not for Petersen graph, because it doesn't have any 9-cycle 6-cover)
+* investigations into common nowhere-zero 5-flows which come from 2BMs, 3BMs, o5cdc, o6c4c
++
+- Graceful labeling, beta+seq
+- graham-haggkvist
+- EPPDC
+- Tree packing, matrix packing
+- P1f stuff
+
+TODO: or=0 - https://gexahedroet.livejournal.com/18152.html
+
+snark book:
+- identify snarks with automorphisms
+- data science: calculate various hardness measures
+- TODO: find famous snark families among small snarks
+    - overall
+        - double_star_snark: 30
+        - flower: 20, 28(, 36)
+        - blanusa1: 18.05g1, 26(, 34)
+        - blanusa2: 18.05g2, 26(, 34)
+        - loupekine1: 22, …
+        - loupekine2: 22, …
+    - Flower snarks
+        - J_(2k+1), (2k+3)*4, k>=1
+        - J_3: 20, J_5: 28, J_7: 36
+    - Blanusa snarks
+        - 18.05g1, 18.05g2
+        - type 1/2: 8k+2: 10, 18, 26, 34
+    - Loupekine snarks
+        - type 1/2: 22, …, 34, …
+        - definition is hard to understand
+        - also, T3-snarks (from Hist snarks)
+            - all 3 of them have 22 vertices
+        - also, pseudo-Loupekine snarks
+        - also, Goldberg-Loupekine snarks
+    - Goldberg snarks
+        - (2k+1)*8, k>=2
+        - 40, 56, …
+        - too big
+    - … snarks
+
+LMFDB
+https://github.com/LMFDB/lmfdb/tree/5b69f228d492ef0120fd57094584b1cf52386693
+
+
+TODO: unit vector flows
+- Tietze’s graph - can we build unit vector flow for it, given flow for Petersen graph?
+
+
+C++ code:
+- maintain dependencies through optional classes; if they null - then we forgot to init them
+- define customized Graph class always in main.cpp
+    - and then we probably don’t even need the concepts!
+- FUTURE: create python bindings
+    - TODO: there maybe a problem with multiple inheritance
+    - maybe I should have only 1 graph class then
+    - which contains all extensions
+    - https://github.com/pybind/python_example
+    - https://pybind11.readthedocs.io/en/latest/
+
+
+
+check all papers by:
+- Edita Máčajová
+    - https://scholar.google.com/citations?hl=en&user=en9ibwYAAAAJ&view_op=list_works&sortby=pubdate
+- Matt DeVos
+- Martin Škoviera
+- Giuseppe Mazzuoccolo
+- Vahan Mkrtchyan
+- Jean Paul Zerafa
+- Roman Nedela
+- Jan Goedgebeur
+
+
+CQ Zhang:
+- Circuit double cover
+- Faithful circuit cover
+- Circuit chain and Petersen minor
+- Small oddness
+- Spanning minor, Kotzig frames
+- Strong circuit double cover
+- Spanning trees, supereulerian graphs
+- Flows and circuit covers
+- Girth, embedding, small cover
+- Compatible circuit decompositions
+- Other circuit decompositions
+- Reductions of weights, coverages
+- Orientable cover
+- Shortest cycle covers
+- Beyond integer (1, 2)-weight
+- Petersen chain and Hamilton weights
+- Appendix A Preliminary
+- Appendix B Snarks, Petersen graph
+- Appendix C Integer flow theory
+- Appendix D Hints for exercises
++
+- I. Integer flows
+    - Introduction to Integer Flows
+    - Basic Properties of Integer Flows
+    - Nowhere-Zero 4-Flows
+    - Nowhere-Zero 3-Flows
+    - Nowhere-Zero k-Flows (k >= 5)
+- II. Cycle Covers
+    - Faithful Cycle Covers
+    - Cycle Double Covers
+    - Shortest Cycle Covers
+- III. Related Topics
+    - Generalization and Unification
+    - Compatible Decompositions
+    - Related Topics
+- Appendices
+    - A. Fundamental Theorems
+    - B. Hints for Exercises
+    - C. Notations and Terminology
++
+comments and errata
+http://www.math.wvu.edu/~cqzhang/book-update.html
+http://www.math.wvu.edu/~cqzhang/ERRATA1.pdf
+http://www.math.wvu.edu/~cqzhang/ERRATA2.pdf
+
+
+TODO: oriented conjectures (o5cdc, o6c4c)
+- check Flower and Goldberg snarks
+- generalised Blanuša snark of type 1 with an odd number of A-blocks (o6c4c for free!)
+
+
+TODO: go through other books, and lecture notes
+- https://faculty.etsu.edu/gardnerr/5340/notes-Bondy-Murty-GT.htm
+
+TODO: collect mathoverflow questions, ask new ones
+- https://math.stackexchange.com/questions/3065766/cycle-double-cover-conjecture-for-complete-graphs
+
+
+
+TODO: youtube
+- Nowhere-zero flows
+    - https://www.youtube.com/watch?v=UuaJHiPzkxA
+    - https://www.youtube.com/watch?v=-5IAKnV11tA
+    - https://www.youtube.com/watch?v=Z1jcRhk4gVU
+    - https://www.youtube.com/watch?v=YwwTFxt1o5g
+- Matroids
+    - a lot
+    - https://www.youtube.com/watch?v=pbvD8KvbpLQ
+    - https://www.youtube.com/watch?v=cKizLButdUo
+    - https://www.youtube.com/watch?v=Om5GFsb5bUA
+- V. Mkrtchyan "Normal edge-colorings of cubic graphs"
+    - https://www.youtube.com/watch?v=hYTvmRe3fuQ
+- 21Oct22 Tutte Dyadic Linear Programming_Ahmad Abdi
+    - https://www.youtube.com/watch?v=iFNaulZV10k
+
+TODO: snark book
+
+TODO: does having Petersen coloring for snarks imply in some sense having a Petersen graph minor? and if so, proving snark theorem, and if so proving 4CT?
+
+not CQ Zhang:
+- NP-completeness
+- o5cdc papers:
+    - Theorem 8.1.1. Every generalised Blanuša snark of type 1 with an odd number of A-blocks is strongly Petersen colourable.
+- rethink the code, makefiles; maybe switch the language (but this is kind of radical)
+- House of Graphs
+- Matroids:
+    - binary
+    - regular
+    - NZflows
+    - CDC
+    - ? more conjectures - flowing, cycling
+- TC3 double cover (with 3 spanning trees)
+    - “Group Connectivity of Graphs-A Nonhomogeneous Analogue of Nowhere-Zero Flow Properties”
+- ? flow-coloring duality
+- Signed graphs, NZ6 flow conjecture or zero-sum flow
+- what other generalizations possible, beyond matroids and signed graphs? maybe continuous analogs?
+    - ? hypergraphs, (Steiner) triple systems
+        - Fano plane (? as analog of K4? Petersen graph?)
+        - zero-sum flows
+        - ? oriented? oriented Fano plane?
+        - ? coloring
+        - ? transversals; perfect matchings
+        - ? o?c3c; ? 7c3c
+        - ? other triple systems (Hall, …)
+        - ? matroids (Sylvester matroid), polynomials
+- Unit vector flows, s2 flow (> 5 flow), ? s3-s4-s5-s6 flows
+    - "On d-dimensional nowhere-zero r-flows on a graph”
+- Petersen coloring / Normal 5-edge-coloring, cycle-continuous mapping, flow continuous maps; ? Z3-flow continuous maps
+- Simplicial Tutte "5"-flow Conjecture
+- Polynomials: Tutte, flow, nzflow, tension-flow, NL-flow, zeroes, zero-free regions, Penrose …; Hopf algebras; categorification; counting flows
+- Neumann-Lara-Flows, Two-Colour-Conjecture
+    - conjecture - every orientation of a simple planar graph can be acyclically colored with two colors
+    - https://mathoverflow.net/questions/255409/do-planar-graphs-have-an-acyclic-two-coloring
+- NZflows and Hadwiger’s conjecture
+- Berge-Fulkerson conjecture / 244-flows
+- o6c4c / Oriented Berge-Fulkerson conjecture
+    - stuff around oriented vertices, and nz5 (or nz-mod5) flows
+- other possible interactions between nz5flows, o5cdc, o6c4c and Petersen coloring
+- reconstructing 5ocdc from nz5 (or nz-mod5) flow
+- ? (m,n)-cycle covers
+- o244-flows, 333-flows, o334-flows (“stronger oriented k-flow graph double cover” + “stronger k-flow graph double cover”)
+- A-flows, A-connectivity
+- “Coverings of abelian groups and vector spaces”
+    - We show that these covering problems are closely related to combinatorial problems, including the so called additive basis conjecture, the three-flow conjecture, and a conjecture of Alon, Jaeger and Tarsi about nowhere zero vectors
+- ? Circular flows, ? Fractional flows, ? counterexamples
+- ? 9c6c, o9c6c/o10c6c
+- ? dominating circuit conj. and 12 other equivalent formulations
+- Hoffman-Ostenhof 3-decomposition
+- (3,3)-flow parity-pair-cover
+- 2 disjoint BMs, Hoffman-Ostenhof counterexample
+- 3 disjoint BMs, my counterexample
+- more counterexamples
+    - In other words, if a snark is “critical” with respect to Berge-Fulkerson’s Conjecture, then it seems to be critical also for the 5-flow Conjecture. The converse is false.
+- Fan-Raspaud conjecture - make a separate overview for it
+- ? T-joins
+- ? Chinese postman problem
+- ? grafts
+- ? blocks
+- ? cores
+- ? total coloring, as measure of hardness
+- equitable total colouring
+- Snark families
+- Snark constructions
+- Snarks and Petersen graph in general, 4color theorem
+- Snark hardness measures:
+    - “Measures of Edge-Uncolorability of Cubic Graphs”
+    - “Girth, oddness, and colouring defect of snarks”
+    - “Critical and flow-critical snarks coincide”
+- 3PM-coverage index 
+- excessive index - graphs coverable with 4 or 5 perfect matchings
+- ? graphs coverable with 3 or 4 cycles
+- “Projective, affine, and abelian colorings of cubic graphs”
+- circular dessin d’enfants (2 papers)
+    - + Graphs on surfaces, delta-matroids, dessin d’enfants, quadratic / Strebel differentials, ribbon graphs
+- ? Hilbert basis, cones, Lovasz’s “Matching structure and the matching lattice”, counterexample for “characteristic vectors of cuts of graphs form Hilbert basis”, ? “circuits of a graph form a Hilbert basis iff the graph has no Petersen minor”
+- snark theorem “every snark has the Petersen graph as a minor”
+    - https://math.stackexchange.com/questions/3692582/what-is-the-current-status-of-the-snark-theorem
+    - https://mathoverflow.net/questions/272067/tuttes-conjecture-on-petersen-graphs
+- Flow polynomials as Feynman amplitudes
+- perfect matchings, chord diagrams, 4T relation, IHX relation, sl2, Vassiliev invariants, bridgeless maps, typings of linear lambda terms, ? knotted trivalent graphs
+- polyhedral or closed 2-cell embedding
+    - Grünbaum conjecture
+
+TODO: collect links to researchers
+http://www.mat.savba.sk/~kochol/
+- Edita Máčajová
+    - http://www.dcs.fmph.uniba.sk/~macajova/
+
+
+
+Open ended questions/neighbour fields:
+- some (flawed) philosophy
+- o5cdc corresponds to some gluing of faces; can we do something similar for o6c4c?
+- tropical geometry; hodge theory of matroids; chip-firing on graphs and Riemann-Roch theory
+- some other research stuff I found with googling, that is related to some keywords
+
+
+TODO: expand (not CDC, BF or NZ flows) topics:
+- P1Fs
+- Graph labelings
+- Häggkvist conjectures
+- Tree packing, matrix packing
+- PPDC, EPPDC, OPPDC
+
+
+would be interesting to research:
+- Bipartite Oberwolfach, Oberwolfach
+- grand not-unified Puzzle theory: Hopf bundle, …
+- Cayley graphs (or other kinds of regular graphs)
+    - ? matroids
+
+
+TODO: what papers to read/cover:
+- historical (e. g. not on arXiv):
+    - …
+- 2022
+    - 2204.10021 - Disjoint odd circuits in a bridgeless cubic graph can be quelled by a single perfect matching
+        - proves Mazzuoccolo’s conjecture
+        - G admits two perfect matchings whose deletion yields a bipartite subgraph of G
+        - +
+        - given any collection of disjoint odd circuits in G, there exists a perfect matching of G containing at least one edge of each circuit in this collection
+- 2023
+    - 2303.10615 - Counting Circuit Double Covers
+
+
+Tutte's edge 3-coloring conjecture
+https://thomas.math.gatech.edu/FC/generalize.html
+
+matroid intersection
+https://codeforces.com/blog/entry/69287
