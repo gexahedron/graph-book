@@ -62,14 +62,17 @@ Looks like there do exist 333-flows for all snarks (verified for small "nontrivi
 
 ## o333-flows
 
-Some snarks also have o333-flows, here are the exceptions:
+Some snarks (maybe more than half of them) also have o333-flows, here are the exceptions:
 - 10 vertices: none
 - 18 vertices: none
 - 20 vertices: g1, g6
 - 22 vertices: g3, g7, g11, g12, g14, g19, g20
 - 24 vertices: g1, g3, g16, g17, g21, g24, g25, g27, g28, g30, g31, g35, g36, g37
 - TODO: check 26 vertices
-- TODO: can we ask for 333-flows, where only 1 or 2 pairs of nz3-flows is oriented?
+
+In o333-flows, any pair of flows gives a nz5-flow, so we have $f1-f2, f1-f3$ and $f2-f3$ as nz5-flows of original graph.
+
+TODO: can we ask for 333-flows, where only 1 or 2 pairs of nz3-flows is oriented? can it be same as o334-flows (so, third subgraph actually is bipartite, but it can also have nz4-flow, and even compatible with orientations of other subgraphs)?
 
 ## o334-flows
 
@@ -77,14 +80,18 @@ Looks like there do exist o334-flows for all snarks (verified for small "nontriv
 
 Also, $f1 - f2$ provides nz5-flow for the original graph.
 
+- TODO: check bipartiteness of $G3$
 - TODO: explore this construction more
 
-## More constructions
+## o2233-flows
+
+We can also try the same ideas, but with 4 subgraphs, having nz-flows, and covering original graph exactly twice. We found one interesting construction, o2233-flows. They seem to work for all small "nontrivial" snarks, checked for 10, 18, 20, 22 and 24 vertices.
 
 TODOs:
-- o2233-flows - checked 10, 18, 20 and 22 vertices, all snarks have this construction
-- TODO: can we build any kind of nz-flow from o2233-flows?
-- can we build 2223-flows?
+- check 26 and more vertices
+- can we build any kind of nz-flow from o2233-flows?
+- can we build o5cdc? maybe even 2 of them?
+- can we build 222k-flows? (can't find them for Petersen graph)
 
 ## Full spectrum
 
