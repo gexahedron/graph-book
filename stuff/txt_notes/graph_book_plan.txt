@@ -1,6 +1,7 @@
 # Graph Book
 
-## plans for the week, 18.12-24.12:
+## plans for the week, 30.12-31.12:
+- 33pp from nz5 - check 134 vertices
 - nz5 vs 33pp - count both
 - check remark:
     - интересно, что в графе петерсена одно nz5 порождает 2 разных o5cdc
