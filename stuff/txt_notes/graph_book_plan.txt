@@ -1,6 +1,10 @@
 # Graph Book
 
-## plans for the week, 30.12-31.12:
+## plans for the week, 01.01-07.01:
+find
+- 244-flows, which is not o244-flows
+- 333-flows, which is not o333-flows
+- o334-flows, where there's no o333-flows
 - 33pp from nz5 - check 134 vertices
 - nz5 vs 33pp - count both
 - check remark:
