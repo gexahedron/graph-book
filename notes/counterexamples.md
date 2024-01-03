@@ -40,5 +40,3 @@ DONE (not by me): The 12 permutation snarks on 34 vertices with λc ≥ 5 are co
 - oriented 6-cycle 4-cover exists for all snarks upto and including 30 vertices; oriented 9-cycle 6-cover also seems to exist for snarks excluding Petersen graph (as for Petersen graph - it doesn't have even unoriented 9-cycle 6-cover graph and it's very eash to prove and actually this was already known to Seymour), but I don't remember right now, how many snarks did I check;
 
 - And there's also a bug on the page http://www.openproblemgarden.org/op/three_4_flows_conjecture - in the last chapter (there are 2 vertices in Petersen graph which are not in the 8-circuit, and they are connected by an edge. G\B_1 and G\B_2 both have this edge as a bridge, and so they can't have nowhere-zero flows. I've also tried 6-circuits and they only produce decompositions with nowhere-zero 4-flows (and its impossible to build any example with odd-length circuits)). But it's still possible to strengthen this family of conjectures:
-
-- looks like there do exist (unoriented) 333-flows, oriented 334-flows and oriented 244-flows for all snarks and no oriented 23k-flows exist for any snark.
