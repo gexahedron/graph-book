@@ -1,12 +1,17 @@
 # Graph Book
 
 ## plans for the week, 01.01-07.01:
-find
-- 244-flows, which is not o244-flows
-- 333-flows, which is not o333-flows
-- o334-flows, where there's no o333-flows
+- ? unit vector flows for graphs, which have strong Petersen colouring?
+    - we only need to check that doubling of vertices works
+- recheck code that's not in repository (33pp_from_o6c4c, ...)
+- o244=9 - how close can we be to a strong Petersen colouring?
+- find
+    - 244-flows, which is not o244-flows
+    - 333-flows, which is not o333-flows
+    - o334-flows, where there's no o333-flows
 - 33pp from nz5 - check 134 vertices
-- nz5 vs 33pp - count both
+    - find examples where we don't have a cycle in (1,2)-graph
+- nz5 vs 33pp - count both; or match them to each other
 - check remark:
     - интересно, что в графе петерсена одно nz5 порождает 2 разных o5cdc
     - можно ли из них что-нибудь слепить ещё?
@@ -15,7 +20,11 @@ find
 - check has_nz5 for interesting parameters
 - render book
 - построить nz5 по o6c4c (через libarmadillo)
-- Fan-Raspaud triples
+    - поискать pinv, mat, EPS, norm
+    cmake -DALLOW_BLAS_LAPACK_MACOS=ON .
+    sudo make install
+- study Fan-Raspaud triples
+- study even cycles (which appear in [o]244-flows)
 - retry 333-flows from o6c4c and other stories
 - o2233-flows vs o5cdc
 - create DB, at least for o6c4c solutions
@@ -32,14 +41,14 @@ find
 - write out statements of conjectures
 - clean up o6c4c code
 - write some proofs for practicing
-
-- check o6c4c with o244-flows - or_sum, …
 - check example where we have 33pp, but not 333pp
+
 
 ## TODO: How to add References
 https://jupyterbook.org/en/stable/content/references.html
 https://jupyterbook.org/en/stable/tutorials/references.html
 https://jupyterbook.org/en/stable/content/citations.html
+
 
 ## My successes:
 - S2 nz6
@@ -48,6 +57,7 @@ https://jupyterbook.org/en/stable/content/citations.html
 - o6c4c or_sums; 2 approaches
 - some counterexamples
 - openproblemgarden errata
+- 5cdc from nz5 (through 33pp)
 * code for strong Petersen colouring conjecture and getting list of snarks with it
 * oriented 9-cycle 6-cover conjecture (o9c6c) (but not for Petersen graph, because it doesn't have any 9-cycle 6-cover)
 * investigations into common nowhere-zero 5-flows which come from 2BMs, 3BMs, o5cdc, o6c4c
@@ -96,6 +106,7 @@ https://github.com/LMFDB/lmfdb/tree/5b69f228d492ef0120fd57094584b1cf52386693
 
 TODO: unit vector flows
 - Tietze’s graph - can we build unit vector flow for it, given flow for Petersen graph?
+- or find unit vector flows for graphs, which have strong Petersen colouring?
 
 
 C++ code:
