@@ -7,6 +7,7 @@ o6c4c landscape:
 - has 2cdcs
 - has nz-mod5, no nz5
 - or2
+- strong Petersen colouring
 - s1s0diff <= 0 (28.05) или -1 (30.05)
 - no chords
 чуть хитрее:
@@ -18,6 +19,151 @@ o6c4c landscape:
     s1 <= 18
     t1 + t3 <= 8
     ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
+
+
+TODO: strong Petersen coloring, par=0
+    - how can we fix this?
+
+
+TODO: o244-flows
+    - o244-triple count
+        - CONJ: 26.05 upto g74: if o244count >= 5, then or_sum % 5 = 0
+            - nope, 10, 15, 20, 25, 30, 35
+        - CONJ: o244count = 10 <=> strong Petersen colouring
+            - although very small amount of solutions checked
+            - TODO: check 28.05, and recheck 26.05
+        - o244count = 10
+            - 26.05, g255 and g280:
+                - or: 7, 9
+                - or_counts:_7_9
+                - s0: 20, 22
+                - s1: 31, 35, 37
+                - s2: 0, 1
+                    -! parity: 0, 1
+                - s2uu: 2, 3
+                    - actually s2uu = 3 - s2
+                - s1s0diff: 11, 13, 15
+                - col: 12, 20
+                - or_type_count: 3, 5, 7
+                - rich_type_count: 15, 25
+                - mismatch: 0, 1
+                    has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0;
+                    has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1;
+                    has_nz5: 1; mismatch: 1; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 0;
+                - no_2cdcs, has_2cdcs
+                - chord_info: (35 4 0), (39 0 0)
+                    - actually, col=20 => chord_info: (39 0 0)
+                        - and col=12 can have both possibilities
+                    - more details:
+                    chord_info: (35 4 0) t1(0 2 0) t2(4 2 0) t3(17 0 0) t4(14 0 0);
+                    chord_info: (35 4 0) t1(2 0 0) t2(2 4 0) t3(17 0 0) t4(14 0 0);
+                    chord_info: (35 4 0) t1(2 1 0) t2(2 3 0) t3(21 0 0) t4(10 0 0);
+                    chord_info: (39 0 0) t1(0 0 0) t2(2 0 0) t3(21 0 0) t4(16 0 0);
+                    chord_info: (39 0 0) t1(0 0 0) t2(2 0 0) t3(27 0 0) t4(10 0 0);
+                    chord_info: (39 0 0) t1(0 0 0) t2(4 0 0) t3(21 0 0) t4(14 0 0);
+                    chord_info: (39 0 0) t1(1 0 0) t2(1 0 0) t3(19 0 0) t4(18 0 0);
+                    chord_info: (39 0 0) t1(1 0 0) t2(1 0 0) t3(25 0 0) t4(12 0 0);
+                    chord_info: (39 0 0) t1(2 0 0) t2(0 0 0) t3(23 0 0) t4(14 0 0);
+                    chord_info: (39 0 0) t1(2 0 0) t2(2 0 0) t3(17 0 0) t4(18 0 0);
+                    chord_info: (39 0 0) t1(2 0 0) t2(2 0 0) t3(23 0 0) t4(12 0 0);
+                    - so at least 11 possibilities!
+                - also, there are no rich chords
+                - rov: 0 0 even odd
+                    - more details:
+                    rov: 0 0 0 7;
+                    rov: 0 0 0 9;
+                    rov: 0 0 2 5;
+                    rov: 0 0 2 7;
+                    rov: 0 0 4 3;
+                    rov: 0 0 4 5;
+                    rov: 0 0 6 3;
+                - ruv: 0 0 even odd
+                    ruv: 0 0 0 17;
+                    ruv: 0 0 10 7;
+                    ruv: 0 0 12 7;
+                    ruv: 0 0 2 15;
+                    ruv: 0 0 2 17;
+                    ruv: 0 0 4 13;
+                    ruv: 0 0 4 15;
+                    ruv: 0 0 8 11;
+                - reors: 14, 16, 22
+                - em: 0 2; or em: 0 3
+                - o2: 5 variations
+                    0 0;
+                    0 1;
+                    1 0;
+                    1 1;
+                    2 2;
+                - u_comps: 2 1, 4 2, 8 3
+                    - more details:
+                    u_comps: 2 1; u_morecomps_undiv: 2 6 2 6
+                    u_comps: 4 2; u_morecomps_undiv: 0 0 0 0
+                    u_comps: 8 3; u_morecomps_undiv: 0 6 0 6
+                - TODO: r244even, r244odd
+
+        - 28.05, o244 = 10:
+            strong petersen colouring для 28.05:
+            g287    rich: 0 (123) -> 10 (145); poor: 0 (123) -> 12 (123); poor: 0 (123) -> 8 (123); poor: 1 (123) -> 13 (123); poor: 1 (123) -> 5 (123); rich: 1 (123) -> 16 (345); rich: 2 (345) -> 24 (125); rich: 2 (345) -> 4 (123); rich: 2 (345) -> 26 (124); poor: 3 (123) -> 8 (123); poor: 3 (123) -> 5 (123); rich: 3 (123) -> 7 (245); poor: 4 (123) -> 12 (123); poor: 4 (123) -> 5 (123); rich: 6 (135) -> 18 (234); rich: 6 (135) -> 20 (124); rich: 6 (135) -> 7 (245); rich: 7 (245) -> 22 (134); poor: 8 (123) -> 9 (123); poor: 9 (123) -> 13 (123); rich: 9 (123) -> 23 (145); rich: 10 (145) -> 18 (234); rich: 10 (145) -> 21 (235); rich: 11 (135) -> 26 (124); rich: 11 (135) -> 25 (234); rich: 11 (135) -> 14 (245); poor: 12 (123) -> 15 (123); poor: 13 (123) -> 15 (123); rich: 14 (245) -> 17 (134); rich: 14 (245) -> 15 (123); rich: 16 (345) -> 20 (124); rich: 16 (345) -> 19 (125); rich: 17 (134) -> 21 (235); rich: 17 (134) -> 19 (125); rich: 18 (234) -> 19 (125); rich: 20 (124) -> 21 (235); rich: 22 (134) -> 24 (125); rich: 22 (134) -> 27 (235); rich: 23 (145) -> 25 (234); rich: 23 (145) -> 27 (235); rich: 24 (125) -> 25 (234); rich: 26 (124) -> 27 (235); has strong coloring
+            g2078   rich: 0 (123) -> 12 (145); rich: 0 (123) -> 4 (245); rich: 0 (123) -> 8 (345); poor: 1 (125) -> 11 (125); rich: 1 (125) -> 5 (134); poor: 1 (125) -> 14 (125); rich: 2 (234) -> 7 (145); rich: 2 (234) -> 26 (135); rich: 2 (234) -> 9 (125); rich: 3 (235) -> 27 (124); rich: 3 (235) -> 5 (134); rich: 3 (235) -> 7 (145); rich: 4 (245) -> 26 (135); rich: 4 (245) -> 5 (134); rich: 6 (145) -> 15 (235); rich: 6 (145) -> 13 (234); poor: 6 (145) -> 7 (145); rich: 8 (345) -> 27 (124); rich: 8 (345) -> 9 (125); poor: 9 (125) -> 11 (125); rich: 10 (234) -> 12 (145); rich: 10 (234) -> 22 (135); rich: 10 (234) -> 24 (125); poor: 11 (125) -> 24 (125); rich: 12 (145) -> 21 (235); rich: 13 (234) -> 14 (125); rich: 13 (234) -> 19 (135); rich: 14 (125) -> 17 (134); rich: 15 (235) -> 18 (124); rich: 15 (235) -> 17 (134); poor: 16 (245) -> 23 (245); rich: 16 (245) -> 19 (135); rich: 16 (245) -> 17 (134); poor: 18 (124) -> 20 (124); rich: 18 (124) -> 19 (135); rich: 20 (124) -> 22 (135); rich: 20 (124) -> 21 (235); rich: 21 (235) -> 25 (134); rich: 22 (135) -> 23 (245); rich: 23 (245) -> 25 (134); rich: 24 (125) -> 25 (134); rich: 26 (135) -> 27 (124); has strong coloring
+            g2503   rich: 0 (123) -> 12 (145); rich: 0 (123) -> 14 (245); poor: 0 (123) -> 3 (123); rich: 1 (234) -> 9 (125); poor: 1 (234) -> 20 (234); rich: 1 (234) -> 6 (135); poor: 2 (134) -> 19 (134); rich: 2 (134) -> 4 (235); rich: 2 (134) -> 9 (125); rich: 3 (123) -> 5 (145); rich: 3 (123) -> 7 (245); poor: 4 (235) -> 13 (235); rich: 4 (235) -> 5 (145); poor: 5 (145) -> 16 (145); poor: 6 (135) -> 15 (135); rich: 6 (135) -> 7 (245); rich: 7 (245) -> 17 (134); rich: 8 (234) -> 12 (145); rich: 8 (234) -> 15 (135); rich: 8 (234) -> 11 (125); poor: 9 (125) -> 11 (125); rich: 10 (134) -> 14 (245); rich: 10 (134) -> 13 (235); rich: 10 (134) -> 11 (125); rich: 12 (145) -> 13 (235); rich: 14 (245) -> 15 (135); rich: 16 (145) -> 22 (123); rich: 16 (145) -> 21 (235); poor: 17 (134) -> 19 (134); poor: 17 (134) -> 23 (134); rich: 18 (125) -> 20 (234); rich: 18 (125) -> 26 (345); rich: 18 (125) -> 19 (134); rich: 20 (234) -> 24 (135); rich: 21 (235) -> 23 (134); rich: 21 (235) -> 27 (124); rich: 22 (123) -> 26 (345); rich: 22 (123) -> 25 (245); rich: 23 (134) -> 25 (245); rich: 24 (135) -> 27 (124); rich: 24 (135) -> 25 (245); rich: 26 (345) -> 27 (124); has strong coloring
+            g2725   rich: 0 (123) -> 14 (145); rich: 0 (123) -> 10 (245); poor: 0 (123) -> 3 (123); rich: 1 (134) -> 9 (125); rich: 1 (134) -> 5 (245); rich: 1 (134) -> 6 (235); rich: 2 (234) -> 7 (145); rich: 2 (234) -> 4 (135); rich: 2 (234) -> 9 (125); rich: 3 (123) -> 5 (245); rich: 3 (123) -> 7 (145); poor: 4 (135) -> 13 (135); rich: 4 (135) -> 5 (245); poor: 6 (235) -> 20 (235); rich: 6 (235) -> 7 (145); poor: 8 (125) -> 16 (125); poor: 8 (125) -> 22 (125); poor: 8 (125) -> 11 (125); poor: 9 (125) -> 11 (125); rich: 10 (245) -> 13 (135); rich: 10 (245) -> 17 (134); rich: 11 (125) -> 21 (134); rich: 12 (234) -> 14 (145); rich: 12 (234) -> 16 (125); rich: 12 (234) -> 13 (135); rich: 14 (145) -> 15 (235); rich: 15 (235) -> 17 (134); rich: 15 (235) -> 19 (124); rich: 16 (125) -> 17 (134); rich: 18 (345) -> 26 (123); rich: 18 (345) -> 22 (125); rich: 18 (345) -> 19 (124); rich: 19 (124) -> 23 (135); rich: 20 (235) -> 24 (145); rich: 20 (235) -> 21 (134); rich: 21 (134) -> 27 (245); rich: 22 (125) -> 25 (234); rich: 23 (135) -> 27 (245); rich: 23 (135) -> 25 (234); rich: 24 (145) -> 26 (123); rich: 24 (145) -> 25 (234); rich: 26 (123) -> 27 (245); has strong coloring
+            g2726   rich: 0 (123) -> 14 (145); rich: 0 (123) -> 10 (245); poor: 0 (123) -> 3 (123); rich: 1 (134) -> 9 (125); rich: 1 (134) -> 5 (245); rich: 1 (134) -> 6 (235); rich: 2 (234) -> 7 (145); rich: 2 (234) -> 4 (135); rich: 2 (234) -> 9 (125); rich: 3 (123) -> 5 (245); rich: 3 (123) -> 7 (145); poor: 4 (135) -> 13 (135); rich: 4 (135) -> 5 (245); poor: 6 (235) -> 20 (235); rich: 6 (235) -> 7 (145); rich: 8 (345) -> 16 (125); rich: 8 (345) -> 22 (123); poor: 8 (345) -> 11 (345); rich: 9 (125) -> 11 (345); rich: 10 (245) -> 13 (135); rich: 10 (245) -> 17 (134); poor: 11 (345) -> 21 (345); rich: 12 (234) -> 14 (145); rich: 12 (234) -> 16 (125); rich: 12 (234) -> 13 (135); rich: 14 (145) -> 15 (235); rich: 15 (235) -> 17 (134); rich: 15 (235) -> 19 (124); rich: 16 (125) -> 17 (134); rich: 18 (145) -> 20 (235); rich: 18 (145) -> 22 (123); rich: 18 (145) -> 26 (234); rich: 19 (124) -> 21 (345); rich: 19 (124) -> 24 (135); rich: 20 (235) -> 23 (134); rich: 21 (345) -> 27 (125); rich: 22 (123) -> 25 (245); rich: 23 (134) -> 27 (125); rich: 23 (134) -> 25 (245); rich: 24 (135) -> 26 (234); rich: 24 (135) -> 25 (245); rich: 26 (234) -> 27 (125); has strong coloring
+            для 28.05 - это всё
+            875 rows
+                743 PAR 1, 132 PAR 0
+                - or: 6, 7, 9, 10, 11, 13, 14
+                -   or_counts:_6_10;
+                    or_counts:_6_14;
+                    or_counts:_7_13;
+                    or_counts:_7_9;
+                    or_counts:_7_9_11;
+                    or_counts:_7_9_13;
+                CONJ: - s0: 18, 20, 22, 24
+                - s1: 30, 33, 34, 35, 36, 37, 38
+                    - s1s0diff: 10,11,12,13,14,15,16,17,18
+                CONJ?: - s2, s2uu:
+                    0; 3;
+                    1; 2;
+                    2; 1;
+                    3; 3;
+                - or_type_count: 3,4,5,6,7,8
+                - rich_type_count: 15,18,21,23,24,25,27,28
+                - r244even: 0, 1
+                - r244odd: 0
+                - reors: 7,9,11,13,15,16,17,19,21,22,24,28,30
+                CONJ?: - em:
+                    0 1;
+                    0 2;
+                    0 3;
+                    3 3;
+                - o2: probably almost anything possible (10 variations)
+                - u_comps:
+                    1 1;
+                    2 1;
+                    3 1;
+                    4 1;
+                    4 2;
+                    5 2;
+                    6 2;
+                    7 3;
+                - rov: anything
+                - ruv: anything
+                CONJ?: - rrn[0]: 0
+                - rrn[1]: 0, 4
+                - rrn[3]: 0, 4, 8, 12, 16, 18
+                - u_morecomps_undiv[1] and u_morecomps_undiv[3]: 0 or 6
+                CONJ?: - prn[0]: 0
+                - flows:
+                    has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 0; has_nzmodb: 0;
+                    has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0;
+                    has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1;
+                    has_nz5: 1; mismatch: 1; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 0;
+                - col: 12,14,16,18,20
+                CONJ?: - chords: only t4[2]: 0
+                    everything else can be anything
+                - when has_2cdcs - taken: 10 10, 11 11, 11 13
+                CONJ: or_sum: nope, 10, 15, 20, 25, 30, 35, 40
+
 
 TODO: smallest par=0 example
     18.05, compare these two solutions:
@@ -50,8 +196,6 @@ TODO: check weights
 TODO: there's some deep connection between (or_sum % 5) and par=1
 
 TODO: strong Petersen colouring
-
-TODO: o244-flows
 
 TODO: has_nz5=0 => has_nzmodb=0
     - 20.05
