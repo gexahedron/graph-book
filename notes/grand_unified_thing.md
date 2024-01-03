@@ -1,12 +1,10 @@
 # In search of GUT
 
 - plan:
-- start with o244-flows, such that cycle G1 is big enough,
+- start with o6c4c + o244-flows, such that cycle G1 is big enough,
 - e. g. we can find o5cdc, where first layer is "dominating cycle", and G1 is a second biggest layer in this o5cdc solution
-- then study
 
-
-We want:
+## What we probably want:
 - o6c4c,
 - with o244-flow
 - then build nz5 from o244-flow (or maybe a pair of nz5s)
@@ -14,8 +12,17 @@ We want:
 - then build o5cdc from 333pp
 - also, maybe o5cdc includes an even cycle from o244-flow,
 - maybe even with same orientation
+- maybe also o5cdc has "dominating cycle" as biggest layer,
+- and maybe the even cycle is second biggest layer
 - and maybe, also have some way to reconstruct Petersen colouring
+- or maybe the strong Petersen colouring, if it exists for the snark
 
+## What is definitely not possible to ask for:
+
+- It's not possible to ask for dominating circuit in o5cdc; for example, none of o5cdc solutions in 28.05g2151 contains a dominating circuit
+
+
+## Random thoughts
 
 - доказать наблюдение про oriented vs ignored (o6c4c, o5cdc, nz5)
 
