@@ -21,9 +21,28 @@ o6c4c landscape:
     ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
 
 
-TODO: strong Petersen coloring, par=0
-    - how can we fix this?
+DONE: or=3, par=0 vs par=1
+    check rich244
+    don't notice anything helpful
 
+
+TODO (kind of done!): strong Petersen coloring, par=0
+    - how can we fix this?
+    - r244even=1 => par=1
+    - that was a good observation, for 26.05 and 28.05 we have
+        these values for parity vs r244_odd_count:
+            1 0
+            1 4
+            0 6
+    - this also works for o244=9!
+        - so, already for 35+589+82+875 rows (1581 rows)
+
+
+TODO: o244=9
+    seems that we have some similar conjectures as in o244=10:
+        - s0 even
+        - we can fix the parity
+        - em: 0 * or em: 3 *
 
 TODO: o244-flows
     - o244-triple count
@@ -31,7 +50,6 @@ TODO: o244-flows
             - nope, 10, 15, 20, 25, 30, 35
         - CONJ: o244count = 10 <=> strong Petersen colouring
             - although very small amount of solutions checked
-            - TODO: check 28.05, and recheck 26.05
         - o244count = 10
             - 26.05, g255 and g280:
                 - or: 7, 9
@@ -79,7 +97,7 @@ TODO: o244-flows
                     rov: 0 0 6 3;
                 - ruv: 0 0 even odd
                     ruv: 0 0 0 17;
-                    ruv: 0 0 10 7;
+                    ruv: 0 0 10c 7;
                     ruv: 0 0 12 7;
                     ruv: 0 0 2 15;
                     ruv: 0 0 2 17;
@@ -112,7 +130,8 @@ TODO: o244-flows
             875 rows
                 743 PAR 1, 132 PAR 0
                 - or: 6, 7, 9, 10, 11, 13, 14
-                -   or_counts:_6_10;
+                CONJ? - or_counts:
+                    or_counts:_6_10;
                     or_counts:_6_14;
                     or_counts:_7_13;
                     or_counts:_7_9;
