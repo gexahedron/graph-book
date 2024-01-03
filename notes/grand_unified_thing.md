@@ -5,10 +5,11 @@
 - e. g. we can find o5cdc, where first layer is "dominating cycle", and G1 is a second biggest layer in this o5cdc solution
 
 ## What we probably want:
+
 - o6c4c,
 - with o244-flow
 - then build nz5 from o244-flow (or maybe a pair of nz5s)
-- then build 333pp from nz5 (or maybe from pair)
+- then build 333pp from nz5 (or maybe from a pair of nz5s)
 - then build o5cdc from 333pp
 - also, maybe o5cdc includes an even cycle from o244-flow,
 - maybe even with same orientation
