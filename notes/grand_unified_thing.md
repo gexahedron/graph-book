@@ -1,6 +1,51 @@
 # In search of GUT
 
+- plan:
+- start with o244-flows, such that cycle G1 is big enough,
+- e. g. we can find o5cdc, where first layer is "dominating cycle", and G1 is a second biggest layer in this o5cdc solution
+- then study
+
+
+We want:
+- o6c4c,
+- with o244-flow
+- then build nz5 from o244-flow (or maybe a pair of nz5s)
+- then build 333pp from nz5 (or maybe from pair)
+- then build o5cdc from 333pp
+- also, maybe o5cdc includes an even cycle from o244-flow,
+- maybe even with same orientation
+- and maybe, also have some way to reconstruct Petersen colouring
+
+
 - доказать наблюдение про oriented vs ignored (o6c4c, o5cdc, nz5)
+
+
+в данный момент есть такое:
+    - альтернатива между
+        o6c4c и 33-pp (nz5, 5cdc)
+        6c4c и 333-pp (nz5, o5cdc)
+    - o244-flows (и даже на той же тройке, что и 33-pp)
+    - 333-flows
+    причём все эти 5 свойств (включая 333-pp) - все кажутся независимы друг от друга, бывают все вариации
+    до 28 вершин включительно есть обе эти альтернативы-комбинации
+теперь можно ещё проверить наличие
+    - dominating circuit, который включает в себя oriented вершины из o6c4c
+        получилось скучно - вроде бы вообще нет таких o6c4c, что они несовместимы с dominating circuit
+        кстати, число dominating circuit растёт экспоненциально в снарках
+    - o2233-flows
+    - проверить, что цикл из 33-pp - сидит в o5cdc
+        вроде в 28.05g1422 не сидит, ни один из циклов
+    - разбиение 6c4c на 2 cdc
+    - что-нибудь про petersen colouring?
+        типа что в цикле 244-flows, например, все рёбра сильные
+        я проверил, что бывают исключения, если poor/rich вытаскивать из o6c4c
+    - что-нибудь про hoffman-ostenhof decomposition?
+
+    - я как-то умел ещё 5cdc переделывать друг в друга - может я сначала получу неплохой 33-pp и 5cdc,
+    а потом путём накидывания циклов - сделаю из него o5cdc?
+    - можно ли такое проделать для 6c4c?
+
+
 
 - известно, что если граф красится рёберно в 3 цвета, то
     там есть 3cdc (=> 5cdc, 6c4c, o6c4c, 9c6c, o9c6c), o4cdc (=> o5cdc), nz4 (=> nz5), normal 5-colouring (все рёбра poor)
@@ -10,9 +55,9 @@
         вообще не факт - если тут взять 6c4c, то у него в 244-flows пустой 2-цикл
     а как, кстати, выглядит тут лесенка
     o2222-flows = nz4,
-    по идее o233-flows (не, нет такой штуки)
-    222-flows = 3cdc
-    o44-flows = o4cdc
+    по идее o233-flows (не, нет такой штуки, e. g. K4 doesn't have it)
+    222-flows = 3cdc, o222-flows = o3cdc
+    o44-flows = o4cdc, o33-flows = nz3 (= o3cdc)
     короче - там есть красивая конструкция про 3cdc => o4cdc
     она очень похожа на 333-pp
 
@@ -88,29 +133,3 @@ nz5 vs раскраски в 4 цвета
         (тут везде одна и та же пара троек)
     - 333-flows (здесь 6 пар троек) (кажется эта шестёрка троек несовместима с тройкой для o244-flows и 33-pp)
     до 28 вершин это работает
-
-в данный момент есть такое:
-    - альтернатива между
-        o6c4c и 33-pp (nz5, 5cdc)
-        6c4c и 333-pp (nz5, o5cdc)
-    - o244-flows (и даже на той же тройке, что и 33-pp)
-    - 333-flows
-    причём все эти 5 свойств (включая 333-pp) - все кажутся независимы друг от друга, бывают все вариации
-    до 28 вершин включительно есть обе эти альтернативы-комбинации
-теперь можно ещё проверить наличие
-    - dominating circuit, который включает в себя oriented вершины из o6c4c
-        получилось скучно - вроде бы вообще нет таких o6c4c, что они несовместимы с dominating circuit
-        кстати, число dominating circuit растёт экспоненциально в снарках
-    - o2233-flows
-    - проверить, что цикл из 33-pp - сидит в o5cdc
-        вроде в 28.05g1422 не сидит, ни один из циклов
-    - разбиение 6c4c на 2 cdc
-    - что-нибудь про petersen colouring?
-        типа что в цикле 244-flows, например, все рёбра сильные
-        я проверил, что бывают исключения, если poor/rich вытаскивать из o6c4c
-    - что-нибудь про hoffman-ostenhof decomposition?
-
-    - я как-то умел ещё 5cdc переделывать друг в друга - может я сначала получу неплохой 33-pp и 5cdc,
-    а потом путём накидывания циклов - сделаю из него o5cdc?
-    - можно ли такое проделать для 6c4c?
-
