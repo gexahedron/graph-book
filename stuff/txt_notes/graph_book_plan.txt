@@ -1,8 +1,7 @@
 # Graph Book
 
 ## plans for the week, 01.01-07.01:
-- ? unit vector flows for graphs, which have strong Petersen colouring?
-    - we only need to check that doubling of vertices works
+- глянуть статью A state sum for the total face color polynomial
 - recheck code that's not in repository (33pp_from_o6c4c, ...)
 - o244=9 - how close can we be to a strong Petersen colouring?
 - find
