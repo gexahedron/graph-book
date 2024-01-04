@@ -54,24 +54,6 @@ In 1989, Richard Steinberg and Dan Younger[5] gave the first correct proof, in E
 
 
 
-todo:
-	- добавить на гитхабе разделы Citation,
-		с правильно вставленным блоком с цитированием чужих статей
-		(а потом мб и своих)
-
-	- дизайны сайтов
-		https://lena-voita.github.io/posts/acl19_heads.html
-		http://www.cs.cornell.edu/~nietert/blog/2020/01/21/a-curious-connection-between-quantum-information-and-finite-geometry/
-
-	- дока
-		- о чём написать сначала?
-			- начну с cycle double cover
-				а конкретно с o6c4c и or studies
-				и заодно буду исправлять код, доводить до конца эксперименты, и закрывать все вопросы во всех файлах
-				ну или явно их прописывать в доке или блоге
-			- потом сферу
-			- потом уже перейду к graceful labeling
-
 
 
 вообще далёкий от меня ресёрч, но тут тоже встречаются нужные графы:
