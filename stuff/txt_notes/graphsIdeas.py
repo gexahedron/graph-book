@@ -1,3 +1,15 @@
+TODO: поисследовать утверждение
+Theorem 3.1. A graph G has a 5-cycle double cover if and only if
+	G has two sub-graphs A and B such that
+	(i) E(G) = E(A) U E(B),
+	(ii) A n B = C is a cycle of G,
+	(iii) each A and B admits a nowhere-zero 4-flow, and
+	(iv) C is an evenly spanning cycle of A
+	казалось это похоже на 44-edp, но вроде нет (в edp в пересечении не цикл)
+TODO: есть вообще мысль пособирать ещё таких утверждений да поизучать их да посвязывать уже с тем, что я знаю
+а может написать review этой области с включением всех таких структурных декомпозиций
+
+
 незаконченные вещи:
     - o6c4c - https://mirskontsa.wordpress.com/2018/12/06/oriented-berge-fulkerson-conjecture-v0-1/
 	- or=0 - https://gexahedroet.livejournal.com/18152.html
@@ -166,7 +178,6 @@ snarky - Some snarks are worse than others
 2003.09162 - On 3-flow-critical graphs
 10015-517-8037-1-10-20200303 - A Study of Critical Snarks
 1905.07913 - VARIATIONS ON THE PETERSEN COLOURING CONJECTURE
-10.1002@jgt.22488 - Group connectivity: ℤ4 vs ℤ2^2
 7970-PDF file-27330-3-10-20190308 - Decomposing graphs into a spanning tree, an even graph, and a star forest
 7175-PDF file-27343-2-10-20190308 - Perfect matching covers of cubic graphs of oddness 2
 Semi_blowup_and_blowup_snarks_and_Berge- - Semi blowup and blowup snarks and Berge-Fulkerson Conjecture
@@ -369,17 +380,6 @@ TODO:
 	- начать писать review или technical report
 	попутно вылизывая код
 	- написать письмо какое-нибудь
-
-TODO: поисследовать утверждение
-Theorem 3.1. A graph G has a 5-cycle double cover if and only if
-	G has two sub-graphs A and B such that
-	(i) E(G) = E(A) U E(B),
-	(ii) A n B = C is a cycle of G,
-	(iii) each A and B admits a nowhere-zero 4-flow, and
-	(iv) C is an evenly spanning cycle of A
-	казалось это похоже на 44-edp, но вроде нет (в edp в пересечении не цикл)
-TODO: есть вообще мысль пособирать ещё таких утверждений да поизучать их да посвязывать уже с тем, что я знаю
-а может написать review этой области с включением всех таких структурных декомпозиций
 
 
 TODO:
