@@ -154,8 +154,6 @@ https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.080/diss_main_publica
 https://helda.helsinki.fi/bitstream/handle/10138/318354/savela_jarkko_tutkielma_2020.pdf?sequence=2
 
 
-зачем мне gap?
-
 
 изучить
 Reduction of the Berge-Fulkerson conjecture to cyclically 5-edge-connected snarks
