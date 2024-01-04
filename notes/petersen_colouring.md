@@ -19,8 +19,8 @@ TODOs:
 
 Petersen graph has an S2 unit vector flow, which means that we can use R3 unit vectors instead of integer values ${1, 2, 3, 4}$, orient the edges and still construct the flow. Because strong Petersen colouring preserves the orientation of edges, we automatically also get the S2 unit vector flows for the snarks mentioned above.
 
-There's also relation between Petersen colours and unit vectors: each colour corresponds to even permutation of coordinates, e. g.:
-- colour 1 corresponds to vectors $(\pm \phi, 0, 0)$, $(0, \pm \phi, 0)$ and $(0, 0, \pm \phi)$;
+There's also a non-obvious relation between Petersen colours and unit vectors (maybe it's because there's a broken symmetry in the coordinates), vectors undergo the same transformation between the edges. So, what we get is:
+- colour 1 corresponds to vectors $(\pm \phi, 0, 0)$, $(0, \pm \phi, 0)$ and $(0, 0, \pm \phi)$
 - colour 2 corresponds to vectors ...
 - colour 3 corresponds to vectors ...
 - colour 4 corresponds to vectors ...
