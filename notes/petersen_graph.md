@@ -17,7 +17,11 @@
 ## Nowhere-zero modular 5-flows
 - если смотреть только mod5, то будет 60 потоков ("независимых" - 40)
 
-## Cycle double covers
+## Cycle double covers (cdc)
+There are 3 cdc solutions:
+- 6 cycles all of lengths 5
+- unorientable 5cdc with cycles of lengths 8, 6, 6, 5 and 5
+- orientable 5cdc with cycles of lengths 9, 6, 5, 5 and 5
 
 ## 5-cycle double covers
 - 5cdc: добавляется 86655 - на бутылке клейна, то есть неориентируемая поверхность
@@ -55,10 +59,12 @@
 ## 333pp
 
 ## Tree-Cycle-Matching decomposition
-- hoffman-ostenhof: 2 решения - 6 + дерево; 5 + дерево + ребро
+2 решения:
+- 9-tree + 6-cycle;
+- 8-tree + 5-cycle + 1 edge.
 
 ## 9c6c
-- don't exist
+- don't exist (TODO: find reference to Seymour proof)
 
 ## 10c6c
 - there are some nice solutions here, e. g., 10 circuits of length 9
@@ -93,7 +99,7 @@
     то есть: 3 раза накрыто ребро 06; 2 раза - 08, 29, 16, 37, 45 (кстати, это perfect matching); 1 раз все остальные
     3*1 + 2*5 + 1*9 = 22
 - shortest 4-cycle cover (aka 21/15): 6555
-- ? shortest oriented-cycle cover
+- ? shortest oriented cycle cover
 - ? circular flow
 - realization as icosidodecahedron/dodecadodecahedron
     - ребро графа петерсена - это пара противоположных вершин icosidodecahedron'а
