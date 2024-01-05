@@ -1,4 +1,5 @@
 TODO: поисследовать утверждение
+https://www.sciencedirect.com/science/article/pii/0012365X9500047Z
 Theorem 3.1. A graph G has a 5-cycle double cover if and only if
 	G has two sub-graphs A and B such that
 	(i) E(G) = E(A) U E(B),
