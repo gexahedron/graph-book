@@ -18,6 +18,17 @@
 - and maybe, also have some way to reconstruct Petersen colouring
 - or maybe the strong Petersen colouring, if it exists for the snark
 
++ also check this construction:
+Theorem 3.1. A graph G has a 5-cycle double cover if and only if
+	G has two sub-graphs A and B such that
+	(i) E(G) = E(A) U E(B),
+	(ii) A n B = C is a cycle of G,
+	(iii) each A and B admits a nowhere-zero 4-flow, and
+	(iv) C is an evenly spanning cycle of A
+	казалось это похоже на 44-edp, но вроде нет (в edp в пересечении не цикл)
+TODO: есть вообще мысль пособирать ещё таких утверждений да поизучать их да посвязывать уже с тем, что я знаю
+а может написать review этой области с включением всех таких структурных декомпозиций
+
 ## What is definitely not possible to ask for:
 
 - It's not possible to ask for dominating circuit in o5cdc; for example, none of o5cdc solutions in 28.05g2151 contains a dominating circuit
