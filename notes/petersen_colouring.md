@@ -54,3 +54,9 @@ Note: vectors also depend on edge orientations, if we take opposite edge orienta
 ## Note about o6c4c and o244-flows
 
 Conjecturally it looks like that if we have an o6c4c solution, which has 10 o244-flows triples, then we also have a corresponding strong Petersen colouring, and vice versa.
+
+## What is not transferred even by strong Petersen colouring
+
+- TODO: $Z_5$-connectivity?
+- TODO: dominating circuit?
+- TODO: Tree-Cycle-Matching decomposition?
