@@ -1,16 +1,18 @@
 o6c4c landscape:
 - or0 (+or2 when s2=3)
+- or2
+- or_type_count=1
 - onlyrich
 - rich_type_count около 12
     - что это: мы генерим тапл для каждого rich ребра в каких слоях он находится, и считаем число таких уникальных таплов
     рёбер много, а таплов мало
 - has 2cdcs
-- has nz-mod5, no nz5
-- or2
+- has_nz_mod5_flow, но нет has_nz_modb_flow
 - strong Petersen colouring
     - o244-flow triple count: 9, 10 (with fix in parity!)
 - s1s0diff <= 0 (28.05) или -1 (30.05)
 - no chords
+    - no t4 chords, with fix in parity!
 чуть хитрее:
 - odd or count is different from even or count
 - any_chords_frequency[1] = 0 (+any_chords_frequency[2] = 0)
@@ -20,17 +22,6 @@ o6c4c landscape:
     s1 <= 18
     t1 + t3 <= 8
     ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
-
-
-TODO: deeper study of or_type_count
-    - or вершины либо идут парами, либо тройками, либо пятёрками («тут 5 вершин одного типа, с сигнатурой (-, +, +, +, +)»)
-    - TODO: check that we never have 4 or vertices from same type
-        - or maybe that we don't get nz-mod5 / nz5 flow in these cases
-
-
-TODO: fix in parity for onlyrich
-    ?
-
 
 
 TODO: restore 333-flows and other constructions
@@ -49,8 +40,121 @@ TODO: check weights
     (7/6, -5/6, -13/6, 1/2, 5/6, 1/2)
 ? пускай c = f, d = e + 1, b = a + 2
 
-TODO: there's some deep connection between (or_sum % 5) and par=1
 
+TODO: fix parity in mismatch=1
+    looks like it's fixable!
+    26.05:
+        r244_odd_count  vs parity
+            0  1
+            4  1
+            6  0
+            10 0
+    TODO: 28.05
+
+
+TODO: no chords, fix in parity!
+    26.05
+        t4(* 0 0)
+            r244_odd_count  vs parity
+            0  1
+            4  1
+            6  0
+            10 0
+        t3(* 0 0)
+            0; 1;
+            10; 1;
+            but
+            4; 0;
+            4; 1;
+            6; 0;
+            6; 1;
+    TODO: 28.05
+
+
+TODO: there's some deep connection between (or_sum % 5) and par=1
+    and also sometimes with "broken" par=0 (which we probably can fix)
+    TODO: list examples
+
+
+TODO: fix parity in o244count >= 5
+    that's a harder one, i think
+
+
+TODO: deeper study of or_type_count
+    - or вершины либо идут парами, либо тройками, либо пятёрками («тут 5 вершин одного типа, с сигнатурой (-, +, +, +, +)»)
+    - DONE: check that we never have 4 or vertices from same type
+        - or maybe that we don't get nz-mod5 / nz5 flow in these cases
+        - that's not true:
+        g194: new o6c4c: or: 04; t1+t3: 09; s0: 13; s1: 29; s2: 1; s2uu: 1; PAR: 1; or_type_count: 1; or_type_decomp:_4; rich_type_count: 20; less: 1; or_counts:_4; rich244:_19_8_15_12_7_10_7_9_14_15; r244odd: 6; reors: 1; em: 3 1; o2: 2 1; t1: 3; t2: 7; t3: 6; t4: 23; u_comps: 7 1; u_morecomps_undiv: 2 6 0 6; rov: 0 2 2 0; ruv: 0 1 12 9; dup_oon: 0 2 2 0; uon: 16 6 0 0; rrn: 0 1 10 11 7; prn: 0 0 1 4 5; has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1; flow5: u113_u113_u244_u244_u122_u334_o244_o113_u244_u122_o113_u334_u113_u244_o244_u113_u334_u244_u122_u334_u244_u113_u244_u113_u122_u113_; or_sum: 10; or0: sames: rrn024: 17; evens: s1s0diff: 16; col: 12; rrn13: 12; ruv13: 10; ruv02: 12; chord_info: (16 17 6) t1(0 3 0) t2(4 2 1) t3(2 2 2) t4(10 10 3); chord_layers: (2 0 0) (2 4 1) (2 6 4) (2 6 6) (2 8 4) (3 5 1); no_2cdcs;
+
+    or_type_count=1
+        26.05: 
+            CONJ: par=1
+            CONJ: or_sum % 5 = 0
+            ?CONJ: or: 2, 4, 6
+            CONJ: less=1 (but not all of them SEALed, yet)
+            ?CONJ: em: 3 *
+            ?CONJ: o2: 0 * or o2: 2 *
+            ?CONJ: t3: 4,6,8,10
+            ?CONJ: mismatch: 0
+            CONJ: no_2cdcs
+
+    26.05:
+        par=1
+            - or_type_count=1
+            - 08; 2; or_type_decomp:_4_4; 1; (4 snarks, 5 examples)
+    
+        rich_type_count=12
+            04; 2; or_type_decomp:_2_2; 1;
+            04; 4; or_type_decomp:_1_1_1_1; 1;
+            06; 3; or_type_decomp:_2_2_2; 1;
+            06; 5; or_type_decomp:_1_1_1_1_2; 1;                                                                                                                08; 3; or_type_decomp:_2_2_4; 1;
+            08; 5; or_type_decomp:_1_1_1_1_4; 1;
+
+        s1s0diff < 0
+            03; 3; or_type_decomp:_1_1_1; 1;
+            05; 3; or_type_decomp:_1_1_3; 1;
+            05; 4; or_type_decomp:_1_1_1_2; 1;
+
+
+TODO: or vs or_type_count
+    26.05
+        or  or_type_count
+         0  0
+         1  -
+         2  1
+         3      3
+         4  1,2,  4
+         5      3,4,5
+         6  1,2,3,4,5,6
+         7      3,4,5,6,7
+         8    2,3,4,5,6,7,8
+         9      3,4,5,6,7,8,9
+        10    2,3,4,5,6,7,8
+        11      3,4,5,6,7,8,9
+        12          5,6
+        13            6
+    CONJ: or % 2 = 1 => or_type_count >= 3
+
+
+TODO: fix in parity for onlyrich
+    fix 30.05g14094
+        but how?
+
+    - 22.05g1: o244=9
+
+    - 26.05: o244 values
+        g172: 8,9
+        g173: 3,4
+        g226: 8
+        g243: 2
+        g253: 8
+        g254: 6
+        g255: 4
+        g257: 3
+        g280: 4
+
+    - 30.05: g307, g4099, g4541, g10117, g13042, g13252, g13796, g14094, g22848, g22915, g22916, g24295, g24381, g26256, g26257, g27826
 
 
 
@@ -67,7 +171,6 @@ DONE: r244odd: 0 or 10
         if r244odd: 0
             or_sum: 3, 5, 6, 9, 11, ...
             par: 0, 1
-
 
 
 TODO (kind of done): r244odd - never 2 or 8?
@@ -133,7 +236,6 @@ DONE: snarks without o333-flows
             g33: 0-7
             g34: 1-7
             g38: 0-9
-
 
 
 DONE(?): or=3, par=0 vs par=1
@@ -308,8 +410,10 @@ TODO: smallest par=0 example
     g2: new o6c4c: or: 03; t1+t3: 09; s0: 13; s1: 23; s2: 1; s2uu: 2; PAR: 1 (1); npar: 1; or_type_count: 3; rich_type_count: 21; less: 0; or_counts:_3; rich244:_8_8_11_7_10_13_11_9_7_8; r244even: 0; r244odd: 0; reors: 1; em: 0 2; o2: 0 1; t1: 0; t2: 4; t3: 9; t4: 14; u_comps: 3 1; u_morecomps_undiv: 4 6 2 6; rov: 0 0 0 3; ruv: 0 1 6 8; dup_oon: 3 0 0 0; uon: 8 6 0 1; rrn: 0 0 3 8 12; prn: 0 0 0 2 2; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; or0: sames: rrn024: 15; evens: s1s0diff: 10; col: 12; rrn13: 8; ruv13: 9; ruv02: 6; chord_info: (13 11 3) t1(0 0 0) t2(3 1 0) t3(6 3 0) t4(4 7 3); chord_layers: (2 0 0) (2 4 1) (2 4 3) (2 4 4) (2 4 4) (3 1 1); no_2cdcs;
     g2: new o6c4c: or: 03; t1+t3: 09; s0: 13; s1: 24; s2: 1; s2uu: 2; PAR: 0 (0); npar: 0; or_type_count: 3; rich_type_count: 21; less: 0; or_counts:_3; rich244:_11_10_8_7_14_8_11_11_8_8; r244even: 0; r244odd: 0; reors: 1; em: 0 2; o2: 0 2; t1: 0; t2: 3; t3: 9; t4: 15; u_comps: 3 1; u_morecomps_undiv: 4 6 2 6; rov: 0 0 0 3; ruv: 0 0 6 9; dup_oon: 3 0 0 0; uon: 8 6 0 1; rrn: 0 0 2 8 14; prn: 0 0 0 0 3; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; or0: sames: rrn024: 16; evens: s1s0diff: 11; col: 12; rrn13: 8; ruv13: 9; ruv02: 6; chord_info: (13 11 3) t1(0 0 0) t2(2 1 0) t3(6 3 0) t4(5 7 3); chord_layers: (2 0 0) (2 4 1) (2 4 3) (2 4 4) (2 4 4) (3 1 1); no_2cdcs;
 
+
 TODO: or_type_count
     CONJ: or=2 => or_type_count=1
+
 
 TODO: o5555-f4c, o222222-f4c
     - what if we have 5 subgraphs?
@@ -328,6 +432,7 @@ TODO: has_nz5=0 => has_nzmodb=0
 
     TODO: how much vertices i checked here?
 
+
 TODO: r244even=1:
     26.05:
         - o2: 0 0, 1 1, 2 2, 3 3
@@ -336,6 +441,7 @@ TODO: r244even=1:
         - s1 >= 17
         - or_sum: nope, 0, 10, 14, 15, 17, 20, 25, 30, 35
             - ? 14, 17 - just 2 solutions, 1 for each value
+
 
 TODO: all t4_chord_count_by_layer: 0 (same as t4(* 0 0))
     - par=0 and par=1, but:
@@ -424,6 +530,7 @@ TODO: has_2cdcs, or_counts:_4_6
     - 2 more solutions, with 5 reors
     - TODO: compare 28.05g926 and 28.05g987
 
+
 TODO: rich_type_count = 12
     TODO: check 6c4c solutions
 
@@ -478,6 +585,7 @@ TODO: ? has_2cdcs, s1 != 18
 
 TODO: or=0, col=12 always?
 
+
 TODO: or=0 + s0 even (+or=2, s2=3, s0 even?), vs has_2cdcs
     - these 2 cases are very similar, right?
     - what is similar:
@@ -497,7 +605,6 @@ TODO: or=0 + s0 even (+or=2, s2=3, s0 even?), vs has_2cdcs
 
 
 
-
 TODO: or=0, s1
     20.05: 22
     22.05: 24,26,28
@@ -507,7 +614,6 @@ TODO: or=0, s1
     ? conj: s1 >= 22?
     - idea is that all of them are related to 20.05g5 actually
     s1 <= 30-8, 33-5, 36-5, 39-6, 42-4, ...?
-
 
 
 TODO: what about small number of poor edges?
@@ -550,7 +656,6 @@ TODO: check 244-flows for each piece of landscape
 
 - TODO: s2uu=3
     - parity=0 is around 1-2% here
-
 
 
 - TODO: or=0, s2=3:
