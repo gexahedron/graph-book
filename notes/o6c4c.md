@@ -46,14 +46,19 @@ There seems to be a deep connection between o6c4c solutions, and nz5 flows which
 
 o6c4c landscape:
 - or0
+- or2
+- or_type_count=1
 - onlyrich
 - rich_type_count around 12
 - has 2cdcs
-- has nz-mod5, but no nz5
-- or2
+- has nz-mod5 flow, but no nz-mod5 flow or no nz-mod-both flow
+  - with fix in parity!
 - strong Petersen colouring
+  - o244-flow triple count: 9, 10 (with fix in parity!)
 - s1s0diff <= 0 (28.05) or -1 (30.05)
 - no chords
+  - no t4 chords, with fix in parity!
+- o244-flow triple count >= 5
 
 more subtle:
 - odd or count is different from even or count
@@ -114,7 +119,7 @@ So, quite a lot of small snarks have at least 1 o6c4c solution with 0 oriented v
 Conjecture: there are $4k+2$ vertices in the graph.
 
 - 10.05: g1 (Petersen graph)
-- 22.05: g1
+- 22.05: g1 (single 6c4c with 7 reorientations)
 - 26.05: g172, g173, g226, g243, g253, g254, g255, g257, g280
 - 30.05: g307, g4099, g4541, g10117, g13042, g13252, g13796, g14094, g22848, g22915, g22916, g24295, g24381, g26256, g26257, g27826
 
