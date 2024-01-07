@@ -78,3 +78,8 @@ What about:
 - dot product
 - superposition
 - windmill
+
+## Snarks which look interesting
+
+- 26.05g255, 26.05g280
+- 28.05g712
