@@ -59,7 +59,7 @@ There are 3 cdc solutions:
 ## 333pp
 
 ## Tree-Cycle-Matching decomposition
-2 решения:
+2 solutions:
 - 9-tree + 6-cycle;
 - 8-tree + 5-cycle + 1 edge.
 
