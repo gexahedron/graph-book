@@ -41,6 +41,22 @@ TODO: check weights
 ? пускай c = f, d = e + 1, b = a + 2
 
 
+
+TODO: parity=0, r244_odd_count=0
+    26.05
+    - rov[0]=0
+    - rrn[0]=0
+    - s0: odd; 13,15,17
+
+
+TODO: fix parity in s0=12!
+    26.05
+    0; 1;
+    4; 1;
+    6; 0;
+    10; 0;
+
+
 TODO: fix parity in mismatch=1
     looks like it's fixable!
     26.05:
@@ -78,6 +94,31 @@ TODO: there's some deep connection between (or_sum % 5) and par=1
 
 TODO: fix parity in o244count >= 5
     that's a harder one, i think
+
+
+TODO: another curious pattern
+    26.05, or_sum % 5 != 0:
+    r244_odd_count vs parity
+    0; 1
+        only 2 cases, for or_sum: 14,17
+    4; 0/1
+    6; 0/1
+    10; 0
+        only 3 cases, for or_sum: 13,22
+
+    - same for or >= 10 (10,11,12,13)
+
+
+TODO: some curiously occurring pattern in fix parity cases
+    r244_odd_count vs parity
+    0; 1
+    4; 0/1
+    6; 0/1
+    10; 1
+
+    appears in 26.05:
+        - or_type_count=2
+        - no t3 chords
 
 
 TODO: deeper study of or_type_count
@@ -171,6 +212,10 @@ DONE: r244odd: 0 or 10
         if r244odd: 0
             or_sum: 3, 5, 6, 9, 11, ...
             par: 0, 1
+
+    26.05:
+        for s1s0diff < 0:
+            r244odd: 0 or 4
 
 
 TODO (kind of done): r244odd - never 2 or 8?
@@ -1041,6 +1086,7 @@ done:
             s1: 32; chord_layers: 5) 5) 5) 5) 7) 7)
         - интересно, что есть какая-то непрямая зависимость
         - интересно, что на 24.05 и 26.05 нет s0=12
+            UPD: тут что-то неверно, на 26.05 есть 5425 rows с s0=12
         - на 22.05 мало примеров
             s1: 24; chord_layers: 5) 5) 5) 5) 9) 9)
 
