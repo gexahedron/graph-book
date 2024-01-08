@@ -2,7 +2,6 @@
 
 ## plans for the week, 08.01-14.01:
 - write-up S2 nz5 counterexample
-- recheck rich_type_count
 - глянуть статью A state sum for the total face color polynomial
 - recheck code that's not part of unified experiments folder
     - 33pp_from_nz5
