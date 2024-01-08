@@ -42,33 +42,38 @@ There seems to be a deep connection between o6c4c solutions, and nz5 flows which
 - TODO: what is or_sum
 - TODO: check sum flow for specific types of edges (t1, t2, t3, t4, ...)
 
-### TODO: landscape around or_sum
+## TODO: landscape around or_sum and parity formula
 
-o6c4c landscape:
-- or0
-- or2
+- has 2cdcs
+- or=0 (+ or=2 when s2=3)
+- or=2
 - or_type_count=1
 - onlyrich
-- rich_type_count around 12
-- has 2cdcs
-- has nz-mod5 flow, but no nz-mod5 flow or no nz-mod-both flow
-  - with fix in parity!
-- strong Petersen colouring
-  - o244-flow triple count: 9, 10 (with fix in parity!)
+- rich_type_count=12 (or even a bit more)
+- strong Petersen colouring (which is probably same as o244-flows triple count = 10)
 - s1s0diff <= 0 (28.05) or -1 (30.05)
-- no chords
-  - no t4 chords, with fix in parity!
+- with fixes in "parity"
+    - no t4 chords
+    - t2=0
+    - s0=12
+    - has nz-mod5 flow, but no nz-mod5 flow or no nz-mod-both flow
+    - o244-flows triple count: 9, 10
+    - big count of oriented vertices
+    - small s1s0diff
+    - any_chords_frequency[1] = 0
+    - solutions with multiple reorientations
 - o244-flow triple count >= 5
-
-more subtle:
-- odd or count is different from even or count
-- any_chords_frequency[1] = 0 (+any_chords_frequency[2] = 0)
-- non-zero nz5 or-sums
-- solutions with multiple orientations
 - SEALed cases:
   - s1 <= 18
   - t1 + t3 <= 8
   - ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
+
+more subtle:
+- even number of or vertices
+    - odd or count behaves differently from even or count
+- non-zero nz5 or-sums
+- any_chords_frequency[2] = 0
+- o2: 0 0 + o2: 3 3
 
 ## Case of splitting into 2 separate 6cdcs
 
