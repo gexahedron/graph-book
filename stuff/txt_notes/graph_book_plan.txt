@@ -1,8 +1,11 @@
 # Graph Book
 
-## plans for the week, 01.01-07.01:
+## plans for the week, 08.01-14.01:
+- write-up S2 nz5 counterexample
+- recheck rich_type_count
 - глянуть статью A state sum for the total face color polynomial
-- recheck code that's not in repository (33pp_from_o6c4c, ...)
+- recheck code that's not part of unified experiments folder
+    - 33pp_from_nz5
 - o244=9 - how close can we be to a strong Petersen colouring?
 - find
     - 244-flows, which is not o244-flows
@@ -103,11 +106,6 @@ LMFDB
 https://github.com/LMFDB/lmfdb/tree/5b69f228d492ef0120fd57094584b1cf52386693
 
 
-TODO: unit vector flows
-- Tietze’s graph - can we build unit vector flow for it, given flow for Petersen graph?
-- or find unit vector flows for graphs, which have strong Petersen colouring?
-
-
 C++ code:
 - maintain dependencies through optional classes; if they null - then we forgot to init them
 - define customized Graph class always in main.cpp
@@ -182,7 +180,6 @@ http://www.math.wvu.edu/~cqzhang/ERRATA2.pdf
 
 TODO: oriented conjectures (o5cdc, o6c4c)
 - check Flower and Goldberg snarks
-- generalised Blanuša snark of type 1 with an odd number of A-blocks (o6c4c for free!)
 
 
 TODO: go through other books, and lecture notes
@@ -209,7 +206,6 @@ TODO: youtube
 - 21Oct22 Tutte Dyadic Linear Programming_Ahmad Abdi
     - https://www.youtube.com/watch?v=iFNaulZV10k
 
-TODO: snark book
 
 TODO: does having Petersen coloring for snarks imply in some sense having a Petersen graph minor? and if so, proving snark theorem, and if so proving 4CT?
 
@@ -252,7 +248,7 @@ not CQ Zhang:
 - o6c4c / Oriented Berge-Fulkerson conjecture
     - stuff around oriented vertices, and nz5 (or nz-mod5) flows
 - other possible interactions between nz5flows, o5cdc, o6c4c and Petersen coloring
-- reconstructing 5ocdc from nz5 (or nz-mod5) flow
+- reconstructing o5cdc from nz5 (or nz-mod5) flow
 - ? (m,n)-cycle covers
 - o244-flows, 333-flows, o334-flows (“stronger oriented k-flow graph double cover” + “stronger k-flow graph double cover”)
 - A-flows, A-connectivity
@@ -272,7 +268,7 @@ not CQ Zhang:
 - ? Chinese postman problem
 - ? grafts
 - ? blocks
-- ? cores
+- cores, joins
 - ? total coloring, as measure of hardness
 - equitable total colouring
 - Snark families
@@ -327,16 +323,17 @@ would be interesting to research:
 
 
 TODO: what papers to read/cover:
-- historical (e. g. not on arXiv):
-    - …
+- 2024
+- 2023
+    - 2303.10615 - Counting Circuit Double Covers
 - 2022
     - 2204.10021 - Disjoint odd circuits in a bridgeless cubic graph can be quelled by a single perfect matching
         - proves Mazzuoccolo’s conjecture
         - G admits two perfect matchings whose deletion yields a bipartite subgraph of G
         - +
         - given any collection of disjoint odd circuits in G, there exists a perfect matching of G containing at least one edge of each circuit in this collection
-- 2023
-    - 2303.10615 - Counting Circuit Double Covers
+- historical (e. g. not on arXiv):
+    - …
 
 
 Tutte's edge 3-coloring conjecture
