@@ -9920,32 +9920,6 @@ success!    cycles: 9+9; 13+5; 13+5; 9+9; 5+13; 13+5
 
 
 
-
-draft письма
-
-cqzhang@mail.wvu.edu
-
-What is known about unit vector flow conjecture?
-
-Dear Cun-Quan Zhang,
-
-My name is Nikolay Ulyanov, I'm not an academic researcher,
-but for the last 9 years as a hobby I do computational experiments around cycle double cover conjecture (and graceful labeling conjecture).
-
-I have released the code on github - https://github.com/gexahedron/cycle-double-covers
-The code is in C++11, and the part about unit vector flow is in Python (Although the code is kinda messy and not yet ready for production or publication; there are also some bugs in the code; readme file and diagram of conjectures are kinda outdated).
-
-I don't have any publications, but here are the most interesting things that I haven't found in research literature and found through playing with HouseOfGraphs' database of snarks and testing various conjectures on them:
-- oriented 6-cycle 4-cover (o6c4c) conjecture also seems to work (edges are oriented twice in both directions); verified for all snarks with 30 vertices and less. Also not related, but found a very easy proof that from o5cdc we can construct o7c4c solution.
-- There's a conjecture about nowhere zero flow on sphere - http://www.openproblemgarden.org/op/unit_vector_flows - second theorem on this page. I've found an example of a set of points on a sphere, which can't be assigned a nowhere zero 4-flow, but they have a nowhere zero 5-flow. Actually, these are exactly the vertices of icosidodecahedron, and this example is intimately connected to Petersen graph. Each opposite pair of points corresponds to edges in Petersen graph, so we get 15 edges. There are 20 triplets of points, which produce vertices of equilateral triangles - these triplets (with their opposites) correspond to vertices of Petersen graph. However, I think, that this example should be known, at least to the author of the conjecture. Do you know maybe other sets of points for this conjecture?
-
-Just for fun, I tried to experiment with combining different conjecture. I was interested in a couple of questions:
-- Is there any connection between 5cdc and 6c4c besides Petersen conjecture? And between o5cdc and o6c4c.
-- You have a theorem, that 6c4c and 244-flows are equivalent. Both conjectures have oriented versions. Is there any relationship between them?
-- Is it possible (or how hard is it) to construct 5cdc/o5cdc from nz5 solution? Looks like it is always so.
-
-
-
 =====
 
 статьи
