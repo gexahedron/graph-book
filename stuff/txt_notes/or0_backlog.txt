@@ -50,6 +50,13 @@ TODO: check weights
 ? пускай c = f, d = e + 1, b = a + 2
 
 
+TODO: reorientations
+    there seems to be some difference between solutions with small amount of orientations
+    and big amount of them
+    have some results for 26.05
+    TODO: check 28.05
+
+
 TODO: 6c4c parity formula
     - looks like it depends only on unoriented stats:
         - s0 - number of circuits
@@ -203,14 +210,25 @@ TODO: or=3
         or_sum: 5, 10
             par: 1
             r244_odd_count: 0, 4
-        
+
         or_sum: 3,6,9,12
             par: 0, 1
             r244_odd_count: 4, 6
             so it's already hard to understand what goes on here
-        
+            (even though it's 85 rows)
+
+            s1: 24..32
+            s2: 1, 2
+
         or_sum: nope
             TODO
+
+        for reference
+            s0: 12..20
+            s1: 17..37
+            s2: 0,1,2,3
+            t1: 0, t1+t3: 09
+                so or vertices are never neighbours
 
     TODO: 28.05
 
