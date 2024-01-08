@@ -1,27 +1,36 @@
 o6c4c landscape:
-- or0 (+or2 when s2=3)
-- or2
+- has 2cdcs
+- or=0 (+ or=2 when s2=3)
+- or=2
 - or_type_count=1
 - onlyrich
-- rich_type_count около 12
-    - что это: мы генерим тапл для каждого rich ребра в каких слоях он находится, и считаем число таких уникальных таплов
-    рёбер много, а таплов мало
-- has 2cdcs
-- has_nz_mod5_flow, но нет has_nz_modb_flow
+- rich_type_count around 12
+    - что это: читай код, это непростая конструкция, но красивая
+    рёбер много, а таплов оказывается очень мало (правда есть и ограничение сверху)
 - strong Petersen colouring
     - o244-flow triple count: 9, 10 (with fix in parity!)
 - s1s0diff <= 0 (28.05) или -1 (30.05)
-- no chords
-    - no t4 chords, with fix in parity!
-чуть хитрее:
-- odd or count is different from even or count
-- any_chords_frequency[1] = 0 (+any_chords_frequency[2] = 0)
-- non-zero nz5 or-sums
-- solutions with multiple orientations
+- fixes in parity
+    - no t4 chords
+    - t2=0
+    - s0=12
+    - has nz-mod5 flow, but no nz-mod5 flow or no nz-mod-both flow
+    - o244-flows triple count: 9, 10
+    - big count of oriented vertices
+    - small s1s0diff
+    - any_chords_frequency[1] = 0
+    - solutions with multiple reorientations
 - SEAL:
     s1 <= 18
     t1 + t3 <= 8
     ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
+
+more subtle:
+- even number of or vertices
+    - odd or count behaves differently from even or count
+- non-zero nz5 or-sums
+- any_chords_frequency[2] = 0
+- o2: 0 0 + o2: 3 3
 
 
 TODO: restore 333-flows and other constructions
@@ -41,72 +50,85 @@ TODO: check weights
 ? пускай c = f, d = e + 1, b = a + 2
 
 
+TODO: 6c4c parity formula
+    - looks like it depends only on unoriented stats:
+        - s0 - number of circuits
+        - s1 - number of rich edges
+        - s2 - depends on rich edges in PMs
+        - r244_odd_count - depends on rich edges in all possible 244-even-cycles
+    - even though the formula is easier to approach in various oriented subcases
+        - and even has influence on or_sum % 5
 
-TODO: parity=0, r244_odd_count=0
-    26.05
-    - rov[0]=0
-    - rrn[0]=0
-    - s0: odd; 13,15,17
+    - so, idea is that there's still 1 more missing unoriented stat
 
-
-TODO: fix parity in s0=12!
-    26.05
-    0; 1;
-    4; 1;
-    6; 0;
-    10; 0;
-
-
-TODO: fix parity in mismatch=1
-    looks like it's fixable!
-    26.05:
-        r244_odd_count  vs parity
-            0  1
-            4  1
-            6  0
-            10 0
-    TODO: 28.05
-
-
-TODO: no chords, fix in parity!
-    26.05
-        t4(* 0 0)
-            r244_odd_count  vs parity
-            0  1
-            4  1
-            6  0
-            10 0
-        t3(* 0 0)
-            0; 1;
-            10; 1;
-            but
-            4; 0;
-            4; 1;
-            6; 0;
-            6; 1;
-    TODO: 28.05
+    TODO: check formula for u6c4c, has_2cdcs
 
 
 TODO: there's some deep connection between (or_sum % 5) and par=1
     and also sometimes with "broken" par=0 (which we probably can fix)
-    TODO: list examples
 
+    26.05, fix in parity cases
+        t2=0
+            or_sum: nope, 15, 20, 25, 30
+            r244_odd_count vs parity
+            0 1
+            4 1
+            6 0
 
-TODO: fix parity in o244count >= 5
-    that's a harder one, i think
+        s0=12
+            or_sum: nope, 6, 9, 10, 12, 13, 15, 16, 20, 22, 25, 30
+            0; 1;
+            4; 1;
+            6; 0;
+            10; 0;
 
+        mismatch=1
+            0  1
+            4  1
+            6  0
+            10 0
 
-TODO: another curious pattern
-    26.05, or_sum % 5 != 0:
-    r244_odd_count vs parity
-    0; 1
-        only 2 cases, for or_sum: 14,17
-    4; 0/1
-    6; 0/1
-    10; 0
-        only 3 cases, for or_sum: 13,22
+        no t4 chords, t4(* 0 0)
+            or_sum: nope, 10, 15, 20, 25, 30
+            0  1
+            4  1
+            6  0
+            10 0
 
-    - same for or >= 10 (10,11,12,13)
+        - big or count
+            or: 11,12,13
+            or_sum: nope, 20, 25, 30, 35
+            0  1
+            4  1
+            6  0
+            10 0
+        
+        - any_chords_frequency[1] = 0
+            or_sum: nope, 10, 15, 20, 25, 30
+            0 1
+            4 1
+            6 0
+        
+        - high reors
+            for 26.05: reors >= 6
+            or_sum: nope, 5, 10, 15, 20, 25, 30
+            0 1
+            4 1
+            6 0
+
+        - TODO: small s1s0diff
+
+        - TODO: small s1 (SEALed: s1 <= 18)
+            s1<=22
+                0 1
+                4 1
+                6 0
+
+        - TODO: small s0    
+        - TODO: small t2
+        - TODO: small t1+t3 (SEALed: t1 + t3 <= 8)
+
+    TODO: 28.05
 
 
 TODO: some curiously occurring pattern in fix parity cases
@@ -116,20 +138,171 @@ TODO: some curiously occurring pattern in fix parity cases
     6; 0/1
     10; 1
 
-    appears in 26.05:
+    26.05:
+        - or=3
+            ?CONJ: or_sum: nope, 5, 10 and 3,6,9,12
         - or_type_count=2
         - no t3 chords
+        - rich_type_count <= 19 (but slightly arbitrary number)
+        - small s1
+            s1 <= 25
+            or_sum: 3,5,6,9,10,12,14,...
+        - any_chords_frequency[2] = 0
+            or_sum: 15, 20, 25, 30
+            0 1
+            4 0/1
+            6 0/1
+        - or=0
+            0  1
+            10 1
+        - or_type_count<=1 + SEALed less=1
+            or_sum: nope, 0, 5, 10
+            0  1
+            4  1
+            6  1
+            10 1
+
+    TODO: 28.05
+
+
+- or=2, or_type_count=1 + SEALed less=1:
+    r244_odd_count vs parity
+     0  1
+     4  1
+     6  1
+     10 1
+
+    - SEALed less=1
+        26.05
+            or: 0, 2, 4, 6, 11
+            reors <= 5
+
+        TODO: 28.05
+
+    - TODO: can we refix these cases back?
+
+
+TODO: another curious pattern, for or_sum % 5 != 0:
+    26.05
+        r244_odd_count vs parity
+        0; 1
+            only 2 cases, for or_sum: 14,17
+        4; 0/1
+        6; 0/1
+        10; 0
+            only 3 cases, for or_sum: 13,22
+
+    TODO: 28.05
+
+
+TODO: or=3
+    26.05
+        or_sum: nope, 5, 10 and 3,6,9,12
+        let's check cases one-by-one
+
+        or_sum: 5, 10
+            par: 1
+            r244_odd_count: 0, 4
+        
+        or_sum: 3,6,9,12
+            par: 0, 1
+            r244_odd_count: 4, 6
+            so it's already hard to understand what goes on here
+        
+        or_sum: nope
+            TODO
+
+    TODO: 28.05
+
+TODO: even or
+    26.05
+        or: 0, 2, 4, 6, 8, 10, 12
+        or_sum: nope, 5, 10, 15, 20, 25, 30, 35
+        but "r244_odd_count vs parity" can be anything
+
+    TODO: 28.05
+
+
+TODO: o2: 0 0 + o2: 3 3
+    26.05
+        or_sum: nope, 0, 5, 10, 15, 20, 25, 30
+        r244_odd_count: 0
+        parity: 0, 1 (only 1 for o2: 3 3; but here are only 3 rows)
+
+    TODO: 28.05
+
+    + o2: 1 1
+        26.05, or_sum: nope, 0, 5, 10, 15, 20, 25, 30, 35
+    
+    o2: 2 2
+        this is worse
+        26.05, or_sum: nope, 5, 8, 10, 11, 13, 14, 15, 16, 17, ...
+
+
+TODO: rich_type_count
+    - TODO: what's the upper bound for rich_type_count?
+    - TODO: we could also try to introduce an oriented version
+
+
+TODO: onlyrich, rich_type_count
+    26.05
+        21, 27, 30, 31
+        
+
+
+TODO: max or value
+    18.05: 8
+    20.05: 11 (all parity=1)
+    22.05: 11 (just 2 rows, both parity=0)
+    24.05: 11 (just 2 rows, both parity=1)
+    26.05: 13 (just 2 rows, both parity=0)
+    28.05: 19 (TODO: how many rows? and which parity?)
+    TODO: is there any structure to these solutions, or to the distribution of vertices?
+
+
+TODO: or_counts includes 0
+    26.05
+        or_type_decomp:;
+        or_type_decomp:_1_1_1_2_2_3;
+        or_type_decomp:_1_1_1_5;
+        or_type_decomp:_1_1_3_3;
+        or_type_decomp:_2_2_2;
+
+
+TODO: parity=0, r244_odd_count=0
+    26.05
+    - s0: odd; 13,15,17
+    - rov[0]=0
+    - rrn[0]=0
+    - prn[0]=0
+    - has_nz5=0, mismatch=0, has_nzmod5=0, has_nzmodb=0
+        - probably because positive cases are in parity=1
+    - has_nzmod6: 0, 1
+    
+    parity=1, r244_odd_count=10:
+    26.05
+    - s0: odd; 13,15,17
+    - rov[0]=0
+    - rrn[0]: not only 0
+    - prn[0]: not only 0
+
+
+TODO: fix parity in o244count >= 5
+    that's a harder one, i think
+    (even though it seems to have or_sum % 5 = 0)
+
 
 
 TODO: deeper study of or_type_count
-    - or вершины либо идут парами, либо тройками, либо пятёрками («тут 5 вершин одного типа, с сигнатурой (-, +, +, +, +)»)
+    - ? or вершины либо идут парами, либо тройками, либо пятёрками («тут 5 вершин одного типа, с сигнатурой (-, +, +, +, +)»)
     - DONE: check that we never have 4 or vertices from same type
         - or maybe that we don't get nz-mod5 / nz5 flow in these cases
         - that's not true:
         g194: new o6c4c: or: 04; t1+t3: 09; s0: 13; s1: 29; s2: 1; s2uu: 1; PAR: 1; or_type_count: 1; or_type_decomp:_4; rich_type_count: 20; less: 1; or_counts:_4; rich244:_19_8_15_12_7_10_7_9_14_15; r244odd: 6; reors: 1; em: 3 1; o2: 2 1; t1: 3; t2: 7; t3: 6; t4: 23; u_comps: 7 1; u_morecomps_undiv: 2 6 0 6; rov: 0 2 2 0; ruv: 0 1 12 9; dup_oon: 0 2 2 0; uon: 16 6 0 0; rrn: 0 1 10 11 7; prn: 0 0 1 4 5; has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1; flow5: u113_u113_u244_u244_u122_u334_o244_o113_u244_u122_o113_u334_u113_u244_o244_u113_u334_u244_u122_u334_u244_u113_u244_u113_u122_u113_; or_sum: 10; or0: sames: rrn024: 17; evens: s1s0diff: 16; col: 12; rrn13: 12; ruv13: 10; ruv02: 12; chord_info: (16 17 6) t1(0 3 0) t2(4 2 1) t3(2 2 2) t4(10 10 3); chord_layers: (2 0 0) (2 4 1) (2 6 4) (2 6 6) (2 8 4) (3 5 1); no_2cdcs;
+    - TODO: how should we understand first statement then?
 
     or_type_count=1
-        26.05: 
+        26.05:
             CONJ: par=1
             CONJ: or_sum % 5 = 0
             ?CONJ: or: 2, 4, 6
@@ -139,6 +312,7 @@ TODO: deeper study of or_type_count
             ?CONJ: t3: 4,6,8,10
             ?CONJ: mismatch: 0
             CONJ: no_2cdcs
+            ?CONJ: reors <= 4
 
     26.05:
         par=1
