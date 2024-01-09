@@ -20,7 +20,7 @@ TODO: Tietze's graph
 
 
 DONE: finish proof for new triples
-    probably all of them follow from following equality:
+    All of them follow from following equality:
         y**2+x**2=4*phi
         x**2*(phi+2)=4*phi
         x**2 = 4 / 5**0.5 (this is known)
