@@ -1,0 +1,290 @@
+Notation/glossary:
+# phi = (1+5**0.5)/2
+# x = 2/(5**0.25)
+# y = x*phi
+
+
+TODO: nz4-flow, K4, S2 cuboctahedron:
+    1+1=2, 2=1+1, 1+2=3, 3=1+2
+    we have 4 vertices, with all 4 options, will all possible transitions
+    so, I think, nz4-flow is same as S2 cuboctahedron flow
+    and the coordinates are just
+        (±1,±1,0)
+        (±1,0,±1)
+        (0,±1,±1)
+    so there should be a simple correspondence
+
+
+TODO: Tietze's graph
+    do we need to use cuboctahedron for it?
+
+
+DONE: finish proof for new triples
+    probably all of them follow from following equality:
+        y**2+x**2=4*phi
+        x**2*(phi+2)=4*phi
+        x**2 = 4 / 5**0.5 (this is known)
+        x**2=4*phi/(phi+2)
+        so we need to prove that
+        phi/(phi+2) = 1/5**0.5
+        phi*5**0.5 = phi+2
+        phi*5**0.5 = (1+5**0.5)/2 * 5**0.5 = (5**0.5+5)/2 =
+        (5**0.5+1)/2 + 2 = phi+2
+        qed
+
+    [2.1640890861976425, 1.3374806099528438, 2]
+    y, x, 2
+    y**2+x**2+4=4*phi+4 [= 4 * phi**2 = (2*phi)**2]
+    y**2+x**2=4*phi
+    qed
+
+    [1.1640890861976427, 2.9555145987027394, 0.618033988749895]
+    (y-1)**2+(x+phi)**2+(phi-1)**2=4*phi+4
+    y**2-2*y+2+x**2+2*x*phi+2*phi**2-2*phi=
+    y**2-2*y+2+x**2+2*y+2*phi+2-2*phi=4*phi+4
+    y**2+x**2=4*phi
+    qed
+
+    [3.1640890861976425, 0.28055337879705067, 0.6180339887498948]
+    y+1, phi-x, phi-1
+    (y+1)**2 + (phi-x)**2 + (phi-1)**2 = 4*phi+4
+    y**2+2y+1+phi**2-2*phi*x+x**2 + phi**2 - 2*phi + 1 = 4*phi+4
+    use 2y=2*phi*x, and phi**2=phi+1
+    y**2+x**2=4*phi
+    qed
+
+    [2.7821230749475383, 0.337480609952844, 1.6180339887498953]
+    y+1/phi, x-1, phi
+    (y+1/phi)**2 + (x-1)**2 + phi**2 = 4*phi+4
+    y**2+x**2 + 2*y/phi + 1/phi**2 - 2*x + 1 + phi + 1 = 4*phi+4
+    use y**2+x**2=4*phi, y=x*phi, 2*y/phi = 2*x
+    1/phi**2 + phi + 2 = 4
+    1/phi**2 + phi = 2
+    1/phi + phi + 1 = 2 * phi
+    1/phi + 1 = phi
+    1 + phi = phi**2
+    qed
+
+    [1.546055097447748, 2.337480609952844, 1.6180339887498953]
+    y-1/phi, x+1, phi
+    (y-1/phi)**2 + (x+1)**2 + phi**2 = 4*phi+4
+    it's actually the same equality as above, we just switch signs between -2*x and 2*y/phi
+    qed
+
+    
+
+WONTDO: use same vectors for unit vector flows for 18.05 snarks
+    probably this won't work
+    new vectors assume a graph with girth 4
+
+
+DONE: what is the structure of the counterexample?
+    - old triples form a Petersen graph G(5, 2)
+    - they have common edges with new triples
+    - these edges are a PM in Petersen graph
+    - new triples also form a cubic graph, G(5, 1)
+    - common edges are still a PM in the new graph
+
+
+DONE: S2 nz5 counterexample, triples as flows
+    a,b,c; a+b=c
+    old triples (Petersen graph / icosidodecahedron / nz5 flow)
+        (28, 29, 4) ['phi+1', '1', 'phi'], ['-(phi+1)', '-1', 'phi'], ['0', '0', '2*phi']
+        (3, 4, 5) ['phi+1', '-1', '-phi'], ['0', '0', '2*phi'], ['phi+1', '-1', 'phi']
+        (26, 25, 3) ['phi', '-(phi+1)', '1'], ['1', 'phi', '-(phi+1)'], ['phi+1', '-1', '-phi']
+        (6, 30, 29) ['-phi', '-(phi+1)', '-1'], ['-1', 'phi', 'phi+1'], ['-(phi+1)', '-1', 'phi']
+        (2, 26, 14) ['phi', 'phi+1', '-1'], ['phi', '-(phi+1)', '1'], ['2*phi', '0', '0']
+        (2, 27, 28) ['phi', 'phi+1', '-1'], ['1', '-phi', 'phi+1'], ['phi+1', '1', 'phi']
+        (27, 36, 16) ['1', '-phi', 'phi+1'], ['0', '2*phi', '0'], ['1', 'phi', 'phi+1']
+        (13, 16, 5) ['phi', '-(phi+1)', '-1'], ['1', 'phi', 'phi+1'], ['phi+1', '-1', 'phi']
+        (14, 6, 13) ['2*phi', '0', '0'], ['-phi', '-(phi+1)', '-1'], ['phi', '-(phi+1)', '-1']
+        (30, 25, 36) ['-1', 'phi', 'phi+1'], ['1', 'phi', '-(phi+1)'], ['0', '2*phi', '0']
+        points/edges: 2,3,4,5,6,13,14,16,25,26,27,28,29,30,36
+            each appears 2 times
+
+    new triples
+        (42, 25, 8) ['y', '-x', '2'],  ['1', 'phi', '-(phi+1)'], ['y+1', 'phi-x', '-(phi-1)']
+        (0, 4, 18) ['y+phi-1', '-(x-1)', '-phi'], ['0', '0', '2*phi'], ['y+phi-1', '-(x-1)', 'phi']
+        (25, 34, 22) ['1', 'phi', '-(phi+1)'], ['-y', 'x', '2'], ['-(y-1)', 'x+phi', '-(phi-1)']
+        (1, 2, 0) ['y-1', '-(x+phi)', '-(phi-1)'], ['phi', 'phi+1', '-1'], ['y+phi-1', '-(x-1)', '-phi']    
+        (2, 9, 33) ['phi', 'phi+1', '-1'], ['y-phi+1', '-(x+1)', 'phi'], ['y+1', 'phi-x', 'phi-1']
+        (7, 4, 9) ['y-phi+1', '-(x+1)', '-phi'], ['0', '0', '2*phi'], ['y-phi+1', '-(x+1)', 'phi']
+        (16, 1, 42) ['1', 'phi', 'phi+1'], ['y-1', '-(x+phi)', '-(phi-1)'], ['y', '-x', '2']
+        (8, 6, 7) ['y+1', 'phi-x', '-(phi-1)'], ['-phi', '-(phi+1)', '-1'], ['y-phi+1', '-(x+1)', '-phi']
+        (33, 34, 16) ['y+1', 'phi-x', 'phi-1'], ['-y', 'x', '2'], ['1', 'phi', 'phi+1']
+        (18, 22, 6) ['y+phi-1', '-(x-1)', 'phi'], ['-(y-1)', 'x+phi', '-(phi-1)'], ['-phi', '-(phi+1)', '-1']
+        new points: 0,1,7,8,9,18,22,33,34,42
+        old points: 2,4,6,16,25
+        each triple has 2 new points and 1 old point
+        each point appears 2 times
+        2,4,6,16,25 is a PM in Petersen graph
+
+
+DONE: S2 nz5 counterexample, triples sum up to 0
+    old triples
+        (49, 40, 19)     ['phi+1', '1', 'phi'], ['-(phi+1)', '-1', 'phi'], ['0', '0', '-2*phi']
+        (28, 29, 4) ['-(phi+1)', '-1', '-phi'],    ['phi+1', '1', '-phi'],  ['0', '0', '2*phi']
+
+        (48, 37, 24) [['phi', '-(phi+1)', '1'], ['1', 'phi', '-(phi+1)'], ['-(phi+1)', '1', 'phi']]
+        (3, 25, 26) [['phi+1', '-1', '-phi'], ['-1', '-phi', 'phi+1'], ['-phi', 'phi+1', '-1']]
+
+        (6, 39, 40) [['phi', 'phi+1', '1'], ['1', '-phi', '-(phi+1)'], ['-(phi+1)', '-1', 'phi']]
+        (29, 30, 31) [['phi+1', '1', '-phi'], ['-1', 'phi', 'phi+1'], ['-phi', '-(phi+1)', '-1']]
+
+        (35, 38, 47) [['1', 'phi', 'phi+1'], ['0', '-2*phi', '0'], ['-1', 'phi', '-(phi+1)']]
+        (27, 36, 16) [['1', '-phi', 'phi+1'], ['0', '2*phi', '0'], ['-1', '-phi', '-(phi+1)']]
+
+        (32, 26, 2) [['2*phi', '0', '0'], ['-phi', 'phi+1', '-1'], ['-phi', '-(phi+1)', '1']]
+        (10, 48, 14) [['phi', 'phi+1', '-1'], ['phi', '-(phi+1)', '1'], ['-2*phi', '0', '0']]
+
+        (10, 27, 28) [['phi', 'phi+1', '-1'], ['1', '-phi', 'phi+1'], ['-(phi+1)', '-1', '-phi']]
+        (49, 47, 2) [['phi+1', '1', 'phi'], ['-1', 'phi', '-(phi+1)'], ['-phi', '-(phi+1)', '1']]
+
+        (15, 16, 17) [['phi+1', '-1', 'phi'], ['-1', '-phi', '-(phi+1)'], ['-phi', 'phi+1', '1']]
+        (13, 35, 5) [['phi', '-(phi+1)', '-1'], ['1', 'phi', 'phi+1'], ['-(phi+1)', '1', '-phi']]
+
+        (6, 13, 14) [['phi', 'phi+1', '1'], ['phi', '-(phi+1)', '-1'], ['-2*phi', '0', '0']]
+        (32, 17, 31) [['2*phi', '0', '0'], ['-phi', 'phi+1', '1'], ['-phi', '-(phi+1)', '-1']]
+
+        (37, 38, 30) [['1', 'phi', '-(phi+1)'], ['0', '-2*phi', '0'], ['-1', 'phi', 'phi+1']]
+        (39, 36, 25) [['1', '-phi', '-(phi+1)'], ['0', '2*phi', '0'], ['-1', '-phi', 'phi+1']]
+
+        (15, 19, 24) [['phi+1', '-1', 'phi'], ['0', '0', '-2*phi'], ['-(phi+1)', '1', 'phi']]
+        (3, 4, 5) [['phi+1', '-1', '-phi'], ['0', '0', '2*phi'], ['-(phi+1)', '1', '-phi']]
+
+    new triples
+        (41, 25, 42) [['y+1', 'phi-x', '-(phi-1)'], ['-1', '-phi', 'phi+1'], ['-y', 'x', '-2']]
+        (45, 37, 8) [['y', '-x', '2'], ['1', 'phi', '-(phi+1)'], ['-(y+1)', '-(phi-x)', 'phi-1']]
+
+        (18, 19, 12) [['y+phi-1', '-(x-1)', 'phi'], ['0', '0', '-2*phi'], ['-(y+phi-1)', 'x-1', 'phi']]
+        (0, 4, 23) [['y+phi-1', '-(x-1)', '-phi'], ['0', '0', '2*phi'], ['-(y+phi-1)', 'x-1', '-phi']]
+
+        (22, 37, 34) [['y-1', '-(x+phi)', 'phi-1'], ['1', 'phi', '-(phi+1)'], ['-y', 'x', '2']]
+        (46, 25, 44) [['y', '-x', '-2'], ['-1', '-phi', 'phi+1'], ['-(y-1)', 'x+phi', '-(phi-1)']]
+
+        (10, 11, 12) [['phi', 'phi+1', '-1'], ['y-1', '-(x+phi)', '-(phi-1)'], ['-(y+phi-1)', 'x-1', 'phi']]
+        (0, 1, 2) [['y+phi-1', '-(x-1)', '-phi'], ['-(y-1)', 'x+phi', 'phi-1'], ['-phi', '-(phi+1)', '1']]
+
+        (33, 9, 2) [['y+1', 'phi-x', 'phi-1'], ['-(y-phi+1)', 'x+1', '-phi'], ['-phi', '-(phi+1)', '1']]
+        (10, 20, 43) [['phi', 'phi+1', '-1'], ['y-phi+1', '-(x+1)', 'phi'], ['-(y+1)', '-(phi-x)', '-(phi-1)']]
+
+        (20, 19, 21) [['y-phi+1', '-(x+1)', 'phi'], ['0', '0', '-2*phi'], ['-(y-phi+1)', 'x+1', 'phi']]
+        (7, 4, 9) [['y-phi+1', '-(x+1)', '-phi'], ['0', '0', '2*phi'], ['-(y-phi+1)', 'x+1', '-phi']]
+
+        (11, 35, 42) [['y-1', '-(x+phi)', '-(phi-1)'], ['1', 'phi', 'phi+1'], ['-y', 'x', '-2']]
+        (45, 16, 1) [['y', '-x', '2'], ['-1', '-phi', '-(phi+1)'], ['-(y-1)', 'x+phi', 'phi-1']]
+
+        (6, 7, 8) [['phi', 'phi+1', '1'], ['y-phi+1', '-(x+1)', '-phi'], ['-(y+1)', '-(phi-x)', 'phi-1']]
+        (41, 21, 31) [['y+1', 'phi-x', '-(phi-1)'], ['-(y-phi+1)', 'x+1', 'phi'], ['-phi', '-(phi+1)', '-1']]
+
+        (33, 16, 34) [['y+1', 'phi-x', 'phi-1'], ['-1', '-phi', '-(phi+1)'], ['-y', 'x', '2']]
+        (46, 35, 43) [['y', '-x', '-2'], ['1', 'phi', 'phi+1'], ['-(y+1)', '-(phi-x)', '-(phi-1)']]
+
+        (6, 22, 23) [['phi', 'phi+1', '1'], ['y-1', '-(x+phi)', 'phi-1'], ['-(y+phi-1)', 'x-1', '-phi']]
+        (18, 44, 31) [['y+phi-1', '-(x-1)', 'phi'], ['-(y-1)', 'x+phi', '-(phi-1)'], ['-phi', '-(phi+1)', '-1']]
+
+
+DONE: S2 nz5 counterexample, coordinates
+    # phi-1 = 0.618033988749895
+    # phi = 1.6180339887498953
+    # phi+1 = 2.6180339887498953
+    # 2*phi = 3.23606797749979
+    # 0
+    # 1
+    # 2
+
+    # x = 2/(5**0.25)
+    # x-1 = 0.337480609952844
+    # x = 1.3374806099528438
+    # x+1 = 2.337480609952844
+    # x+phi = 2.9555145987027394
+    # phi-x = 0.28055337879705067
+
+    # y = x*phi
+    # y-1 = 1.1640890861976427
+    # y = 2.1640890861976425
+    # y+1 = 3.1640890861976425
+    # y-(phi-1) = 1.546055097447748
+    # y+(phi-1) = 2.7821230749475383
+
+
+DONE: Tietze's graph
+    expand vertex in Petersen graph (123 are Petersen colours):
+    a1a2a3 -> a1b2b3,b1a2b3,b1b2a3
+        a2+a3=a1
+        a1:       0, 0,2*phi
+        a2:  phi**2, 1,  phi
+        a3: -phi**2,-1,  phi
+
+        a1+b2=b3
+        a1: 0,0,2*phi
+        b2: phi**2,1,-phi
+        b3: phi**2,1,phi
+
+        b1+a2=b3
+        b1: 0,0,0
+        a2: phi**2,1,phi
+        b3: phi**2,1,phi
+
+        so, we can't do it
+        problem in parity: a2=b3, so b1=0
+
+
+WONTDO: Tietze's graph, use new vectors
+    # 5**0.5 = 2*phi-1 = (phi+2)/phi
+    x = 2/(5**0.25)
+    y = x*phi
+
+    [1.1640890861976427, 2.9555145987027394, 0.618033988749895]
+    y-1, x+phi, phi-1
+
+    [3.1640890861976425, 0.28055337879705067, 0.6180339887498948]
+    y+1, phi-x, phi-1
+
+    [2.7821230749475383, 0.337480609952844, 1.6180339887498953]
+    y+(phi-1), x-1, phi
+
+    [1.546055097447748, 2.337480609952844, 1.6180339887498953]
+    y-(phi-1), x+1, phi
+
+    [2.1640890861976425, 1.3374806099528438, 2]
+    y, x, 2
+
+
+    a1a2a3 -> a1b2b3,b1a2b3,b1b2a3
+    a2+a3=a1
+    a1:       0, 0,2*phi
+    a2:  phi**2, 1,  phi
+    a3: -phi**2,-1,  phi
+
+    (0, 4, 23)
+        [2.7821230749475383, -0.337480609952844, -1.6180339887498953]
+        [0.0, 0.0, 3.23606797749979]
+        [-2.7821230749475383, 0.337480609952844, -1.6180339887498953]
+    (29, 4, 28)
+        [2.6180339887498953, 1, -1.618033988749895]
+        [0.0, 0.0, 3.23606797749979]
+        [-2.6180339887498953, -1, -1.618033988749895]
+
+    a1+b2=b3
+    a1:             0,   0,2*phi
+    b2:                   ,x-phi
+    b3:                   ,x+phi
+
+    b1+a2=b3
+    b1: 
+    a2:       phi**2,   1,phi
+    b3: -(y+(phi-1)),-x+1,phi
+
+    FAIL:
+        a1+b2=b3
+        a1:         0,  0,2*phi
+        b2: y+(phi-1),x-1, -phi
+        b3: y+(phi-1),x-1,  phi
+
+        b1+a2=b3
+        b1:       y-2,x-2,  0
+        a2:    phi**2,  1,phi
+        b3: y+(phi-1),x-1,phi
+
+    probably this approach won't work, because new vectors assume a graph with girth 4
