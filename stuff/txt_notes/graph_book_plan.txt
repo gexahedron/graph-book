@@ -1,10 +1,15 @@
 # Graph Book
 
 ## plans for the week, 08.01-14.01:
-- write-up S2 nz5 counterexample
+- write-up how 5cdc gives S4 unit vector flow
+    Celmins [3] and Preissmann [13] conjectured that every 2-edge-connected-graph
+    has a collection of five even subgraphs so that every edge is in exactly two of these subgraphs.
+    If true, that would imply that every 2-edge-connected graph has a 5-dimensional unit distance flow.
+- what about S3 unit vector flows?
 - глянуть статью A state sum for the total face color polynomial
 - recheck code that's not part of unified experiments folder
     - 33pp_from_nz5
+    - unit vector flows (desargues stuff)
 - o244=9 - how close can we be to a strong Petersen colouring?
 - find
     - 244-flows, which is not o244-flows
