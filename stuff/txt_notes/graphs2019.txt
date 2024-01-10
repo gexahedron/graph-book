@@ -161,6 +161,7 @@ todo:
     надо полагать, что в s2 и в s3 её нельзя найти
     раз в ней нет ни nz5, ни nz6
     и раз я думаю, что s2 и s3 красятся в nz5
+    UPDfrom2024: s2 не красится в nz5
 
 done:
   в статье Kral "Projective, affine and abelian colorings of cubic graphs"
@@ -219,7 +220,9 @@ done:
   eikosany - это desargues граф
   https://en.wikipedia.org/wiki/Desargues_graph
   It is the Levi graph of the Desargues configuration
-  It is the bipartite double cover of the Petersen graph, formed by replacing each Petersen graph vertex by a pair of vertices and each Petersen graph edge by a pair of crossed edges.
+  It is the bipartite double cover of the Petersen graph, 
+  formed by replacing each Petersen graph vertex by a pair of vertices 
+  and each Petersen graph edge by a pair of crossed edges.
 
 wont do:
   может можно сформулировать гипотезу
