@@ -4,6 +4,114 @@ Notation/glossary:
 # y = x*phi
 
 
+TODO: S3 unit vector flows, oriented Desargues configuration:
+    from backlog:
+        проверил S3
+        конкретно - вершины 600-cell
+        прокатило! до 28.05 включительно работает
+        а вроде и меньшее число вершин прокатывает
+        более того - есть 20 векторов (включая противоположные - то есть 10 пар)
+        которых хватает на все графы (проверил до 28.05 включительно)
+        что это за набор?
+        это какой-то гиперграф (3-uniform), где у каждой вершины степень 3, и у каждого ребра степень 3
+        скорее всего это будет типа bipartite double cover of desargues configuration,
+            что бы это ни значило
+            так и есть!
+
+        ops: 0 1
+        ops: 2 3
+        ops: 4 7
+        ops: 5 6
+        ops: 8 9
+        ops: 10 11
+        ops: 12 15
+        ops: 13 14
+        ops: 16 19
+        ops: 17 18
+        вот равномерно пошафленные тройки (хочу нарисовать их на плоскости)
+        triples:  0  7  5     -4  3  1
+        triples:  1  4  6
+        triples: 13  0 15      2 -4  2
+        triples: 14  1 12
+        triples: 17 19  0      3  1 -4
+        triples: 18 16  1
+        triples:  2  6 17
+        triples:  3  5 18
+        triples:  7  2 16
+        triples:  4  3 19
+        triples:  9 11  2
+        triples:  8 10  3
+        triples: 15  9  4
+        triples: 12  8  7
+        triples:  5 14  9
+        triples:  6 13  8
+        triples: 10 17 14
+        triples: 11 18 13
+        triples: 16 15 10
+        triples: 19 12 11
+
+        0: -4
+        1: 4
+        2: -2
+        3: 2
+        4: -3
+        5: 1
+        6: -1
+        7: 3
+        8: -1
+        9: 1
+        10: -1
+        11: 1
+        12: -2
+        13: 2
+        14: -2
+        15: 2
+        16: -1
+        17: 3
+        18: -3
+        19: 1
+
+        каждая вершина - это 3 буквы из 6 abcdef
+        например abc
+        ops - это дополнения друг до друга, например
+        0 = abc, 1 = def
+        что такое тройка тогда?
+        о!
+        берём цифры, берём какую-нибудь перестановку (но не сдвиг), и рассматриваем все 6 её сдвигов
+            я хотел вместо перестановки какую-нибудь функцию простую, но не придумал ничего для Z6
+        0 5 7
+        3 5 18
+        11 13 18
+        0 13 15
+        лень проверять
+        видимо я неправ тут - выше разобрался, что тут двойное покрытие для конфигурации Дезарга
+        о, догнал
+        это 20 вершин вида:
+         . 12 13 14 15
+        21  . 23 24 25
+        31 32  . 34 35
+        41 42 43  . 45
+        51 52 53  . 54
+        а каждая тройка - это циклического вида набор ab bc ca
+        а значение в вершине ab - это разность b-a
+
+
+
+TODO: find universal o5cdc snark for S2 flow
+    - idea is that we want to find "oriented Desargues" configuration (?)
+    we have 5 oriented cycles, with weights 0,1,2,3,4
+    for each edge we have wi-wj, so 10 pairs of possibilities
+    (10 pairs of opposite points on sphere)
+    but we also need to fulfill
+    all 10 possibilities of 3 cycles meeting together in a vertex
+    which is not true for Petersen 96555 solution
+    we don't have 655 vertices
+    Tietze’s graph also doesn't immediately help here
+        if we expand the vertex
+        then we can get all 655 vertices, but we will lose 555 vertex
+        TODO: but maybe it has an alternative o5cdc solution
+
+
 TODO: nz4-flow, K4, S2 cuboctahedron:
     1+1=2, 2=1+1, 1+2=3, 3=1+2
     we have 4 vertices, with all 4 options, will all possible transitions
@@ -39,6 +147,7 @@ DONE: finish proof for new triples
     qed
 
     [1.1640890861976427, 2.9555145987027394, 0.618033988749895]
+    y-1, x+phi, phi-1
     (y-1)**2+(x+phi)**2+(phi-1)**2=4*phi+4
     y**2-2*y+2+x**2+2*x*phi+2*phi**2-2*phi=
     y**2-2*y+2+x**2+2*y+2*phi+2-2*phi=4*phi+4
