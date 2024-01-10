@@ -24,7 +24,6 @@ o6c4c landscape:
     s1 <= 18
     t1 + t3 <= 8
     ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
-
 more subtle:
 - even number of or vertices
     - odd or count behaves differently from even or count
@@ -72,6 +71,8 @@ TODO: 6c4c parity formula
     - so, idea is that there's still 1 more missing unoriented stat
 
     TODO: check formula for u6c4c, has_2cdcs
+        TODO: it will definitely break on s0 odd
+        is it "fixable"?
     TODO: check formula for u6c4c, some other known cases from o6c4c
         e. g. "no chords"
         which of them will break?
