@@ -1,19 +1,45 @@
 # Graph Book
 
 ## plans for the week, 08.01-14.01:
-- 6c4c logs
-- find universal o5cdc snark for S2 flow
-- write-up how 5cdc gives S4 unit vector flow
-    Celmins [3] and Preissmann [13] conjectured that every 2-edge-connected-graph
-    has a collection of five even subgraphs so that every edge is in exactly two of these subgraphs.
-    If true, that would imply that every 2-edge-connected graph has a 5-dimensional unit distance flow.
-- S2 flow for Blanusa snarks?
-- S3 flow for Petersen graph, Tietze’s graph, Blanusa snarks
-- what about S3 unit vector flows? did I find anything there?
+- o6c4c, where poor edges form a cutset
+- detect flower snark among 20.05 snarks
+- Petersen graph "4-pole", 22.05g11
+    also check 20.05g1
+- Petersen colouring or 6c4c: poor edges should form a cycle
+    + rich connected components have <= 15 edges
+? G ---Z3--> H (333-flows)
+- petersen colourings и совпадение по 5cdc (там какое-то диковинное паросочетание)
+- интересно ли это?
+    26.05, 28.05:
+        (s1 + s2 + odd_poor_full_cycles) по модулю 2 всегда даёт 1
+        это легко доказать
+        поэтому odd_poor_full_cycles не нужен
+        поэтому вопрос про parity сводится скорее к совпадению чётностей
+        s0 и odd_poor_full_cycles
+- Corollary 5.16. All cyclically 4-edge connected cubic graphs on n  36 vertices, except the Petersen graph, have an even cycle double cover
+- Space vectors forming rational angles - study how icosidodecahedron appears there
+- For history: I think this is the first mention of s0, s1, s2:
+    - Theorem 1. Let s0, s1 and s2 be respectively the number of (topological) minima, saddle points and maxima of the distance functions d or g. We have:
+- o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер
+- Paper on unit vector flows:
+    - S2: Petersen graph = icosidodecahedron
+    - S2, strong Petersen colouring
+    - S2, Tietze's graph
+    - S2, other snarks!
+    - S2: nz6 counterexample
+    - S3: 20 points is enough, unit vector flows from o5cdc and oriented Desargues configuration
+    - Hopf map S3->S2
+    - pose more open problems
+    + classic stuff
+        - write-up how 5cdc gives S4 unit vector flow
+            Celmins [3] and Preissmann [13] conjectured that every 2-edge-connected-graph
+            has a collection of five even subgraphs so that every edge is in exactly two of these subgraphs.
+            If true, that would imply that every 2-edge-connected graph has a 5-dimensional unit distance flow.
+
+- TODO: {rich o6c4c == rich petersen} < {? RP2, wat == has_2cdcs}
 - глянуть статью A state sum for the total face color polynomial
 - recheck code that's not part of unified experiments folder
     - 33pp_from_nz5
-    - unit vector flows (Desargues stuff)
     - Riemann surface, and Petersen graph group calculation
 - o244=9 - how close can we be to a strong Petersen colouring?
 - find
@@ -244,7 +270,7 @@ not CQ Zhang:
         - ? o?c3c; ? 7c3c
         - ? other triple systems (Hall, …)
         - ? matroids (Sylvester matroid), polynomials
-- Unit vector flows, s2 flow (> 5 flow), ? s3-s4-s5-s6 flows
+- Unit vector flows, s2 flow (> 5 flow)
     - "On d-dimensional nowhere-zero r-flows on a graph”
 - Petersen coloring / Normal 5-edge-coloring, cycle-continuous mapping, flow continuous maps; ? Z3-flow continuous maps
 - Simplicial Tutte "5"-flow Conjecture
@@ -354,5 +380,10 @@ https://codeforces.com/blog/entry/69287
 
 
 Backlog:
-- unit vector flows for Tietze's graph
+- S2 unit vector flow for Tietze's graph
     - problem is we need to rotate cuboctahedron coordinates
+- S2 unit vector flow for Blanusa snarks
+    - no idea how to do it
+    - and we also need to understand,
+    what is the obstruction to oriented Desargues configuration in S2
+    why can't we find 10 pairs of opposite points
