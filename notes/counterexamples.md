@@ -29,6 +29,8 @@ TODO: recheck "circuit" claim, in a sense that we can find "dominating cycle" wi
 
 
 DONE (not by me): Problem 3.8. Is the Petersen graph the only snark which does not have an even cycle double cover?
+    - Corollary 5.16. All cyclically 4-edge connected cubic graphs on n  36 vertices, except the Petersen graph,
+have an even cycle double cover
     - counterexamples here
     - Odd 2-factored snarks
     - https://www.sciencedirect.com/science/article/pii/S0195669813002321
@@ -40,3 +42,12 @@ DONE (not by me): The 12 permutation snarks on 34 vertices with λc ≥ 5 are co
 - oriented 6-cycle 4-cover exists for all snarks upto and including 30 vertices; oriented 9-cycle 6-cover also seems to exist for snarks excluding Petersen graph (as for Petersen graph - it doesn't have even unoriented 9-cycle 6-cover graph and it's very eash to prove and actually this was already known to Seymour), but I don't remember right now, how many snarks did I check;
 
 - And there's also a bug on the page http://www.openproblemgarden.org/op/three_4_flows_conjecture - in the last chapter (there are 2 vertices in Petersen graph which are not in the 8-circuit, and they are connected by an edge. G\B_1 and G\B_2 both have this edge as a bridge, and so they can't have nowhere-zero flows. I've also tried 6-circuits and they only produce decompositions with nowhere-zero 4-flows (and its impossible to build any example with odd-length circuits)). But it's still possible to strengthen this family of conjectures:
+
+
+контрпримеры к гипотезе Jaeger'а про Circular Flow
+
+
+TODO: поискать в логах фразу "снарки контрпримеры:"
+
+
+надо отдельно поизучать граф 26.05g255 - у него 4 ребра всегда poor
