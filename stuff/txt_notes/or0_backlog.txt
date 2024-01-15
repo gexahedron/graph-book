@@ -52,6 +52,14 @@ TODO: check weights
 TODO: t1,t2,t3,t4 -244_odd_counts
 
 
+TODO: triples_without_ors
+    it's a bit different from what I wanted, but still interesting
+
+
+TODO: triples, where oriented vertices split, as if they are unoriented
+    count them
+
+
 TODO: reorientations
     there seems to be some difference between solutions with small amount of orientations
     and big amount of them
@@ -59,8 +67,8 @@ TODO: reorientations
     TODO: check 28.05
 
 
-TODO: 6c4c parity formula
-    - looks like it depends only on unoriented stats:
+WONTDO: 6c4c parity formula
+    - looks like formula depends only on unoriented stats:
         - s0 - number of circuits
         - s1 - number of rich edges
         - s2 - depends on rich edges in PMs
@@ -70,12 +78,28 @@ TODO: 6c4c parity formula
 
     - so, idea is that there's still 1 more missing unoriented stat
 
-    TODO: check formula for u6c4c, has_2cdcs
+    DONE: check formula for u6c4c, has_2cdcs
         TODO: it will definitely break on s0 odd
         is it "fixable"?
-    TODO: check formula for u6c4c, some other known cases from o6c4c
+        looks like it's not fixable
+
+    DONE: check formula for u6c4c, some other known cases from o6c4c
         e. g. "no chords"
         which of them will break?
+        "no chords" also break
+
+    I think I won't do unoriented 6c4c, because it looks wild, without any logic
+    probably even though the formula doesn't depend on orientable parameters,
+    it heavily depends on the existence of o6c4c solution itself
+
+
+TODO: 6c4c
+    found 3 interesting things to explore
+    - s0=12 - looks like case of "fixable" formula
+    - r244odd is never 2 or 8
+    - has 2cdcs => r244odd=0
+    checked upto 22.05
+    TODO: check on 24.05 and more
 
 
 TODO: there's some deep connection between (or_sum % 5) and par=1
