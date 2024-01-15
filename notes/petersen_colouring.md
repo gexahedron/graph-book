@@ -7,9 +7,16 @@
 All non-oriented structures are preserved and transferred to a snark with Petersen colouring:
 
 - 5cdc;
-- 6c4c / 244-flows (6c4c is actually possible to split into 2 sets of 6cdc).
+- 6c4c / 244-flows (6c4c is actually possible to split into 2 sets of 6cdc);
+- "We prove that the Petersen colouring conjecture implies a conjecture of Markström saying that the line graph of every bridgeless cubic graph is decomposable into cycles of even length."
 
-TODO: add note about what it doesn't preserve and why
+But also, sometimes some of the oriented structures are also preserved:
+- nz5
+- unit vector flows
+- TODO: o6c4c
+- ? TODO: o5cdc
+
+TODO: also add note about what it doesn't preserve and why.
 
 ## Strong Petersen colouring
 
