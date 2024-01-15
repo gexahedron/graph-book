@@ -2,7 +2,7 @@
 
 ## plans for the week, 08.01-14.01:
 - o6c4c, where poor edges form a cutset
-- detect flower snark among 20.05 snarks
+- 20.05g1 is a flower snark!
 - Petersen graph "4-pole", 22.05g11
     also check 20.05g1
 - Petersen colouring or 6c4c: poor edges should form a cycle
