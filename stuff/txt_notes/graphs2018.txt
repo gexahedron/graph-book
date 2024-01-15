@@ -83,10 +83,21 @@ done:
 		и там у одной dominating цепи бывают winding 6 и 7
 	ну ок
 
-todo: Problem 3.8. Is the Petersen graph the only snark which does not have an even cycle double cover?
+wontdo: Problem 3.8. Is the Petersen graph the only snark which does not have an even cycle double cover?
 (чуваки проверили это утверждение до 28 вершин)
-	то есть надо это на 30.05 проверять
-	и мб на 28.04 и прочем
+	UPD: проверили до 36 вершин
+	Cycle double covers of this type are called even cycle double covers. In [43] it is shown that
+		a possible smallest example of another graph than the Petersen graph would be a snark. We have
+		verified this property for all snarks on 36 vertices and less.
+	Corollary 5.16. All cyclically 4-edge connected cubic graphs on n  36 vertices, except the Petersen graph,
+		have an even cycle double cover.
+	Note that this does not hold in general if the graph has cyclic 3-edge-cuts. The smallest example
+		of a 3-connected cubic graph, except the Petersen graph, without a CDC with only even cycles has 12
+		vertices. It is also easy to show that there are cubic graphs in which not all even cycles are part of an
+		even cycle double cover. Hence there is no “strong” version of this problem.
+	UPD2: нашли контрпримеры тут
+	Odd 2-factored snarks
+	https://www.sciencedirect.com/science/article/pii/S0195669813002321#br000020
 
 done:
 	в разбиении на 2-6cdc
@@ -1659,9 +1670,20 @@ done:
 
 	то есть я нашёл 3 разных конструкции вокруг o6c4c,
 	до 24.05 - одна вкладывается в другую
-	{0 oriented vertices} < {rich o6c4c == rich petersen} < {? RP2, wat}
+	{0 oriented vertices} < {rich o6c4c == rich petersen} < {? RP2, wat == has_2cdcs}
 
-	а вот хрен, на 26 вершинах сломалось
+	o6c4c, without has_2cdcs:
+	- 18.05: g1, g2
+	- 20.05: g2, g3
+	- 22.05: g1, g2, g5, g6, g8, g19
+	- 24.05: g1, g3, g6, g15, g21, g23, g27, g37
+	
+	на 26 вершинах сломалось
+	26.05: g13 - has or0, no_2cdcs
+
+	TODO: {rich o6c4c == rich petersen} < {? RP2, wat == has_2cdcs}
+		works for 26.05 also
+		
 
 todo:
 	WARNING
