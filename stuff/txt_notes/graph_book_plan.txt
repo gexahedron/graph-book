@@ -1,14 +1,34 @@
 # Graph Book
 
-## plans for the week, 08.01-14.01:
+# Some caveats, for me; what results need to be rechecked:
+- o5cdc
+- Petersen colouring
+- 2BM/3BM
+...
+
+
+## plans for the week, 15.01-21.01:
+- Petersen colouring code was WRONG
+    - specifically, profiles were WRONG (everything else seems to be ok)
+    - so, we need to recheck everything about petersen profiles at least
+        - o6c4c_and_petersen_colouring
+        - onlyrich
+        - ? strong Petersen colouring
+        - groupings by profile (bipartite smth)
+        - counts of poor edges
+        - petersen_always_rich
+        - petersen_always_poor
+- links:
+    https://math.wvu.edu/~hlai2/Pdf/Hong-Jian_Lai_Pdf/189_Book_Chapter_2015.pdf
+    https://mirskontsa.blogspot.com/2019/12/5cdcnz5-33pp.html
+    https://houseofgraphs.org/meta-directory/snarks#circular_flow_5
 - o6c4c, where poor edges form a cutset
 - 20.05g1 is a flower snark!
 - Petersen graph "4-pole", 22.05g11
     also check 20.05g1
-- Petersen colouring or 6c4c: poor edges should form a cycle
-    + rich connected components have <= 15 edges
 ? G ---Z3--> H (333-flows)
 - petersen colourings и совпадение по 5cdc (там какое-то диковинное паросочетание)
+    - RECHECK, because code was WRONG
 - интересно ли это?
     26.05, 28.05:
         (s1 + s2 + odd_poor_full_cycles) по модулю 2 всегда даёт 1

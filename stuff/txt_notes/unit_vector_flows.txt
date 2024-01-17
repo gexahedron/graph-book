@@ -4,6 +4,73 @@ Notation/glossary:
 # y = x*phi
 
 
+TODO: S2 uvf + Petersen colouring + o6c4c with 2xcdcs:
+    - what are the oriented vertices?
+    = what is nz5
+    - s0, s1
+    - what is the decomposition into 2 cdcs?
+    - 244-cycles, what are the properties?
+    - why don't we have o333-flows, interesting
+
+
+TODO/FIXME (WRONG): here's another list:
+    o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер (aka profile)
+    10.05: g1
+    18.05: -
+    20.05: g1, g4, g5
+    22.05: g3, g4, g7, g9-g18, g20
+    24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
+
+
+TODO: Blanusa snarks, maybe they don't have S2 uvf at all?
+    this will require some proof, or proof strategy
+    idea is to deduce Petersen colouring from S2 uvf
+        and probably nz5/o5cdc/o6c4c, related to Petersen colouring
+        which doesn't exist
+        and then deduce, that we have a problem with 2 paths of poor edges
+    DONE: maybe there's a smaller example also?
+        12 vertices: (probably only) Tietze's graph
+        14.04cyc3: 1 graph
+        16.04cyc3: 3 graphs
+        all of them have s2 uvf
+
+
+DONE: S2 uvf vs profiles:
+    DONE: Petersen colouring profiles
+        check that "new vector => poor edge"
+        upto 24.05: true
+        note for myself: 24.05g2 is slow for some reason
+
+
+    DONE: s2 uvf => o6c4c with 2x6cdcs
+        DONE: actually, check that we always also have a Petersen profile here
+            so, for specific s2 uvf,
+            DONE: o6c4c with 2x6cdc should include all compatible Petersen colouring, and more
+            breaks on 22.05g4!
+            compatible Petersen profiles:
+                rrrppprrpppprrrrppprpprrprrrrrppp
+                rrrprpprppprrrrpppprrpprprrrrrppp ;
+            compatible o6c4c profiles:
+                rrrprpprppprrrrpppprrpprprrrrrppp
+                rrrprprprpprrrrrppprprrprrrrrrppp ;
+            compatible both profiles:
+                rrrprpprppprrrrpppprrpprprrrrrppp ;
+            so, we can have prof1 in Petersen colouring, but not in "o6c4c with 2x6cdcs"
+            and prof2 in "o6c4c with 2x6cdcs", but not in Petersen colouring
+
+    DONE: so what I checked is that we always have
+        at least 1 profile:
+            - compatible with Petersen colouring
+            - compatible with o6c4c with 2x6cdcs
+            - having "new vector => poor edge" for particular uvf that we currently check
+        upto 24.05: true
+
+
+
+TODO: S2 uvf vs Petersen colouring:
+    which new vectors do we need? do we need all of them?
+
+
 TODO: S2 uvf vs Petersen colouring:
     probably it's a poor cycle + strong Petersen colouring for remaining edges
         strong petersen colouring - это когда vertex cutset
@@ -13,16 +80,6 @@ TODO: S2 uvf vs Petersen colouring:
     poor cycle + poor cutset
         poor edges from cutset connect vertices from different subsets
         we can color vertices in 2 colors
-
-
-DONE?/FIXME: weird bug in code
-    when replace conf1 with conf2 in gen_icosidodecahedron
-    and attach cuboctahedrons
-    we lose nz5 flow
-    do we lose in precision?
-
-    UPD: i think i fixed problem
-    i think it was in "add_opposite_points", when comparing coordinates to 0
 
 
 TODO: S2 uvf vectors vs poor/rich edges:
@@ -182,6 +239,12 @@ TODO: S2 uvf, small number of Petersen colourings:
 
 
 TODO: S2 uvf, Blanusa snarks:
+    18.05g2:
+        petersen51 + cuboctahedron: doesn't work (424/414)
+        icosidodeca-cubocta + cuboctahedron: doesn't work (324/314)
+        TODO: icosidodeca-cubocta + icosidodecahedron
+            tried some small subsets: doesn't work
+
     from logs:
         18.05g1:
             - petersen colouring: 1 неизоморфное решение, где есть 2 пути по 4 poor ребра
@@ -274,31 +337,10 @@ TODO: S2 uvf, Blanusa snarks:
 
 
 TODO: (current) S2 unit vector flows, suspicious coincidence:
-    o6c4c, with 2x6cdcs:
-        10.05: g1
-        18.05: -
-        20.05: g1, g4-g6
-        22.05: g3, g4, g7, g9-g18, g20
-        24.05: g2, g4, g5, g7-g14, g16-g20, g22, g24-g26, g28-g36, g38
-
-    we can't find S2 unit vector flow currently for these snarks (but not only for them)
-
-    DONE: check 26.05g13 - it shouldn't have a flow, probably
-        but if it has - then it's unexpected (it doesn't have o6c4c with has_2cdcs)
-        Probably there's no uvf, because the search for it is too long already
-        Checked, it doesn't
-
-    DONE: here's another list:
-        10.05: g1
-        18.05: -
-        20.05: g1, g4, g5
-        22.05: g3, g4, g7, g9-g18, g20
-        24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
-        TODO: o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер (aka profile)
-
     So, currently we have this:
         unit vectors count: 78
         unit vectors triples count: 68
+        (so, we used here a smaller subset of vectors though)
         10.05: g1
         18.05: -
         20.05: g1, g4, g5
@@ -307,7 +349,29 @@ TODO: (current) S2 unit vector flows, suspicious coincidence:
             (g37 didn't finish checking, waited for 1 or 2 hours;
             so probably no uvf for it, currently)
 
+
+    o6c4c, with 2x6cdcs:
+        10.05: g1
+        18.05: -
+        20.05: g1, g4-g6
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g4, g5, g7-g14, g16-g20, g22, g24-g26, g28-g36, g38
+
+    DONE: check 26.05g13 - it shouldn't have a flow, probably
+        but if it has - then it's unexpected (it doesn't have o6c4c with has_2cdcs)
+        Probably there's no uvf, because the search for it is too long already
+        Checked, it doesn't
+
+    DONE/FIXME (WRONG): here's another list:
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
+        TODO: o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер (aka profile)
+
     TODO: so, we have {s2 uvf} \in {o6c4c_and_petersen_colouring} \in {o6c4c, with 2x6cdcs}
+
 
 
 DONE: S2 uvf, 20.05g1:
@@ -335,6 +399,7 @@ DONE: S2 uvf, 20.05g1:
     from logs:
         у этого графа особенно выделяется один цикл длины 5 (собственно он в нём один такой)
             '12 18 19 16 5'
+            e13 e23 e29 e27 e14
         - stronger petersen colouring: есть решения, где 9 poor рёбер - 2 пути по 2 ребра + этот цикл
             если не учитывать симметрии, то
             2 решения с 5 poor рёбрами
@@ -383,6 +448,7 @@ DONE: S2 uvf, 20.05g1:
         prrrrrrrprrrrppprrrrprrprrrprp: 6
         prprrrprprrrrpprrrrrrrrprrrprp: 3
         012345678901234567890123456789
+
         0         1         2
         also poor (twice):
             e0, e2, e6, e8, e16, e17, e18, e19, e20
@@ -395,11 +461,15 @@ DONE: S2 uvf, 20.05g1:
                        __  __
         rrrrrrrrrrrrrpppprrpprrprrrprp
         012345678901234567890123456789
-        e15: 6-10
-        e16: 6-7
-        e19: 8-9
-        e20: 9-11
-        7-6-10 + 8-9-11
+        poor "cut": 7-6-10 + 8-9-11
+        poor 5-cycle: 12-18-19-16-5-12
+        10-cycle: 8-9-11-2-15-7-6-10-0-14-8
+        cutsets:
+            a:
+            b: 1, 6, 9
+                6:      1(e5)   10(e15) 7(e16)
+                9:      1(e3)   8(e19)  11(e20)
+                rich edges 1-6, 1-9
 
 
 TODO: 22.05g11, petersen colouring:
@@ -1050,8 +1120,29 @@ WONTDO: Tietze's graph, use new vectors
 
 
 
+DONE: S2 uvf points:
+    recheck triples:
+        nz4:
+            tetrakis cuboctahedron
+        nz5:
+            pentakis icosidodecahedron
+            disdyakis triacontahedron
+                catalan solid
+            deltoidal hexecontahedron
+                catalan solid
+            great disdyakis triacontahedron
+    nothing new; we either have cuboctahedron triples,
+    or icosidodecahedron triples
 
 
+DONE: weird bug in code
+    when replace conf1 with conf2 in gen_icosidodecahedron
+    and attach cuboctahedrons
+    we lose nz5 flow
+    do we lose in precision?
+
+    UPD: i think i fixed problem
+    i think it was in "add_opposite_points", when comparing coordinates to 0
 
 
 
@@ -1177,3 +1268,42 @@ WONTDO: Tietze's graph, use new vectors
 // {0.9077435189160142, 0.09872652454106681, -0.4077435189160141},
 {0.9687598666735441, -1.8036648461847414e-17, 0.24800064661741741},
 {1.0, 9.030971600656904e-18, -9.549708297316796e-17}
+
+16.04cyc3g2:
+    012345678901234567890123
+    rrrrrrpprrrrrrrrrppppppp; rich: 15; poor: 9; 0 1
+          nn         nnnn n
+
+    0:      6(e0)   4(e1)   8(e2)
+    1:      9(e3)   5(e4)   6(e5)
+    2:      12(e6)  11(e7)  9(e8)
+    3:      8(e9)   5(e10)  7(e11)
+    4:      0(e1)   11(e12) 5(e13)
+    5:      1(e4)   3(e10)  4(e13)
+    6:      0(e0)   1(e5)   7(e14)
+    7:      3(e11)  6(e14)  10(e15)
+    8:      0(e2)   3(e9)   9(e16)
+    9:      1(e3)   2(e8)   8(e16)
+    10:     7(e15)  14(e17) 13(e18)
+    11:     2(e7)   4(e12)  15(e19)
+    12:     2(e6)   14(e20) 13(e21)
+    13:     10(e18) 12(e21) 15(e22)
+    14:     10(e17) 12(e20) 15(e23)
+    15:     11(e19) 13(e22) 14(e23)
+
+    v: 2; 12 11 9 ; triple: 66 10 41
+    v: 10; 7 14 13 ; triple: 49 11 76
+    v: 11; 2 4 15 ; triple: 10 27 1
+    v: 12; 2 14 13 ; triple: 66 76 28
+    v: 13; 10 12 15 ; triple: 76 28 66
+    v: 14; 10 12 15 ; triple: 11 76 49
+    v: 15; 11 13 14 ; triple: 1 66 49
+    11-2-12-14-10-13-15-11
+
+    cuboctahedron vectors:
+        vector v: 1; -a 0 -b
+        vector v: 76; a 0 b
+        vector v: 10; -c 0.5 d
+        vector v: 67; c -0.5 -d
+            vector v: 66; c 0.5 -d
+        vector v: 11; -c -0.5 d
