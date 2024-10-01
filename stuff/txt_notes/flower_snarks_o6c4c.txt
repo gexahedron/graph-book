@@ -1,0 +1,65 @@
+TODO: check uvf for J3, J4
+    build nz5
+    understand how is it related to Petersen colouring and o6c4c
+
+
+TODO: find J5 in 28.05
+
+
+J3 == Tietze’s graph
+    so almost Petersen graph
+    so we actually know the o6c4c solution for it
+
+20.05g1:
+Printing graph:
+0:      10(e0)  4(e1)   14(e2)
+1:      9(e3)   18(e4)  6(e5)
+2:      15(e6)  4(e7)   11(e8)
+3:      8(e9)   19(e10) 7(e11)
+4:      0(e1)   2(e7)   5(e12)
+5:      4(e12)  12(e13) 16(e14)
+6:      1(e5)   10(e15) 7(e16)
+7:      3(e11)  6(e16)  15(e17)
+8:      3(e9)   14(e18) 9(e19)
+9:      1(e3)   8(e19)  11(e20)
+10:     0(e0)   6(e15)  13(e21)
+11:     2(e8)   9(e20)  13(e22)
+12:     5(e13)  18(e23) 13(e24)
+13:     10(e21) 11(e22) 12(e24)
+14:     0(e2)   8(e18)  17(e25)
+15:     2(e6)   7(e17)  17(e26)
+16:     5(e14)  19(e27) 17(e28)
+17:     14(e25) 15(e26) 16(e28)
+18:     1(e4)   12(e23) 19(e29)
+19:     3(e10)  16(e27) 18(e29)
+
+    5-circuit: 12 18 19 16 5 (so called a_i vertices)
+    10-circuit: 10 6 7 15 2 11 9 8 14 0 (c_i and d_i vertices)
+    left out: 13 1 3 17 4 (so called b_i vertices)
+
+	- TODO: o5cdc solutions with this 5-circuit
+	- TODO: 2bm, with both circuits
+	- TODO: petersen colouring
+        a solution with 9 poor edges: 2 paths of 2 edges + 5-circuit
+		(1?) solution with 5 poor edges
+		(1 or 2?) with 7 poor edges
+
+    TODO: o6c4c
+    тут есть #rich=s1: 21,23,25
+    btw, or=5 everywhere
+
+    выбираем вот это решение:
+    g1: 82 new o6c4c: or: 05; s0: 12; s1: 21; s2: 0; r244odd: 0; PAR: 1; 
+    reors: 7; em:_6_0_0_3; o2:_0_0_0_0; t1+t3: 15; or_type_count: 3; 
+    or_type_decomp:_1_1_3; rich_type_count: 15; less: 0; or_counts:_5; 
+    t1: 0; t2: 9; t3: 15; t4: 6; rov: 0 0 0 5; ruv: 0 7 4 4; uon: 2 11 2 0; 
+    rrn: 0 0 7 8 6; prn: 0 0 5 4 0; orverts:_0_1_3_11_17_; 
+    has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; 
+    flow5: nope; 
+    or_sum: nope; rrn024: 13; s1s0diff: 9; ruv13: 11; evens: col: 12; rrn13: 8; 
+    ruv02: 4; chord_info: (21 0 9) t1(0 0 0) t2(0 0 9) t3(15 0 0) t4(6 0 0); done;
+    has_2cdcs; taken: 6 6; t5: 3 6; SEAL; also_pet!
+        интересно - or_type_count: 3; 
+        reors: 7
+        число решений = 35, с учётом reors получается 5,
+        что сходится с тем, что мы выбираем пару соседних вершин b_i,b_{i+1}

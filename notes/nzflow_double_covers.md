@@ -62,13 +62,25 @@ Looks like there do exist 333-flows for all snarks (verified for small "nontrivi
 
 ## o333-flows
 
-Some snarks (maybe more than half of them) also have o333-flows, here are the exceptions:
+Some snarks (from 65% to 90% of them) also have o333-flows:
+- 10 vertices: g1
+- 18 vertices: g1, g2
+- 20 vertices: g2-g5
+- 22 vertices: g1, g2, g4-g6, g8-g10, g13, g15-g18
+- 24 vertices: g2, g4-g15, g18-g20, g22, g23, g26, g29, g32-g34, g38
+- 26 vertices: g1, g3-g5, g7-g16, g18-g31, g33-g41, g43-g45, g47-g51, g53-g123,
+               g125-g129, g131, g133-g138, g140, g141, g143-g176, g178-g180,
+               g182-g186, g193-g196, g198-g203, g205-g226, g228-g239,
+               g241-g247, g249, g252-g280
+
+And here are the exceptions:
 - 10 vertices: none
 - 18 vertices: none
 - 20 vertices: g1, g6
 - 22 vertices: g3, g7, g11, g12, g14, g19, g20
-- 24 vertices: g1, g3, g16, g17, g21, g24, g25, g27, g28, g30, g31, g35, g36, g37
-- TODO: check 26 vertices
+- 24 vertices: g1, g3, g16, g17, g21, g24, g25, g27, g28, g30, g31, g35-g37
+- 26 vertices: g2, g6, g17, g32, g42, g46, g52, g124, g130, g132, g139, g142,
+               g177, g181, g187-g192, g197, g204, g227, g240, g248, g250, g251
 
 In o333-flows, any pair of flows gives a nz5-flow, so we have $f1-f2, f1-f3$ and $f2-f3$ as nz5-flows of original graph.
 

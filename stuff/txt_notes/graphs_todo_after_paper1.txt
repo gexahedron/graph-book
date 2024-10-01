@@ -1,0 +1,170 @@
+DONE! or=0 produces o6cdc
+
+DONE: or=0; rich pm edges from same layer, how are they distributed in o6cdc - in each layer we get even number of them; maybe even on each circuit; maybe it's even obvious how we prove it, actually, let's just follow the circuits and see what rich edges do
+
+
+Problem 7.2. Does there exist a nontrivial snark with defect 3 in which every core hexagon is single-core?
+This problem is particularly interesting from the point of view of Fulkerson’s conjecture. If such a snark did exist, then either its Fulkerson cover would not consist of two
+complementary optimal 3-arrays, or else the snark would provide a counterexample to
+Fulkerson’s conjecture.
+
+
+TODO: 12>34>56 encoding, symmetries:
+    - A6/S6 have outer automorphism
+    is this related to "or=0 produces o6cdc"?
+    - also, maybe Petersen graph is related to outer automorphism
+
+DONE: or != 0, what if all or vertices have same sign for the rotation?
+    but how do we even define this? if we have "oru" edge,
+        and we check it as pm edge,
+        we have 2 orderings from "u" side, and same order twice from "o" side
+        so we don't have "ab>cd>ef" encoding
+
+TODO: or != 0, give all "u" vertices same sign for order/orientation:
+    so 2 possibilities to check
+    TODO: when do we get o6cdc?
+    TODO: which snarks never have this?
+    TODO: does this apply to or=2? Petersen graph? has_2cdcs? also_pet? also_uvf?
+    TODO: why/when do we get o5cdc? does it correlate with has_nz5 flow? also_pet? also_uvf?
+
+
+TODO: or=0, s2=3, check rich pm edges:
+    fix layer1
+    we know that rich pm edges connect "1a>..." vertices with "a1>..." vertices
+        so rich pm edges kind of have multiplicity of 1,
+        and poor pm edges have 0/2
+    so it suffices to show that we have even number of "1a>..." vertices
+
+
+TODO: or=0, fix layer, check rich pm edges; sum of "ab" and "ba" appearances is even
+    TODO: is it related to "homological" or "or-homological" constructions?
+
+
+TODO: also check reors; UPD: for or=6 we get 3 pairs of or-or, in each of them 1 vertex has same order, the other one switches order
+TODO: or=6, built from or=0 reors: is it always 3 pairs of or-or pairs?
+
+
+https://blogs.ams.org/visualinsight/2015/08/15/tutte-coxeter-graph/
+TODO: Concretely, the Tutte-Coxeter graph can be defined from a 4-dimensional symplectic vector space V
+    https://math.ucr.edu/home/baez/six.html
+
+
+
+- TODO: bricks:
+    TODO: check which graphs/snarks are not bricks
+    https://github.com/sagemath/sage/issues/38216
+    Norine-Thomas brick
+    https://www.sciencedirect.com/science/article/pii/S0095895607000147
+    https://github.com/sagemath/sage/pull/38218
+
+
+
+TODO: circular flow number
+
+TODO: petersen graph, 9+6+ribbon5x3: can we use it for 2d nz-flow? TODO: check all 3 versions, that are different from 96555 solution
+
+TODO: ribbon graphs
+DONE: it actually works for Petersen graph too
+
+CDC Experiments:
+- add flags to argv; so we can run specific experiment
+
+- prove also_pet coloring => homological
+
+
+- Postman join vs perfect matching
+
+TODO: "postman set" perfect matching
+
+- TODO: semi-bipartite graphs
+paper "Matchings and matching extensions in graphs"
+
+- TODO: even F–orientations
+
+- TODO: orient pm edges, using weights, and zero-sums in each layer
+
+- TODO: check or_homological (it should include "mappable to 0" + some inconsistent solutions as well); TODO: "or=0 + evens=15", osignabsdiff
+
+- TODO: or_homological for snarks, what could it be? maybe absdiff [i][j]-[j][i] should be the same value?
+
+- wow TODO: osignabsdiff vs rich_edge_pair_evens (+ vs r244odd): has_2cdcs, or=0, or_as_unor_triples_244_count=4; or_as_unor_triples_244_count=2 with PAR=1; genus=0; evens=0,15
+
+- DONE: bipartite + o6c4c => s0 even; broken on 16.04
+
+matroids:
+https://www.youtube.com/@IBSDIMAG/streams
+
+
+
+TODO: maybe we could check has_2cdc for some planar graph?
+
+TODO: has_2cdcs, check s0 odd example; maybe we can glue it somehow
+
+TODO: has_2cdcs, inconsistent => or>=5?
+
+TODO: has_2cdcs, where there are no pm edges, connecting circuits from same partition
+
+- has_3cdcs
+- hypergraphs
+
+TODO: circuits_odd_poor=0,2,4 vs r244odd
+
+has_2cdcs, r244odd=0:
+- TODO: if one of layers<6, then all t4 edges are duplicated kind of!
+- doesn't depend on orientation
+- btw, r244odd=0 for mappable also doesn't depend on orientation
+- ? girth > 3
+- TODO: maybe check all cycle space, and count how many rich_odd=0 (mod 2) cycles exist
+- TODO: study 244-flows 3-coloring or other properties of nz4-subgraphs 
+
+has_2cdcs:
+- TODO: study relationship between genuses
+
+TODO: why girth=3 still breaks some asserts?
+nonsnark12.03g58:
+assert(rich_doubly_oriented == t4);
+
+
+TODO: more graph decompositions:
+    Theorem 2.5 (Zhang [24]). Let G be a graph. The graph G admits a nowhere-zero 4-flow if and only if for each cycle C of G, G has a 4-cycle double cover COVER such that C in COVER
+
+    ⁃ So, we have strong 4cdc
+    ⁃ but not oriented!
+
+
+    https://arxiv.org/abs/2408.04642
+    Conjecture 8.2. [7] A snark is odd 2–factored if and only if G is the Petersen graph,
+    Blanusaˇ 2, or a Flower snark J(t), with t ≥ 5 and odd
+
+
+    Theorem 3.1 is exactly about 44-edp? probably no, there's assymetry in theorem 3.1
+    Nz5 with lots of 3 and 4, or lots of 134 vertices
+
+
+
+TODO: or0 + onlyrich <=> maybe we have mapping to nongraph8?
+
+easy: nz5ws=000011 => or=0
+
+DONE: u444-subgraphs behave like or0+onlyrich; UPD: looks like it's more complicated than that, although sometimes it seems to be the case (e. g. in onlyrich graphs) (but e. g. poor edges can break splitting into 3 pairs); but maybe it's always bipartite?
+
+TODO: or=0, nz5ws:000011 (not always, but sometimes; and always when onlyrich)
+TODO: or=0, onlyrich => prove that we have bipartite graph; we actually have 3 pairs of layers, which sum up to 3 nz3 flows; so, we don't have pms which fall into these pairs; that's why we have 12 non-zero pm counts
+
+DONE: or=0, check the 12/34/56 encoding
+
+TODO: check the 12/34/56 encoding in general
+
+DONE: o6c4c, check that there are no odd circuits, if we consider t4 subgraph; this is easily not true; check smallest or0 snark solution 20g5-96
+
+TODO: or=0, t2unor=0: i think we can just ignore orientations in some sense; then we prove that we preserve s2; and then the only problem we have is to prove the base case;
+and then we can also return back to orientations, and maybe try to add that we preserve parity of negative edges in the solution;
+and then the base should be a slight generalization of onlyrich, with even number of negative orientations
+(and for onlyrich probably all circuits have even length) (actually, I only have examples from V=8, and V=16)
+
+TODO: or=0, t2unor=0: do we remove all t2or edges at once?
+
+TODO: or=0, t2unor=0: Do we extend to signed graphs? (probably not)
+TODO: or=0, study t2or and t2unor
+
+Todo: or=0, are pms related to 3-coloring?

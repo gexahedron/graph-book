@@ -5,7 +5,7 @@ main TODO:
   - counterexamples
   - musings about riemann surfaces
   - nz6 flow and its structures
-- можно ли частично ориентировать Petersen coloring'и?
+- можно ли частично ориентировать Petersen coloring'и? UPD: можно!
 - вытащить ещё задачи из чужих статей:
   - On d-dimensional nowhere-zero r-flows on a graph
   ...
@@ -13,10 +13,9 @@ main TODO:
   - что происходит на t1+t3=9?
 - вычислить известные снарки в базе
   - Blanusa snarks
-  - Isaacs snark J5
+  - Isaacs snark J5; UPD: done!
 - статья Lovasz "Matching Structure and the Matching Lattice"
   - compute brick decomposition
-    - походу никакого decomposition не будет - весь граф целиком и есть brick
 - Noether's Theorem. If W is not hyperelliptic, then every quadratic differential on W can be written as the sum of (three) products of abelian differentials.
   - paper "NON-HYPERELLIPTIC RIEMANN SURFACES" by Richard Hamilton
 - Hopf fibration
@@ -26,8 +25,13 @@ main TODO:
 - paper "BABY’S FIRST RIEMANN-ROCH"
 - Disjoint odd circuits in a bridgeless cubic graph can be quelled by a single perfect matching
 	доказали Mazzuoccolo's conjecture
-- всего 2110 simple snarks
-	Our aim in this paper is, therefore, to analyse and classify all 5-simple snarks of order not exceeding 36. The list of such snarks is known and contains exactly 2110 graphs. We have extracted it from the complete list of all nontrivial snarks of order up 36 which was produced by Brinkmann et al. [6] in 2013. The list of all critical snarks of order up to 36 was previously compiled by Carneiro et al. [9], however, those with cyclic connectivity at least 5 have not been singled out.
+- всего 2110 simple snarks до 36.05
+	Our aim in this paper is, therefore, to analyse and classify all 5-simple snarks of order not exceeding 36.
+    The list of such snarks is known and contains exactly 2110 graphs.
+    We have extracted it from the complete list of all nontrivial snarks of order up 36
+     which was produced by Brinkmann et al. [6] in 2013.
+     The list of all critical snarks of order up to 36 was previously compiled by Carneiro et al. [9],
+     however, those with cyclic connectivity at least 5 have not been singled out.
 - супер любопытные числа, почему-то все кроме odd_t4_comps_matchings - чётные:
   odd_t1_comps_2_factors << " " << odd_t2_comps_2_factors << " " <<
   odd_t3_comps_2_factors << " " << odd_t4_comps_2_factors << " " <<
@@ -118,29 +122,12 @@ done
 
 
 
-- взять сферу
-- взять icosahedron на нём
-- каждый треугольник подразбить равномерно на сетку треугольников
-- попробовать раскрасить и посчитать процент удачных раскрасок
-
-
-https://en.wikipedia.org/wiki/Dodecahedron#Pyritohedron
-
-
-сфера
-  - генерим грани
-  - генерим тысячи точек (типа центроидов) и каждой приписываем номер грани
-  - генерим тройки, проверяя, что топ-5 соседей у каждой из них сидят в одной и той же грани
-  - выясняем взаимосвязи между гранями
-  - пытаемся их покрасить
-  - считаем процент ошибок
-
 сфера
   - попробовать подразбиения в духе мозаики пенроуза
 
 
 
-todo:
+done (nothing interesting):
   глянуть целочисленные точки на сфере
   x**2 + y**2 + z**2 = d
   d=101
@@ -171,7 +158,18 @@ Conjecture (Jaeger, Swart): No 7-cyclically connected snark does exist.
 
 
 todo:
-Есть набор статей по теме "flow-continuous mapping". Конкретно интересна конструкция Z3-flow continuous mapping, которую не изучали. Вопрос - она даёт что-нибудь новое для кубических графов? В статье ... приведён пример, где она даёт новый mapping для субкубических графов, но я не понимаю, обобщается ли такой подход на кубические. Сходу кажется, что может обобщиться, если например рёбра как-то хитро замкнутся в цепь. А именно: там приведён пример D3 -> C3. В D3 2 вершины, с рёбрами a, b, c, a+b+c=0 (mod 3). В C3 3 вершины, рёбра (a,b), (b,c) и (c,a). Происходит разбегание рёбер. Вот вопрос - можно ли это разбегание как-то замкнуть, чтоб всё сошлось. UPD: я тут вспомнил, что у редких снарков имеется oriented petersen colouring, который аналогичен Z-flow continuous mapping, из которого следует Z3-flow continuous mapping. Поэтому есть надежда, что будут ещё примеры.
+Есть набор статей по теме "flow-continuous mapping". Конкретно интересна конструкция Z3-flow continuous mapping,
+  которую не изучали. Вопрос - она даёт что-нибудь новое для кубических графов? 
+  В статье ... приведён пример, где она даёт новый mapping для субкубических графов, 
+  но я не понимаю, обобщается ли такой подход на кубические. 
+  Сходу кажется, что может обобщиться, если например рёбра как-то хитро замкнутся в цепь.
+  А именно: там приведён пример D3 -> C3. В D3 2 вершины, с рёбрами a, b, c, a+b+c=0 (mod 3). 
+  В C3 3 вершины, рёбра (a,b), (b,c) и (c,a). Происходит разбегание рёбер. 
+  Вот вопрос - можно ли это разбегание как-то замкнуть, чтоб всё сошлось. 
+  
+  UPD: я тут вспомнил, что у редких снарков имеется oriented petersen colouring, 
+  который аналогичен Z-flow continuous mapping, из которого следует Z3-flow continuous mapping.
+  Поэтому есть надежда, что будут ещё примеры.
 
 
 

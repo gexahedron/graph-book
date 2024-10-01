@@ -150,7 +150,7 @@ https://thomas.math.gatech.edu/PAP/pfafsurv.pdf
 +
 Lemma 4.4.7
 Figure 16
-https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=c87ca5db4779ebc0ca42916627422f9390735bfe
+https://harrell.math.gatech.edu/GP/Dissert/NorineS05.pdf
 
 
 Teichmüller Curves in Genus Two: Square-Tiled Surfaces and Modular Curves
@@ -190,8 +190,7 @@ Magnetic monopoles over topologically
 non trivial Riemann Surfaces
 https://arxiv.org/pdf/hep-th/9603035.pdf
 
-𝑈(1)
--connection
+𝑈(1)-connection
 https://math.stackexchange.com/questions/189504/u1-connection
 
 "canonical map" "hyperplane" "riemann surface"
@@ -221,3 +220,24 @@ https://www.brown.edu/academics/math/sites/math/files/Zelesko,%20Nathan.pdf
 bott periodicity "riemann surface"
 
 Matroids, motives and conjecture of Kontsevich
+
+
+checkerboard stuff link dump:
+    google: checkerboard surface coloring even number of faces
+    Checkerboard colourable twisted duals
+    https://arxiv.org/pdf/1808.04047
+    google: checkerboard diagram knot even
+    Cut Points & Checkerboard Framings
+    https://people.math.osu.edu/chmutov.1/wor-gr-su21/Cut_Points__main_7-26-2021.pdf
+    google: alternating link checkerboard
+    ALTERNATING LINKS WITH TOTALLY GEODESIC CHECKERBOARD SURFACES
+    https://arxiv.org/pdf/2005.07904
+    google: Knots and Graphs I—Arc Graphs and Colorings
+    https://www.sciencedirect.com/science/article/pii/S0196885898906340?ref=pdf_download&fr=RR-2&rr=8a726683dc27c079
+    google: checkerboard graph on surface
+    Knots, graphs and surfaces
+    https://www.math.csi.cuny.edu/~ikofman/ribbon_graphs.pdf
+
+
+Chirality of octonion algebras
+https://mathoverflow.net/questions/455889/chirality-of-octonion-algebras

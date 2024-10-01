@@ -1,0 +1,25 @@
+- Results:
+    - it seems the relations between variables are weaker than in o6c4c
+    - s1 is quite big
+
+- TODO: study Lovasz "matching lattice" paper, and maybe find connection to 9c6c
+
+- TODO: can we find an o5cdc with "same"/corresponding cyclic order of edges ("same windings")?
+
+- TODO: can we duplicate a 2-factor?
+
+- TODO: compare profiles with other profiles
+    although maybe it's not that interesting
+
+- TODO: vertices:
+    wind/unwind dichotomy
+    but actually we have more information for unwind vertices
+    they are also winding: 2 times in one cyclic edge order, 1 time in opposite order
+
+    sounds like a ribbon graph
+
+- TODO: edges:
+    poor/rich dichotomy
+
+- TODO: t1/t2/... edges:
+    ...

@@ -1,0 +1,75 @@
+TODO: types of contact structures:
+    TODO: dichotomy: tight / overtwisted
+    TODO: hierarchy of tight contact structures
+        tight
+            weakly symplectically semi-fillable
+        weakly symplectically fillable
+            strongly symplectically semi-fillable
+        strongly symplectically fillable
+        exactly symplectically fillable (? <=> Liouville?)
+        Weinstein fillable
+        Stein fillable (<=> holomorphically fillable)
+        Sasaki type
+        +
+        weak < strong < Liouville < Weinstein
+    TODO: degrees of tightness
+        Some Tight Contact Manifolds Are Tighter Than Others
+    hypertight
+    universally tight
+        https://www.emis.de/journals/NYJM/JDG/p/2000/55-1-3.pdf
+        Universally tight contact structures with universal cover R3 are rather close in spirit to taut foliations. In fact, a small perturbation of a taut foliation into a contact structure is universally tight, due to the work of Eliashberg and Thurston [5].
+    virtually overtwisted
+        same as stably overtwisted
+    strongly overtwisted
+    flexible Weinstein fillings
+    exact Lagrangian fillings
+    Liouville fillings
+    +
+    Milnor fillable
+        Milnor fillable contact structures are universally tight
+    Bourgeois contact structures
+    spherical contact structures
+    exotic contact structures
+    planar contact structures
+    induced contact structures (induced by geodesic fields)
+    weakly compatible contact structures
+    strongly compatible contact structures
+    asymptotically finitely generated contact structures
+    invariant contact structure
+    bi-contact structures
+    real contact structures
+        real tight contact structures
+        real Milnor filling
+
+
+btw, compare with foliations (on graph manifolds):
+    https://www.math.unl.edu/~mbrittenham2/papers/pdf/graph8.pdf
+    foliations without Reeb components
+    taut foliations
+    foliations with no S1xS1-leaves
+
+
+TODO: Daniel V. Mathews + discrete contact geometry
+    An introduction to contact geometry and topology
+        https://tqft.net/web/conferences/Topology2016/contact_geometry.pdf
+    Discrete Contact Geometry
+        https://users.monash.edu/~gfarr/research/slides/Mathews-discrete_presentation.pdf
+    Itsy bitsy topological field theory
+    Chord diagrams, contact-topological quantum field theory, and contact categories
+    Contact topology and holomorphic invariants via elementary combinatorics
+    +
+    translations (downloaded)
+    notes on papers (downloaded)
+    blog
+        https://www.danielmathews.info/2019/02/28/uniqueness-of-contact-structures-and-tomography/
+
+
+
+Non-trivial examples of overtwisted contact structures
+https://mathoverflow.net/questions/303838/non-trivial-examples-of-overtwisted-contact-structures/
+
+
+Daniel Cristofaro-Gardiner
+https://www.dancristofarogardiner.com/videos-and-slides
+https://scholar.harvard.edu/gardiner/talks-and-slides
+https://dancg.sites.ucsc.edu/videos-and-slides/

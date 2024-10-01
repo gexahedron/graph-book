@@ -13,7 +13,7 @@ We will abbreviate this construction as o6c4c.
 
 ## Snark families with o6c4c solutions
 
-### Generalised Blanuša snark of type 1 with an odd number of A-blocks
+### Generalised Blanuša snarks of type 1 with an odd number of A-blocks
 
 Because this family of snarks has a strong Petersen colouring (TODO: add reference), we get a corollary for free, that they also have an o6c4c solution.
 
@@ -129,8 +129,6 @@ Conjecture: there are $4k+2$ vertices in the graph.
 - 26.05: g172, g173, g226, g243, g253, g254, g255, g257, g280
 - 30.05: g307, g4099, g4541, g10117, g13042, g13252, g13796, g14094, g22848, g22915, g22916, g24295, g24381, g26256, g26257, g27826
 
-- TODO (kind-of-counterexample): 30.05g14094: s0+s1+s2 % 2 = 0, instead of 1
-
 ## (kind-of-counterexample) onlyrich 6c4c, but no o6c4c
 
 - TODO: 30.05g3269
@@ -176,6 +174,8 @@ TODO: check weights
 
 Let's assume that we can build nz5 from o6c4c.
 
+Let's assume additionally that ...
+
 - Conjecture: we can only have one of following types of weights for 6 cycles:
   - -4 -3 -2 0 0 0
   - -4 -2 -1 0 0 0
@@ -189,5 +189,7 @@ Let's assume that we can build nz5 from o6c4c.
   - 0 0 0 1 2 3
   - 0 0 0 1 2 4
   - 0 0 0 2 3 4
+
+TODO: recheck these weights, something is definitely wrong, we miss some additional condition about oriented vertex type sums (where 112+112=224)
     
 ## TODO: oriented vs ignored

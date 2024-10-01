@@ -1,0 +1,43 @@
+Main question: why s0 is even?
+    - TODO: try to glue circuits into a "polyhedron"
+    - or maybe 2 polyhedrons
+
+
+- DONE: hierarchy and relationships:
+    - rich_type_count=12
+    - also_uvf (also_pet + 333-flows + or_as_unor_triples_244_count=1)
+        - TODO: also_pet + 333-flows
+            - also_pet
+                - has_2cdcs
+                    - has_2richcdcs
+                    - r244odd=0
+                    - all_or_nonsplit
+                - mappable
+                    - r244odd=0
+                - no_rich_chords
+                    - no t4 chords
+                - rich_edge_pair_evens=0,15
+            - frac_nz5:10010100
+                - frac_nz5:1
+                    - 333-flows
+
+    - NOTE: has_2cdcs + "no rich chords" doesn't imply also_pet
+        (but they seem to be kind-of similar)
+    - NOTE: has_2richcdcs + "mappable + all_or_strong_nonsplit" doesn't imply has_2cdcs
+
+
+- TODO: rich_type_count vs uvf-flow
+- TODO: has_2richcdcs
+- TODO: mappable
+- TODO: r244odd=0
+- TODO: no t4 chords
+
+- TODO: has_2cdcs + "no rich chords" ; vs also_pet
+    - DONE: looks, like it's the same set of graphs (upto 26.05 at least)
+        UPD: it's not
+    - TODO: it also feels, like they could "behave similarly"
+        maybe we could reconstruct one from another
+        - DONE: check circuit lengths in "mappable"
+
+- DONE: if "no rich chords" and rich_type_count<=15, then also_pet
+    fails on 38.06

@@ -1,0 +1,662 @@
+TODO: list all topics I'm interested here
+    - Contact structures
+        - connection to Spinors, Seiberg-Witten theory
+        - 2 or infinity
+        - bi-contact structures
+            - ? taut contact circles
+                - ? transversely holomorphic flows
+    - Reeb vector field
+        - Hopf fibration
+        - Beltrami vector field
+    - Contact metric three manifolds
+    - geodesible vector field
+    - unit vector field
+    - Great Circle Flows / Fibrations
+        - Volume-Preserving ...
+    - nonvanishing Killing vector field
+    - Minimal and harmonic characteristic vector fields
+    - Geodesic foliations by circles
+    - Veering triangulations, Cannon-Thurston map
+    - Closed 1-forms
+        - Harmonic 1-forms
+        - Nowhere-vanishing ...
+    - Crainic: duality between Poisson and Contact Geometry?
+        - + paper "Remarks on Contact and Jacobi Geometry"
+        - bifoliations
+        - contact dual pairs, symplectic dual pairs
+    - Besse and Zoll manifolds
+        - all Reeb orbits are closed
+    
+    ?
+        total foliations
+        totally geodesic foliations
+        Circle bundle / principal U(1)-bundles
+        (flat) G-structure on a manifold
+        
+        
+    - TO-Google: Contact deformations of closed 1-forms
+    - TO-Google: Geodesible "unit vector field" divergence free is flat connection
+    - ? TO-Google: nowhere zero vector field volume-preservation 1-form flux surface invariant torus
+
+
+? TODO?: persistently foliar double cover
+
+
+TODO: matroids
+    - there are some works on exterior calculus for matroids
+
+
+TODO: nowhere-zero flows as incompressible fluid / divergence-free flows
+    Euler flows
+
+    DONE: what is vector field?
+        input: vertices, output: tangent space, so some formal weighted sum of edges, e. g.
+        3e_1+1e_2-4e_3
+        NOTE: antisymmetric field is also called a flow
+    divergence-free <=> inflow=outflow for each vertex
+        <=> solenoidal vector field
+        it's a dot product, sum of dv\dx_i
+    DONE: what is curl on graphs?
+        it should be sum of flows for each "face" (cycle? circuit?)
+        also it's cross product of nabla and vector field
+    DONE: what is cross product?
+    DONE: Beltrami vector field
+        a vector field in three dimensions that is parallel to its own curl
+        I understand what is meant by parallel
+        I need to understand the curl vector field though
+        we need to define metric on the graph
+    RESULT: I think curl is zero for antisymmetric flows on graphs
+        because curl is symmetric
+
+    Etnyre-Ghrist 1:
+        In hydrodynamics, we consider the class of vector fields whose behavior is most fascinating and whose analysis has been most incomplete: these are the Beltrami fields, or fields which are parallel to their own curl.
+        All such fields are steady solutions to Euler’s equations of motion for a perfect incompressible fluid.
+        +
+        Theorem The class of (nonsingular) vector fields on a three-manifold parallel to their (nonsingular) curl is identical to the class of Reeb fields under rescaling.
+
+    https://arxiv.org/pdf/0904.2719
+    Geodesible vector fields are Beltrami
+        examples
+        Geodesic flow on a Riemannian surface
+        Killing vector fields
+        Vector fields tangent to 1-foliations by closed curves
+    
+    https://arxiv.org/pdf/1911.01963
+    A landmark in the study of the steady Euler flows in odd dimensional manifolds is Arnold’s structure theorem [1, 2], which is based on the following dichotomy: a stationary solution either has a nontrivial first integral (the Bernoulli function) or it is a Beltrami field.
+
+    TODO: divergence free lie algebras
+    TODO: volume-preserving diffeomorphisms
+
+    TODO: integrable vs non-integrable fluid flows
+        is it similar to nz3-nz4-nz5 flow dichotomy?
+
+
+TODO: Poincare homology sphere
+    - as a 3d continuous analog of Petersen graph
+https://en.m.wikipedia.org/wiki/Homology_sphere
+Alternatively, the Poincaré homology sphere can be constructed as the quotient space SO(3)/I where I is the icosahedral group (i.e., the rotational symmetry group of the regular icosahedron and dodecahedron, isomorphic to the alternating group A5). More intuitively, this means that the Poincaré homology sphere is the space of all geometrically distinguishable positions of an icosahedron (with fixed center and diameter) in Euclidean 3-space. One can also pass instead to the universal cover of SO(3) which can be realized as the group of unit quaternions and is homeomorphic to the 3-sphere. In this case, the Poincaré homology sphere is isomorphic to S^3/~I where ~I is the binary icosahedral group, the perfect double cover of I embedded in S^3.
+
+
+my Q: my impression is that tight contact structures should correspond to snarks, in some way
+        (maybe not)
+    why such impression, e.g.:
+    https://www.mat.univie.ac.at/~vertesi/fikusz.pdf
+        - Eliashberg proved classification of overtwisted structures
+        - => tight contact structures are "interesting"
+        - which corresponds with snarks are "interesting"
+
+    but what if overtwisted contact structures correspond to snarks?
+    an overtwisted disk would correspond to some kind of Petersen colouring, Petersen minor
+    analogy could work smth like:
+    - there exist ∞ many 3-manifold with no tight contact structure
+    - e. g. nz6-flow (or nz5) exists for all bridgeless graphs
+    - but, snarks don't have nz4-flow; so, tightness corresponds to 3-colouring
+
+    - so, maybe snarks correspond to conditions of non-tightness
+    - and also, very interestingly:
+    https://etnyre.math.gatech.edu/preprints/papers/nocont.pdf
+    - Theorem 1. There exist no positive tight contact structures on the Poincare homology sphere \Sigma(2; 3; 5) with reverse orientation.
+
+
+Directed Cycle Double Covers: Hexagon Graphs
+https://kam.mff.cuni.cz/~loebl/clanky/eurocomb13.pdf
+    - actually interesting paper
+        DCDC conjecture
+        problem of existence of special perfect matchings in a class of graphs that we call hexagon graphs
+        critical embeddings: embeddings with no dual loop
+
+Discrete Dirac Operators, Critical Embeddings and Ihara-Selberg Functions
+- probably this paper could be also important
+
+
+
+TODO: Higher Ribbon Graphs, Arborealization program
+https://www.math.princeton.edu/events/higher-ribbon-graphs-2018-03-12t200000
+    Ribbon graphs capture the topology of open Riemann surfaces in an elementary combinatorial form. One can hope this is the first step toward a general theory for open symplectic manifolds such as Stein manifolds. We will discuss progress toward such a higher dimensional theory (joint work with Alvarez-Gavela, Eliashberg, and Starkston), and in particular, what kind of topological spaces might generalize graphs. We will also discuss applications to the calculation of symplectic invariants.
+https://www.youtube.com/watch?v=zjTZQYsBO78
+Arboreal models and their stability
+    https://arxiv.org/pdf/2101.04272
+Caustics of fronts and the arborealization conjecture - Daniel Alvarez-Gavela
+https://www.youtube.com/watch?v=Pog1wg2sATU
+The flexibility of caustics and its applications - Daniel Alvarez-Gavela
+https://www.youtube.com/watch?v=0xIz730GD3E
+h-principle without pre-conditions for ridgy Lagrangians transverse to a distribution
+https://www.youtube.com/watch?v=3Xh3_N4TslQ
+8th PRCM: Yakov Eliashberg, The program of arborealization (plenary)
+https://www.youtube.com/watch?v=3N15ZjB_1MY
+Weinstein manifolds as cotangent bundles of arboreal spaces - Yakov Eliashberg
+https://www.youtube.com/watch?v=Lmfl_mqWXtk
+
+
+Вайнштейновы многообразия и симплектические когомологии
+https://ms.hse.ru/course2018
+
+
+https://arxiv.org/pdf/1802.03797
+GREAT	CIRCLE	FIBRATIONS	and	CONTACT	STRUCTURES	on	the	3-SPHERE
+Herman	Gluck
+
+Intrinsically harmonic forms and characterization of flat circle bundles
+Elizeu França, Francesco Mercuri
+https://arxiv.org/pdf/2205.14190
++
+https://mathoverflow.net/a/342032/73702
+    - A classical theorem due to Hodge states that in each De Rham’s cohomology class of a compact Riemannian manifold, there is one, and only one, harmonic form
+    - Given a closed-form ω on a compact manifold M, is there a Riemannian metric g on M such that ω is harmonic concerning g?
+    - If such a metric exists, ω is called an intrinsically harmonic form (I.H.)
+    - Calabi showed that an 1-form ω is I.H., under suitable conditions on its zero-set, if and only if it is transitive.
+    - Transitivity means that for every point x that is not a zero of ω, there is an embedded circle containing x, such that the restriction of ω to it never vanishes.
+    - Honda proved a “dual” version of Calabi-Volkov’s result by showing that a transitive closed (n − 1)-form is I.H., under suitable conditions on its zero-set.
+    - By a standard foliation’s argument, one can prove that nowhere-vanishing closed 1-form on a closed manifold is transitive, hence I.H.
+
+    - Theorem 3. A differentiable principal circle bundle B = {B, p, M, S1}
+        over a closed orientable base admits a flat connection, if and only if,
+        one (and consequently all) of the four conditions below holds:
+        (1) p∗(ΩM) is I.H.;
+        (2) p∗(ΩM) determines a nonzero cohomology class;
+        (3) the fiber represents a nonzero class in H1(B; R);
+        (4) χ(B), the Euler’s class of B, is a torsion element.
+
+    - my Q: I wonder whether we can interpret here
+        flat connection as ocdc, and
+        I.H. form as nz-flow?
+    - We need to replace S1 with S2, probably?
+        - do we assign a point on S2 to each vertex?
+        - what does connection do then?
+        - rotate the sphere?
+
+TODO: what about Berge-Fulkerson?
+https://www.unige.ch/math/folks/cimasoni/Dirac.pdf
+Discrete Dirac operators on Riemann surfaces and Kasteleyn matrices
+David Cimasoni
+    In [5], we studied an explicit correspondance (first suggested by Kuperberg [16]) relating spin structures on 6 and Kasteleyn orientations
+
+    (Spin; also, Pin+, Pin-, Spin-C, Spin-H structures)
+    (r-Spin structures)
+
+    my Q: existence of (S)pin structure <=> Petersen's theorem?
+
+    A spin structure on a Riemann surface \Sigma may be thought of as a square root of the tangent bundle T-\Sigma
+        which sounds kind of interesting already
+        as if we try to replace ocdc with oc4c
+
+    https://en.wikipedia.org/wiki/Spin_structure
+    Spin structures will exist if and only if the second Stiefel–Whitney class w2(M) ∈ H2(M, Z2) of M vanishes
+    Furthermore, if w2(M) = 0, then the set of the isomorphism classes of spin structures on M is acted upon freely and transitively by H1(M, Z2)
+
+    my Q: do we need something dual or transverse to spin structure?
+    my Q: single spin structure probably corresponds to a single perfect matching
+        but we want 6 of them in Berge-Fulkerson
+        so probably we want something more from spin structures
+    my Q: also, we have oriented and non-oriented vertices
+        and rich and poor edges
+        do we have something similar for spin structures?
+    
+    https://www.discretization.de/media/filer_public/2017/09/18/lecture_notes_berlin.pdf
+    Summarizing this section so far, a dimer configuration D on X1 and a Kasteleyn orientation K on X determine a spin structure on Σ, i.e: a quadratic form q^K_D : H1(Σ; Z2) → Z2. Furthermore, this quadratic form can be computed explicitely.
+    
+    https://www.unige.ch/math/folks/cimasoni/Dirac.pdf
+    includes dictionary!
+    (but only for bipartite graphs)
+        - a bipartite structure V (0) = B t W together with a perfect matching M on the graph 0, inducing a decomposition X(DM) C = X(B) ⊕ X(W)
+        corresponds to
+        - the decomposition C∞(T \Sigma C) = C∞(T \Sigma+) ⊕ C∞(T \Sigma−) induced by an almost complex structure on \Sigma
+
+    nowhere vanishing spinors
+    spinor bundle
+    spin connection
+    transversal Killing spinors
+    quadratic forms (of symplectic type)
+        ? Arf invariant
+    ? flat surfaces; flat manifolds
+    theta characteristics
+    harmonic spinors
+    parallel spinors
+    twisted Dirac equation
+    Dirac bundle
+    second Stiefel–Whitney class
+    Ricci flow
+         Ricci flow preserves the spin structure
+    almost complex structure
+    Kaehler manifold
+    Seiberg-Witten equations
+    principal U(1)-bundle
+    oriented 2–plane fields (or a contact structure)
+        https://www.ams.org/journals/proc/2001-129-11/S0002-9939-01-05964-0/S0002-9939-01-05964-0.pdf
+        - Theorem 1.1. Let Y be a closed oriented 3–manifold carrying metrics with positive scalar curvature. Then, two fillable contact structures on Y are homotopic if and only if they are homotopic on the complement of a point.
+        same as
+        - Theorem 2.1. Let Y be a closed oriented 3–manifold carrying metrics with positive scalar curvature. Then, two fillable contact structures on Y are homotopic if and only if they induce the same Spinc structure on Y .
+    https://msp.org/gt/2003/7-2/gt-v7-n2-p14-p.pdf
+        Spinc structures tξi induced by the contact structures ξi
+    
+    https://arxiv.org/pdf/0805.0591
+    Theorem 1 says that a principal bundle over a spin manifold with commutative structural group is a Dirac morphism if and only if it is flat.
+
+    s002200050343.pdf, 10.1007/s002200050343
+    https://hal.science/hal-00125990/document
+        projectable spinors
+        totally geodesic fibers
+        - Theorem 5.1. Let M be a compact Kahler manifold of positive scalar curvature and complex dimension 4l + 1. Then the following statements are equivalent:
+            (i) M is the twistor space of some quaternionic Kahler manifold;
+            (ii) M is Kahler–Einstein and admits a complex contact structure;
+            (iii) There exist a Spinc structure on M with ... and \Sigma-M carries a Kahlerian Killing spinor ...
+        - Corollary 5.1. Let Z be a Fano contact manifold. Then Z is a twistor space iff it admits a Kahler–Einstein metric
+
+    ? tropical spin curves
+        http://www.mat.uniroma3.it/users/caporaso/spinAG.pdf
+        spin graphs
+
+
+dictionary:
+    flat connection
+    closed geodesics
+    geodesic flow
+    totally geodesic:
+        totally geodesic submanifolds
+        totally geodesic cycles
+        totally geodesic maps
+        totally geodesic foliations
+    nowhere vanishing form
+        nowhere-vanishing closed 1-form
+    harmonic form
+
+    Euler class
+    Geodesible vector fields
+    taut foliations
+    tight contact structures
+        tight contact forms
+    Reeb flows transverse to the contact structure
+
+    betti numbers
+        b0 is the number of connected components;
+        b0 is 1 for connected graphs
+        b1 is the number of one-dimensional or "circular" holes;
+        b1 is E-V+1
+        b2 is the number of two-dimensional "voids" or "cavities".
+        b2 is 0 for graphs
+    
+    https://arxiv.org/pdf/1510.08670v2
+    transversely holomorphic flows and taut contact circles
+
+
+
+https://www.youtube.com/watch?v=2il4nSXJsgY
+A codimension one foliation F in M gives a globally defined notion of "horizontal" motion (motion restricted to a particular leaf) and "vertical" motion (motion always transverse to the leaves) through the manifold. Tautness means it is possible to get anywhere in M by vertical motion.
+
+
+https://mathoverflow.net/questions/273635/finding-a-1-form-adapted-to-a-smooth-flow
+    A geodesible flow on a manifold 𝑀 is a one dimensional foliation associated with a non vanishing vector field such that all leaves of the foliation are geodesics for some Riemannian metric on 𝑀.
+
+    metric: g_p: T_p M x T_p M -> R, positive-definite inner product
+    and norm: |.|_p : T_p M -> R; |v|_p = sqrt(g_p(v,v))
+    g_ij | p = g_p (d/dx^i | p, d/dx^j | p)
+
+    my Q: how should we define a metric from ribbon graph geodesics?
+
+    Philippe Tondeur, Geometry of Foliations, Page 71, Proposition 6.8
+    6.8 Proposition: Let 𝑉 be a non singular vector field on 𝑀. Then the following conditions are equivalent:
+    (i) The flow of 𝑉 is geodesible,
+    (ii) there exist a 1-form 𝜒∈Ω1(𝑀) such that 𝜒(𝑉)>0 and 𝑖(𝑉)𝑑𝜒=0
+
+
+Philippe Tondeur, Geometry of Foliations
+A flow is geodesible, if there exists a Riemannian metric such that the leaves of F are geodesics. Note that for a flow this concept is equivalent to tautness.
+
+Universality of Euler flows and flexibility of Reeb embeddings
+https://www.sciencedirect.com/science/article/pii/S0001870823002852
+The geometric content of the Beltrami fields was unveiled in [18,34],
+where connections with Reeb fields of a contact structure and with geodesible flows were
+established. This remarkable connection, which will be exploited in this paper, allows one
+to bring tools from (high dimensional) contact topology to the analysis of the stationary
+Euler equations provided that the Riemannian metric is not fixed, which is precisely the
+context where Tao introduced the notion of universality
+
+
+https://www2.math.upenn.edu/~ghrist/preprints/tight.pdf
+The theorems of Gabai [12] imply that any closed orientable irreducible 3-manifold with nonzero second Betti number b2 supports a tight contact structure.
+
+
+Tischler's theorem.
+Theorem 1. Let 𝑀𝑛 be a closed 𝑛-dimensional manifold. SUppose 𝑀𝑛 admits a nonvanishing closed 1-form. Then 𝑀𝑛 is a fiber bundle over 𝑆1.
+
+
+https://www.arxiv.org/pdf/1906.02705
+Theorem. Let Φ be a non-singular smooth 1 flow on a smooth, compact, connected manifold M. Denote the infinitesimal generator of Φ by X and assume that Φ preserves a smooth volume form Ω. Then Φ admits a smooth global cross section if and only if iXΩ is intrinsically harmonic.
+
+
+https://www.mdpi.com/2227-7390/11/13/2993#B6-mathematics-11-02993
+It is shown in [6] that on a four-dimensional orientable manifold “two taut make one symplectic”, which means that the existence of two complementary orientable 2-dimensional taut foliations implies that the manifold is symplectic.
+[6] Scorpan, A. Existence of foliations on 4-manifold
+
+
+Colored Graphs and Matrix Integrals
+I. V. Artamkin
+https://publications.hse.ru/pubs/share/folder/t5505l77f2/72090864.pdf
+Proposition 4.3. 1. A connection ∇ is flat if and only if the surface S∇ is orientable.
+Dictionary:
+- tangent space <=> star of vertex
+- connection (i think i understand how to construct it from given ribbon graph)
+    - defined on each edge
+    - so for each vertex we have 3 edges, 3 mappings
+- geodesic
+    d_{e_{i+1}} (e_i) = e_{i+2}
+- closed geodesic
+    - i think border of each cell (of ribbon graph) is a closed geodesic
+- from "How is a graph like a manifold?"
+    ETHAN D. BOLKER, VICTOR W. GUILLEMIN, AND TARA S. HOLM
+    https://arxiv.org/pdf/math/0206103
+    Remark 2.5. Because there is a unique closed geodesic through each pair of edges in the
+    star of a vertex, the set of all closed geodesics completely determines the connection on Γ.
+    We will sometimes use this fact to describe a connection.
+- totally geodesic subgraphs
+- all maximal geodesic paths are closed
+- flat connections <=> ribbon graph embeddings on orientable surfaces
+- from "Homology Flows, Cohomology Cuts"
+    Erin W. Chambers Jeff Erickson Amir Nayyeri
+    https://jeffe.cs.illinois.edu/pubs/pdf/surflow.pdf
+    flows/circulations <=> duals of closed 1-forms
+        co-closed form
+    nz5-flow from o5cdc <=> duals of exact 1-forms
+        co-exact form
+    TODO: what is meant by dual?
+- ? curvature
+    - input: 2 directed edges, which are neighbours
+    - we also need some axial functions; for each edge it's a n-tuple of integers, Z^n
+        - if we reverse edge, the axial function changes sign
+    - ? flat connection => curvature = 0
+    - curvature is sign(dot product of axial functions)
+    - kappa(d, e); d=(x,y), e=(y,z)
+    - ? can this be related to nz-flow from ocdc?
+    - ? curvature is a 2-form?
+        - omega(e) = dw(e) + w(e) /\ w(e)
+        - w(e) is a tuple, i suppose
+
+
+https://upcommons.upc.edu/bitstream/handle/2117/494/BCE-VCWN.pdf
+So, for each vertex x ∈ V, we will call the real vector space of formal linear combinations of the edges incident with x tangent space at x and we denote it by Tx(Γ). 
+We will call any application f : V → \union_{x∈V} Tx(Γ) such that f(x) ∈ Tx(Γ) for each x ∈ V vector field on Γ
+    so for each vertex we define some formal sum of it's edges,
+    and this will be the vector field
+    f(x) = \sum_{y~x} f(x,y)e_{xy}
+
+
+Harmonic and analytic functions on graphs
+Itai Benjamini and Laszlo Lovasz
+https://www.math.ucdavis.edu/~saito/data/discr-harm-anal/benjamini-lovasz-disc-harm.pdf
+Found though something in Lovasz paper
+LEMMA 3. Every circulation is homologous to a unique rotation-free circulation.
+So, they call nowhere-zero flow (actually a "rotation-free circulation") a harmonic flow, in some sense
+Actually they call it a holomorphic form
+
+
+The Hodge * operator action on cohomology is generally speaking metric-dependent
+
+a, alpha - coexact form
+*a = db
+    *a - sounds like nz-coloring of faces; oriented
+    b - 0-form on faces, coming from ocdc
+    db - difference between 2 faces
+
+https://www.physicsforums.com/threads/why-the-terms-exterior-closed-exact.871875/
+closed differential form is a cycle
+    my Q: maybe actually closed 1-forms correspond more to cycles in ocdc?
+
+
+also interesting question of orientability:
+    https://mathoverflow.net/questions/55913/contact-manifolds-that-are-not-cooriented
+    crombecque,-david.pdf
+    - examples of 3-manifolds equipped with nonorientable tight contact structures for which the orientation double cover is overtwisted
+
+
+
+TODO: Engel structures
+
+TODO: there is very interesting conjecture about taut foliations for 3-spheres
+Floer homology, group orderability, and taut foliations of hyperbolic 3-manifolds
+https://arxiv.org/abs/1904.04628
+    - This paper explores the conjecture that the following are equivalent for rational homology 3-spheres: having left-orderable fundamental group, having non-minimal Heegaard Floer homology, and admitting a co-orientable taut foliation.
+
+
+TODO: L-space conjecture
+    - on the one hand we have a conjecture about having a co-orientable taut foliation
+    https://adamjclay.github.io/Notes[3].pdf
+        Conjecture 2.31. (The L-space conjecture, [6, Conjecture 1], [25, Conjecture 5]) Suppose that M
+        is a compact, connected, orientable irreducible 3-manifold with finite first homology, other than S3.
+        Then the following are equivalent:
+        (1) M is not a Heegaard Floer homology L-space;
+        (2) M admits a co-orientable taut foliation;
+        (3) π1(M) is left-orderable.
+
+        or there's cyclic cover version:
+        Conjecture 2.32. (The L-space conjecture, circular orderability version, [1]). Suppose that M is
+        a compact, connected, orientable irreducible 3-manifold with finite first homology that is not a lens
+        space. Then the following are equivalent:
+        (1) There exists a finite cyclic cover of M that is not an L-space.
+        (2) There exists a finite cyclic cover of M that supports a co-orientable taut foliation.
+        (3) The fundamental group of M is circularly orderable.
+    
+    - on the other hand, we have a conjecture for ocdc, that it exists for all bridgeless graphs
+        - π1(G) is always a free group, so left-orderable, for any graph, so this is not very useful
+        - so what is the alternative topological description of being a bridgeless graph?
+        one idea is to check out the Topological crystals paper
+        https://arxiv.org/pdf/1607.07748
+        TODO: maximal abelian cover
+
+        https://mathoverflow.net/questions/238111/which-paths-in-a-graph-are-orthogonal-to-all-cycles
+    
+        https://golem.ph.utexas.edu/category/2016/07/topological_crystals_part_1.html
+        TODO: what if bridges correspond to orbifolds? or some kind of singularities? border?
+
+        also, Riemann-Roch and Abel-Jacobi theory on a finite graph
+        https://arxiv.org/abs/math/0608360
+        (ii) Theorem 1.8 and Corollary 4.7 suggest that from the point of view of Abel-Jacobi theory, the “correct” analogue of a Riemann surface is a 2-edge-connected graph.
+
+
+TODO: there's also an interesting Weinstein conjecture (now theorem)
+https://en.wikipedia.org/wiki/Weinstein_conjecture
+https://arxiv.org/pdf/math/0611007
+The Seiberg-Witten equations and the Weinstein conjecture
+Clifford Henry Taubes
+    - Let M denote a compact, oriented 3-dimensional manifold and let a denote a contact 1-form on M; thus a /\ da is nowhere zero. This article proves that the vector field that generates the kernel of da has a closed integral curve.
+
+
+
+TODO: planar contact manifolds
+
+
+DONE: there's also a 4-dimensional graph E8-manifold
+    - but it's not smoothable (only topological)
+
+TODO: manifolds can also have boundary
+
+TODO: Uniform foliations
+    A foliation on a compact manifold is uniform if each pair of leaves of the induced foliation on the universal cover are at finite Hausdorff distance from each other.
+
+TODO: Every 3-Manifold Admits a Transverse Pair of Codimension One Foliations Which Cannot be Raised to a Total Foliation
+
+TODO: universal circle
+
+
+TODO: contact triangulations of 3-manifolds
+TODO: "contact cellular decomposition"
+    (compatible) open book decomposition
+    Legendrian graph
+    1-skeleton
+
+
+TODO: symplectic geometry vs nowhere-zero flows
+    volume forms i.e. nowhere vanishing 𝑛 forms on an 𝑛 dimensional manifold
+    area preserving diffeomorphism
+    symplectomorphism
+    https://math.stackexchange.com/questions/4560681/why-is-an-area-preserving-diffeomorphism-a-symplectomorphism-in-r2
+    In the general case, we only have symplectic => volume preserving
+    https://en.wikipedia.org/wiki/Symplectomorphism
+    Since symplectomorphisms preserve the symplectic 2-form and hence the symplectic volume form, Liouville's theorem in Hamiltonian mechanics follows. Symplectomorphisms that arise from Hamiltonian vector fields are known as Hamiltonian symplectomorphisms.
+    If the first Betti number of a connected symplectic manifold is zero, symplectic and Hamiltonian vector fields coincide, so the notions of Hamiltonian isotopy and symplectic isotopy of symplectomorphisms coincide.
+    It can be shown that the equations for a geodesic may be formulated as a Hamiltonian flow, see Geodesics as Hamiltonian flows.
+    TODO: Geodesics as Hamiltonian flows
+    https://en.wikipedia.org/wiki/Geodesics_as_Hamiltonian_flows
+
+
+
+TODO: spin vs contact structures, several approaches:
+    TODO: Seiberg-Witten theory
+        but also maybe we should talk about Stein manifolds, Stein contact structures, Stein fillings
+        https://en.wikipedia.org/wiki/Stein_manifold
+        In the GAGA set of analogies, Stein manifolds correspond to affine varieties.
+    https://repository.kulib.kyoto-u.ac.jp/dspace/bitstream/2433/265683/1/2191-06.pdf
+    Taubes's non-vanishing result of the Seiberg-Witten invariant for symplectic manifolds is one of the most fundamental results in the relation between Seiberg-Witten theory and symplectic/contact structures
+
+    TODO: contact Ozsvath–Szabo invariants of 3–manifolds
+        they use oriented spin^c-structure somehow
+        TODO: 3 papers: "Ozsvath–Szabo invariants and tight contact three–manifolds"
+    
+    TODO: Contact structures and adjunction inequality in 3-manifolds
+    https://mathoverflow.net/questions/133239/contact-structures-and-adjunction-inequality-in-3-manifolds
+
+
+TODO: computational complexity
+    Computation in geometric topology conference
+    https://warwick.ac.uk/fac/sci/maths/research/events/2017-18/symposium/cgt/schedule/
+    +
+    https://www.youtube.com/playlist?list=PLGcTAr9mXAp1GymaX2VXJmA3sinogVKou
+
+
+
+TODO: unit vector fields
+    google "Minimality, harmonicity and CR geometry for Reeb vector fields"
+    Contact metric 3-manifolds
+    cosymplectic manifold
+    harmonicity
+    Reeb vector field
+    Ricci operator
+    Hopf vector field
+    Totally geodesic vector field (on a unit sphere)
+    Sasaki metric
+
+    https://arxiv.org/pdf/2202.07622
+    Corollary 2.48. There is a metric on M such that each Reeb vector field is of unit length, their flow lines are geodesics, and the foliations F and Fi are harmonic foliations.
+
+
+blogs:
+    https://kylerec.wordpress.com/2017/06/07/notes-from-the-kylerec-2016/
+    https://electrichandleslide.wordpress.com/
+    https://symplecticfieldtheorist.wordpress.com/2014/10/17/a-biased-survey-on-symplectic-fillings-part-1-definitions/
+    https://www.danielmathews.info/2019/02/28/uniqueness-of-contact-structures-and-tomography/
+    +
+    https://www.quantamagazine.org/in-the-wild-west-of-geometry-mathematicians-redefine-the-sphere-20231107/
+
+
+courses, lectures:
+    Math 595 FTM, Foliations and the topology of 3-manifolds
+    https://nmd.web.illinois.edu/classes/2021/595A/index.html
+
+    https://www.mathematik.hu-berlin.de/~kegemarc/23WSContactGeometry.html
+
+    https://www.ma.imperial.ac.uk/~ssivek/courses/12s-math273.php
+
+
+book, Embedding Problems in Symplectic Geometry
+    Symplectic geometry is the geometry underlying Hamiltonian dynamics, and symplectic mappings arise as time-1-maps of Hamiltonian flows. The spectacular rigidity phenomena for symplectic mappings discovered in the last two decades show that certain things cannot be done by a symplectic mapping. For instance, Gromov's famous "non-squeezing'' theorem states that one cannot map a ball into a thinner cylinder by a symplectic embedding. The aim of this book is to show that certain other things can be done by symplectic mappings. This is achieved by various elementary and explicit symplectic embedding constructions, such as "folding", "wrapping'', and "lifting''. These constructions are carried out in detail and are used to solve some specific symplectic embedding problems.
+    +
+    http://members.unine.ch/felix.schlenk/Daejeon18/Survey.embeddings.pdf
+    Abstract. We survey the many new results on symplectic embeddings found over the last eight years. The focus is on motivations, connections, ideas, examples and open problems.
+
+
+Stein fillable tight contact structures on the 3-torus
+https://mathoverflow.net/questions/407394/stein-fillable-tight-contact-structures-on-the-3-torus
+
+https://math.stackexchange.com/questions/1010343/a-question-about-incompressible-vector-field
+
+https://mathoverflow.net/questions/426023/contact-structures-associated-to-taut-foliations
+
+https://math.stackexchange.com/questions/3036708/which-3-manifolds-can-be-cubulated
+
+https://mathoverflow.net/questions/273635/finding-a-1-form-adapted-to-a-smooth-flow
+
+https://mathoverflow.net/questions/75038/when-is-a-closed-differential-form-harmonic-relative-to-some-metric
+
+https://math.stackexchange.com/questions/4275437/relation-between-the-two-spin-structures-of-s1
+
+https://mathoverflow.net/questions/208607/three-manifolds-having-a-reebless-foliation-but-not-a-taut-one
+
+https://mathoverflow.net/questions/356036/foliated-circle-bundles-whose-euler-class-is-torsion
+
+
+TODO: regular pentagon space
+    https://mathoverflow.net/questions/58589/calabi-yau-manifolds-and-polygonal-linkage-configuration-spaces-related
+    and it's relationship to M0,5
+
+Standard contact forms on the torus
+https://mathoverflow.net/questions/429440/standard-contact-forms-on-the-torus
+
+transformation properties of divergence (of a vector field)
+https://mathoverflow.net/questions/48598/transformation-properties-of-divergence-of-a-vector-field
+
+Transverse open book decompositions supporting the same contact structure
+https://mathoverflow.net/questions/396217/transverse-open-book-decompositions-supporting-the-same-contact-structure
+
+
+trying to find a closed 1-form, representative of nz5-flow:
+    abcde
+    96555
+    closed form: sum = 0
+    (a-b)*3+(3*a-c-d-e)*2=9*a-3*b-2*(c+d+e)=0
+    6*b - 3*a -c-d-e=0
+    5*c-2*a-b-d-e=0
+    5*d-2*a-b-c-e=0
+    5*e-2*a-b-c-d=0
+    ...
+    =>
+    9*a-3*b-2*(c+d+e)=0
+    3*a-6*b+  (c+d+e)=0
+    6*a+3*b-3*(c+d+e)=0
+
+    15*a=5*(c+d+e)
+    3*a=c+d+e
+    3*b=c+d+e
+    a=b
+    a-b=0
+    well, it's vanishing on some edges
+
+
+WS
+gluing:
+    1 vertex, 6 edges, 6 pentagons, and 1 cell
+cubulation
+    14-vertex,
+    54-edge,
+    60 square,
+    20-cube decomposition
+    - all cubes have 2 vertices in common:
+        - one is center of dodecahedron,
+        - another is same glued vertex
+    - 14 vertices = 1+6+6+1
+    - 20 cubes: correspond to 20 original vertices of dodecahedron
+    - 60 squares: 5 * 12 original faces of dodecahedron
+    - every edge of DˆWS occurs in ≥ 4 cubes
+
+
+Symplectic geometry in 2d is same as area-preserving geometry
+"Divergence-free vector field has volume-preserving flow"
+"A nowhere vanishing smooth n-form µ on an n-dimensional smooth manifold M is called a volume form"

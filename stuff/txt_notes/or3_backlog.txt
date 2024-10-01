@@ -1,0 +1,206 @@
+or=3
+
+RESULT:
+    - we just need to add even_or_circuits to fix parity
+
+
+DONE: do we want this picture?
+    r244odd vs parity
+    0; 1;
+    4; 1;
+    6; 0;
+    10; 0;
+
+DONE: 18.05g2, first smallest solution with "wrong" parity, graph18g2-18:
+    (actually all of 18.05g2 solutions with "or=3" have "wrong" parity)
+    - r244odd=4, parity=1
+    or vertices: 2,3,6
+    - let's look at the circuits
+        1 layer
+            2-6 circuit
+                6r+1p+1r+1p
+                "length" 5
+                no chords
+                2+6 in 6r
+            3 circuit
+                8r+1p
+                inconsistent
+                no chords
+        2 layer
+            3-2-6 circuit
+                1p
+                inconsistent
+            empty circuit
+                rich
+        3 layer
+            2 circuit
+                rich
+            3-6 circuit
+                1p
+                inconsistent
+        4 layer
+            2-3 circuit
+                rich
+            6 circuit
+                1p+1p
+            empty circuit
+                rich
+        5 layer
+            2-6 circuit
+                rich
+            3 circuit
+                1p+1p
+        6 layer
+            3-6 circuit
+                rich
+            2 circuit
+                1p+1p+1p
+                inconsistent
+
+    vs 18.05g1, where parity is ok, graph18g1-5:
+    or vertices: 3,6,17
+        1 layer
+            3 circuit
+            6-17 circuit
+        2 layer
+            17 circuit
+            3-6 circuit
+        3 layer
+            6-3 circuit
+            17 circuit
+        4 layer
+            3-17 circuit
+            6 circuit
+        5 layer
+            3-17 circuit
+            6 circuit
+        6 layer
+            3 circuit
+            6-17 circuit
+
+
+26.05, interesting stuff:
+    - if "no t4 chords", then
+        - parity=1
+        - no_lens: 0, 4, 8
+        - t3[2]=0, t3[1]: 0,1
+        - r244odd: 0, 4
+    - actually it's a bit more general, if t4[2]=0:
+        fixable parity, so:
+        - r244odd: 0,4 =>
+            parity=1
+            no_lens: 0,4,8,12
+        - r244odd: 6 =>
+            parity=0
+            no_lens: 4,6,8
+    - mismatch=1 => t4[2]=0
+    - any_chords_frequency[1] = 0
+        - r244odd: 0,4
+        - parity: 1
+    - reors > 4 => fixable parity
+    - r244odd:0,10 => parity: 1
+
+    - let's focus on case of
+        - reors <= 4,
+        - r244odd=4,6, and
+        - t4[2] != 0
+    - our goal at this point to fix formula, such that
+        r244odd=4 => parity=1
+        r244odd=6 => parity=0
+
+
+DONE(?): or=3, par=0 vs par=1
+    check rich244
+    don't notice anything helpful
+    i know the reason why, kind of
+    or_sum % 5 != 0, e. g. 6, 12
+    there's some disturbance which i don't understand, and which  we don't catch with r244odd
+
+26.05
+    or_sum: nope, 5, 10 and 3,6,9,12
+    let's check cases one-by-one
+
+    or_sum: 5, 10
+        par: 1
+        r244_odd_count: 0, 4
+
+    or_sum: 3,6,9,12
+        par: 0, 1
+        r244_odd_count: 4, 6
+        so it's already hard to understand what goes on here
+        (even though it's 85 rows)
+
+        s1: 24..32
+        s2: 1, 2
+
+    or_sum: nope
+        TODO
+
+    for reference
+        s0: 12..20
+        s1: 17..37
+        s2: 0,1,2,3
+        t1: 0, t1+t3: 09
+            so or vertices are never neighbours
+
+
+
+
+
+
+
+
+
+
+03; r244odd: 4; even_lens: 1; no_lens: 4; 3 0) 13 6); PAR: 0;
+03; r244odd: 4; even_lens: 1; no_lens: 4; 3 0) 13 6); PAR: 1;
+
+03; r244odd: 4; even_lens: 2; no_lens: 4; 2 0) 4 1); has_2richcdcs; PAR: 1;
+03; r244odd: 4; even_lens: 2; no_lens: 4; 2 0) 4 2); has_2richcdcs; PAR: 1;
+
+
+g108: 228 new o6c4c: or: 03; s0: 14; s1: 20; s2: 1; r244odd: 4; PAR: 1; inconsistent; even_lens: 2; zero_lens: 2; no_lens: 4; has_rich_chords; reors: 3; em:_6_4_0_2; o2:_0_2_0_4; t1+t3: 09; or_type_count: 3; or_type_decomp:_1_1_1; rich_type_count: 18; less: 0; or_counts:_3_5; t1: 0; t2: 19; t3: 9; t4: 11; rov: 0 0 0 3; ruv: 7 6 5 5; uon: 15 7 1 0; rrn: 1 2 3 6 8; prn: 7 6 2 4 0; orverts:_6_11_17_; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; rrn024: 12; s1s0diff: 6; ruv13: 11; evens: col: 12; rrn13: 8; ruv02: 12; chord_info: (21 6 12) t1(0 0 0) t2(8 0 11) t3(7 2 0) t4(6 4 1); done; no_2cdcs; has_2richcdcs;
+
+g122: 138 new o6c4c: or: 03; s0: 14; s1: 23; s2: 2; r244odd: 4; PAR: 1; inconsistent; even_lens: 2; zero_lens: 2; no_lens: 4; has_rich_chords; reors: 3; em:_6_2_0_1; o2:_0_2_0_4; t1+t3: 09; or_type_count: 3; or_type_decomp:_1_1_1; rich_type_count: 19; less: 0; or_counts:_3; t1: 0; t2: 16; t3: 9; t4: 14; rov: 0 0 0 3; ruv: 5 5 7 6; uon: 15 7 1 0; rrn: 0 2 7 4 10; prn: 3 6 5 0 2; orverts:_2_3_18_; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; rrn024: 17; s1s0diff: 9; ruv13: 11; evens: col: 12; rrn13: 6; ruv02: 12; chord_info: (22 6 11) t1(0 0 0) t2(7 0 9) t3(7 2 0) t4(8 4 2); done; no_2cdcs; has_2richcdcs;
+
+
+2 layer
+    3-2-6 circuit
+        1p
+        inconsistent
+4 layer
+    2-3 circuit
+        rich
+    6 circuit
+        1p+1p
+
+
+orcir_even:_10; orcir_odd:_6; r244odd:_4; PAR:_1;
+orcir_even:_6; orcir_odd:_6; r244odd:_4; PAR:_1;
+orcir_even:_8; orcir_odd:_6; r244odd:_0; PAR:_1;
+orcir_even:_8; orcir_odd:_6; r244odd:_4; PAR:_1;
+reversed:
+    orcir_even:_7; orcir_odd:_6; r244odd:_10; PAR:_1;
+    orcir_even:_7; orcir_odd:_6; r244odd:_4; PAR:_0;
+    orcir_even:_7; orcir_odd:_6; r244odd:_6; PAR:_1;
+
+
+
+orcir_even:_10; orcir_odd:_6; r244odd:_0; PAR:_1;
+orcir_even:_10; orcir_odd:_6; r244odd:_4; PAR:_1;
+orcir_even:_10; orcir_odd:_6; r244odd:_6; PAR:_0;
+orcir_even:_12; orcir_odd:_6; r244odd:_0; PAR:_1;
+orcir_even:_12; orcir_odd:_6; r244odd:_4; PAR:_1;
+orcir_even:_6; orcir_odd:_6; r244odd:_0; PAR:_1;
+orcir_even:_6; orcir_odd:_6; r244odd:_4; PAR:_1;
+orcir_even:_6; orcir_odd:_6; r244odd:_6; PAR:_0;
+orcir_even:_8; orcir_odd:_6; r244odd:_0; PAR:_1;
+orcir_even:_8; orcir_odd:_6; r244odd:_4; PAR:_1;
+reversed
+    orcir_even:_7; orcir_odd:_6; r244odd:_10; PAR:_1;
+    orcir_even:_7; orcir_odd:_6; r244odd:_4; PAR:_0;
+    orcir_even:_7; orcir_odd:_6; r244odd:_6; PAR:_1;
+    orcir_even:_7; orcir_odd:_8; r244odd:_4; PAR:_0;
+    orcir_even:_7; orcir_odd:_8; r244odd:_6; PAR:_1;
+    orcir_even:_9; orcir_odd:_6; r244odd:_4; PAR:_0;
+    orcir_even:_9; orcir_odd:_6; r244odd:_6; PAR:_1;

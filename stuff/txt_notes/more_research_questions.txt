@@ -1,0 +1,11 @@
+Questions to explore.
+
+A STATE SUM FOR THE TOTAL FACE COLOR POLYNOMIAL
+SCOTT BALDRIDGE, LOUIS H. KAUFFMAN, AND BEN MCCARTY
+https://arxiv.org/pdf/2308.02732
+Question 5.1. Does there exist a perfect matching on Jm, for m odd and m > 3, so that
+the total face color polynomial is zero? More generally, when does a non-trivial snark have
+zero total face color polynomial for some perfect matching?
+Remark 5.2. If one passes to the blowup, the total face color polynomial is nontrivial if and
+only if the graph has a cycle double cover. Question 5.1 is about whether the polynomial
+can be zero when one does not first blow up and instead works with a perfect matching.

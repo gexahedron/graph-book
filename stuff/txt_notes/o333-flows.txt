@@ -1,0 +1,184 @@
+- "2-flow cycle":
+    DONE: is it even length?
+        looks like so!
+        checked upto 24.05, a selection of solutions from "oriented_three_4_flows"
+        yes, seems easy to prove
+        we switch between even / odd permutations
+        NOTE: so, is should be all even circuits
+
+    TODO: what properties does it have?
+        TODO/WARNING: could it happen, that we need higher oddness to break anything here?
+        TODO: or check out notion of "separating" cycles
+
+        TODO: can we get 244-flows? (6c4c)
+            on a selection of solutions, upto 24.05 everything is ok
+            i have a heuristic explanation of how this could work
+            but it's not rigorous at all, and maybe we need some slight additional conditions
+            UPD: oh, it broke on selection of 26.05: g114, g115, g172
+                TODO: is it because it's several circuits?
+                and maybe we need to switch edges in different circuit?
+                seems like so; all 3 examples consist of 2 circuits
+
+        TODO: can we get o6c4c?
+            TODO: does it have nz5-flow? nz-mod5-flow?
+            TODO: is it same flows as for o333-flows?
+        TODO: can we get 5cdc?
+        TODO: can we get o5cdc?
+        TODO: can we get o5cdc with same nz5?
+
+        DONE: can we get o244-flows?
+            18.05: g1,g2
+            20.05: g2,g3,g4
+                g5 has o333-flows, but couldn't find o244-flows for the selected cycle
+
+    explanation:
+    - 333-flows have selected vertices with degree 3
+    - which appear each in 2 subgraphs
+    - let's imagine the nz3-flows on them
+    - so either we have 2 inflow, and 1+1 outflow; or vice versa
+    - let's now consider only o333-flows
+    - then we get that for each of these vertices,
+        - in one subgraph we have 2-1-1
+        - in the other it's -2+1+1
+        - and the same edge gets flow of 2
+        - also notice that all other vertices appear in all 3 subgraphs, with all 3 different pairs of edges
+    - so we have a correctly defined cycle, which doesn't go through the selected vertices
+        - which has flow of 2 on all of subgraphs
+        - for Petersen graph it's 6-cycle from (o)6c4c, or (o)5cdc
+        - and also, "oriented" vertices have distance 1 to the cycle
+
+    - or alternatively I think, we can just add all flows together and get same cycle
+
+    - how can I code/check this?
+        - maybe reuse mnk_flows code?
+        - fastest way would be to run oriented_three_4_flows code
+
+
+18.05g1 example:
+    5: 1 6; parts: 2 flows: 2 -1 0
+    14: 6 15; parts: 0 flows: 0 -1 2
+    25: 14 15; parts: 1 flows: 1 0 -2
+    21: 10 14; parts: 2 flows: 1 -2 0
+    22: 10 13; parts: 1 flows: -1 0 2
+    11: 4 13; parts: 0 flows: 0 1 -2
+    7: 2 4; parts: 1 flows: 1 0 -2
+    6: 2 17; parts: 2 flows: -1 2 0
+    26: 16 17; parts: 0 flows: 0 -2 1
+    4: 1 16; parts: 1 flows: -2 0 1
+
+    colors:
+        1
+            2 1 0
+            1 0 2
+            0 2 1
+        2
+            0 1 2
+            1 2 0
+            2 0 1
+        so it's even/odd permutations
+
+
+10.05:
+    g1	333: YES!;
+    6-cycle
+        3: 1 9; parts: 0 flows: 0 1 -2
+        14: 8 9; parts: 1 flows: -1 0 2
+        9: 3 8; parts: 2 flows: -1 2 0
+        11: 3 7; parts: 0 flows: 0 -2 1
+        13: 6 7; parts: 1 flows: 2 0 -1
+        5: 1 6; parts: 2 flows: 2 -1 0
+
+    0: 0 6; parts: 0 flows: 0 1 -1
+    1: 0 4; parts: 0 flows: 0 1 -1
+    2: 0 8; parts: 0 flows: 0 -2 2
+    4: 1 5; parts: 1 flows: -2 0 2
+    6: 2 7; parts: 2 flows: -2 2 0
+    7: 2 4; parts: 2 flows: 1 -1 0
+    8: 2 9; parts: 2 flows: 1 -1 0
+    10: 3 5; parts: 1 flows: 1 0 -1
+    12: 4 5; parts: 1 flows: 1 0 -1
+    
+    G1:
+        twice
+        2+3 : 1 9; parts: 0 flows: 0 1 -2
+        1+3 : 6 7; parts: 1 flows: 2 0 -1
+        1+2 : 3 8; parts: 2 flows: -1 2 0
+        once
+        1   : 1 5; parts: 1 flows: -2 0 2
+        1   : 2 9; parts: 2 flows: 1 -1 0
+        1   : 0 4; parts: 0 flows: 0 1 -1
+        +
+        2   : 2 7; parts: 2 flows: -2 2 0
+        2   : 0 6; parts: 0 flows: 0 1 -1
+        2   : 4 5; parts: 1 flows: 1 0 -1
+        +
+        3   : 3 5; parts: 1 flows: 1 0 -1
+        3   : 0 8; parts: 0 flows: 0 -2 2
+        3   : 2 4; parts: 2 flows: 1 -1 0
+
+        recolored:
+        1   : 0 8; parts: 0 flows: 0 -2 2
+        2+3 : 3 8; parts: 2 flows: -1 2 0
+        1   : 3 5; parts: 1 flows: 1 0 -1
+        1   : 2 4; parts: 2 flows: 1 -1 0
+        +
+        2   : 1 5; parts: 1 flows: -2 0 2
+        1+3 : 1 9; parts: 0 flows: 0 1 -2
+        2   : 2 9; parts: 2 flows: 1 -1 0
+        2   : 0 4; parts: 0 flows: 0 1 -1
+        +
+        3   : 2 7; parts: 2 flows: -2 2 0
+        1+2 : 6 7; parts: 1 flows: 2 0 -1
+        3   : 0 6; parts: 0 flows: 0 1 -1
+        3   : 4 5; parts: 1 flows: 1 0 -1
+
+
+26.05:
+    g114
+        1-11-10-12-13-22-1
+        2-24-19-18-21-20-2
+
+        3: 1 11; parts: 1 flows: -1 0 2
+        5: 1 22; parts: 2 flows: 1 -2 0
+        7: 2 24; parts: 1 flows: -1 0 2
+        8: 2 20; parts: 2 flows: 1 -2 0
+        23: 10 12; parts: 2 flows: 2 -1 0
+        25: 10 11; parts: 0 flows: 0 1 -2
+        26: 12 13; parts: 1 flows: 2 0 -1
+        27: 13 22; parts: 0 flows: 0 2 -1
+        32: 18 21; parts: 1 flows: 2 0 -1
+        33: 18 19; parts: 2 flows: -2 1 0
+        34: 19 24; parts: 0 flows: 0 1 -2
+        35: 20 21; parts: 0 flows: 0 -2 1
+
+    g115
+        1-11-10-12-13-24-1
+        ...
+        3: 1 11; parts: 1 flows: -2 0 1
+        5: 1 24; parts: 2 flows: 2 -1 0
+        22: 10 12; parts: 2 flows: 1 -2 0
+        24: 10 11; parts: 0 flows: 0 2 -1
+        25: 12 13; parts: 1 flows: 1 0 -2
+        26: 13 24; parts: 0 flows: 0 1 -2
+        29: 16 21; parts: 0 flows: 0 1 -2
+        30: 16 22; parts: 1 flows: -1 0 2
+        32: 18 21; parts: 2 flows: 2 -1 0
+        33: 18 19; parts: 1 flows: -2 0 1
+        34: 19 23; parts: 0 flows: 0 -2 1
+        37: 22 23; parts: 2 flows: -1 2 0
+
+    g172
+        10-12-13-17-14-15-10
+        ...
+        21: 10 12; parts: 1 flows: -2 0 1
+        22: 10 15; parts: 0 flows: 0 2 -1
+        25: 12 13; parts: 2 flows: -2 1 0
+        26: 13 17; parts: 0 flows: 0 1 -2
+        27: 14 17; parts: 1 flows: -1 0 2
+        28: 14 15; parts: 2 flows: 1 -2 0
+        31: 19 21; parts: 1 flows: -1 0 2
+        32: 19 25; parts: 2 flows: 1 -2 0
+        33: 20 24; parts: 1 flows: 2 0 -1
+        34: 20 23; parts: 2 flows: -2 1 0
+        35: 21 23; parts: 0 flows: 0 -1 2
+        38: 24 25; parts: 0 flows: 0 2 -1

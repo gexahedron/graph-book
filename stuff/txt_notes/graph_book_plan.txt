@@ -1,5 +1,14 @@
 # Graph Book
 
+jupyter-book stuff:
+## TODO: How to add References
+https://jupyterbook.org/en/stable/content/references.html
+https://jupyterbook.org/en/stable/tutorials/references.html
+https://jupyterbook.org/en/stable/content/citations.html
+- jupyter book example:
+https://www.tomasbeuzen.com/python-programming-for-data-science/README.html
+
+
 # Some caveats, for me; what results need to be rechecked:
 - o5cdc
 - Petersen colouring
@@ -7,7 +16,112 @@
 ...
 
 
-## plans for the week, 15.01-21.01:
+- understand:
+    - nz6-flows
+    - Z6-connectivity
+    - TODO: maybe we could try some structures, with a+b=c?
+        - e. g., p-adic numbers (just a wild idea, not serious)
+        - or something with zero divisors
+        - Clifford algebra
+        - or something non-commutative, but associative and preserving order as in quaternions
+
+
+- Paper2, on unit vector flows:
+    - S3:
+        - 600-cell
+        - 20 points is enough, unit vector flows from o5cdc and oriented Desargues configuration
+        - note about Hopf map S3->S2
+    - S2: openproblemgarden, 1 historical comment about semidefinite programming from Kamal Jain
+    - S2: cuboctahedron = K4 or nz4-flow, icosidodecahedron = Petersen graph
+    - S2, strong Petersen colouring
+    - S2: nz6 example, so kind-of nz5 counterexample
+    - S2, Tietze's graph
+    - S2, other snarks!
+        - semi-strong Petersen colouring + o6c4c + nz5 (+ o5cdc?)
+    - S2: even more snarks! (18.05g1, ...)
+    - S2: even more! (18.05g2, ...)
+        - and write up a story how I got there finally
+    - S2: which snarks are not yet solved?
+    - S2: nz5 example which is not icosidodecahedron, but suitable for Petersen graph!
+    - S2: nz5 examples, which are not suitable for Petersen graph (so a counterexample in a way)!
+    - S2: another nz6, nz5 counterexample! using only sqrt coordinates
+    - pose more open problems
+        - what is the general approach to find solutions for snarks? maybe sqrt-complex/compound is not enough?
+        - e. g., that nz5 is still enough for all unit vectors for snarks
+        - either find nz7, or nz6 is enough for the sphere somehow
+        - can we always build nzk-flow from nz-modk-flow? with same mod values?
+        - what is the size of minimal counterexample for nz5 flow?
+    + classic stuff
+        - write-up how 5cdc gives S4 unit vector flow
+            Celmins [3] and Preissmann [13] conjectured that every 2-edge-connected-graph
+            has a collection of five even subgraphs so that every edge is in exactly two of these subgraphs.
+            If true, that would imply that every 2-edge-connected graph has a 5-dimensional unit distance flow.
+        + some more
+        - so probably:
+            - o5cdc <=> S3 (20 points)
+            - 5cdc => S4
+            - ? o6c4c => S?
+            - 6c4c => S5
+            - 7c4c => S6
+    - release the code
+        - explain algorithm and optimizations
+    - add references
+
+    - smoe preliminary results on the connection to o6c4c
+
+
+- Paper3, much more about o6c4c, panorama, experimental data science:
+    ...
+    + gallery of o6c4c solutions
+
+
+
+other Papers:
+    - retrieving 5cdc from nz5
+    - on 3BMs
+    - gallery of counterexamples
+    - notes about Petersen graph
+    - on nmk-flows
+
+
+
+theorems I like:
+    Nowhere-Zero 6-flow Theorem
+    Perfect Path Double Cover Theorem
+    Matrix Packing Theorem
+    Planar Tree Packing Theorem
+    Solution of the bipartite analogue of the Oberwolfach problem
+    Road coloring Theorem
+    Smith's Theorem about hamiltonian cycles
+    Snark Theorem (probably, there's still 1 paper missing for the full proof)
+    Construction of cyclically 6-connected snarks
+
+
+## plans for the week, ...:
+- Benson Farb - Rigidity of moduli spaces and algebro-geometric constructions
+    https://www.youtube.com/watch?v=rXw1Fb93vlQ
+    1. resolving quartic, 10:52
+        familiar formulas
+        same as in nz4 flow <=> orientable double 4-cover (theorem 13.1.7)
+        https://en.wikipedia.org/wiki/Quartic_equation#Galois_theory_and_factorization
+    2. Schläfli graph, The intersection graph of the 27 lines on a cubic surface is a locally linear graph that is the complement of the Schläfli graph
+        can we find analogue for Petersen graph? I believe we can,
+        it's probably related to moduli stuff about tropical geometry
+    3. ? https://youtu.be/rXw1Fb93vlQ?t=3423
+        simple groups as monodromy groups
+        S6 ~= Sp4 F2
+        can it be related to o6c4c?
+- faster_edge_order - 22.05g19 on uvf is very fast; but not fast on other snarks
+    maybe there's room for improvement
+    TODO: maybe based on Petersen colourings?
+    TODO: or dynamically change edge order, based on bruteforce stats
+- render book
+- Work on the paper1
+- build S2 uvf for 18.05g2
+- what is the minimal possible rich-connected-component (judging by edge count)
+    - for Petersen colouring
+    - for 6c4c
+    - for o6c4c
 - Petersen colouring code was WRONG
     - specifically, profiles were WRONG (everything else seems to be ok)
     - so, we need to recheck everything about petersen profiles at least
@@ -41,20 +155,6 @@
 - For history: I think this is the first mention of s0, s1, s2:
     - Theorem 1. Let s0, s1 and s2 be respectively the number of (topological) minima, saddle points and maxima of the distance functions d or g. We have:
 - o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер
-- Paper on unit vector flows:
-    - S2: Petersen graph = icosidodecahedron
-    - S2, strong Petersen colouring
-    - S2, Tietze's graph
-    - S2, other snarks!
-    - S2: nz6 counterexample
-    - S3: 20 points is enough, unit vector flows from o5cdc and oriented Desargues configuration
-    - Hopf map S3->S2
-    - pose more open problems
-    + classic stuff
-        - write-up how 5cdc gives S4 unit vector flow
-            Celmins [3] and Preissmann [13] conjectured that every 2-edge-connected-graph
-            has a collection of five even subgraphs so that every edge is in exactly two of these subgraphs.
-            If true, that would imply that every 2-edge-connected graph has a 5-dimensional unit distance flow.
 
 - TODO: {rich o6c4c == rich petersen} < {? RP2, wat == has_2cdcs}
 - глянуть статью A state sum for the total face color polynomial
@@ -75,14 +175,12 @@
     - o2233-flows?
 - run has_nz5 for 26.05, compare with has_nzmodb
 - check has_nz5 for interesting parameters
-- render book
 - построить nz5 по o6c4c (через libarmadillo)
     - поискать pinv, mat, EPS, norm
     cmake -DALLOW_BLAS_LAPACK_MACOS=ON .
     sudo make install
 - study Fan-Raspaud triples
 - study even cycles (which appear in [o]244-flows)
-- retry 333-flows from o6c4c and other stories
 - o2233-flows vs o5cdc
 - create DB, at least for o6c4c solutions
     - actually several DBs
@@ -101,11 +199,6 @@
 - check example where we have 33pp, but not 333pp
 
 
-## TODO: How to add References
-https://jupyterbook.org/en/stable/content/references.html
-https://jupyterbook.org/en/stable/tutorials/references.html
-https://jupyterbook.org/en/stable/content/citations.html
-
 
 ## My successes:
 - S2 nz6
@@ -113,7 +206,7 @@ https://jupyterbook.org/en/stable/content/citations.html
 - o6c4c
 - o6c4c or_sums; 2 approaches
 - some counterexamples
-- openproblemgarden errata
+- openproblemgarden comments/errata
 - 5cdc from nz5 (through 33pp)
 * code for strong Petersen colouring conjecture and getting list of snarks with it
 * oriented 9-cycle 6-cover conjecture (o9c6c) (but not for Petersen graph, because it doesn't have any 9-cycle 6-cover)
@@ -123,7 +216,7 @@ https://jupyterbook.org/en/stable/content/citations.html
 - graham-haggkvist
 - EPPDC
 - Tree packing, matrix packing
-- P1f stuff
+- P1f stuff (mostly failures here)
 
 TODO: or=0 - https://gexahedroet.livejournal.com/18152.html
 
@@ -146,16 +239,21 @@ snark book:
         - type 1/2: 8k+2: 10, 18, 26, 34
     - Loupekine snarks
         - type 1/2: 22, …, 34, …
-        - definition is hard to understand
         - also, T3-snarks (from Hist snarks)
-            - all 3 of them have 22 vertices
+            - 2 of them are Loupekine snarks, with 22 vertices
+            - third of them also has 22 vertices
+            - ? maybe it'a pseudo-Loupekine snark R2
         - also, pseudo-Loupekine snarks
         - also, Goldberg-Loupekine snarks
-    - Goldberg snarks
-        - (2k+1)*8, k>=2
-        - 40, 56, …
-        - too big
-    - … snarks
+        - but in general there's a lot of them, L1, LP1, ...
+    - Hist (rotation) snarks
+    - Goldberg snarks (+ twisted Goldberg snarks)
+        - (2k+1)*8, k>=1
+        - 24, 40, ...
+        - 24 vertex graph, though, has a triangle
+    - Blowup snarks
+        - 34, 48
+    - other families of snarks
 
 LMFDB
 https://github.com/LMFDB/lmfdb/tree/5b69f228d492ef0120fd57094584b1cf52386693
@@ -292,7 +390,7 @@ not CQ Zhang:
         - ? matroids (Sylvester matroid), polynomials
 - Unit vector flows, s2 flow (> 5 flow)
     - "On d-dimensional nowhere-zero r-flows on a graph”
-- Petersen coloring / Normal 5-edge-coloring, cycle-continuous mapping, flow continuous maps; ? Z3-flow continuous maps
+- Petersen coloring / Normal 5-edge-coloring, cycle-continuous mapping, flow continuous maps; ? Z3-flow continuous maps; Z2xZ2-flow?
 - Simplicial Tutte "5"-flow Conjecture
 - Polynomials: Tutte, flow, nzflow, tension-flow, NL-flow, zeroes, zero-free regions, Penrose …; Hopf algebras; categorification; counting flows
 - Neumann-Lara-Flows, Two-Colour-Conjecture
@@ -310,7 +408,7 @@ not CQ Zhang:
 - “Coverings of abelian groups and vector spaces”
     - We show that these covering problems are closely related to combinatorial problems, including the so called additive basis conjecture, the three-flow conjecture, and a conjecture of Alon, Jaeger and Tarsi about nowhere zero vectors
 - ? Circular flows, ? Fractional flows, ? counterexamples
-- ? 9c6c, o9c6c/o10c6c
+- 9c6c, o9c6c, o10c6c
 - ? dominating circuit conj. and 12 other equivalent formulations
 - Hoffman-Ostenhof 3-decomposition
 - (3,3)-flow parity-pair-cover
@@ -328,7 +426,7 @@ not CQ Zhang:
 - equitable total colouring
 - Snark families
 - Snark constructions
-- Snarks and Petersen graph in general, 4color theorem
+- Snarks and Petersen graph in general, 4-color theorem
 - Snark hardness measures:
     - “Measures of Edge-Uncolorability of Cubic Graphs”
     - “Girth, oddness, and colouring defect of snarks”
@@ -339,14 +437,15 @@ not CQ Zhang:
 - “Projective, affine, and abelian colorings of cubic graphs”
 - circular dessin d’enfants (2 papers)
     - + Graphs on surfaces, delta-matroids, dessin d’enfants, quadratic / Strebel differentials, ribbon graphs
-- ? Hilbert basis, cones, Lovasz’s “Matching structure and the matching lattice”, counterexample for “characteristic vectors of cuts of graphs form Hilbert basis”, ? “circuits of a graph form a Hilbert basis iff the graph has no Petersen minor”
+- Lovasz’s “Matching structure and the matching lattice”
+- Hilbert basis, cones, counterexample for “characteristic vectors of cuts of graphs form Hilbert basis”, ? “circuits of a graph form a Hilbert basis iff the graph has no Petersen minor”
 - snark theorem “every snark has the Petersen graph as a minor”
     - https://math.stackexchange.com/questions/3692582/what-is-the-current-status-of-the-snark-theorem
     - https://mathoverflow.net/questions/272067/tuttes-conjecture-on-petersen-graphs
 - Flow polynomials as Feynman amplitudes
 - perfect matchings, chord diagrams, 4T relation, IHX relation, sl2, Vassiliev invariants, bridgeless maps, typings of linear lambda terms, ? knotted trivalent graphs
 - polyhedral or closed 2-cell embedding
-    - Grünbaum conjecture
+    - (disproved) Grünbaum conjecture
 
 TODO: collect links to researchers
 http://www.mat.savba.sk/~kochol/

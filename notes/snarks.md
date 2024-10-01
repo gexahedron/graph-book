@@ -50,6 +50,8 @@ https://en.wikipedia.org/wiki/Loupekine_snarks
 
 ## Bicritical snarks
 
+All bicritical snarks are critical.
+
 ## Strictly critical snarks
 
 There are no strictly critical snarks of any order smaller than 32.
@@ -67,7 +69,7 @@ There exist strictly critical snarks of order n for every even integer $n \ge 32
 ## TODO: not-(yet)-found snarks
 
 - 7-cyclically connected snarks
-- Cayley snarks
+- Cayley snarks ("well-known conjecture (Alspach-Liu-Zhang) that there are no snarks amongst Cayley graphs.")
 
 What about:
 - ? matroids

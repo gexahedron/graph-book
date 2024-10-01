@@ -224,8 +224,6 @@ infra TODO:
 		вывод в формате graphviz
 		и потом можно будет в каждом эксперименте что-то своё довешивать в плане визуализации
 		удобно же!
-	свалить с github (на gitlab, например)
-		https://docs.gitlab.com/ee/user/project/import/github.html
 
 	добавить локализацию
 	http://alabaster.readthedocs.io/en/latest/customization.html
@@ -396,6 +394,7 @@ TODO:
 
 	а что это за вложение графа? может это соответствует
 	вложению в тор?
+	UPD: кажется что соответсвует решению 96555
 
 DONE:
 	теперь такой план есть

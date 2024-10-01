@@ -3,36 +3,1367 @@ Notation/glossary:
 # x = 2/(5**0.25)
 # y = x*phi
 
+TODO: what is (still) left to find:
+        20.05: g2 (27/30), g6 (26)
+        22.05: g1 (30/33), g2 (31, fast), g3 (30), g5 (30, almost fast),
+               g6 (29), g7 (30), g8 (30, very fast),
+               g9 (30, fast), g19 (31, super fast), g20 (30)
+
+
+TODO: faster searches:
+    - faster_edge_order - 22.05g19 on uvf is very fast; but not fast on other snarks
+    maybe there's room for improvement
+    TODO: maybe based on Petersen colourings?
+    TODO: or dynamically change edge order, based on bruteforce stats
+
+    - TODO: add random coin flips when bruteforcing, for speed up,
+        even if we miss the solution
+
+    - TODO: add timer, and if we search too long, stop doing it
+
+
+TODO: compound 18.05g2
+    NOTE: i use not full set of 90 opposite points, but smaller subset, sufficient for 18.05g2
+    DONE: with cuboctahedron
+        nothing upto including 22.05
+        - TODO: maybe we need 2**0.5 analog of cuboctahedron here!
+    DONE: with midpoints
+        nothing upto including 22.05
+    DONE: compound + midpoints
+        nothing upto including 22.05
+    
+
+(sqrt_complex, i'm still missing something)
+TODO: Tietze's graph (or e. g. 20.05g5)
+    TODO: add integer w1**2+w2**2 points
+        e. g. w1=phi-1, w2=phi
+
+        easy hack helped
+        points, from_val_to_ws = gen_sqrt_complexes([
+            (1,5,2,1),
+            (1,2,3,1),
+        ], use_conf2=True)
+
+    even this set
+        points, from_val_to_ws = gen_sqrt_complexes([
+        (1,5,2,1),
+        (1,2,1,1),
+        (1,3,1,1),
+        (2,3,4,1),
+        (2,5,6,1),
+        (1,1/2,1,1),
+    ], use_conf2=True)
+
+    doesn't seem to work for 20.05g5
+    how can we capture it?
+
+    TODO: how do we add/find these or similar points?
+        a = 0.96875986667354408
+            a = 1/6 * (-1 + 2**0.5 + 5**0.5 + 10**0.5)
+            a = 1/3 * (phi-1 + phi * 2**0.5)
+        b = 0.24800064661741741
+            b = 1/6 * (1 + 2**0.5 + 5**0.5 - 10**0.5)
+            b = 1/3 * (phi - (phi-1) * 2**0.5)
+        c = 0.65974287229859663
+            c = 1/12 * (1 + 2*2**0.5 - 5**0.5 + 2*10**0.5)
+            c = 1/3 * (-(phi-1)/2 + phi * 2**0.5)
+        d = 0.56101634775752984
+            d = 1/12 * (1 - 2*2**0.5 + 5**0.5 + 2*10**0.5)
+            d = 1/3 * (phi/2 + (phi-1) * 2**0.5)
+    
+    phi, phi-1, and use 2**0.5 in weights
+    phi-1=1/phi
+    a = (1/phi**2 + 2**0.5) * phi / 3
+
+    TODO: we can try to add circle extension in the mix
+
+
+TODO: gen_sqrt_complex(1, 3, 5, v4=1, use_conf2=True), no nz5!
+    nice, so we can find nz5 counterexample with only sqrt roots
+    TODO: would be cool to find nz6 counterexample
+    TODO: gen_sqrt_complex(1, 3, 6, v4=1, use_conf2=True), no nz5!
+
+    it turns out even gen_sqrt_complex(1, 3, 1, 1, use_conf2=True), no nz5!
+
+    even better!
+    gen_sqrt_complex(1, 3, 7, v4=1, use_conf2=True), no nz5!
+    just 44 points
+        but much more various coordinates are used
+
+    with 1,3,1 i think the least amount of points is 42
+        visualized it, and also 44 points, they look the same
+        44 set is more symmetric, so 42 misses 1 pair of opposite points
+
+    (15, 7, 16)
+    (1, 13, 4)
+    (38, 13, 9)
+    (19, 22, 25)
+    (5, 22, 0)
+    (6, 7, 8)
+    (2, 1, 0)
+    (24, 20, 38)
+    (19, 4, 8)
+    (16, 1, 27)
+    (20, 22, 7)
+    (3, 7, 9)
+    (12, 13, 6)
+    (12, 20, 2)
+    (24, 1, 25)
+    (3, 4, 5)
+    counts
+        15
+        27
+        1,1,1,1
+        7,7,7,7
+        4,4,4
+        13,13,13
+        20,20,20
+        22,22,22
+        0,0
+        2,2
+        3,3
+        5,5
+        6,6
+        8,8
+        9,9
+        12,12
+        16,16
+        19,19
+        24,24
+        25,25
+        38,38
+
+
+TODO: 20.05g2 (and probably 20.05g6)
+    icosidodeca-cubocta compound + 18.05g2 doesn't give a solution here
+    TODO: compound 18.05g2 and compound
+    TODO: check out other sqrt combinations
+
+
+DONE: study 18.05g2 solution
+    NOTES:
+        - conf2 finally is useful
+        - second type of vectors forms a cycle, with 2 circuits
+            with 6 and 8 edges
+        - i don't see much correlation between Petersen colouring and this solution
+            - only that we have a symmetry in this graph
+            - and it relates to both constructions
+        - there are 3 types of vertices
+            122
+            322
+            333
+
+    - TODO: graph used triple count: 15
+        - this is after equivalence of opposite points
+
+    DONE: identify 8-cycles
+    prrrrrrrrrrrrrrprrpprpprprp; rich: 19; poor: 8; 0
+    rprrrrrrrrrrrrrprrprpppprpr; rich: 19; poor: 8; 1
+    rrrrppprprprpprrrprrrrrrrrr; rich: 19; poor: 8; 2
+    rrrpprpprprrrpprrprrrrrrrrr; rich: 19; poor: 8; 3
+    012345678901234567890123456
+    0         1         2
+    always rich: e2, e11, e16
+        0-3, 4-13, 8-11
+    twice poor: e4, e6, e13, e15, e17, e18, e21, e22
+    first solution, poor edges:
+        e21, e22, e24, e26
+        13-10-14-15-8
+        0-12-17-16-11
+
+    v: 0; 12(e0) 14(e1) 3(e2) ; triple: 1 47 83
+    v: 1; 9(e3) 5(e4) 6(e5) ; triple: 38 41 53
+    v: 2; 7(e6) 4(e7) 9(e8) ; triple: 13 46 73
+    v: 3; 0(e2) 5(e9) 7(e10) ; triple: 6 88 42
+    v: 4; 2(e7) 13(e11) 5(e12) ; triple: 43 85 7
+    v: 5; 1(e4) 3(e9) 4(e12) ; triple: 48 1 82
+    v: 6; 1(e5) 8(e13) 7(e14) ; triple: 36 23 80
+    v: 7; 2(e6) 3(e10) 6(e14) ; triple: 76 47 9
+    v: 8; 6(e13) 15(e15) 11(e16) ; triple: 66 63 0
+    v: 9; 1(e3) 2(e8) 11(e17) ; triple: 51 16 64
+    v: 10; 14(e18) 13(e19) 16(e20) ; triple: 12 43 80
+    v: 11; 8(e16) 9(e17) 16(e21) ; triple: 89 25 24
+    v: 12; 0(e0) 17(e22) 13(e23) ; triple: 88 41 7
+    v: 13; 4(e11) 10(e19) 12(e23) ; triple: 4 46 82
+    v: 14; 0(e1) 10(e18) 15(e24) ; triple: 42 77 16
+    v: 15; 8(e15) 14(e24) 17(e25) ; triple: 26 73 37
+    v: 16; 10(e20) 11(e21) 17(e26) ; triple: 9 65 54
+    v: 17; 12(e22) 15(e25) 16(e26) ; triple: 48 52 35
+
+    8-cycles:
+              0-12-13-10-16-17-15-14-(0)
+        vecs:  1-7-43-9-35-37-16-42
+              3-7-6-1-9-2-4-5-(3)
+        vecs: ...
+    + vertices:
+        8, 11, and 8-11 edge
+            e16: vec0: -1 0 0
+    and edges
+        0-3, 4-13
+            e8: vec16: -0.70710678118654757 0.70710678118654757 0
+            e11: vec4: -0.84089641525371461 -0.20710678118654757 0.5
+
+    vector v: 0; -1 0 0
+    vector v: 1; -0.84089641525371461 -0.5 -0.20710678118654757
+    vector v: 4; -0.84089641525371461 -0.20710678118654757 0.5
+    vector v: 6; -0.84089641525371461 0.20710678118654757 0.5
+    vector v: 7; -0.84089641525371461 0.5 -0.20710678118654757
+    vector v: 9; -0.70710678118654757 -0.70710678118654757 0
+    vector v: 12; -0.70710678118654757 0 -0.70710678118654757
+    vector v: 13; -0.70710678118654757 0 0.70710678118654757
+    vector v: 16; -0.70710678118654757 0.70710678118654757 0
+    vector v: 23; -0.5 -0.20710678118654757 -0.84089641525371461
+    vector v: 24; -0.5 -0.20710678118654757 0.84089641525371461
+    vector v: 25; -0.5 0.20710678118654757 -0.84089641525371461
+    vector v: 26; -0.5 0.20710678118654757 0.84089641525371461
+    vector v: 35; -0.20710678118654757 -0.5 -0.84089641525371461
+    vector v: 36; -0.20710678118654757 -0.5 0.84089641525371461
+    vector v: 37; -0.20710678118654757 0.5 -0.84089641525371461
+    vector v: 38; -0.20710678118654757 0.5 0.84089641525371461
+    vector v: 41; 0 -1 0
+    vector v: 42; 0 -0.70710678118654757 -0.70710678118654757
+    vector v: 43; 0 -0.70710678118654757 0.70710678118654757
+    vector v: 46; 0 0.70710678118654757 -0.70710678118654757
+    vector v: 47; 0 0.70710678118654757 0.70710678118654757
+    vector v: 48; 0 1 0
+    vector v: 51; 0.20710678118654757 -0.5 -0.84089641525371461
+    vector v: 52; 0.20710678118654757 -0.5 0.84089641525371461
+    vector v: 53; 0.20710678118654757 0.5 -0.84089641525371461
+    vector v: 54; 0.20710678118654757 0.5 0.84089641525371461
+    vector v: 63; 0.5 -0.20710678118654757 -0.84089641525371461
+    vector v: 64; 0.5 -0.20710678118654757 0.84089641525371461
+    vector v: 65; 0.5 0.20710678118654757 -0.84089641525371461
+    vector v: 66; 0.5 0.20710678118654757 0.84089641525371461
+    vector v: 73; 0.70710678118654757 -0.70710678118654757 0
+    vector v: 76; 0.70710678118654757 0 -0.70710678118654757
+    vector v: 77; 0.70710678118654757 0 0.70710678118654757
+    vector v: 80; 0.70710678118654757 0.70710678118654757 0
+    vector v: 82; 0.84089641525371461 -0.5 0.20710678118654757
+    vector v: 83; 0.84089641525371461 -0.20710678118654757 -0.5
+    vector v: 85; 0.84089641525371461 0.20710678118654757 -0.5
+    vector v: 88; 0.84089641525371461 0.5 0.20710678118654757
+    vector v: 89; 1 0 0
+
+    grouped vectors:
+        vecs:  1-7-43-9-35-37-16-42
+        types: 2-2- 3-3- 2- 2- 3- 3 
+
+        vector v: 0; -1 0 0
+        vector v: 41; 0 -1 0
+        vector v: 48; 0 1 0
+        vector v: 89; 1 0 0
+
+        vector v: 1; -0.84089641525371461 -0.5 -0.20710678118654757
+        vector v: 4; -0.84089641525371461 -0.20710678118654757 0.5
+        vector v: 6; -0.84089641525371461 0.20710678118654757 0.5
+        vector v: 7; -0.84089641525371461 0.5 -0.20710678118654757
+        vector v: 23; -0.5 -0.20710678118654757 -0.84089641525371461
+        vector v: 24; -0.5 -0.20710678118654757 0.84089641525371461
+        vector v: 25; -0.5 0.20710678118654757 -0.84089641525371461
+        vector v: 26; -0.5 0.20710678118654757 0.84089641525371461
+        vector v: 35; -0.20710678118654757 -0.5 -0.84089641525371461
+        vector v: 36; -0.20710678118654757 -0.5 0.84089641525371461
+        vector v: 37; -0.20710678118654757 0.5 -0.84089641525371461
+        vector v: 38; -0.20710678118654757 0.5 0.84089641525371461
+        vector v: 51; 0.20710678118654757 -0.5 -0.84089641525371461
+        vector v: 52; 0.20710678118654757 -0.5 0.84089641525371461
+        vector v: 53; 0.20710678118654757 0.5 -0.84089641525371461
+        vector v: 54; 0.20710678118654757 0.5 0.84089641525371461
+        vector v: 63; 0.5 -0.20710678118654757 -0.84089641525371461
+        vector v: 64; 0.5 -0.20710678118654757 0.84089641525371461
+        vector v: 65; 0.5 0.20710678118654757 -0.84089641525371461
+        vector v: 66; 0.5 0.20710678118654757 0.84089641525371461
+        vector v: 82; 0.84089641525371461 -0.5 0.20710678118654757
+        vector v: 83; 0.84089641525371461 -0.20710678118654757 -0.5
+        vector v: 85; 0.84089641525371461 0.20710678118654757 -0.5
+        vector v: 88; 0.84089641525371461 0.5 0.20710678118654757
+
+        vector v: 9; -0.70710678118654757 -0.70710678118654757 0
+        vector v: 12; -0.70710678118654757 0 -0.70710678118654757
+        vector v: 13; -0.70710678118654757 0 0.70710678118654757
+        vector v: 16; -0.70710678118654757 0.70710678118654757 0
+        vector v: 42; 0 -0.70710678118654757 -0.70710678118654757
+        vector v: 43; 0 -0.70710678118654757 0.70710678118654757
+        vector v: 46; 0 0.70710678118654757 -0.70710678118654757
+        vector v: 47; 0 0.70710678118654757 0.70710678118654757
+        vector v: 73; 0.70710678118654757 -0.70710678118654757 0
+        vector v: 76; 0.70710678118654757 0 -0.70710678118654757
+        vector v: 77; 0.70710678118654757 0 0.70710678118654757
+        vector v: 80; 0.70710678118654757 0.70710678118654757 0
+
+
+DONE!: 18.05g2, which weighted linear combinations to try?
+    TODO: can we solve it algebraically?
+    TODO: compound 2,5,12 (or 2,5,6,conf2) and 1,5,4
+    TODO: maybe we need to compound with non-standard nz3-configuration?
+        e. g. 5,11,18,conf2
+            although it's best to check the angles also
+    NOTE: petersen graph is 1,5,2
+        let's assume 5 ~ 15, 2 ~ 10
+        x ~ 27, y ~ 18
+        x = 9, y = 2
+    
+    TODO: 18.05g2, from approximations we see that
+        - sqrt(10) could be useful
+        - sqrt(...+sqrt(5)) could be useful
+    
+    DONE!: what if we add points looking like
+        a = ((w1*s2+w2*s5))**0.5
+        this was important! and helped with 18.05g2
+
+
+DONE, somewhat: 650 points
+    - no nz4, has nz5
+    - can't use for Petersen graph!
+    unit vectors count: 650
+    unit vectors triples count: 636
+
+    although it still doesn't help with 18.05g2
+
+    what's interesting: this is done using 1, 2**0.5/2 and 3**0.5/2
+
+    found a smaller sample of 312 vectors
+
+    WOW, looks like there's also a subtle bug in find_flow
+        because i got this output:
+        397
+        after uniq_points 598
+        after add_opposite_points 598
+        after find_trinities_from_points 598 344
+        after filter_trinities 598 250
+        after map_to_smaller_indices 340 250
+        312 cur_found: 3 False
+        312 cur_found: 4 True
+        alt cur_found: 4 True
+        312 vs 340
+        312 cur_found: 3 False
+        312 cur_found: 4 False
+        found [3, 4] False
+        component_count 2
+
+        so, we have 340 points
+        but 2 components, both of which have 312 points
+
+        although this only happens when we search for a subset, it doesn't happen for 650 points
+
+        Something is wrong with colors dict
+        it has 0 for a colored/flooded vertex
+
+        so, probably there's a bug in find_colors
+
+        is it a bug in backtracks? looks like that, wow
+
+    cool, now it's good to print out the triples, and make a smaller subset
+    found a smaller sample of 264 vectors
+    254
+    188
+    140
+    134
+    100
+    92
+    32 (nice)
+
+                 ops
+    (23, 55, 18) [34, 12, 51]
+    (33, 52, 55) [24, 17, 12]
+    (11, 12, 13) [50, 55, 44]
+    (16, 33, 34) [5, 24, 23]
+    (16, 14, 30) [5, 49, 53]
+    (51, 52,  5) [18, 17, 16]
+    (43, 41, 13) [45, 4, 44]
+    (16, 28, 29) [5, 15, 19]
+    (16, 47, 45) [5, 48, 43]
+    (19, 50, 30) [29, 11, 53]
+    (11, 14, 15) [50, 49, 28]
+    (44, 48, 42) [13, 47, 3]
+    (3, 4, 5) [42, 41, 16]
+
+    min values:
+    (23, 12, 18)
+    (24, 17, 12)
+    (11, 12, 13)
+    (5, 24, 23)
+    (5, 14, 30)
+    (18, 17, 5)
+    (43, 4, 13)
+    (5, 15, 19)
+    (5, 47, 43)
+    (19, 11, 30)
+    (11, 14, 15)
+    (13, 47, 3)
+    (3, 4, 5)
+    13 triples, 32 points
+    who appears how much:
+        3, 3
+        4, 4
+        5, 5, 5, 5, 5, 5
+        11, 11, 11
+        12, 12, 12
+        13, 13, 13
+        14, 14 
+        15, 15
+        17, 17
+        18, 18
+        19, 19
+        23, 23
+        24, 24
+        30, 30
+        43, 43
+        47, 47
+    okay, nice, everyone appears at least twice
+    TODO: do we need triple 11,12,13 for nz5?
+    each triple contains one of 5,11,12,13
+    "5,11,12,13"-cycles: 3,4,43,47,3,
+                          5 13 5 13
+
+    TODO?: angles
+    TODO: compound
+    TODO: extend; maybe get nz6 counterexample
+    TODO: simplify coordinates
+    DONE: coordinates
+        s2=2**0.5
+        s3=3**0.5
+        (12, 2, -2) means (2*s2-2*s3)/12
+        14 coordinates:
+            (12, -2, 2) 0.052972874199297006
+            (12, 3, -2) 0.06487825599846093
+            (12, -1, 2) 0.17082400439705495
+            (12, -2, 4) 0.3416480087941099
+            (12, 1, 2) 0.40652626479257087
+            (12, 6, -2) 0.41843164659173476
+            (12, 4, 0) 0.47140452079103173
+            (12, 2, 2) 0.5243773949903289
+            (12, 0, 4) 0.5773502691896257
+            (12, 3, 2) 0.6422285251880867
+            (12, -1, 6) 0.7481742735866808
+            (12, 2, 4) 0.8130525295851415
+            (12, 1, 6) 0.9838765339821967
+            (12, 6, 2) 0.9957819157813604
+        [-0.8130525295851415, 0.3416480087941099, 0.47140452079103173]
+            (2*s2+4*s3)**2 + (-2*s2+4*s3)**2 + (4*s2)**2 = 144
+            (2*s2+4*s3)**2 + (-2*s2+4*s3)**2 = 112
+            (4*2+16*3)*2 = 112. qed
+        [0.47140452079103184, -0.8130525295851417, 0.34164800879410995]
+        [0.17082400439705495, -0.9838765339821967, -0.052972874199297006]
+        [0.6422285251880867, 0.6422285251880867, -0.41843164659173476]
+        [-0.7481742735866808, 0.40652626479257087, -0.5243773949903289]
+        [0.5773502691896257, 0.5773502691896257, 0.5773502691896257]
+        [-0.5773502691896257, -0.5773502691896257, -0.5773502691896257]
+        [-0.9957819157813604, 0.06487825599846093, 0.06487825599846093]
+        [0.3416480087941099, 0.47140452079103173, -0.8130525295851415]
+        [-0.40652626479257087, 0.5243773949903289, 0.7481742735866808]
+        [-0.052972874199297006, 0.17082400439705495, -0.9838765339821967]
+        [-0.41843164659173476, 0.6422285251880867, 0.6422285251880867]
+        [0.9957819157813604, -0.06487825599846093, -0.06487825599846093]
+        [-0.9838765339821967, -0.052972874199297006, 0.17082400439705495]
+        [0.06487825599846093, -0.9957819157813604, 0.06487825599846093]
+        [-0.6422285251880867, 0.41843164659173476, -0.6422285251880867]
+        [-0.3416480087941099, -0.47140452079103173, 0.8130525295851415]
+        [-0.5243773949903289, -0.7481742735866808, 0.40652626479257087]
+        [0.9838765339821967, 0.052972874199297006, -0.17082400439705495]
+        [0.41843164659173476, -0.6422285251880867, -0.6422285251880867]
+        [-0.47140452079103184, 0.8130525295851417, -0.34164800879410995]
+        [0.5243773949903289, 0.7481742735866808, -0.40652626479257087]
+        [0.40652626479257087, -0.5243773949903289, -0.7481742735866808]
+        [-0.06487825599846093, 0.9957819157813604, -0.06487825599846093]
+        [0.6422285251880867, -0.41843164659173476, 0.6422285251880867]
+        [0.8130525295851415, -0.3416480087941099, -0.47140452079103173]
+        [-0.17082400439705495, 0.9838765339821967, 0.052972874199297006]
+        [-0.6422285251880867, -0.6422285251880867, 0.41843164659173476]
+        [0.06487825599846093, 0.06487825599846093, -0.9957819157813604]
+        [0.7481742735866808, -0.40652626479257087, 0.5243773949903289]
+        [-0.06487825599846093, -0.06487825599846093, 0.9957819157813604]
+        [0.052972874199297006, -0.17082400439705495, 0.9838765339821967]
+    ​
+
+
+
+NOTE:
+    18.05g1 point (0.5 0.5 1/2**0.5)
+    is also kind of useful for 18.05g2:
+    without it we get 21/27
+    with it we get 24/27
+
+    also interesting, playing with linear sums of 1, 2**0.5 / 2, phi
+    if denom is 4, and some restriction on weights
+    then we don't get 20.05g5 somehow (but we have 20.05g3)
+    denom 6 works for 20.05g5
+
+
+WONTDO: pythagorean triples
+    (0, 0.6, 0.8)
+    it doesn't seem to appear in triples, but still funny to note
+
+
+TODO: 18.05g2
+    maybe it's because of non-petersen 5-cycle clusters?
+
+
+maybe DONE: 18.05g2, cut colors.size() != 2:
+    that's a bit weird
+    it's only 3 or 4, at the moment 
+    checked all circuits of length 5 and 6
+    on the other hand, I had a check that we don't reuse same vector
+    and in my previous construction i did exactly that
+
+
+TODO: 18.05g2, approximations:
+    =>0.638196600211586
+    (3*phi+1)/10=0.5854101966249684
+    1/2
+    
+    =>0.9472135945868558
+    (3*phi-4)/10=0.085410196624968335
+    (phi-1)/2
+
+    conf2?
+    0.89442719099991586
+    0.44721359549995804
+    0
+
+
+
+    could be useful maybe
+        except for a0,a1,a2
+    [{a0: -5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2 - 5797*sqrt(246 - 110*sqrt(5)) + 1/4 + 3*sqrt(5)/20 + 12958*sqrt(1230 - 550*sqrt(5))/5 + 1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)),
+    a1: -1353*sqrt(1230 - 550*sqrt(5))/40 - 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 - 3*sqrt(5)/10 + 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 + 615*sqrt(246 - 110*sqrt(5))/8,
+    a2: -sqrt(5)/4 - 1/4,
+    
+    b0: -5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2 - 5797*sqrt(246 - 110*sqrt(5)) - 1/4 + 3*sqrt(5)/20 + 12958*sqrt(1230 - 550*sqrt(5))/5 + 1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)),
+    b1: -1353*sqrt(1230 - 550*sqrt(5))/40 - 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 - sqrt(5)/20 + 1/4 + 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 + 615*sqrt(246 - 110*sqrt(5))/8,
+    b2: -1/2,
+    
+    c0: -5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2 - 5797*sqrt(246 - 110*sqrt(5)) - sqrt(5)/10 + 12958*sqrt(1230 - 550*sqrt(5))/5 + 1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)),
+    c1: -1353*sqrt(1230 - 550*sqrt(5))/40 - 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 - 1/4 - sqrt(5)/20 + 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 + 615*sqrt(246 - 110*sqrt(5))/8,
+    c2: -1/4 + sqrt(5)/4,
+    
+    d0: -5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2 - 5797*sqrt(246 - 110*sqrt(5)) - sqrt(5)/10 + 1/2 + 12958*sqrt(1230 - 550*sqrt(5))/5 + 1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)),
+    d1: -1353*sqrt(1230 - 550*sqrt(5))/40 - 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 + sqrt(5)/5 + 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 + 615*sqrt(246 - 110*sqrt(5))/8,
+    d2: 0,
+    
+    e0: -5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2 - 5797*sqrt(246 - 110*sqrt(5)) - sqrt(5)/10 + 12958*sqrt(1230 - 550*sqrt(5))/5 + 1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)),
+    e1: -1/4 - sqrt(5)/20 - sqrt(10)*sqrt(123 - 55*sqrt(5))/(5*(11 - 5*sqrt(5))),
+    e2: 1/4 - sqrt(5)/4},
+    
+    {a0: -1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)) - 12958*sqrt(1230 - 550*sqrt(5))/5 + 1/4 + 3*sqrt(5)/20 + 5797*sqrt(246 - 110*sqrt(5)) + 5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2,
+    a1: -615*sqrt(246 - 110*sqrt(5))/8 - 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 - 3*sqrt(5)/10 + 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 + 1353*sqrt(1230 - 550*sqrt(5))/40,
+    a2: -sqrt(5)/4 - 1/4,
+    
+    b0: -1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)) - 12958*sqrt(1230 - 550*sqrt(5))/5 - 1/4 + 3*sqrt(5)/20 + 5797*sqrt(246 - 110*sqrt(5)) + 5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2,
+    b1: -615*sqrt(246 - 110*sqrt(5))/8 - 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 - sqrt(5)/20 + 1/4 + 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 + 1353*sqrt(1230 - 550*sqrt(5))/40,
+    b2: -1/2,
+    
+    c0: -1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)) - 12958*sqrt(1230 - 550*sqrt(5))/5 - sqrt(5)/10 + 5797*sqrt(246 - 110*sqrt(5)) + 5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2,
+    c1: -615*sqrt(246 - 110*sqrt(5))/8 - 275*sqrt(5)*sqrt(246 - 110*sqrt(5))/8 - 1/4 - sqrt(5)/20 + 121*sqrt(5)*sqrt(1230 - 550*sqrt(5))/8 + 1353*sqrt(1230 - 550*sqrt(5))/40,
+    c2: -1/4 + sqrt(5)/4,
+    
+    e0: -1159*sqrt(5)*sqrt(1230 - 550*sqrt(5)) - 12958*sqrt(1230 - 550*sqrt(5))/5 - sqrt(5)/10 + 5797*sqrt(246 - 110*sqrt(5)) + 5185*sqrt(5)*sqrt(246 - 110*sqrt(5))/2,
+    e1: sqrt(10)*sqrt(123 - 55*sqrt(5))/(5*(11 - 5*sqrt(5))) - 1/4 - sqrt(5)/20,
+    e2: 1/4 - sqrt(5)/4}]
+
+
+
+TODO: 18.05g2, uvf for whole graph without 1 circuit
+     e5,  6-1: vector 16:      0 1 0
+    e17, 11-9:    ... 24:    0.5 0.80901699437494745 0.30901699437494745
+     e6,  7-2:    ...  5:   -0.5 -0.80901699437494745 -0.30901699437494745
+    e11, 13-4:    ... 10:   -0.30901699437494745 -0.5 0.80901699437494745
+     e9,  3-5: ... 12op(17): 0.30901699437494745 -0.5 -0.80901699437494745
+
+    x1,y1,z1
+    x2,...
+    ...
+    x5,...
+
+    x5-x1=0
+    x1-x2=0.5
+    ...
+
+    without enforcing (x5,y5,z5) to be on a sphere:
+    {a0: 0.585410196624969,
+    a1: -0.0527864045000425,
+    a2: 0.809016994374947,
+    b0: 0.0854101966249691,
+    b1: -0.861803398874989,
+    b2: 0.500000000000000,
+    c0: 0.585410196624969,
+    c1: -0.0527864045000425,
+    c2: 0.809016994374947,
+    d0: 0.894427190999916,
+    d1: 0.447213595499958,
+    d2: -5.00584853300088e-17,
+    e0: 0.585410196624969,
+    e1: 0.947213595499958,
+    e2: 0.809016994374947}]
+    or
+    {a0: -0.309016994374947,
+    a1: 0.500000000000000,
+    a2: 0.809016994374947,
+    b0: -0.809016994374947,
+    b1: -0.309016994374947,
+    b2: 0.500000000000000,
+    c0: -0.309016994374947,
+    c1: 0.500000000000000,
+    c2: 0.809016994374947,
+    d0: -2.93047477397882e-16,
+    d1: 1.00000000000000,
+    d2: 4.74160778747191e-16,
+    e0: -0.309016994374947,
+    e1: 1.50000000000000,
+    e2: 0.809016994374947},
+
+    plan:
+    - done: select small number of vectors, e. g., just icosidodecahedron ones, or at maximum 18.05g1 vectors
+    - done: iterate over circuits, increasing in their size
+    - done: build uvf for whole graph except for this circuit
+    - done: check that we have 0-sum for inflow for this circuit
+    - ? forgot about possible chords inside circuit (the idea here could be that maybe we need to filter out this kind of circuits)
+
+    vector v: -1;
+    vector v: 0; -1 0 0
+    vector v: 1; -0.80901699437494745 -0.30901699437494745 -0.5
+    vector v: 2; -0.80901699437494745 -0.30901699437494745 0.5
+    vector v: 3; -0.80901699437494745 0.30901699437494745 -0.5
+    vector v: 4; -0.80901699437494745 0.30901699437494745 0.5
+    vector v: 5; -0.5 -0.80901699437494745 -0.30901699437494745
+    vector v: 6; -0.5 -0.80901699437494745 0.30901699437494745
+    vector v: 7; -0.5 0.80901699437494745 -0.30901699437494745
+    vector v: 8; -0.5 0.80901699437494745 0.30901699437494745
+    vector v: 9; -0.30901699437494745 -0.5 -0.80901699437494745
+    vector v: 10; -0.30901699437494745 -0.5 0.80901699437494745
+    vector v: 11; -0.30901699437494745 0.5 -0.80901699437494745
+    vector v: 12; -0.30901699437494745 0.5 0.80901699437494745
+    vector v: 13; 0 -1 0
+    vector v: 14; 0 0 -1
+    vector v: 15; 0 0 1
+    vector v: 16; 0 1 0
+    vector v: 17; 0.30901699437494745 -0.5 -0.80901699437494745
+    vector v: 18; 0.30901699437494745 -0.5 0.80901699437494745
+    vector v: 19; 0.30901699437494745 0.5 -0.80901699437494745
+    vector v: 20; 0.30901699437494745 0.5 0.80901699437494745
+    vector v: 21; 0.5 -0.80901699437494745 -0.30901699437494745
+    vector v: 22; 0.5 -0.80901699437494745 0.30901699437494745
+    vector v: 23; 0.5 0.80901699437494745 -0.30901699437494745
+    vector v: 24; 0.5 0.80901699437494745 0.30901699437494745
+    vector v: 25; 0.80901699437494745 -0.30901699437494745 -0.5
+    vector v: 26; 0.80901699437494745 -0.30901699437494745 0.5
+    vector v: 27; 0.80901699437494745 0.30901699437494745 -0.5
+    vector v: 28; 0.80901699437494745 0.30901699437494745 0.5
+    vector v: 29; 1 0 0
+
+    0:      12(e0)  14(e1)  3(e2)
+    1:      9(e3)   5(e4)   6(e5)
+    2:      7(e6)   4(e7)   9(e8)
+    3:      0(e2)   5(e9)   7(e10)
+    4:      2(e7)   13(e11) 5(e12)
+    5:      1(e4)   3(e9)   4(e12)
+    6:      1(e5)   8(e13)  7(e14)
+    7:      2(e6)   3(e10)  6(e14)
+    8:      6(e13)  15(e15) 11(e16)
+    9:      1(e3)   2(e8)   11(e17)
+    10:     14(e18) 13(e19) 16(e20)
+    11:     8(e16)  9(e17)  16(e21)
+    12:     0(e0)   17(e22) 13(e23)
+    13:     4(e11)  10(e19) 12(e23)
+    14:     0(e1)   10(e18) 15(e24)
+    15:     8(e15)  14(e24) 17(e25)
+    16:     10(e20) 11(e21) 17(e26)
+    17:     12(e22) 15(e25) 16(e26)
+    e-circuit:  e3, e8, e7, e12, e4
+    v-circuit: 1 - 9 - 2 - 4  - 5 - (1)
+    inflow edges:
+         e5,  6-1: vector 16:      0 1 0
+        e17, 11-9:    ... 24:    0.5 0.80901699437494745 0.30901699437494745
+         e6,  7-2:    ...  5:   -0.5 -0.80901699437494745 -0.30901699437494745
+            i think e6 and e17 are incompatible
+            probably, i'm not 100% sure
+        e11, 13-4:    ... 10:   -0.30901699437494745 -0.5 0.80901699437494745
+         e9,  3-5: ... 12op(17): 0.30901699437494745 -0.5 -0.80901699437494745
+
+    v: 0; 12 14 3 ; mintriple: 0 8 5
+    v: 1; 9 5 6 ; mintriple: -1 -1 13
+    v: 2; 7 4 9 ; mintriple: 5 -1 -1
+    v: 3; 0 5 7 ; mintriple: 5 12 2
+    v: 4; 2 13 5 ; mintriple: -1 10 -1
+    v: 5; 1 3 4 ; mintriple: -1 12 -1
+    v: 6; 1 8 7 ; mintriple: 13 10 12
+    v: 7; 2 3 6 ; mintriple: 5 2 12
+    v: 8; 6 15 11 ; mintriple: 10 13 12
+    v: 9; 1 2 11 ; mintriple: -1 -1 5
+    v: 10; 14 13 16 ; mintriple: 3 4 14
+    v: 11; 8 9 16 ; mintriple: 12 5 2
+    v: 12; 0 17 13 ; mintriple: 0 6 7
+    v: 13; 4 10 12 ; mintriple: 10 4 7
+    v: 14; 0 10 15 ; mintriple: 8 3 9
+    v: 15; 8 14 17 ; mintriple: 13 9 11
+    v: 16; 10 11 17 ; mintriple: 14 2 1
+    v: 17; 12 15 16 ; mintriple: 6 11 1
+
+    e: 0; 0
+    e: 1; 21
+    e: 2; 24
+    e: 3; -1
+    e: 4; -1
+    e: 5; 16
+    e: 6; 5
+    e: 7; -1
+    e: 8; -1
+    e: 9; 12
+    e: 10; 27
+    e: 11; 10
+    e: 12; -1
+    e: 13; 19
+    e: 14; 12
+    e: 15; 16
+    e: 16; 17
+    e: 17; 24
+    e: 18; 3
+    e: 19; 25
+    e: 20; 15
+    e: 21; 27
+    e: 22; 6
+    e: 23; 7
+    e: 24; 9
+    e: 25; 11
+    e: 26; 28
+
+
+    v: 2; 7 4 9 ; mintriple: -1 -1 8
+    v: 3; 0 5 7 ; mintriple: 5 -1 -1
+    v: 4; 2 13 5 ; mintriple: -1 10 -1
+    v: 5; 1 3 4 ; mintriple: 6 -1 -1
+    v: 7; 2 3 6 ; mintriple: -1 -1 4
+    7-2-4-5-3-(7)
+    inflow edges:
+         6-7: 4: -0.80901699437494745   0.30901699437494745 0.5
+         9-2: 8op: 0.5                 -0.80901699437494745 -0.30901699437494745
+        13-4: 10op: 0.30901699437494745 0.5                 -0.80901699437494745
+         1-5: 6: -0.5                  -0.80901699437494745 0.30901699437494745
+         0-3: 24: 0.5                    0.80901699437494745 0.30901699437494745
+
+
+DONE: 18.05g2, problem with my drawing
+    i have a drawing
+    which combines rich 5-colouring
+    and some 6-cycle, which connects to edges or colors 2 and 4
+    problem is if we reuse standard vectors for rich edges
+    we need to get 0 sum on the 6-cycle
+    which we don't get
+
+    so, first we need to find a decomposition, such that it respects this constraint
+
+
+TODO: nz6 for whole sphere
+    maybe it's easy actually?
+    just create some continuous cells?
+    we can try to enforce same values if points are nearby
+
+
+TODO: nz6 geometry
+    TODO: try maybe find a similar subset,
+        but with smaller amount of different coordinates
+    TODO: angles
+
+    everywhere - conf1
+    s5 = 5**0.5
+    s25 = s5**0.5
+    phi = (1+s5)/2
+    x = 2/s25
+    y = x*phi
+
+    [1, 0, 0]
+    [(phi-1)/2, 0.5, phi/2]
+    [1.1640890861976427, 2.9555145987027394, 0.618033988749895]
+    y-1, x+phi, phi-1
+    [3.1640890861976425, 0.28055337879705067, 0.6180339887498948]
+    y+1, phi-x, phi-1
+    [2.7821230749475383, 0.337480609952844, 1.6180339887498953]
+    y+(phi-1), x-1, phi
+    [1.546055097447748, 2.337480609952844, 1.6180339887498953]
+    y-(phi-1), x+1, phi
+    [2.1640890861976425, 1.3374806099528438, 2]
+    y, x, 2
+
+    DONE: normalize coordinates
+        divide by 2*phi
+
+    coordinates:
+        0, 1/2, 1
+        (s5-1)/4, (s5+1)/4
+        ...
+
+        y/2/phi=x*phi/2/phi=x/2=
+            1/s25
+                0.668740304976422
+        2/2/phi=1/phi=phi-1=
+            (s5-1)/2
+                0.6180339887498949
+        x/2/phi=(phi-1)/s25 = (s5-1)/2/s25=
+            (s25-1/s25)/2
+                0.41330423812239925
+            (s25-1/s25)/2 + 1/2
+                0.9133042381223992
+            (s25-1/s25)/2 - 1/2
+                -0.08669576187760075
+        (phi-1)/2/phi = 1/2/phi**2=1/(2*phi+2)=
+            1/(s5+3)
+                0.19098300562505258
+        (y+(phi-1))/2/phi=1/s25+1/(s5+3)=s25/s5+1/(s5+3)=...=
+            (3-s5)/4 + 1/s25
+                0.8597233106014746
+            (3-s5)/4 - 1/s25
+                -0.47775729935136946
+        (y-1)/2/phi=...=
+            (1-s5)/4 + 1/s25
+                0.35972331060147456
+            (1-s5)/4 - 1/s25
+                -0.9777572993513695
+        (x+1)/2/phi=...=
+            (s25-1/s25)/2 + (s5-1)/4
+            (s25-1/s25)/2 - (s5-1)/4
+
+        DONE: rewrite with q=(s25-1/s25)/2, root of 5*x**4+5*x**2-1
+            0, 1, 1/2
+            (s5-1)/4, (s5+1)/4, (s5-1)/2
+            q, q+1/2, q-1/2
+            1/s25
+            1/(s5+3)
+            (1-s5)/4 + 1/2 + 1/s25, (1-s5)/4 + 1/2 - 1/s25, (1-s5)/4 + 1/s25, (1-s5)/4 - 1/s25
+            q + (s5-1)/4, q - (s5-1)/4
+        17 coordinates, wow
+
+
+DONE: Petersen graph can be embedded in a different way!
+    41.810314066473836 [0, 203, 199] [0, 202, 200]
+    41.81031489577859 [155, 44, 266] [154, 44, 268]
+    41.81031489577862 [79, 80, 383] [79, 266, 200]
+    41.81031566985978 [79, 80, 383] [203, 80, 268]
+    41.81031489577859 [351, 154, 202] [154, 44, 268]
+    41.81031489577859 [155, 44, 266] [199, 155, 352]
+    41.81031489577859 [0, 202, 200] [79, 266, 200]
+    41.81031492339039 [0, 203, 199] [203, 80, 268]
+    41.81031489577862 [351, 154, 202] [351, 383, 352]
+    41.810314895778596 [199, 155, 352] [351, 383, 352]
+    63.43494882292201 [79, 80, 383] [351, 383, 352]
+    63.43494882292203 [155, 44, 266] [79, 266, 200]
+    63.43494840826963 [0, 203, 199] [199, 155, 352]
+    63.43494882292203 [351, 154, 202] [0, 202, 200]
+    63.43494920996261 [203, 80, 268] [154, 44, 268]
+
+    2/5**0.5 = 0.89442719099991586
+        = 1/(phi-1/2) = 2/(2*phi-1)
+    1/5**0.5 = 0.44721359549995804
+        = 1/(2*phi-1)
+    (phi+7)/10 = 0.86180339887498947
+    (3*phi-4)/10 = 0.085410196624968335
+    (3*phi+1)/10 = 0.5854101966249684
+    (7-4*phi)/10 = 0.052786404500042031
+    0,1,1/2
+    phi/2, (phi-1)/2
+
+    points[0] = [-1, 0, 0]
+    points[44] = [-0.89442719099991586, 0.44721359549995804, 0]
+    points[79] = [-0.80901699437494734, -0.30901699437494745, -0.5]
+    points[80] = [-0.80901699437494734, -0.30901699437494745, 0.5]
+    points[154] = [-0.5854101966249684, -0.052786404500042031, -0.80901699437494745]
+    points[155] = [-0.5854101966249684, -0.052786404500041989, 0.80901699437494745]
+    points[199] = [-0.5, 0.80901699437494745, 0.30901699437494717]
+    points[200] = [-0.5, -0.80901699437494745, 0.30901699437494745]
+    points[202] = [-0.5, 0.80901699437494734, -0.3090169943749479]
+    points[203] = [-0.5, -0.80901700049924297, -0.3090169832959927]
+    points[266] = [-0.30901699437494734, 0.5, -0.80901699437494745]
+    points[268] = [-0.30901699437494728, 0.50000000000000011, 0.80901699437494756]
+    points[351] = [-0.085410196624968335, -0.86180339887498947, -0.50000000000000011]
+    points[352] = [-0.085410196624968335, -0.86180339887498947, 0.50000000000000011]
+    points[383] = [0, 0, -1]
+    points[384] = [0, 0, 1]
+    points[415] = [0.085410196624968335, 0.86180339887498947, -0.50000000000000011]
+    points[416] = [0.085410196624968335, 0.86180339887498947, 0.50000000000000011]
+    points[499] = [0.30901699437494728, -0.50000000000000011, -0.80901699437494756]
+    points[501] = [0.30901699437494734, -0.5, 0.80901699437494745]
+    points[564] = [0.5, 0.80901700049924297, 0.3090169832959927]
+    points[565] = [0.5, -0.80901699437494734, 0.3090169943749479]
+    points[567] = [0.5, 0.80901699437494745, -0.30901699437494745]
+    points[568] = [0.5, -0.80901699437494745, -0.30901699437494717]
+    points[612] = [0.5854101966249684, 0.052786404500041989, -0.80901699437494745]
+    points[613] = [0.5854101966249684, 0.052786404500042031, 0.80901699437494745]
+    points[687] = [0.80901699437494734, 0.30901699437494745, -0.5]
+    points[688] = [0.80901699437494734, 0.30901699437494745, 0.5]
+    points[723] = [0.89442719099991586, -0.44721359549995804, 0]
+    points[767] = [1, 0, 0]
+
+    one of 5-cycles is turned with a different angle
+
+
+TODO: gen_all
+    есть очень близкие точки, странно
+
+
+TODO: uvf after approx.
+    TODO: a better idea
+    we fix a set of starting points
+    e. g. icosidodecahedron, compound or 18.05g1 points
+    and for the rest of the sphere we generate network of approximate points
+    so we don't generate any points nearby the starting set
+    but we fill the what is left of the sphere with a lot of approximate points
+    and find the approximate solution for 18.05g2, which will use both sets
+
+    okay, now we need to rotate the solution to understand it better
+    would be nice to match it with icosidodecahedron somehow
+    or calculate angles between triples
+    for each edge, it participates in 2 triples,
+        we can calculate the angle
+
+
+TODO: 18.05g2
+    what if we could generate new points and new triples on the fly?
+
+
+
+DONE: start with huge EPS value
+    and discretized set of points on sphere
+    check that we still find solutions for what we know
+    and check that we can find approximate solution to 18.05g2
+    1e-2
+    fibonacci sphere, 500 points
+    18.05g1: 26/27
+        very interesting
+    18.05g2: 26/27
+        also very interesting!
+        v: 8; 6 15 11 ; triple: 438 768 85
+        vector v: 438; 0 0.65533905109945256 -0.75533484502177517
+        vector v: 768; 0.80839649455886731 -0.56312625250501003 0.17141741838156044
+        vector v: 85; -0.79620294315831075 -0.066132264529058071 0.60140452018113588
+        seems to sum up to almost 0
+
+        v: 9; 1 2 11 ; triple: 735 73 -1
+        vector v: 735; 0.72776072285432258 -0.062124248496993946 0.68301164559562078
+        vector v: 73; -0.8247641900917565 -0.5591182364729459 0.084562570831732631
+        => 0.09700346723743392 0.6212424849699398 -0.7675742164273534
+            vector 438
+
+
+        v: 11; 8 9 16 ; triple: 766 -1 83
+        vector v: 766; 0.79620294315831075 0.066132264529058071 -0.60140452018113588
+        vector v: 83; -0.80839649455886731 0.56312625250501003 -0.17141741838156044
+        => 0.012193551400556557 -0.6292585170340681 0.7728219385626963
+            vector 413
+    so, the approximation almost seems to work, actually
+
+
+
+
+TODO: add 2 small compounds to icosidodecahedron
+    1 with a couple of triples (but sufficient) from cuboctahedron
+    another 1 with a couple of triples from  1/2 1/2 1/2**0.5
+    idea here is that maybe we need both of them for all of petersen colours
+    preliminary approach shows that this doesn't help,
+    but I maybe missing the right vectors still
+
+
+TODO: idea for a new points extension
+    we rotate some triple to align with (phi/2, (phi-1)/2, 0.5)
+    and then add conf1 for all points
+    or add icosidodecahedron as is
+    but maybe it's not different from doing compound
+
+
+DONE: collect all individual coordinates,
+    and try to find other combinations, which squared sum up to 1
+
+    new 0 0.7071067811865475 0.7071067811865475
+
+
+TODO: 18.05g2 and others, double pentagon:
+    is currently the problem exactly in embedding double pentagon construction?
+        + satisfying parity lemma
+        + no chords between pentagons
+    probably not exactly
+    TODO: what about triple pentagon?
+
+    construction was:
+        icosidodeca + cubocta + extend
+
+
+DONE: can we simulate compound with circle extensions?
+    DONE: so, would be nice to find these coordinates:
+    a = 0.96875986667354408
+    b = 0.24800064661741741
+    c = 0.65974287229859663
+    d = 0.56101634775752984
+    we actually get them after 1 extension of single triple
+        a 0 b
+        c 0.5 d
+
+    DONE: so, then we don't have icosidodecahedron
+    phi/2 = 0.80901698577175807
+    (phi-1)/2 = 0.30901698577175807
+    1/2**0.5 = 0.70710678118654746
+
+    phi/2 (phi-1)/2 0.5
+        if we add conf1 = we will get these points
+    
+        UPD: we have it! if we add new heights, specifically phi/2 and (phi-1)/2
+
+    BUT, we still don't have 18.05g1, by just extending single triple
+    0.5 0.5 1/2**0.5
+        TODO: find height, which will produce these points
+
+    DONE: so, at least Tietze’s graph is solvable after circle extensions, applied to icosidodecahedron
+        so, compound was inside 1/2 circle extensions already, nice!
+
+    TODO: could conf2 become useful, if we rotate configuration somehow?
+
+
+DONE: what is left to find:
+    18.05: g2
+    20.05: g2, g6
+    22.05: g1, g2, g3, g5 (fast), g6, g7, g8, g9, g19, g20
+    24.05: g3, g4, g11, g12, g16, g17, g21, g22, g23, g25, g27, g30, g37 (slow)
+    we can also track incomplete progress for each graph:
+        18.05: g2 (24/27)
+        20.05: g2 (27/30), g6 (26)
+        22.05: g1 (30/33), g2 (31), g3 (30), g5 (30, fast),
+               g6 (29), g7 (30), g8 (30, ultra fast),
+               g9 (30), g19 (31, ultra fast), g20 (30)
+
+
+TODO: do we reuse some pairs-of-points in more than 2 triples?
+
+
+TODO: study angles between great circles
+
+
+TODO: S2 uvf, 18.05g1
+    we seem to always have nz5 in this uvf
+    TODO: is this construction related to anything else?
+        TODO: 5cdc? 33pp? o5cdc?
+    this could also help maybe with building a solution for 18.05g2 and others
+
+    from logs (which are slightly wrong/outdated):
+        18.05g1:
+            - o5cdc: как минимум 24 решения (хотя некоторые друг на друга похожи - кажется, что можно перебрасывать циклы между слоями)
+                2 из этих 24 решений содержат dominating circuit
+                    17;5+6;5;6+6;9; 
+                    17;5+6;5+6;6;9;
+            - 5cdc: ещё как минимум >= 477 решений
+            - stronger petersen colouring, petersen colouring: 1 неизоморфное решение, где есть 2 пути по 4 poor ребра
+
+            o5cdc
+            глянем решения с циклом длиной 17
+            что попадает в ignored: 16, 17
+            и всё
+            в stronger petersen colouring: эти 2 вершины всегда являются центрами путей из poor рёбер
+            в 2/3bm: в ignored попадает всё что угодно (при длине цикла 17)
+
+            
+        18.05g2:
+            - o5cdc: как минимум 54 решения
+                2 из этих 24 решений содержат dominating circuit
+                    17;5+6;5;6+6;9; 
+                    17;5+6;5+6;6;9;
+            - 5cdc: ещё как минимум >= 665 решений
+            - stronger petersen colouring, petersen colouring: 1 неизоморфное решение, где есть 2 пути по 4 poor ребра
+            - nz5: 226416 решений
+            - nz-k polynomial: 226416, 7081284, ...
+            
+            o5cdc
+            ignored для циклов длины 17: 8, 11
+            и тоже всё
+            в stronger petersen colouring: эти 2 вершины всегда являются концами путей из poor рёбер
+
+
+TODO: maybe we need S2 complex coordinates?
+    a+bi, y, z
+    a**2-b**2+2*a*b*i+y**2+z**2=1
+    => 2*a*b=0
+    so, we need at least 2 complex coordinates
+    so this gives at least 5 numbers, with 1 additional constraint
+        a+bi, c+di, z
+        a**2 + c**2 + z**2 - b**2 - d**2 = 0
+        a*b + c*d = 0
+    TODO: so probably it would behave similarly to S4? and then it should be very easy?
+
+
+NOTES for myself (temporary):
+    - try also to test 20.05g2 on some small point sets
+
+    - magic_dist is not enough to find solution for 18.05g1
+        - but small prop like 0.2 can work
+    - 1/4 doesn't work for 18.05g1
+        - 1/3 also doesn't work
+
+    what constructions do we have right now:
+        - single triple
+        - conf0, conf1
+            - note: conf2 never helped
+        - cuboctahedron
+        - icosidodecahedron
+        - compound 2 sets
+        - extend set by circles
+            - note: mostly only 1/2 worked for now
+        - compound, and then extend
+            - note: worked once, helped for 18.05g1, doesn't help second time
+
+    what would be nice to try:
+        - combine several extensions together
+            - but probably this doesn't help
+        - max_cur_edge_idx: 24 vs 27 - try to see partial results, maybe i can extend by hand?
+
+
+TODO: going further
+    TODO: try linear combinations of 0, 1, sqrt(2), sqrt(5), sqrt(10), 1/x
+
+    TODO: try merging various small sets
+        done a couple of small experiments, nothing helped
+
+    DONE: try adding triples/vectors
+        [0.5, 0.5, 1/2**0.5] to other points
+
+
+DONE: current uvf status (icosidodecahedron + cuboctahedron + 1/2 circles)
+    10.05: g1
+    18.05: g1 (+ g1)
+    20.05: g1, g3-g5 (+ g3)
+    22.05: g4, g10-g18 (+ g10)
+    24.05: g1, g2, g5-g10, g13-g15, g18-g20, g24, g26, g28, g29, g31-g36, g38 (+ g1,g6,g7,g15,g20)
+        ? g37 (probably still no uvf)
+
+
+TODO: S2 uvf, 18.05g2
+    TODO: try to reiterate from these vectors again + compound cuboctahedron/icosidodecahedron
+        ...
+
+    DONE: // ['0', '1/3', '2/3'] max_flooded_len 270 len 240 1
+        nope
+        maybe TODO: 18.05g1
+    DONE: // ['0', '3/5'] max_flooded_len 150 len 180 4
+        nope
+        maybe TODO: 18.05g1
+    DONE: // ['0', '1/5', '2/5', '3/5', '4/5'] max_flooded_len 750 len 780 1
+        nope
+        maybe TODO: 18.05g1
+
+    DONE: find subset of vectors for 18.05g1
+    
+    # 0 1/2 max_flooded_len 270 len 300 1
+    # 0 3/5 max_flooded_len 150 len 140 1
+    # 1/2 1/2 max_flooded_len 510 len 500 1
+    # 1/2 3/4 max_flooded_len 150 len 120 1
+    # 1/4 1/2 max_flooded_len 150 len 160 3
+    # 1/4 1/4 max_flooded_len 150 len 160 3
+    # 1/4 3/4 max_flooded_len 150 len 160 2
+    # 3/5 4/5 max_flooded_len 60 len 50 1
+    # 1/6 2/3 max_flooded_len 270 len 200 1
+
+
+TODO: S2 uvf, 18.05g1
+    DONE: also try to understand, why it doesn't work for 18.05g2
+        - so, currently my understanding is this:
+        - they have 2 different rich-blocks
+        - 18.05g1 has a block with 4 outward edges, all of them have same colour, e. g. 1
+        - and we also don't have a corresponding Petersen colouring here
+        - because around poor loop we would have edges with 4 colours in the neighbourhood
+        - the block of 18.05g2 has colour 1 inside as chords
+        - outside edges have 4 different colours
+        - so we need some other ingredient
+
+
+    DONE: also understand why there's no compatible profile anywhere
+        WONTDO probably: maybe it should be reversed? poor <-> rich?
+            well, now I see some o6c4c profiles for 18.05g1,
+            but nothing else
+        even with any of o6c4c profiles
+
+        UPD: found another uvf, with Petersen profiles, it gives this:
+        compatible Petersen profiles: ;
+        compatible o6c4c profiles: pprrrrrrrrrrrrrrrppprpppppr ;
+        compatible o6c4c-with-2xcdcs profiles: ;
+        compatible both profiles: ;
+        compatible Petersen profiles (reversed): rrrpprpprprrrprpprrrrrrrrrr rrrrppprprprpprrprrrrrrrrrr ;
+        compatible o6c4c profiles (reversed): rrpprrrrppprrrrrrrrrprrrrrp rrpprrrrrrrrprprrprrrrrrrrr rrprrprprrrrprrprrrrprrrrrp rrprrprrrprrrrprrprrrrrrrrr rrprrrrprrpprrrrrrrrrprrrrr rrprrrrrprrprrrprrrrrprrrrr rrprrrrrrrrprrrrrprrrprrrrr rrprrrrrrrrrrrprrprrrprrrrr rrrprrrrpppprrprrrrrrrrrrrp rrrprrrrrrrpprrrrprrprrrrrr rrrrrprprrrpprpprrrrrrrrrrp rrrrrprrrprprrrrrprrprrrrrr rrrrrrrprrprrrprrrrrpprrrrr rrrrrrrrprrrrrpprrrrpprrrrr rrrrrrrrrrrprrrrrprrpprrrrr rrrrrrrrrrrrrrprrprrpprrrrr ;
+        compatible o6c4c-with-2xcdcs profiles (reversed): ;
+        compatible both profiles (reversed): ;
+
+        WONTDO: or maybe find another uvf, where there is still such compatibility
+
+    DONE: do we still have nz5 flow with this solution?
+        yes, still nz5
+
+    0:      12(e0)  14(e1)  3(e2)
+    1:      9(e3)   16(e4)  6(e5)
+    2:      17(e6)  4(e7)   9(e8)
+    3:      0(e2)   5(e9)   7(e10)
+    4:      2(e7)   13(e11) 5(e12)
+    5:      3(e9)   4(e12)  16(e13)
+    6:      1(e5)   15(e14) 7(e15)
+    7:      3(e10)  6(e15)  17(e16)
+    8:      12(e17) 15(e18) 11(e19)
+    9:      1(e3)   2(e8)   11(e20)
+    10:     14(e21) 13(e22) 11(e23)
+    11:     8(e19)  9(e20)  10(e23)
+    12:     0(e0)   8(e17)  13(e24)
+    13:     4(e11)  10(e22) 12(e24)
+    14:     0(e1)   10(e21) 15(e25)
+    15:     6(e14)  8(e18)  14(e25)
+    16:     1(e4)   5(e13)  17(e26)
+    17:     2(e6)   7(e16)  16(e26)
+    dominating circuit: 2 9 11 8 12 13 10 14 15 6 7 3 5 16 17 2
+    rrrpprpprprrrprpprrrrrrrrrr; rich: 19; poor: 8; 1
+        3,4,6,7,9,13,15,16
+        3-5-16-1-9 + 4-2-17-7-6
+    rrrrppprprprpprrprrrrrrrrrr; rich: 19; poor: 8; 0
+    012345678901234567890123456
+        4,5,6,8,10,12,13,16
+        4-5-16-1-6 + 9-2-17-7-3
+
+    v: 0; n12 n14 3 ; triple: 386 124 254
+    v: 1; n9 n16 6 ; triple: 223 412 127
+    v: 2; n17 4 n9 ; triple: 98 363 285
+    v: 3; 0 5 7 ; triple: 254 450 60
+    v: 4; 2 13 5 ; triple: 363 509 145
+    v: 5; 3 4 16 ; triple: 450 145 325
+    v: 6; 1 15 7 ; triple: 127 0 368
+    v: 7; 3 6 17 ; triple: 60 368 183
+    v: 8; 12 n15 n11 ; triple: 0 385 396
+    v: 9; n1 n2 11 ; triple: 223 285 254
+    v: 10; 14 n13 n11 ; triple: 509 123 114
+    v: 11; n8 9 n10 ; triple: 396 254 114
+    v: 12; n0 8 n13 ; triple: 386 0 114
+    v: 13; 4 n10 n12 ; triple: 509 123 114
+    v: 14; n0 10 n15 ; triple: 124 509 396
+    v: 15; 6 n8 n14 ; triple: 0 385 396
+    v: 16; n1 5 n17 ; triple: 412 325 482
+    v: 17; n2 7 n16 ; triple: 98 183 482
+        it's a cycle, again
+        14-0-12-13-10-11-8-15-14
+        10   8     14   12
+        16-1- 9-2-17-16
+        5  6 11 4  7
+        0-3, 13-4, 11-9, 15-6
+
+    old vector v: 0; -1 0 0
+    old vector v: 59; -0.80901698577175807 0.30901700297813683 0.5
+    old vector v: 60; -0.80901698577175785 0.30901700297813683 -0.5
+    old vector v: 127; -0.5 -0.80901699437494745 -0.3090169943749474
+    old vector v: 141; -0.5 0.80901699437494756 0.30901699437494745
+    old vector v: 145; -0.5 0.80901700297813683 -0.30901698577175801
+    old vector v: 146; -0.5 -0.8090170049116594 0.30901698383823528
+    old vector v: 183; -0.30901699437494745 -0.5 -0.80901699437494756
+    old vector v: 184; -0.3090169943749474 -0.5 0.80901699437494745
+    old vector v: 254; 0 0 -1
+    old vector v: 255; 0 0 1
+    old vector v: 325; 0.3090169943749474 0.5 -0.80901699437494745
+    old vector v: 326; 0.30901699437494745 0.5 0.80901699437494756
+    old vector v: 363; 0.5 0.8090170049116594 -0.30901698383823528
+    old vector v: 364; 0.5 -0.80901700297813683 0.30901698577175801
+    old vector v: 368; 0.5 -0.80901699437494756 -0.30901699437494745
+    old vector v: 382; 0.5 0.80901699437494745 0.3090169943749474
+    old vector v: 449; 0.80901698577175785 -0.30901700297813683 0.50000000860318938
+    old vector v: 450; 0.80901698577175807 -0.30901700297813683 -0.50000000860318938
+    old vector v: 509; 1 0 0
+    vector v: 27; -0.89442719099991597 -0.44721359549995776 0
+    vector v: 97; -0.58541019662496863 0.052786404500042051 -0.80901699437494745
+    vector v: 98; -0.58541019662496863 0.052786404500042051 0.80901699437494745
+    vector v: 113; -0.5 -0.70710678118654746 -0.5
+    vector v: 114; -0.5 -0.70710678118654746 0.5
+    vector v: 123; -0.5 0.70710678118654746 -0.5
+    vector v: 124; -0.5 0.70710678118654746 0.5
+    vector v: 223; -0.08541019662496846 0.86180339887498936 -0.5
+    vector v: 224; -0.08541019662496846 0.86180339887498936 0.5
+    vector v: 285; 0.08541019662496846 -0.86180339887498936 -0.5
+    vector v: 286; 0.08541019662496846 -0.86180339887498936 0.5
+    vector v: 385; 0.5 -0.70710678118654746 -0.5
+    vector v: 386; 0.5 -0.70710678118654746 0.5
+    vector v: 395; 0.5 0.70710678118654746 -0.5
+    vector v: 396; 0.5 0.70710678118654746 0.5
+    vector v: 411; 0.58541019662496863 -0.052786404500042051 -0.80901699437494745
+    vector v: 412; 0.58541019662496863 -0.052786404500042051 0.80901699437494745
+    vector v: 482; 0.89442719099991597 0.44721359549995776 0
+    
+
+    UPD: another flow, with more profile matched (in reverse)
+
+    old vector v: 0; -1 0 0
+    old vector v: 28; -0.80901699437494745 -0.3090169943749474 -0.5
+    old vector v: 29; -0.80901699437494734 0.30901699437494756 -0.5
+    old vector v: 30; -0.80901699437494712 0.30901699437494767 0.5
+    old vector v: 31; -0.80901699437494679 -0.30901699437494728 0.5
+    old vector v: 53; -0.5 -0.80901699437494756 0.30901699437494745
+    old vector v: 61; -0.5 -0.80901699437494745 -0.3090169943749474
+    old vector v: 68; -0.5 0.80901699437494745 -0.30901699437494751
+    old vector v: 69; -0.5 0.80901699437494745 0.3090169943749474
+    old vector v: 85; -0.3090169943749474 0.5 0.80901699437494745
+    old vector v: 86; -0.30901699437494728 -0.5 -0.80901699437494767
+    old vector v: 87; -0.30901699437494723 0.5 -0.80901699437494756
+    old vector v: 88; -0.30901699437494701 -0.5 0.8090169943749479
+    old vector v: 110; 0 -1 0
+    old vector v: 119; 0 0 -1
+    old vector v: 120; 0 0 1
+    old vector v: 129; 0 1 0
+    old vector v: 151; 0.30901699437494701 0.5 -0.8090169943749479
+    old vector v: 152; 0.30901699437494723 -0.5 0.80901699437494756
+    old vector v: 153; 0.30901699437494728 0.5 0.80901699437494767
+    old vector v: 154; 0.3090169943749474 -0.5 -0.80901699437494745
+    old vector v: 170; 0.5 -0.80901699437494745 -0.3090169943749474
+    old vector v: 171; 0.5 -0.80901699437494745 0.30901699437494751
+    old vector v: 178; 0.5 0.80901699437494745 0.3090169943749474
+    old vector v: 186; 0.5 0.80901699437494756 -0.30901699437494745
+    old vector v: 208; 0.80901699437494679 0.30901699437494728 -0.5
+    old vector v: 209; 0.80901699437494712 -0.30901699437494767 -0.5
+    old vector v: 210; 0.80901699437494734 -0.30901699437494756 0.5
+    old vector v: 211; 0.80901699437494745 0.3090169943749474 0.5
+    old vector v: 239; 1 0 0
+    vector v: 62; -0.5 -0.70710678118654757 -0.5
+    vector v: 63; -0.5 -0.70710678118654746 0.5
+    vector v: 77; -0.5 0.70710678118654791 -0.5
+    vector v: 58; -0.5 0.70710678118654757 0.5
+    vector v: 162; 0.5 -0.70710678118654791 0.5
+    vector v: 176; 0.5 0.70710678118654746 -0.5
+    vector v: 177; 0.5 0.70710678118654757 0.5
+    vector v: 181; 0.5 -0.70710678118654757 -0.5
+
+
+    v: 0; 12 14 3 ; triple: n181 n77 120
+    v: 8; 12 15 11 ; triple: 0 n162 n176
+    v: 10; 14 13 11 ; triple: 239 n58 n62
+    v: 11; 8 9 10 ; triple: n176 120 n62
+    v: 12; 0 8 13 ; triple: n181 0 n62
+    v: 13; 4 10 12 ; triple: 239 n58 n62
+    v: 14; 0 10 15 ; triple: n77 239 n176
+    v: 15; 6 8 14 ; triple: 0 n162 n176
+        old vectors here are only 0 and 239
+
+    v: 1; 9 16 6 ; triple: 211 87 53
+    v: 2; 17 4 9 ; triple: 154 178 31
+    v: 3; 0 5 7 ; triple: 120 210 30
+    v: 4; 2 13 5 ; triple: 178 239 69
+    v: 5; 3 4 16 ; triple: 210 69 153
+    v: 6; 1 15 7 ; triple: 53 0 171
+    v: 7; 3 6 17 ; triple: 30 171 88
+    v: 9; 1 2 11 ; triple: 211 31 120
+    v: 16; 1 5 17 ; triple: 87 153 129
+    v: 17; 2 7 16 ; triple: 154 88 129
+
 
 TODO: S2 uvf + Petersen colouring + o6c4c with 2xcdcs:
+    - build s2-nz5 from o6c4c!
+
     - what are the oriented vertices?
-    = what is nz5
+    - what is the s2-nz5, and nz5 on the graph? 33pp? 333pp? o5cdc?
     - s0, s1
     - what is the decomposition into 2 cdcs?
     - 244-cycles, what are the properties?
-    - why don't we have o333-flows, interesting
+    - ? why don't we have o333-flows? (e. g. 20.05g1)
 
 
-TODO/FIXME (WRONG): here's another list:
-    o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер (aka profile)
+DONE: here's another list:
+    o6c4c, which are also Petersen 6c4c:
     10.05: g1
     18.05: -
     20.05: g1, g4, g5
     22.05: g3, g4, g7, g9-g18, g20
     24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
-
-
-TODO: Blanusa snarks, maybe they don't have S2 uvf at all?
-    this will require some proof, or proof strategy
-    idea is to deduce Petersen colouring from S2 uvf
-        and probably nz5/o5cdc/o6c4c, related to Petersen colouring
-        which doesn't exist
-        and then deduce, that we have a problem with 2 paths of poor edges
-    DONE: maybe there's a smaller example also?
-        12 vertices: (probably only) Tietze's graph
-        14.04cyc3: 1 graph
-        16.04cyc3: 3 graphs
-        all of them have s2 uvf
 
 
 DONE: S2 uvf vs profiles:
@@ -349,7 +1680,6 @@ TODO: (current) S2 unit vector flows, suspicious coincidence:
             (g37 didn't finish checking, waited for 1 or 2 hours;
             so probably no uvf for it, currently)
 
-
     o6c4c, with 2x6cdcs:
         10.05: g1
         18.05: -
@@ -362,13 +1692,12 @@ TODO: (current) S2 unit vector flows, suspicious coincidence:
         Probably there's no uvf, because the search for it is too long already
         Checked, it doesn't
 
-    DONE/FIXME (WRONG): here's another list:
+    o6c4c, which are also Petersen 6c4c:
         10.05: g1
         18.05: -
         20.05: g1, g4, g5
         22.05: g3, g4, g7, g9-g18, g20
         24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
-        TODO: o6c4c_and_petersen_colouring - графы, где у o6c4c и petersen colouring совпадает набор poor рёбер (aka profile)
 
     TODO: so, we have {s2 uvf} \in {o6c4c_and_petersen_colouring} \in {o6c4c, with 2x6cdcs}
 
@@ -487,10 +1816,10 @@ TODO: 22.05g11, petersen colouring:
     probably because they are chords inside same poor circuit
 
 
-TODO: S2, compounds of icosidodecahedrons and cuboctahedrons
+DONE: S2, compounds of icosidodecahedrons and cuboctahedrons
     study these 36/42 vectors
-    TODO: and try to reiterate from them
-    TODO: and also check them for nz6 counterexample
+    DONE: and try to reiterate from them
+    DONE: and also check them for nz6 counterexample
 
 
     Tietze’s graph, 36 vectors
@@ -1146,6 +2475,56 @@ DONE: weird bug in code
 
 
 
+WONTDO: Blanusa snarks, maybe they don't have S2 uvf at all?
+    this will require some proof, or proof strategy
+    idea is to deduce Petersen colouring from S2 uvf
+        and probably nz5/o5cdc/o6c4c, related to Petersen colouring
+        which doesn't exist
+        and then deduce, that we have a problem with 2 paths of poor edges
+    DONE: maybe there's a smaller example also?
+        12 vertices: (probably only) Tietze's graph
+        14.04cyc3: 1 graph
+        16.04cyc3: 3 graphs
+        all of them have s2 uvf
+    UPD: I found S2 uvf for 18.05g1!
+
+
+
+WONTDO: 18.05g1 is toroidal
+    18.05g2 is not
+    but!
+    Theorem 2. All snarks on 20 vertices have genus 2.
+    so it seems there's no relation to genus
+
+
+DONE
+    smth weird is happening
+    i can't seem to rotate solution for 18.05g1
+    removing [0.5, 0.5, 1/2**0.5] destroys solution
+    got it, i needed a bigger set of triples
+
+
+
+DONE: 18.05g2, trying to resolve by hand:
+    v: 2; 7 4 9 ; triple: 68 46 -1
+    vector v: 68; 0.5 -0.56101634775752984 0.65974287229859663    
+    vector v: 46; 0 -0.24800064661741753 -0.96875986667354408
+    
+    v: 9; 1 2 11 ; triple: 0 -1 -1
+
+    v: 11; 8 9 16 ; triple: 97 -1 66
+        vector v: 66; 0.5 0.80901699437494745 0.30901699437494745
+        vector v: 97; 1 0 0
+
+    so we need
+        2-9: -0.5 0.8090169943749473 0.30901699437494745
+        1-6: 0.5 0.8090169943749473 0.30901699437494745
+        9-11: 0.5 +-0.809 +-0.309
+    
+    so, it's just that we can't find a consistent configuration of triples
+    i mean, everything works as expected
+
+
 
 
 {-1.0, -9.030971600656904e-18, 9.549708297316796e-17},
@@ -1307,3 +2686,184 @@ DONE: weird bug in code
         vector v: 67; c -0.5 -d
             vector v: 66; c 0.5 -d
         vector v: 11; -c -0.5 d
+
+
+
+
+
+
+v: 2; 7 4 9 ; mintriple: 10 -1 -1
+v: 4; 2 13 5 ; mintriple: -1 -1 14
+v: 9; 1 2 11 ; mintriple: 6 -1 -1
+v: 10; 14 13 16 ; mintriple: 3 -1 -1
+v: 11; 8 9 16 ; mintriple: 11 -1 -1
+v: 13; 4 10 12 ; mintriple: -1 -1 7
+v: 16; 10 11 17 ; mintriple: -1 -1 1
+
+7-2: e6: vec19       0.30901699437494745 0.5 -0.80901699437494745 
+5-4: e12: vec15       0 0 1
+12-13: e23op: vec7op  0.5 -0.80901699437494745 0.30901699437494745
+14-10: e18: vec3      -0.80901699437494745 0.30901699437494745 -0.5
+17-16: e26: vec28    0.80901699437494745 0.30901699437494745 0.5
+8-11: e16op: vec18op -0.30901699437494745 0.5 -0.80901699437494745
+1-9: e3op: vec23op   -0.5 -0.80901699437494745 0.30901699437494745
+
+
+
+v: 1; 9 5 6 ; mintriple: -1 -1 7
+v: 2; 7 4 9 ; mintriple: -1 4 -1
+v: 3; 0 5 7 ; mintriple: 5 -1 -1
+v: 5; 1 3 4 ; mintriple: -1 -1 7
+v: 7; 2 3 6 ; mintriple: -1 -1 4
+v: 9; 1 2 11 ; mintriple: -1 -1 5
+
+1-6: e5: vec7          : -0.5 0.80901699437494745 -0.30901699437494745
+5-4: e12op: vec22      : 0.5 -0.80901699437494745 0.30901699437494745
+3-0: e2op: vec5        : -0.5 -0.80901699437494745 -0.30901699437494745
+7-6: e14op: vec25 (4op): 0.80901699437494745 -0.30901699437494745 -0.5
+2-4: e7: vec4          : -0.80901699437494745 0.30901699437494745 0.5
+9-11: e17: vec24       : 0.5 0.80901699437494745 0.30901699437494745
+
+
+
+
+18.05g2:
+    vector v: 0; -1 0 0
+    vector v: 41; 0 -1 0
+
+    vector v: 1; -0.84089641525371461 -0.5 -0.20710678118654757
+    vector v: 23; -0.5 -0.20710678118654757 -0.84089641525371461
+
+    vector v: 4; -0.84089641525371461 -0.20710678118654757 0.5
+    vector v: 35; -0.20710678118654757 -0.5 -0.84089641525371461
+    
+    vector v: 9; -0.70710678118654757 -0.70710678118654757 0
+    vector v: 12; -0.70710678118654757 0 -0.70710678118654757
+    vector v: 42; 0 -0.70710678118654757 -0.70710678118654757
+
+
+v1 = 0.907743518916014
+    v1 = 1/12 * (3 + 5**0.5 + 4 * 2**0.5)
+v3 = 0.407743518916014
+    v3 = 1/12 * (-3 + 5**0.5 + 4 * 2**0.5)
+v2 = 0.098726524541066
+v4 = 0.865754201881895
+    v4 = 1/12 * (-1 + 2*2**0.5 + 5**0.5 + 2*10**0.5)
+
+
+
+
+
+Tietze’s graph, 36 vectors
+    phi = (1 + 5**0.5)/2
+    a = 0.96875986667354408
+        a = 1/6 * (-1 + 2**0.5 + 5**0.5 + 10**0.5)
+        a = 1/3 * (phi-1 + phi * 2**0.5)
+    b = 0.24800064661741741
+        b = 1/6 * (1 + 2**0.5 + 5**0.5 - 10**0.5)
+        b = 1/3 * (phi - (phi-1) * 2**0.5)
+    c = 0.65974287229859663
+        c = 1/12 * (1 + 2*2**0.5 - 5**0.5 + 2*10**0.5)
+        c = 1/3 * (-(phi-1)/2 + phi * 2**0.5)
+    d = 0.56101634775752984
+        d = 1/12 * (1 - 2*2**0.5 + 5**0.5 + 2*10**0.5)
+        d = 1/3 * (phi/2 + (phi-1) * 2**0.5)
+
+    v: 9; triple: 77 18 118
+    vector v: 77; (phi-1)/2 -0.5 phi/2
+    vector v: 18; c 0.5 -d
+    vector v: 118; a 0 b
+
+w1 + w2*2**0.5
+w2 - w1*2**0.5
+    a 0 b is simple
+c 0.5 -d
+    is a bit trickier
+    c = w1/2 + w2*2**0.5
+    d = w2/2 - w1*2**0.5
+        1/9*(w1**2 + w2**2) * (2+1/4) + 1/4 = 1
+        (w1**2 + w2**2) * (1/4) = 3/4
+        w1=phi-1=1/phi, w2=phi
+        w1**2+w2**2 = 3
+        phi**2-phi-1=0
+        phi*(phi-1)=1
+        phi-1=1/phi
+        
+        w2 = k**0.5/w1
+        w1**2+k/w1**2 = m, m>0
+        w1**4-m*w1**2+k=0
+        w1**2 = (m+-sqrt(m**2-4*k))/2
+        m=3, k=1 => w1**2=(3+-sqrt(9-4))/2
+            , parametrized by k, but constrained
+
+        w2 = k**0.5 * w1
+        =>
+        w1**2+k*w1**2 = m
+        w1**2 = m / (1+k), parametrized by k
+
+    so, what is important is
+        w1**2+w2**2 is an integer
+
+
+1/3 * (phi/2 + (phi-1) * 2**0.5)
+
+
+
+20.05g2:
+	- petersen colouring: 5 решений (2 с 9 poor, 2 с 11 poor, 1 с 13 poor)
+		видимо 3 неизоморфных решения
+		рёбра 2-7, 2-9 всегда poor
+		рёбра, которые всегда rich: 0-12, 6-7, 9-11
+		вершины, которые всегда соседи с poor: 5
+		все вершины так или иначе бывают соседями с poor рёбрами
+
+20.05g6:
+	- petersen colouring: 2 решения, изоморфны друг другу вроде, то есть решение 1 неизоморфное
+	всегда poor рёбра: 8-12, 12-13
+	всегда rich рёбра: 0-12, 4-13, 6-8, 8-15, 9-11, 10-13
+	вершины, всегда соседние с poor рёбрами: 0
+	- 2/3bm:
+		если смотреть на длину dominating circuit = 19, то
+		ignored бывает таким: все вершины, кроме 0, 8, 12, 13
+
+
+20.05g3:
+	- petersen colouring: 10 решений, неизоморфных ~ 2
+	всегда poor рёбра: 1-11
+	всегда rich рёбра: 1-14, 11-17, 18-19
+	вершины, всегда соседние с poor рёбрами: 1, 11
+	вершины, которые никогда не соседние с poor рёбрами: -
+	все решения - "stronger" petersen colouring:
+		- пути: 4, циклы: 7
+		- пути: 2+3+4
+	
+20.05g4:
+	- petersen colouring: 7 решений, неизоморфных ~ 4
+	всегда poor рёбра: 1-11
+	всегда rich рёбра: 10-12
+	вершины, всегда соседние с poor рёбрами: 1, 11
+	вершины, которые никогда не соседние с poor рёбрами: -
+	есть не stronger решения
+	"stronger" petersen colouring:
+		- пути: 4, циклы: 7
+		- пути: 2+3+4
+	
+20.05g5:
+	- petersen colouring: 3 решения, неизоморфных ~ 2
+	отлично, это граф, где нет stronger petersen colouring
+	это значит, что если и есть какая-то связь между petersen colouring'ами и 2/3bm, то она не просто на уровне "все poor рёбра лежат на dominating circuits", а что-то более сложное
+	всегда poor рёбра: 8-12, 10-18, 12-13, 14-19, 15-19, 16-18
+	всегда rich рёбра: 0-3, 1-9, 1-5, 1-6, 2-7, 2-4, 2-9, 3-5, 3-7, 4-13, 4-5, 6-8, 6-7, 9-11
+	вершины, всегда соседние с poor рёбрами: 0, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+	вершины, которые никогда не соседние с poor рёбрами: 1, 2, 3, 4, 5, 6, 7, 9
+		эти вершины образуют цикл, который даже в 2bm встречается: 9 2 4 5 3 7 6 1
+	интересно, что эти 2 множества не пересекаются и образуют все вершины графа
+
+
+
+
+10.05: g1
+18.05: -
+20.05: g1, g4, g5
+22.05: g4, g11-g18
+24.05: g2, g5, g8-g10, g13, g14, g18-g19, g24, g26, g28, g29, g31-g36, g38

@@ -1,6 +1,116 @@
 Project: Proving EPPDC (Bondy) conjecture
 (and then TODO: find a stronger conjecture)
 
+notebooks order:
+    - ppdc
+    - eppdc-1-first-counterexample
+    - eppdc-2-check-connectivity
+    - eppdc-3-add-vertex-order-swap
+    - eppdc-4-add-backtrack
+        this addition compicates the code a bit
+    
+    - after this addition we can't find a counterexample
+        now we have to deeply study the backtrack option,
+        maybe we should restrict it somehow
+    
+    - eppdc-5-stricter-search
+        TODO: n=11, seed=981479781
+            - counterexample (maybe not actually)
+                - we have backtrack
+                - no vertex swap, so no "v1,v2=v2,v1"
+                - AFTER_PART1 doesn't help!
+                - AFTER_PART2 helps, or "v1,v2=v2,v1" also helps
+
+        TODO: find a smaller counterexample
+
+        TODO: now we are slightly in an underexplored territory
+        - what options should we explore here?
+
+        - TODO: we also had an interesting counterexample in 2023:
+            TODO: find it somewhere in "eppdc-clean-version" file
+            - no vertex swap, so no "v1,v2=v2,v1"
+            - check_connectivity=True
+                - TODO: was it same as ALWAYS, or as "AFTER_PART1"?
+            - and backtrack didn't help!
+            - but what helped, is either "check_connectivity=False", or "v1,v2=v2,v1"
+
+            - also note, that it's super hard to find this example
+
+        - TODO: remove v1,v2=v2,v1
+        - TODO: change check_connectivity to something more strict, e. g. "ALWAYS"
+        - TODO: make only 1 bactrack, or TODO: make several backtracks, but around 1 vertex
+            if we do only 1 bactrack, it could fail
+            but then should find another one which doesn't
+        - TODO: maybe only do backtrack in part1, or only in part2
+        
+    - eppdc-6-start-from-some-eppdc
+        We found an example, where we need AFTER_PART2 to save it
+            so it's a counterexample to "AFTER_PART1" + "swaps" + "backtracks=\inf"
+        We want to simplify it somehow, maybe manually
+    
+    - eppdc-7-start-from-cycle
+        It was interesting to try, but we didn't get better I think
+    
+    - eppdc-8-build-transition-graphs
+        Now this should be interesting
+        Idea is to build transition graphs, study their edges
+        e. g. we can have situations where we don't have backtrack edges
+            so we can't do a bactrack
+        - TODO: prove, that if we don't have backtrack edges in both transition graphs,
+            then ALWAYS + "no swap" works
+    
+    - eppdc-9-deterministic-edges-for-transitions
+        - We had an idea, where we try to restrict ourselves to edges,
+            which definitely preserve connectedness of eppdc
+            and e. g. let's restrict to case where we don't have backtrack edges
+        - Some more tricks appeared
+        - We tried to do this for part1, and part2
+        - It seems we have a counterexample
+        ADDING NEW EDGE (1, 5); edge_idx=27
+        [0, 7, 1, 8, 5, 2, 4, 3, 6]
+        [4, 0, 7, 8, 6, 5, 3, 2]
+        [7, 8, 0, 5, 3, 1, 2, 4, 6]
+        [2, 8, 6, 0, 1, 4, 5, 7, 3]
+        [3, 8, 4, 6, 1, 7, 5, 2, 0]
+        [5, 6, 0, 8, 4, 7, 2, 3, 1]
+        [5, 8, 1, 6, 3, 0, 2, 7, 4]
+        [1, 4, 5, 0, 3, 7, 6, 2, 8]
+        [8, 3, 4, 0, 1, 2, 6, 7]
+    
+    - eppdc-10-adversarial
+        - now that we have a counterexample for deterministic edge order,
+        we could try to expand our selection of edges
+        we know that in some situations we can prove that we can use more edges,
+            even those that could disconnect
+        but we need some topological analysis
+
+        - but in this notebook we added an adversarial edge order
+    
+    - eppdc-11-counterexample-for-everything
+        - okay, we actually switch to a specific counterexample,
+            which we will try to build manually
+            and verify, that it breaks ALWAYS very specifically
+            specifically it should be a counterexample to all deterministic edge orders,
+            which i came up with
+
+        - it works as a counterexample!
+            - AFTER_PART2 saves it, though
+            - and now we also understand,
+                how to proceed from an artifical counterexample
+                to a real one
+
+        - TODO: optimize the counterexample a little
+
+        - after slight modification, counterexample breaks AFTER_PART2
+        now we don't have any heuristics at all
+    
+    - eppdc-12-after-backtrack-mode
+        idea was that maybe we can backtrack in this counterexample,
+            and temporarily disconnect eppdc,
+            but check connectivity on the last part after all backtracks
+        but it doesn't seem to be the case
+        it seems that no backtracks are available at all
+
 notes:
     - граф перестроек динамичный в том смысле
         - что второй конец у пути может поменяться на другой
@@ -881,3 +991,370 @@ backtrack as decorator?
 [1, 9, 3]
 [9, 1, 8, 7, 2, 10]
 [6, 10, 2, 3]
+
+
+before part1
+0-4-7-8-10-6-9-
+part1:
+    9,4->0,4
+        5-3-1-2-0-4-7-8-10-6-9
+                5
+    0,4->1,4
+        5-3-1-2  0-4-7-8-10-6-9
+              1  5
+        =>
+        9-6-10-8-7-4-0-5-3-1-2
+                           2
+    1,4->inf
+        9-6-10-8-7-4-0-5-3-4 + 2-1-2
+part2:
+    4,9->2,9
+
+
+start
+    debug_path=[7, 10, 9, 0, 5, 3, 6, 8]
+    debug_path=[3, 7, 5, 9, 2, 1]
+    debug_path=[4, 6, 1, 5, 3, 0, 10, 9, 7]
+    debug_path=[6, 10, 7, 8, 1, 0, 2, 9]
+    debug_path=[5, 10, 8, 7, 1, 4, 9, 0]
+    debug_path=[5, 9, 8, 0, 10, 6, 1, 3]
+    debug_path=[0, 8, 6, 3, 1, 4, 2]
+    debug_path=[1, 7, 0, 4, 2]
+    debug_path=[0, 7, 3, 8, 10, 1, 2, 6, 4]
+    debug_path=[8, 9, 7, 2, 0, 1, 5, 10]
+    debug_path=[10, 1, 8, 3, 0, 5, 7, 2, 6]
+part1.x: adding edge (0, 4)
+    [2, 4, 1, 3, 6, 8, 0] => [2, 4, 0, 8, 6, 3, 1]
+    debug_path=[7, 10, 9, 0, 5, 3, 6, 8]
+    debug_path=[3, 7, 5, 9, 2, 1]
+    debug_path=[4, 6, 1, 5, 3, 0, 10, 9, 7]
+    debug_path=[6, 10, 7, 8, 1, 0, 2, 9]
+    debug_path=[5, 10, 8, 7, 1, 4, 9, 0]
+    debug_path=[5, 9, 8, 0, 10, 6, 1, 3]
+    debug_path=[2, 4, 0, 8, 6, 3, 1]
+    debug_path=[1, 7, 0, 4, 2]
+    debug_path=[0, 7, 3, 8, 10, 1, 2, 6, 4]
+    debug_path=[8, 9, 7, 2, 0, 1, 5, 10]
+    debug_path=[10, 1, 8, 3, 0, 5, 7, 2, 6]
+part1.x: adding edge (1, 4)
+    [7, 10, 9, 0, 5, 3, 6, 8]
+    [3, 7, 5, 9, 2, 1, 4]
+    [4, 6, 1, 5, 3, 0, 10, 9, 7]
+    [6, 10, 7, 8, 1, 0, 2, 9]
+    [5, 10, 8, 7, 1, 4, 9, 0]
+    [5, 9, 8, 0, 10, 6, 1, 3]
+    [2, 4, 0, 8, 6, 3, 1]
+    [1, 7, 0, 4, 2]
+    [0, 7, 3, 8, 10, 1, 2, 6, 4]
+    [8, 9, 7, 2, 0, 1, 5, 10]
+    [10, 1, 8, 3, 0, 5, 7, 2, 6]
+part2: adding edge (4, 9)
+[3, 7, 5, 9, 2, 1, 4] => [3, 7, 5, 9, 4, 1, 2]
+    debug_path=[7, 10, 9, 0, 5, 3, 6, 8]
+    debug_path=[3, 7, 5, 9, 4, 1, 2]
+    debug_path=[4, 6, 1, 5, 3, 0, 10, 9, 7]
+    debug_path=[6, 10, 7, 8, 1, 0, 2, 9]
+    debug_path=[5, 10, 8, 7, 1, 4, 9, 0]
+    debug_path=[5, 9, 8, 0, 10, 6, 1, 3]
+    debug_path=[2, 4, 0, 8, 6, 3, 1]
+    debug_path=[1, 7, 0, 4, 2]
+    debug_path=[0, 7, 3, 8, 10, 1, 2, 6, 4]
+    debug_path=[8, 9, 7, 2, 0, 1, 5, 10]
+    debug_path=[10, 1, 8, 3, 0, 5, 7, 2, 6]
+part2.x: adding edge (2, 9)
+    [7, 10, 9, 0, 5, 3, 6, 8]
+    [3, 7, 5, 9, 4, 1, 2]
+    [4, 6, 1, 5, 3, 0, 10, 9, 7]
+    [6, 10, 7, 8, 1, 0, 2, 9]
+    [5, 10, 8, 7, 1, 4, 9, 0]
+    [5, 9, 8, 0, 10, 6, 1, 3]
+    [1, 3, 6, 8, 0, 4, 2, 9]
+    [1, 7, 0, 4, 2]
+    [0, 7, 3, 8, 10, 1, 2, 6, 4]
+    [8, 9, 7, 2, 0, 1, 5, 10]
+    [10, 1, 8, 3, 0, 5, 7, 2, 6]
+
+after adding (0,4), can we add (4,9)?
+    before we did [3, 7, 5, 9, 2, 1, 4] => [3, 7, 5, 9, 4, 1, 2]
+    now we can't do this
+    
+    [7, 10, 9, 0, 5, 3, 6, 8]
+    [3, 7, 5, 9, 2, 1]
+    [4, 6, 1, 5, 3, 0, 10, 9, 7]
+        we can try this path
+    [6, 10, 7, 8, 1, 0, 2, 9]
+    [5, 10, 8, 7, 1, 4, 9, 0]
+    [5, 9, 8, 0, 10, 6, 1, 3]
+    [2, 4, 0, 8, 6, 3, 1]
+    [1, 7, 0, 4, 2]
+    [0, 7, 3, 8, 10, 1, 2, 6, 4]
+        we can try this path
+    [8, 9, 7, 2, 0, 1, 5, 10]
+    [10, 1, 8, 3, 0, 5, 7, 2, 6]
+
+    try1:
+        [4, 6, 1, 5, 3, 0, 10, 9, 7] => ...
+        we lose connectivity
+        9-6-10-8-7-10 + 4-0-5-3-1-2
+                                2
+
+    try2:
+        [0, 7, 3, 8, 10, 1, 2, 6, 4] => [0, 7, 3, 8, 10, 1, 2, 6, 4, 9]
+        =>
+        [7, 10, 9, 0, 5, 3, 6, 8]
+        [3, 7, 5, 9, 2, 1]
+        [4, 6, 1, 5, 3, 0, 10, 9, 7]
+        [6, 10, 7, 8, 1, 0, 2, 9]
+        [5, 10, 8, 7, 1, 4, 9, 0]
+        [5, 9, 8, 0, 10, 6, 1, 3]
+        [2, 4, 0, 8, 6, 3, 1]
+        [1, 7, 0, 4, 2]
+        [0, 7, 3, 8, 10, 1, 2, 6, 4, 9]
+        [8, 9, 7, 2, 0, 1, 5, 10]
+        [10, 1, 8, 3, 0, 5, 7, 2, 6]
+
+        2-1-3-5-0-9-6-10-8-7-4
+          2
+
+    and now let's add 1,4
+        the previous version will lose connectivity
+            [3, 7, 5, 9, 2, 1] => [3, 7, 5, 9, 2, 1, 4]
+    
+    what if we try a different route of perestroikas?
+        1,4->0,4->6,4->inf?
+
+        1,4->0,4
+            2-1-3-5-0-9-6-10-8-7-4
+                    2
+        before:
+            [7, 10, 9, 0, 5, 3, 6, 8]
+            [3, 7, 5, 9, 2, 1]
+            [4, 6, 1, 5, 3, 0, 10, 9, 7]
+            [6, 10, 7, 8, 1, 0, 2, 9]
+            [5, 10, 8, 7, 1, 4, 9, 0]
+            [5, 9, 8, 0, 10, 6, 1, 3]
+            [2, 4, 0, 8, 6, 3, 1]
+                (we could also try this, but then it's a bit of backtracking)
+            [1, 7, 0, 4, 2]
+                probably we mean this path
+            [0, 7, 3, 8, 10, 1, 2, 6, 4, 9]
+            [8, 9, 7, 2, 0, 1, 5, 10]
+            [10, 1, 8, 3, 0, 5, 7, 2, 6]
+        after:
+            [1, 7, 0, 4, 2] => [2, 4, 1, 7, 0]
+            =>
+            [7, 10, 9, 0, 5, 3, 6, 8]
+            [3, 7, 5, 9, 2, 1]
+            [4, 6, 1, 5, 3, 0, 10, 9, 7]
+            [6, 10, 7, 8, 1, 0, 2, 9]
+            [5, 10, 8, 7, 1, 4, 9, 0]
+            [5, 9, 8, 0, 10, 6, 1, 3]
+            [2, 4, 0, 8, 6, 3, 1]
+            [2, 4, 1, 7, 0]
+            [0, 7, 3, 8, 10, 1, 2, 6, 4, 9]
+            [8, 9, 7, 2, 0, 1, 5, 10]
+            [10, 1, 8, 3, 0, 5, 7, 2, 6]
+
+        0,4->6,4
+            oh, it's modified now
+            in the cycle, we transform edge (0,9) to (6,9)
+                instead of (0,4) to (6,4)
+
+            2-1-3-5-0 + 9-6-10-8-7-4
+                    2   6
+            we break connectivity
+
+
+
+[1, 4, 5, 2, 0, 3]
+[4, 5, 1, 3, 0]
+[4, 3, 1, 5, 2]
+[5, 0, 2, 3, 4, 1]
+[5, 3, 2, 4, 0]
+[3, 5, 0, 4, 2]
+
+
+debug_path=[3, 0, 2, 5, 4, 1]
+debug_path=[4, 5, 1, 3, 0]
+debug_path=[2, 5, 1, 3, 4]
+debug_path=[5, 0, 2, 3, 4, 1]
+debug_path=[0, 4, 2, 3, 5]
+debug_path=[2, 4, 0, 5, 3]
+
+
+
+debug_path=[5, 2, 0, 3, 4, 1]
+debug_path=[7, 4, 6, 3, 2]
+debug_path=[5, 1, 0, 3, 2, 4, 6]
+debug_path=[6, 2, 1, 0, 5, 4, 3, 7]
+debug_path=[1, 2, 4, 5, 7, 0]
+debug_path=[4, 1, 6, 7, 0]
+debug_path=[4, 7, 5, 1, 6, 0, 2]
+debug_path=[3, 7, 6, 0, 5, 2]
+another 2,6
+    [3, 7, 6, 0, 5, 2] => [3, 7, 6, 2, 5, 0]
+
+    debug_path=[5, 2, 0, 3, 4, 1]
+    debug_path=[7, 4, 6, 3, 2]
+    debug_path=[5, 1, 0, 3, 2, 4, 6]
+    debug_path=[6, 2, 1, 0, 5, 4, 3, 7]
+    debug_path=[1, 2, 4, 5, 7, 0]
+    debug_path=[4, 1, 6, 7, 0]
+    debug_path=[4, 7, 5, 1, 6, 0, 2]
+    debug_path=[3, 7, 6, 2, 5, 0]
+
+    add 0,6
+
+
+edge_idx=11 after part 1;
+[6, 1, 2, 0]
+[5, 2, 6, 4, 0, 1]
+[2, 5, 4, 0, 7]
+[3, 2, 6, 4, 1, 7, 0, 5]
+[3, 2, 4]
+[7, 6, 1, 4, 2, 0]
+[6, 0, 5, 4, 7, 1]
+[2, 1, 0, 6, 7, 4, 3]
+adding edge (3, 4)
+4-3-5-1-6-0-7-2-3
+[5, 0, 7, 1, 4, 6, 2, 3] => [5, 0, 7, 1, 4, 3, 2, 6]
+
+debug_path=[6, 1, 2, 0]
+debug_path=[5, 2, 6, 4, 0, 1]
+debug_path=[2, 5, 4, 0, 7]
+debug_path=[5, 0, 7, 1, 4, 3, 2, 6]
+debug_path=[3, 2, 4]
+debug_path=[7, 6, 1, 4, 2, 0]
+debug_path=[6, 0, 5, 4, 7, 1]
+debug_path=[2, 1, 0, 6, 7, 4, 3]
+6-5-1-6-0-7-2-3-4
+
+[1, 7, 4, 5, 0, 6] => [1, 7, 4, 6, 0, 5]
+  current paths
+debug_path=[6, 1, 2, 0]
+debug_path=[5, 2, 6, 4, 0, 1]
+debug_path=[2, 5, 4, 0, 7]
+debug_path=[5, 0, 7, 1, 4, 3, 2, 6]
+debug_path=[3, 2, 4]
+debug_path=[7, 6, 1, 4, 2, 0]
+debug_path=[1, 7, 4, 6, 0, 5]
+debug_path=[2, 1, 0, 6, 7, 4, 3]
+5-1-5-6-0-7-2-3-4
+
+
+
+adding edge (1, 5)
+  part2.x: adding edge (4, 5)
+  part2.x: adding edge (7, 5)
+  part2.x: adding edge (0, 5)
+  part2.x: adding edge (4, 5)
+  part2.x: adding edge (1, 5)
+
+adding edge (1, 5)
+  part2.x: adding edge (7, 5)
+  part2.x: adding edge (3, 5)
+  part2.x: adding edge (1, 5)
+  part2.x: adding edge (3, 5)
+  part2.x: adding edge (7, 5)
+  part2.x: adding edge (1, 5)
+  part2.x: adding edge (3, 5)
+  part2.x: adding edge (1, 5)
+
+
+
+[4, 1, 2, 7, 5, 8, 3, 0, 6] => [4, 1, 2, 6, 0, 3, 8, 5, 7]
+  current paths
+debug_path=[2, 8, 7, 4, 0, 1, 5, 3, 6]
+debug_path=[3, 1, 7, 6, 8, 4, 0]
+debug_path=[0, 6, 4, 3, 5, 1, 8, 7]
+debug_path=[4, 1, 2, 6, 0, 3, 8, 5, 7]
+debug_path=[6, 4, 2, 1, 7, 5, 0, 8]
+debug_path=[5, 6, 1, 4, 8, 2, 3, 7]
+debug_path=[5, 6, 3, 4, 2, 7, 0, 1, 8]
+debug_path=[4, 7, 0, 5, 2, 6, 8, 3, 1]
+debug_path=[2, 5, 8, 0, 3, 7, 6, 1]
+  part1.x: adding edge (7, 2)
+transition 7,0 => 0,2:
+    [0, 6, 4, 3, 5, 1, 8, 7] => [0, 6, 4, 3, 5, 1, 8, 7, 2]
++ glue with part2: adding edge (2, 3) to same path:
+    [0, 6, 4, 3, 5, 1, 8, 7, 2] => [0, 6, 4, 3, 2, 7, 8, 1, 5]
+    part2.x: adding edge (5, 3)
+    debug_path=[2, 8, 7, 4, 0, 1, 5, 3, 6]
+    debug_path=[3, 1, 7, 6, 8, 4, 0]
+    debug_path=[0, 6, 4, 3, 2, 7, 8, 1, 5]
+    debug_path=[4, 1, 2, 6, 0, 3, 8, 5, 7]
+    debug_path=[6, 4, 2, 1, 7, 5, 0, 8]
+    debug_path=[5, 6, 1, 4, 8, 2, 3, 7]
+    debug_path=[5, 6, 3, 4, 2, 7, 0, 1, 8]
+    debug_path=[4, 7, 0, 5, 2, 6, 8, 3, 1]
+    debug_path=[2, 5, 8, 0, 3, 7, 6, 1]
+
+
+
+ADDING NEW EDGE (1, 5); edge_idx=27
+edge_idx=27 before part 1;
+[0, 7, 1, 8, 5, 2, 4, 3, 6]
+[4, 0, 7, 8, 6, 5, 3, 2]
+[7, 8, 0, 5, 3, 1, 2, 4, 6]
+[2, 8, 6, 0, 1, 4, 5, 7, 3]
+[3, 8, 4, 6, 1, 7, 5, 2, 0]
+[5, 6, 0, 8, 4, 7, 2, 3, 1]
+[5, 8, 1, 6, 3, 0, 2, 7, 4]
+[1, 4, 5, 0, 3, 7, 6, 2, 8]
+[8, 3, 4, 0, 1, 2, 6, 7]
+  adding edge (1, 5)
+  part1.x: adding edge (6, 5)
+  part1.x: adding edge (2, 5)
+  part1.x: adding edge (4, 5)
+  part1.x: adding edge (6, 5)
+  part1.x: adding edge (1, 5)
+  part1.x: adding edge (4, 5)
+  part1.x: adding edge (2, 5)
+  part1.x: adding edge (6, 5)
+  part1.x: adding edge (4, 5)
+  part1.x: adding edge (1, 5)
+  ... loop ...
+
+  adding edge (5, 1)
+  part1.x: adding edge (8, 1)
+  part1.x: adding edge (0, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (6, 1)
+  part1.x: adding edge (8, 1)
+  part1.x: adding edge (5, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (2, 1)
+  part1.x: adding edge (0, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (5, 1)
+  part1.x: adding edge (8, 1)
+  part1.x: adding edge (6, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (0, 1)
+  part1.x: adding edge (2, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (6, 1)
+  part1.x: adding edge (8, 1)
+  part1.x: adding edge (5, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (7, 1)
+  part1.x: adding edge (0, 1)
+  part1.x: adding edge (8, 1)
+  part1.x: adding edge (6, 1)
+  part1.x: adding edge (3, 1)
+  part1.x: adding edge (5, 1)
+
+  wow, and only here we start to loop!
+
+
+- imagine we have an edge
+    which could disconnect
+    but assume that it doesn't disconnect
+    we could try to prove that it doesn't disconnect,
+        according to the transition graph information
+

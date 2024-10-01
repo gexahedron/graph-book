@@ -1,0 +1,560 @@
+MOTTO: s0 + b - s1 - 2*t1 = 2 - 2*g
+    (well, almost; we also need to subtract all_poor_circuits,
+    because they count for disconnected components)
+
+
+- TODO: or=0 => s2=3, r244odd = s0 = s1 (mod 2):
+    s0 - s1 = 2 - 2*g
+    g = (s1-s0)/2 + 1
+    - i think we can prove this as follows
+    - each layer is homologous to other layers
+    - actually they are holomologous to 0-cycle
+    - and r244odd cycle is also homologous to the same thing
+    - so we need to start from 0-cycle, add any of the circuits,
+        and maybe prove s2=3 in some more generalized sense
+    - although, e. g. we can have 5-cycle, all edges rich,
+        the pms are 2-rich + 3-poor, or 3-rich + 2-poor
+    
+    this approach sounds strange, because it sounds as if it should work
+        for cases with boundary also
+
+
+- DONE: Petersen graph, great dodecahedron construction:
+    Devadoss and Morava, "Diagonalizing the genome I: navigation in tree spaces":
+        Example. The orientation cover Mor (R) can be constructed by considering two copies
+        of M0,5(R) with CW and CCW labeling of their polygons, as displayed in Figure 13(a) and (b).
+        The blowups of the three 0-cells of ∆ result in (nonorientable) crosscaps.
+        The orientable double cover is obtained by gluing the “holes” of the CW labeling to those of the CCW labeling,
+        as given by the colored arrows, based on the cotwist operation.
+        The resulting manifold is orientable, tiled by 24 associahedra K4 pentagons.
+        Eq. (5.1) shows the Euler characteristic to be −6, forming a surface of genus four.
+        An embedding of this space with high symmetry is provided in [2],
+        based on a pentagonal decomposition of Kepler’s great dodecahedron shown in Figure 13(c).
+    
+    M0,5:
+        V = 24 = 3*or + rich = 9 + 15
+        F+B = 12+3 = 15
+        E = 39 = 6 * or + 3 * unor
+    orientable double cover:
+        V = 30 = 2*e
+            corresponds to E=30 in great dodecahedron
+        F=24=2*s0
+            corresponds to F=12 in great dodecahedron and something more
+        E=60=double count of consecutive edge pairs, (when we double the o6c4c) = 4*e
+            but actually it should be this:
+            "The sixty (new) edges form ten hexagonal great circles."
+            (from "Pentagonal structure of the configuration space of five points in the real projective line")
+        
+    great dodecahedron:
+        F=12 = s0
+            (without including boundaries / oriented vertices)
+            NOTE: this decompose into 6 pairs of parallel pentagons
+        E=30 =?= 2*s1
+            I mean, I currently don't know what to do with poor edges
+            maybe E = 2*e
+        V=12 =?= s0
+            ? maybe it's 2*t4?
+                so, this should probably correspond to edges
+                t4 — number of rich edges which connect non-oriented with non-oriented vertex
+                t4 = 6
+            UPD: another idea, from reading "Pentagonal structure of the configuration space of five points in the real projective line" paper:
+                this is also s0, in a sense that
+                "(new) flat pentagon by a 5-juzu" - this is 5-cycle from s0
+                "five hexagons bounding this pentagon by L(12), L(34), L(51), L(23), and L(45), cyclicly"
+                L(12), ... - vertices of this 5-cycle,
+            
+            "The sixty (new) edges form ten hexagonal great circles."
+            i think this will be just going around the vertices
+                we choose one pair, then another, then cotwist, then another pair, and so on,
+                and so 6 times
+        
+        s0 + b - s1 = 2-2*g1
+            12+3-15=0
+        2*s0-2*s1 = 2-2*g2 = 2*(2-2*g1-b)
+        1-g2=2-2*g1-b
+        g2 = b + 2*g1 - 1
+        g2 = 3 + 2*1 - 1 = 4
+        s0 - s1 = 1 - g2
+        s0 = 1 + s1 - g2
+
+        i think i still can't deduce here that s0 is even
+
+    UPD: great dodecahedron is dual to orientable double cover of surface of o6c4c
+
+    UPD:
+        - DONE: understand great dodecahedron 12 5-cycles;
+            how do we get them from o6c4c? and what is the orientation?
+        UPD: I think I got it (except for orientation), it doesn't help much with any of the panorama cases
+            - про ориентацию - похоже что мы берём циклы одного цвета
+
+        - let's look at hyperbolic image again
+        - there's 12 faces of great dodecahedron there
+        - what happens is that we actually use same-colored faces, twice
+        - so, 1. we create orientable double cover of surface
+        - 2. we take circuits of same color, which corresponds to situation of has_2cdcs
+        - s0 = s0p0 + s0p1, for Petersen graph: s0p0 = s0p1 = 6
+        F = 2*s0p0
+        V = 2*s0p1 (at least  now I understand that V != F)
+        E = 2*s1 (probably s1, not e, but who knows)
+        2*s0-2*s1 = 2-2*g2
+        s0 = 1 + s1 - g2
+
+
+
+- WONTDO: has_2cdcs, s0 even, "hamiltonian cycle" on circuits:
+    - it would be interesting, if this "hamiltonian cycle" on circuits
+        has even length, and it switches between partitions of circuits
+    - oh, it looks plausible actually
+    - and there's also checkerboard pattern for circuits for Petersen graph
+    UPD: i think hamiltonicity will fail for has_2cdcs, where they have
+        different circuit counts in partitions
+    - but the checkerboard idea looks promising
+
+
+- TODO: some-"all_or_nonsplit"-cases, second formula:
+    various cases converge to:
+        - s0 even
+        - or+s1 even = t4 even
+        - r244odd=0
+            => s1+s2 odd
+            => s2=0,3
+    especially when we have additionally "all_or_nonsplit"
+    s0 + b - s1 - 2*t1 = 2 - 2*g
+        s0 even => b-s1 even
+            or+s1 even <=> or+b even
+        so, all_or_nonsplit + "s0 even" => "or+s1 even" = "t4 even"
+
+    NOTE: for "has_2cdcs" t4 edges are exactly the rich edges,
+        which are covered twice in same direction
+        and it's not hard to prove
+        does it help though?
+    
+    has_2cdcs:
+        if t1=0:
+            b=or
+            s0 + or - s1 = 2 - 2*g
+
+
+- TODO: more formulas:
+    NOTE: we also kind-of "know" (without proof) that
+        (s1 + s2 + (r244odd / 2)) = 1 (mod 2)
+    +
+        r244odd:0,10 <=> s2:0,3
+        r244odd:4,6 <=> s2:1,2
+
+    - s0 even
+    - or+s1 even / t4 even
+    - s1+s2 odd <=> r244odd=0,4
+    - s2=0,3 <=> r244odd=0,10
+
+    or=0:
+        - proven with genus formula: s0 = s1 (mod 2)
+        - s2 = 3
+            => r244odd/2 = s0 = s1 (mod 2)
+            => r244odd=0,10
+    or_type_count=1:
+        - or even
+        - s0+s1+s2 odd
+            <=> r244odd/2 = s0 (mod 2)
+    rich_edge_pair_evens=0:
+        - (easy to prove!) r244odd=0
+        - (obvious) s1 odd
+        - s2=0
+        - or=b (mod 2)
+        IF or odd (not always case for 38.06):
+            - s0 even
+                => or+s1 even / t4 even
+        IF or even:
+            - s0 odd
+                =>  or+s1 odd / t4 odd        
+    rich_edge_pair_evens=15:
+        - (easy to prove!) r244odd=0
+        - (obvious) s1 even
+        - s2=3
+        - or=b (mod 2)
+        + maybe:
+        - s0 even
+        - or even
+            => or+s1 even / t4 even
+    has_2cdcs (+ also_pet): (=> "all_or_nonsplit")
+        - s0 even
+            => or+s1 even / t4 even (because "all_or_nonsplit")
+        - r244odd=0 (doesn't depend on being o6c4c, just 6c4c)
+            => s1+s2 odd
+            => s2=0,3
+    "333-flows":
+        - s0 even
+        "333-flows" + "all_or_nonsplit":
+            - or+s1 even / t4 even (because "all_or_nonsplit")
+            - s1+s2 odd <=> r244odd=0,4
+    mappable:
+        - r244odd=0
+            => s1+s2 odd
+            => s2=0,3
+        mappable + "all_or_nonsplit":
+            - s0 even
+                => or+s1 even / t4 even (because "all_or_nonsplit")
+    "uru3=0" + "all_or_nonsplit":
+        - s0 even
+            => or+s1 even / t4 even (because "all_or_nonsplit")
+
+    NOTE: we can have all_or_nonsplit=0 and
+            mappable
+            333-flows=1
+            s2=0
+            r244odd=0
+            (? evens=0) (RECHECK)
+        all at the same time
+
+
+- TODO: "or" = number of boundaries (mod 2)
+    (so "s0+or-rich" is even)
+
+    - or=0 (obvious)
+    - has_2cdcs
+        (NOTE: s0 even + "or+rich" even)
+        TODO: finish proof for has_2cdcs, that or_comps split with same parity
+    - rich_edge_pair_evens=0
+        (NOTE: s0 even + "or+rich" even)
+        TODO: why? can we understand this?
+        NOTE: "or" vertices can "split"
+    - onlyrich
+        TODO: why? can we understand this?
+        NOTE: "or" vertices can "split"
+
+        s0 + b - s1 = 2 - 2*g
+
+    - TODO: check panorama
+        - mappable+has_2richcdcs
+
+    - NOTE: r244odd=0
+    28.05: 380326 solutions
+        - t4 odd: 6076+2301=8377 solutions (2.2%)
+        - no t4 chords: 106284 solutions (27.9%)
+            - some of them have odd t4
+            - even more:
+                - t4 odd, s2=3, or=3, no rich chords, has_2richcdcs, parity=1, has 333-flows; SEAL
+                    although it's inconsistent, and no frac-nz5-flow
+        - has_frac_nz5 (with 3 sign combinations):
+            - we can have odd t4, bal3=1, or_as_unor_triples_244_count=1, parity=1, s2=3
+                but no_2richcdcs, has_t4_chords, inconsistent
+
+- TODO: why s0 even in some cases?
+    - TODO: could it be related to s2=3 in or=0 case?
+
+- TODO: can we incorporate r244odd into the surface?
+    if we could though, then probably we could understand s2 as well
+
+- TODO: dual "triangulation" of the surface
+    what formula would we get here?
+
+
+- DONE: all_or_circs != 0
+    28.05g19-1747
+    looks like these kind of circuits go in pairs, and they just glue to each other
+
+
+- DONE: vbef
+    vbef = s0 + b - s1 + t3 - 3*or
+    3*or=t3+2*t1
+    => vbef = s0 + b - s1 + t3 - t3-2*t1
+    
+    vbef = s0 + b - s1 - 2*t1
+        s1+t1+t2=e
+        vbef = s0 + b - s1 - t1 - t1 = s0 + b - e + t2 - t1
+
+
+- DONE: genus
+    so, we know empirically that "b+s0+s1" is even
+    let's return to V+B-E+F = 2-2g calculation
+
+    t1 - number of poor edges which connect oriented with oriented vertex
+    t2 - number of poor edges which connect non-oriented with non-oriented vertex
+    t3 - number of rich edges which connect oriented with non-oriented vertex
+    t4 - number of rich edges which connect non-oriented with non-oriented vertex
+
+    s1 = rich = t3+t4
+
+    V = 2*t3 + t4 + 2 * poor
+    B = b
+    E = 6*or + 3*unor
+    F = s0
+
+        simplify:
+        F+B=s0+b
+        V = 2*t3 + t4 + 2 * poor = e + t3 + poor = 2*e-t4
+        E = 6*or + 3*unor = 3*v + 3*or
+        V-E=2*e-t4-3*v-3*or=-t4-3*or
+        =>
+        s0+b-t4-3*or
+        t4=s1-t3
+        s0+b-s1 + t3-3*or
+            okay, it's easy to deduce from this that "b+s0+s1" is even
+    
+    2-2g=V+B-E+F
+    2g = 2 - (V+B-E+F)
+    g = 1 - (V+B-E+F)/2, g >= 0 (0 equals plane)
+
+    DONE!
+    DONE/UPD: i think there's some problem still, i get even genus=-2 somehow
+        can it be because there are more than 1 connected component in the surface?
+        UPD: exactly!
+
+
+- TODO: how to add perfect matchings to this picture?
+    - cluster algebras have some connection to associahedron
+        (? and to perfect matchings)
+        - and there's some connection to skew-symmetric matrices
+        - and there are some Plücker coordinates, which are related to Petersen graph
+            https://math.berkeley.edu/~bernd/tropical/sec5.pdf
+            Example 5.4. (d = 2, n = 5) The tropical Grassmannian G2,5 is a pure fan of
+            dimension 7 in R 10, and its reduced version G'2,5 is a one-dimensional complex.
+            This complex the Petersen graph, which has 10 vertices and 15 edges
+
+    - wild idea: perfect matchings correspond to Pfaffian, or skew-symmetric something (matrix, form)
+        (at least in bipartite graphs they do somehow)
+    - so maybe there should exist some skew-symmetric bilinear form
+        - maybe a symplectic form
+
+    Projective, affine, and abelian colorings of cubic graphs
+    Theorem 7.2. A cubic graph has a double cover by six perfect matchings
+        if and only if it has a CR-coloring where CR is the Cremona-Richmond
+        configuration.
+    
+    ? Segre cubic / Cremona-Richmond configuration:
+        ? A four-dimensional cousin of the Segre cubic
+        ? Tropicalization of classical moduli spaces
+            binary space F_2^4, u_ijkl; 15 vectors in F_2^4 \ {0}
+            symplectic form:
+                <x,y> = x1y3 + x2y4 -x3y1 -x4y2
+                z_ij z_kl z_mn, 15 cubic monomials - edges of Petersen graph
+                    so each edge is 3 vectors in F_2^4 \ {0}
+                z12: u0001
+                z13: u1100
+                z14: u1110
+                z15: u0101
+                z16: u0110
+                z23: u1101
+                z24: u1111
+                z25: u0100
+                z26: u0111
+                z34: u0010
+                z35: u1001
+                z36: u1010
+                z45: u1011
+                z46: u1000
+                z56: u0011
+            
+            ? Plücker quadrics
+                p_ij, 10 Plücker coordinates, vertices
+
+    2211.16154v1
+        Proposition 3.5. There are exactly 6 collections of five planes among the fifteen planes in C3,
+        meeting pairwise along single points. These collections are exchanged transitively by the action of S6.
+        Each one has for stabilizer a copy of S5, embedded in S6 in a non standard way.
+
+        these are perfect matchings
+
+
+- TODO: understand why Petersen graph has 12 circuits, so s0 even
+
+- TODO: has_2cdcs
+    I think that number of boundaries is same as "or"
+    or at least same mod 2
+    UPD: ok, so
+        oriented vertices, if they are surrounded by unoriented,
+        come in 2 types:
+        - those that form a 6-cycle boundary
+        - those that split into t2 3-cycle boundaries
+        - has_2cdcs solutions can't have the second type of oriented vertices
+    So this is basically the reason why "or" should have same parity as number of boundaries
+
+
+- TODO: s0 even panorama, can we get a second "mod 2" equations?
+    - has 333-flows
+        - includes (0,0,1/3,2/3,4/3,8/3)-nz5 flows
+    
+    - has_2richcdcs + mappable
+        NOTE: very small amount of "t4 odd" cases here
+            28.05: 18 cases
+    - s1 <= s0+or
+    - nzmod5ws: 0 0 1 1 2 2
+    - nzmod5ws: 0 0 1 2 3 4
+    - mismatch=1
+    - any_chords_frequency[1] = 0
+    - no t4 chords (includes "no rich chords")
+        t4 - number of rich edges which connect non-oriented with non-oriented vertex
+        - but e. g. "no t2 chords" can have odd s0
+
+
+- TODO: or2unor=4 <=> or_type_count=1:
+    - or even (2,4,6)
+    - s0+s1+s2=1 (mod 2)
+
+    NOTE: we always have here "no_2cdcs", "has_rich_chords", "mismatch=0"
+
+
+- TODO: onlyrich solutions
+    V-E+F=2-2g
+    V = 6 * or + (rich - 3*or)
+        rich=e=3v/2
+    F = s0[+or]
+    E = 6 * or + unor * 3
+        unor=v-or
+    V-E+F = s0[+or] + rich-3*or - 3*unor=
+        s0[+or] + rich-3*or-3(v-or)=
+        s0[+or] + rich - 3*v
+    so this should be even, interesting
+
+    onlyrich: "s0+or-e" is even
+
+    10.05g1:
+        s0=12, rich=15, or=3, unor=7, v=10, e=15
+        V-E+F = 12[+3] + 15 - 3*10 = 0
+        V = 6 * or + (rich - 3*or) = 3*or + rich = 3*3 + 15 = 24
+        F = 12+3=15
+        E=39
+        we get torus, if we fill in the boundaries
+    
+    NOTE: let's agree now by default, that
+        we always fill in the boundaries, when calculating F
+        or split it into F+B
+
+
+
+- TODO: or!=1
+    TODO: maybe we can prove this just by counting something?
+
+    we would have same formula as in or=0/Petersen-graph
+    V = 6*or + (rich - 3*or) + 2*poor
+        V = 3*or + e + poor
+    F = s0+or
+    E = 6 * or + 3*(v-or) = 3*(or+v)
+    V+F = 4*or + e + poor + s0 = E + 2-2g = 3*(or+v) + 2-2g
+    or + e + poor + s0 - 3*v = 2-2g
+    e=3*v/2
+    s0 + or - e = 2-2g <= 2
+    or=1: s0 + 1 - e <= 2
+    "s0 + e" is odd, s0-e <= 1, sounds quite plausible
+
+    ? so maybe this happens because I consider only snarks as graphs?
+    But probably it has to do with s2=3 breaking
+
+    NOTE: we could also have theoretically
+        F = s0+or+1
+
+
+- TODO: or = 0 (or_type_count=0):
+    - s2 = 3 (each perfect matching has even number of rich edges)
+    why?
+    if we check the o6c4 gluing, surface
+    we take all circuits from same layer
+    and e. g., search for neighbour vertices of degree 4
+
+- TODO: or=2, s2 = number of boundaries (mod 2)
+    - we could try to prove it locally, maybe
+    - and then glue the local patches somehow
+
+    - maybe we can define some kind of Reidemeister moves?
+
+- TODO: how reorientation changes number of boundaries?
+
+- TODO: V-E+F=2-2g in general case
+    or=0:
+        V = rich + 2*poor
+            rich=t4
+            poor=t2
+        F = s0
+        E = 3*v = 2*e
+        V+F = rich + 2*poor + s0 = 3*v + 2-2g = even
+        => "rich + s0" is even
+
+    or=2, t1=1:
+        V = 6*or + ...
+                broken: + 2*poor + t4
+            FIXME: RECALCULATE
+            or_components=1
+            poor=t1+t2
+            t4 = rich-4
+        F = s0+1 or F = s0+2
+            (depends on s2)
+        E = 6 * or + 3*(v-or)
+        V+F = 4 * (or_components) + 2*poor + t4 + s0+or-1 = 3*v + 2-2g = even
+        4+t4+s0+1 is even
+        s0 + t4 is odd
+        s0+s1 is odd
+
+        Something is still wrong!
+        and that's very interesting, because we should add s2 somehow
+
+        UPD: okay, we actually either have 1 blowup, or 2
+
+- TODO: or=2, t1=0
+    s2=2:
+        interesting, we have here 3 boundaries
+
+- TODO: or=2, t1=1, count poor edges in 2-neighbourhood
+    compare s2=2 with s2=1,3
+
+- TODO: or=3
+    are they always connected to each other, same as in Petersen graph surface?
+    like, by a diagonal or something similar
+
+- TODO: strong (oriented) Petersen colouring
+
+- TODO: maybe uvf-flows would be easy?
+
+
+- DONE: is it always a torus?
+    - Petersen graph's o6c4c can be drawn on torus
+    - what about other solutions?
+    - RESULT: probably not always a torus, or=0 solutions have various genus values
+        - 26.05: s1s0or=s1-s0=2-2g=8,10,12,14,16,18
+
+
+- DONE: or=0:
+    - let's interpret each edge as a square (cube in dimension 2)!
+        - NOTE: this is a dual construction, to what we have in Petersen graph case
+    - and also, each of the edge pairs is covered twice!
+    - and if or=0, then each "edge pair" is covered in 2 different directions
+    
+    F=3*v/2=e
+    E=2*F=3*v=2*e
+    V=s0
+    2-2*g=V+F-E=s0-e
+    TODO: why not s1, but e?
+
+    - poor and rich edges behave slightly differently
+    - idea is to ignore poor edges completely
+    - UPD: actually, we don't ignore them, but they don't add anything topologically
+    - rich edges are vertices with degree 4; and poor edges split into 2 vertices of degree 2,
+        that's why we can ignore them
+
+    F=s1
+    E=2*F=2*s1
+    V=s0
+    2-2*g=V+F-E=s0-s1, g should be an integer
+    => s0=s1 (mod 2)
+
+
+
+
+- Right now we have 2 cases where we know how to glue a surface:
+    - or=0
+    - Petersen graph
+        - onlyrich
+
+
+
+TODO: Parity of cycles in even-faced graphs
+    - Consider a graph G embedded in a surface S.
+    - Two cycles are homologous if their symmetric difference is the boundary of a set of faces.
+    Observation
+    The length of homologous cycles in an even-faced graph has the same parity.
+
+    or=0
+    we have
+        - orientable surface without boundary
+        - vertices have degrees 2 and 4, so dual graph is even-faced
+        - so for dual graph we get that homologous cycles in it have the same parity
+        - every simple cycle of dual graph corresponds to a minimal cutset in the original

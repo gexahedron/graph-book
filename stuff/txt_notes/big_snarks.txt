@@ -1,0 +1,145 @@
+- TODO: circular flow,  Φ=4+1/3:
+    26.05:
+        57 graphs
+        - all of them have a solution with 3flows
+        - 56 have nz-mod5 flow
+        - 52 have frac-nz5 flow
+        - 23 have has_2cdcs
+        - 2 have also_pet, and same for also_uvf: g42, g54
+        - 2 have or=0: g36, g56
+        - no solutions with evens=15
+- TODO: cyc5, permutation snarks, 34.05:
+    12=11+1 graphs (except g4, it's slow to get anything about it)
+    - no also_uvf solutions
+    - 2 or=0 solutions: g10, g12
+- TODO: permutation snarks, 26.05:
+    64 graphs
+    - 2 have also_uvf: g26, g64
+    - no or=0 solutions
+    
+
+- TODO: Generated_graphs.34.05.sn.cyc4-circ_flownr_5.g6
+    done, that was actually quite fast
+    no asserts failed
+    TODO: find the treelike snark
+
+
+- TODO: snarks_44.04.oddness4.cyc4.g6
+    UPD: i needed to fix some stuff before moving to V >= 42, now it's fixed (hacked)
+    looks like Petersen coloring works
+    UPD2: 6c4c is broken though still
+        it's broken on 44 vertices in general, 42 works
+    UPD3: now it works, also had to fix the Mask type
+
+    - found also_uvf
+
+    TODO: find any of or_as_unor_triples_244_count=2,4,10 solutions
+
+    DONE: find or < 6 solutions
+        UPD: found or=5 solution on g3
+
+        NOTE: now i think it makes sense that for all or=0 solutions we say
+            we had s0 <= 18
+            similar for or_as_unor_triples_244_count=2,4,10 solutions
+            we had s0 <= 18 on 26.05, s0 <= 19 on 28.05
+        for or < 6 we had s0 <= 24 on 28.05
+
+        DONE: we should count not s0, but odd circuits instead, "col"
+            (but it's quite slowly increasing, on 26.05 and 28.05 it's col=20 maximum)
+            (and all oddness=4 solutions have col=24 currently)
+            or=0
+                26.05, 28.05: col=12,14
+            or_as_unor_triples_244_count=2,4
+                26.05: col=12,14
+                28.05: col=12,14,16
+            or<6
+                26.05: col=12,14,16
+                28.05: col=12,14,16,18
+
+    TODO: find or < 5 solutions
+
+
+- TODO: there are also smaller snarks with oddness 4, although they have connectivity < 4, =2 and =3:
+    Lukot'ka, Mácajová, Mazák and Škoviera showed in [Electron. J. Combin. 22 (2015)] 
+    that the smallest snark with oddness 4 has 28 vertices and remarked that there are exactly
+    two such graphs of that order. However, this remark is incorrect as -- using an exhaustive computer search -- 
+    we show that there are in fact three snarks with oddness 4 on 28 vertices. 
+    In this note we present the missing snark and also determine 
+    all snarks with oddness 4 up to 34 vertices.
+
+
+
+- DONE: o6c4c, 38.05 girth6 snarks:
+    - no asserts failed!
+    - or=0: g21, g24, g35
+        + s0 even
+            => s1 even
+            => r244odd=0
+    - has_2cdcs can be non-mappable (all graphs, except g23, g24)
+    - no onlyrich solutions
+    - evens=0 (all graphs)
+    - for evens=15 everything stays same, in terms of CONJ
+    - also_pet: all 39 graphs
+    - also_uvf: 35 graphs (exceptions: g5, g7, g17, g18)
+    - 3flows => s0 even
+    - verified most of or_type_count=1
+    - s0=12 => any_chords_frequency[1] % 2 == 0
+    - no solutions with rich_type_count=12
+    - verified also_pet
+    - mappable => r244odd=0
+    - no t4 chords => s0 even
+    - no freq1 chords => s0 even
+    - mismatch=1 => s0 even
+    - mappable + "all_or_nonsplit" => s0 even
+    - verified (0, 0, 1/3, -8/3, 2/3, -4/3) in sync with (0, 0, 1/3, -2/3, 8/3, -4/3)
+    - nz-weights:
+            98 nz5ws:000113; nzmod5ws:000113;
+            30 nz5ws:000122; nzmod5ws:000122;
+          1204 nz5ws:000123; nzmod5ws:000123;
+         11801 nz5ws:001122; nzmod5ws:001122;
+            16 nz5ws:011223; nzmod5ws:001124;
+            15 nz5ws:011223; nzmod5ws:001233;
+            11 nz5ws:011223; nzmod5ws:011223;
+             6 nz5ws:012234; nzmod5ws:001234;
+         93997 nz5ws:noonee; nzmod5ws:001234;
+        823384 nz5ws:noonee; nzmod5ws:noonee;
+    - verified all "weird" or_sums are in nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+    - 333flows + or_as_unor_triples_244_count + has_2cdcs => evens=0,15
+    - 333flows + or_as_unor_triples_244_count + mappable => evens=0,3,15
+    - and some other stuff
+
+    wow:
+        - found has_2cdcs + "mismatch=1, has_nzmod5=1, has_nzmod6=1"
+        - g29, found no_2cdcs (so not also_pet), where rich_edge_layer_types == simpler = 15
+            - also all_or_nonsplit=0, all_in_out_count_even=0
+            - although it still has some nice properties:
+                - no u444 vertices (but sometimes it has u334)
+                - has_2richcdcs
+                - mappable
+                - or=10,16
+                - b=8,16
+                - s0=24
+                - s1=42
+                - s2=3
+                - r244odd=0
+                - evens=15
+                - parity=1
+                - no rich chords
+        - g34, evens=0:
+            s0 odd
+            or=6
+            parity=0
+            t4 odd
+
+            but still:
+                s1 odd (that's obvious, btw)
+                s2=0
+        so it's more subtle with evens
+
+
+
+- TODO: strictly critical snarks
+    https://arxiv.org/pdf/2406.16618
+        Strictly critical snarks have been previously studied in [4, 9, 15, 20]. The smallest
+        strictly critical snarks have order 32 (one is displayed in Figure 1) and such snarks have
+        been constructed for all higher orders.

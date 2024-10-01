@@ -1,0 +1,161 @@
+- first counterexample:
+    where we try to do same stuff as in ppdc,
+    but fail, by creating ppdc which is not eppdc
+
+    ADDING NEW EDGE (2, 3)
+    edge_idx=1 before part 1; adding edge (2, 3)
+    [0, 3, 1, 2]
+    [1, 2, 0]
+    [1, 3]
+    [3, 0, 2]
+    before rebuild
+    after rebuild
+    [0, 3, 1, 2] => [0, 3, 2, 1]
+    current paths
+    debug_path=[0, 3, 2, 1]
+    debug_path=[1, 2, 0]
+    debug_path=[1, 3]
+    debug_path=[3, 0, 2]
+    part1.x: adding edge (1, 3)
+    edge_idx=1 part1 success: True
+    success1=True
+    edge_idx=1 after part 1;
+    [0, 3, 2, 1]
+    [0, 2, 1, 3]
+    [1, 3]
+    [3, 0, 2]
+    adding edge (3, 2)
+    before rebuild
+    after rebuild
+    [0, 2, 1, 3] => [0, 2, 3, 1]
+    current paths
+    debug_path=[0, 3, 2, 1]
+    debug_path=[0, 2, 3, 1]
+    debug_path=[1, 3]
+    debug_path=[3, 0, 2]
+    part2.x: adding edge (1, 2)
+
+
+- check_connectivity=AFTER_PART2:
+    main idea is to add check for connectivity, but only at the end of part2
+
+    - it seems we don't have counterexaples on n=4,5
+
+    - we have a counterexample on n=6, seed=10020068:
+    ADDING NEW EDGE (3, 1); edge_idx=3
+    edge_idx=3 before part 1; adding edge (3, 1)
+    [0, 1, 2, 4, 3, 5]
+    [3, 4]
+    [0, 3, 5, 2]
+    [5, 2, 4]
+    [1, 2, 3]
+    [1, 0, 3, 2]
+
+    after part1:
+        [0, 1, 2, 4, 3, 5]
+        [3, 4]
+        [0, 3, 5, 2, 1]
+        [5, 2, 4]
+        [1, 3, 2]
+        [1, 0, 3, 2]
+
+        or
+
+        [0, 1, 2, 4, 3, 5]
+        [4, 3, 1]
+        [0, 3, 5, 2]
+        [5, 2, 4]
+        [1, 2, 3]
+        [1, 0, 3, 2]
+
+        or
+
+        [0, 1, 2, 4, 3, 5]
+        [3, 4]
+        [2, 5, 3, 0, 1]
+        [5, 2, 4]
+        [1, 3, 2]
+        [1, 2, 3, 0]
+    
+    why part2 fails:
+        ...
+
+    - it seems that check_connectivity=AFTER_PART1 would give same counterexample
+
+    - it seems v1,v2=v2,v1 helps in this counterexample
+
+
+- check_connectivity=AFTER_PART2 + v1,v2=v2,v1:
+    - we have a counterexample on n=6, seed=74886860:
+
+    ADDING NEW EDGE (0, 2); edge_idx=3
+    edge_idx=3 before part 1; adding edge (0, 2)
+    [5, 0, 4, 1]
+    [2, 5, 4, 1, 0]
+    [2, 5, 0, 1]
+    [3, 5, 4]
+    [4, 0, 3, 5]
+    [3, 0]
+
+        after part1:
+            [5, 0, 4, 1]
+            [2, 0, 1, 4, 5]
+            [2, 5, 0, 1]
+            [3, 5, 4]
+            [4, 0, 3, 5, 2]
+            [3, 0]
+
+            or
+
+            [5, 0, 4, 1]
+            [2, 5, 4, 1, 0]
+            [2, 5, 0, 1]
+            [3, 5, 4]
+            [4, 0, 3, 5]
+            [3, 0, 2]
+
+            or
+
+            [1, 4, 0, 5, 2]
+            [2, 0, 1, 4, 5]
+            [2, 5, 0, 1]
+            [3, 5, 4]
+            [4, 0, 3, 5]
+            [3, 0]
+
+        why part2 fails?
+            ...
+    
+    ADDING NEW EDGE (2, 0); edge_idx=3
+    edge_idx=3 before part 1; adding edge (0, 2)
+    [5, 0, 4, 1]
+    [2, 5, 4, 1, 0]
+    [2, 5, 0, 1]
+    [3, 5, 4]
+    [4, 0, 3, 5]
+    [3, 0]
+
+        after part1:
+            [5, 0, 1, 4]
+            [0, 2, 5, 4, 1]
+            [2, 5, 0, 1]
+            [3, 5, 4, 0]
+            [4, 0, 3, 5]
+            [3, 0]
+            adding edge (0, 2)
+            part2.x: 2 is not in path [3, 5, 4, 0], but ppdc is not connected
+            part2.x: 2 is not in path [3, 0], but ppdc is not connected
+
+            or
+
+            [5, 0, 4, 1]
+            [2, 5, 4, 1, 0]
+            [1, 0, 2, 5]
+            [4, 5, 3, 0]
+            [4, 0, 5, 3]
+            [3, 0]
+        
+        why part2 fails:
+            ...
+
+    - backtrack helps

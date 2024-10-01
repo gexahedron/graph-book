@@ -7,7 +7,7 @@ todo:
 	- bridgeless
 	- have 3 hamiltonian cycles, которые образуют balanced triple cover
 		прям сразу hamiltonian?
-
+		TODO: Richmond-Cremona configuration
 
 
 блог стартовал
@@ -4114,7 +4114,7 @@ TODO:
 	по числу решений - где окажутся диаграммы дынкина?
 	понятно, что пути - самые популярные графы,
 	и путь с хвостиком тоже
-	мне скорее интересны графы E8, E7, E8
+	мне скорее интересны графы E6, E7, E8
 
 TODO:
 	какие посты написать:
@@ -4147,7 +4147,7 @@ TODO:
 	там будут контрпримеры, да, типа тех же K3 и K5
 	а у antiorientedPPDC вроде бы K4 был контрпримером?
 
-	Update: Danny Calegary pointed out a bird-eye similarity between Keevash’s strategy and the strategy of the  recent Kahn-Markovic proof of the Ehrenpreis conjecture http://arxiv.org/abs/1101.1330 , a strategy used again by Danny and Alden Walker to show that random groups contain fundamental groups of closed surfaces http://arxiv.org/abs/1304.2188 .
+	Update: Danny Calegary pointed out a bird-eye similarity between Keevash’s strategy and the strategy of the recent Kahn-Markovic proof of the Ehrenpreis conjecture http://arxiv.org/abs/1101.1330, a strategy used again by Danny and Alden Walker to show that random groups contain fundamental groups of closed surfaces http://arxiv.org/abs/1304.2188.
 
 	а может мне стоит поизучать другие обобщения графов?
 	типа steiner triple systems?
@@ -4188,7 +4188,6 @@ Ardila - Coxeter Groups
 	Federico Ardila: Polytopes
 	Federico Ardila: Combinatorial Commutative Algebra
 	Matroids as a Theory of Independence by Federico Ardila
-Little Heroes ep. 5
 	
 
 Incidentally, the f-vectors are also unimodal, but only up to dimension 19. There are non-unimodal f-vectors in dimension 20.

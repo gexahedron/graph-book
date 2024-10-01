@@ -1,63 +1,2200 @@
 o6c4c landscape:
-- has 2cdcs
-- or=0 (+ or=2 when s2=3)
-- or=2
-- or_type_count=1
-- onlyrich
-- rich_type_count around 12
-    - что это: читай код, это непростая конструкция, но красивая
-    рёбер много, а таплов оказывается очень мало (правда есть и ограничение сверху)
-- strong Petersen colouring
-    - o244-flow triple count: 9, 10 (with fix in parity!)
-- s1s0diff <= 0 (28.05) или -1 (30.05)
-- fixes in parity
+    - some kind-of dichotomy of spectrum of solutions:
+        - "or" around 0
+            - or2unor=2,4,10
+            - or_type_count=0,1,2
+        - everything else: 333-flows, mismatch=1, t2=0, "no t4 chords", has_2cdc, ...
+    - genus=0
+    - also uvf
+    - also pet
+    - has 2cdcs
+    - or=0 (+ or=2 when s2=3)
+    - or=2 (s2=1,2)
+    - or_type_count=1
+    - rich_type_count around 12
+        - что это: читай код, это непростая конструкция, но красивая
+        рёбер много, а таплов оказывается очень мало (правда есть и ограничение сверху)
+        - также это подмножество also_pet
+    - strong Petersen colouring
+        - o244-flow triple count: 9, 10 (with fix in parity!)
+    - rich_edge_pair_evens=0,15
+    - s1s0diff <= 0 (28.05) или -1 (30.05)
+    - SEAL:
+        s1 <= 18
+        t1 + t3 <= 8
+        ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
+- fixes in parity (which means, ignore "s0" in parity sum, and add r244_odd_count)
+    (NOTE: also related to "s0 even" panorama)
+    - general fix!
+    - 333-flows, where deg=3 vertices are oriented
     - no t4 chords
-    - t2=0
+    - t2=0 (breaks on 30.05)
     - s0=12
-    - has nz-mod5 flow, but no nz-mod5 flow or no nz-mod-both flow
-    - o244-flows triple count: 9, 10
+    - "mismatch=1": has nz-mod5 flow, but no nz-mod6 flow or no nz-mod-both flow
     - big count of oriented vertices
     - small s1s0diff
+    - s1=s0+or (s1 <= s0+or)
     - any_chords_frequency[1] = 0
     - solutions with multiple reorientations
-- SEAL:
-    s1 <= 18
-    t1 + t3 <= 8
-    ((t1 + t3 <= or * 2 + 2) || (t1 + t3 == 9)) && ((s2 == 0) || (s2 == 3))
-more subtle:
-- even number of or vertices
-    - odd or count behaves differently from even or count
-- non-zero nz5 or-sums
-- any_chords_frequency[2] = 0
-- o2: 0 0 + o2: 3 3
+- more subtle:
+    - even number of or vertices
+        - odd or count behaves differently from even or count
+    - non-zero nz5 or-sums
+    - any_chords_frequency[2] = 0
+    - o2: 0 0 x . + o2: 3 3 x .
+- even more subtle:
+    - mappable
+    - onlyrich
+        - TODO (kind-of-counterexample): 30.05g14094: s0+s1+s2 % 2 = 0, instead of 1
+    - 2 rich cdcs
+    - or=3
+
+
+NOTES:
+    - we can have same orverts, but different s0 % 2:
+        26.05
+        g101: orverts:_1_11_17_19_22_; 13;
+        g101: orverts:_1_11_17_19_22_; 14;
+    - onlyrich graphs can have odd s0
+    - 28.05g2869: we have same u6c4c rich/poor edges ("profile"), but different "or" count % 2
+    - r244odd vs s2:
+        r244odd:0,10 <=> s2:0,3
+        r244odd:4,6 <=> s2:1,2
+    - has_2cdcs can be non-mappable ("inconsistent") on 28.05:
+        g193, g205, g691, g700, g701, g703, g708-g712,
+        g791, g805, g808, g809, g2182, g2251, g2332, g2333, g2900
+
+
+- TODO: girth=5, cyc2, snarks:
+    10: 1
+    12,14,16: 0
+    18: 3
+    20: 14
+    22: 107
+    24: 1109
+
+- DONE: girth=5, cyc3, snarks:
+    18: 3
+    20: 13
+    22: 97
+    24: 996
+    so not big difference with cyc2
+
+
+-  even F–orientations
+    https://arxiv.org/pdf/1501.02437
+    - idea is that we fix pm
+    - check all even-cycles, which alternate between edges of this pm, and edges outside this pm
+    - and we try to find at least 1 orientation of edges, which makes all these even-cycles
+        have even number of edges with same orientation (along the cycle)
+    - NOTE: probably we talk about connected even-cycles
+
+- TODO: or_homological
+
+- TODO: sign of perfect matching
+    Petersen graph:
+    direct edges:
+        0-8-3-5-4-0
+        4-2-9-8
+        3-7-6-1-5
+        1-9
+        6-0
+        2-7
+    pms:
+        4-2, 9-8, 6-0, 3-7, 1-5 => 1
+        8-3, 5-4, 1-9, 6-0, 2-7 => -1
+        0-8, 3-7, 5-4, 2-9, 6-1 => -1
+        3-5, 9-8, 4-0, 6-1, 2-7 => -1
+        0-8, 3-5, 1-9, 4-2, 7-6 => 1
+        8-3, 4-0, 2-9, 1-5, 7-6 => 1
+    that could be interesting
+    
+    - note that if we duplicate pms for 3-edge-coloured graphs, we get even counts for each sign
+
+        4->2, 8->9, 0->6, 3->7, 5->1
+        2, -2, -1, 2, -1 = 0
+
+
+- TODO: orienting pm, try3:
+    - we can give weights to edges
+    - e. g. by exploiting nz5-flow
+    - we can also direct edges in each pm
+    - so that each edge is covered twice in both directions
+    - and we can ask, that each layer sums up to 0, if we sum up weights of pm edges
+
+
+- TODO: homological:
+    DONE: odd_rcpm
+        can be odd on 26.05
+    DONE: nz5ws, nzmod5ws
+        26.05
+        nz5ws:000123; nzmod5ws:000123;
+        nz5ws:001122; nzmod5ws:001122;
+        nz5ws:012234; nzmod5ws:001234;
+        nz5ws:noonee; nzmod5ws:001234;
+        nz5ws:noonee; nzmod5ws:noonee;
+    DONE: or_b_same_mod2
+        broken on 26.05
+    didn't find anything specific to homological solutions, they seem to be too broad
+
+    TODO: petersen_pm_layer_count
+        DONE: is it always 0/6?
+            no, it can be also 1 and 2 at least
+            TODO: but these are probably inconsistent
+
+        TODO: does it correlate with anything?
+    
+    DONE: or_as_unor_triples_244_count != 2?
+        works on snarks upto 26.05
+        but doesn't work for non-snarks at least
+
+
+- TODO: check pm-homology for or=0 cases
+
+- TODO: contract_poor_edges
+
+- TODO: find_min_diff
+
+TODO: mappable, u6c4c, do we still have r244odd=0?
+
+- TODO: non-snarks, girth>=5, cyc>=2:
+    NOTE: girth=4 could be also interesting, but we have some technical issues
+        e. g. "genus" can be wrong
+        but most asserts work in these cases also
+    - i wonder whether cyclic connectivity affects anything
+    - also for non-snarks we need to add repetition of layers
+    - and i think even repeated edges could be allowed, if we will be careful enough
+
+
+- TODO: sums of 3 layers, rich edges:
+    - what if we just sum 3 layers as flows? and count rich edges?
+    - or=0:
+        - CONJ: triple_layer_sum = r244odd (=0,10)
+            so it adds even number of edges
+    - has_2cdcs:
+        - CONJ: triple_layer_sum = r244odd = 0
+            so it adds even number of edges
+    TODO: 26.05
+    
+
+- TODO: also_uvf (also_pet + 333-flows + or_as_unor)
+    does it have anything new compared to also_pet?
+    NOTE (28.05):
+        evens=0,15; same as also_pet
+        CONJ (+38.06): reors > 1 (which is interesting)
+            CONJ: and all reoriented solutions are also_uvf!
+            TODO: check this
+                TODO: and check it for also_pet
+
+    DONE: genus
+        nothing informative
+        28.05, genus=0-15; same as also_pet
+
+
+
+TODO: Fan-Raspaud triples
+    - fix FR-triple from o6c4c
+        - and try to modify the second FR-triple
+        - what panorama changes do we get?
+
+    - FR-triple is any triple of 6c4c layers
+    - 3 perfect matchings with empty intersection
+
+    - TODO: ask more questions
+    - TODO: which FR-triples don't have 6c4c?
+    - TODO: which FR-triples have 6c4c, but don't have o6c4c?
+    - TODO: which FR-triples (have 6c4c, but) don't have o244-flows?
+    - TODO: maybe we can find some necessary/sufficient conditions for (non-)existence of anything,
+        e. g., degree 3 vertices shouldn't be clustered or smth else?
+        UPD: actually, for 6c4c, necessary/sufficient is to get 244-flows?
+        nz2-flows is easy
+        so the problem is about nz4-flows
+    - TODO: read papers about FR-triples
+    btw, this is relevant:
+    https://mathoverflow.net/questions/333608/a-simple-case-of-a-strong-version-of-the-berge-fulkerson-conjecture
+
+
+- DONE: or!=1:
+    - DONE: prove, that we can define "orientation" on 244-circuits
+        and so on each 244-circuit we have even number of oriented vertices
+        which will immediately prove that or!=1
+            because in this case we would find several 244-cycles that go throug this vertex
+            and they will have only 1 oriented vertex
+    
+    TODO: although in general the situation is subtler
+    because in general what we should prove is that
+    oriented vertices don't come alone,
+    they can appear as a pair, as a triple, smth more complicated,
+    and as a sum of this combinations
+
+
+
+TODO: fixed a bug around evens:
+    (bug was because I was underestimating the value of evens)
+
+    FACT: evens=0,15 => r244odd=0
+        easy to prove!
+    FACT: evens=0 => s1 odd (obvious, just sum 15 odd numbers)
+    FACT: evens=15 => s1 even (also obvious)
+
+    26.05, 28.05, evens=0 (notCONJ checked on 38.06):
+        TODO-CONJ: homological=1
+        NOTE: simpler: 15 (that's easy) (because all 15 values are non-zero, so we have each rich edge pair)
+        CONJ: s2=0
+        CONJ: "or" = b (mod 2)
+            NOTE: we don't always have all_or_nonsplit
+        CONJ:
+            26.05
+                  914 nz5ws:001122; nzmod5ws:001122;
+                   15 nz5ws:012234; nzmod5ws:001234;
+                  802 nz5ws:noonee; nzmod5ws:001234;
+                23025 nz5ws:noonee; nzmod5ws:noonee;
+            28.05
+                 13099 nz5ws:001122; nzmod5ws:001122;
+                   442 nz5ws:012234; nzmod5ws:001234;
+                 14208 nz5ws:noonee; nzmod5ws:001234;
+                301823 nz5ws:noonee; nzmod5ws:noonee;
+            38.06:
+                    16 nz5ws:001122; nzmod5ws:001122;
+                 15871 nz5ws:noonee; nzmod5ws:001234;
+                133533 nz5ws:noonee; nzmod5ws:noonee;
+            so or_sum % 5 = 0 + nope
+        notCONJ: s0 even
+            notCONJ: so parity=1
+        notCONJ: or odd
+            => notCONJ: or+s1=0 (mod 2) (<=> t4 even)
+            => notCONJ: b odd
+    26.05, 28.05, 38.06, evens=15:
+        TODO-CONJ: homological=1
+        CONJ: s0 even
+        CONJ: s2=3
+            so parity=1
+        CONJ: or even
+            => or+s1=0 (mod 2) (<=> t4 even)
+        CONJ: b even
+            so "or" = b (mod 2)
+            NOTE: we don't always have all_or_nonsplit
+        NOTE: simpler: 10-15
+        NOTE:
+            26.05
+                  2 nz5ws:000123; nzmod5ws:000123;
+                 65 nz5ws:001122; nzmod5ws:001122;
+                  1 nz5ws:012234; nzmod5ws:001234;
+                 30 nz5ws:noonee; nzmod5ws:001234;
+                688 nz5ws:noonee; nzmod5ws:noonee;
+            28.05
+                   17 nz5ws:000123; nzmod5ws:000123;
+                 1557 nz5ws:001122; nzmod5ws:001122;
+                   23 nz5ws:012234; nzmod5ws:001234;
+                  434 nz5ws:noonee; nzmod5ws:001234;
+                10750 nz5ws:noonee; nzmod5ws:noonee;
+        CONJ: or_sum % 5 = 0 + nope
+    +
+    CONJ:
+        26.05, has_2cdcs => evens:0,6,9,15
+        28.05, has_2cdcs => evens:0,6,8,9,15
+            NOTE: inconsistent => evens=0,6,8,9
+            0: rich_edge_pair_counts:_1_1_1_1_1_1_1_1_1_1_1_1_1_7_1
+            6: rich_edge_pair_counts:_2_2_1_3_1_2_1_3_5_3_1_3_2_2_2
+            8: rich_edge_pair_counts:_0_5_1_3_2_2_2_2_5_1_1_2_3_4_0
+            9: rich_edge_pair_counts:_4_2_2_1_1_1_1_2_2_1_2_2_2_2_1
+            + ?CONJ: simpler=11 => inconsistent
+                NOTE: inconsistent => simpler=11-15
+        38.06, has_2cdcs => evens:0,6,7,8,9,15
+
+    TODO: 30.05
+
+
+- TODO: evens panorama:
+    28.05, 38.06:
+        CONJ: also_pet => rich_edge_pair_evens=0,15 (evens "dichotomy")
+            NOTE:
+                evens=0 => simpler=15
+                evens=15 => simpler=12,14,15
+        CONJ: 333flows + or_as_unor_triples_244_count + mappable => evens=0,3,6,9,12,15
+        CONJ: 333flows + or_as_unor_triples_244_count + has_2cdcs => evens=0,6,9,15
+            (it can still be inconsistent!)
+    28.05, has_2cdcs => evens=0,6,8,9,15
+        38.06: adds evens=7 (which makes sense)
+    26.05:
+        mappable => evens=0,3,4,5,6,8,9,10,11,12,15
+        no_rich_chords => evens=0,1,2,3,4,11,12,13,14,15
+        no_chords => evens=0,2,4
+        rich_type_count=12 => evens=15
+            this conjecture is already implied in evens=0,15 dichotomy for also_pet
+
+
+- TODO: connected components:
+    26.05,28.05,38.06:
+        CONJ: odd_pc2f:0,2,4,6
+        CONJ: odd_rc2f:0,2,4,6
+        CONJ: odd_pcpm:0,2,4,6
+        +
+        NOTE: odd_rcpm:0,1,2,3,4,5,6
+    NOTE: also_uvf can still have
+        28.05: odd_rcpm:0,2,3,4,5,6
+        on 38.06 we only have here 0,2,6
+
+    when we add has_nzmod5=1:
+        also_uvf + has_nzmod5=1 => 28.05: odd_rcpm:0,2,3,4,6
+
+    interestingly, when we add has_nz5=1:
+        (although relatively small amount of solutions)
+        CONJ: "no t4 chords" + has_nzmod5=1 => odd_rcpm:0,2,4,6
+            nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:10010010;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:000123; has_frac_nz5:10010010;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:001122; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:001122; has_frac_nz5:10010010;
+            nz5ws:noonee; nzmod5ws:noonee; nz6ws:001224; nzmod6ws:001224; has_frac_nz5:00000000;
+            nz5ws:noonee; nzmod5ws:noonee; nz6ws:noonee; nzmod6ws:012345; has_frac_nz5:00000000;
+        CONJ: has_2cdcs + has_nzmod5=1 => odd_rcpm:0,2,4,6
+            nz5ws:000123; nzmod5ws:000123; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:10010010;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:000123; has_frac_nz5:10010010;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:001122; has_frac_nz5:00000000;
+            nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:001122; has_frac_nz5:10010010;
+            nz5ws:012234; nzmod5ws:001234; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:noonee; nzmod5ws:001234; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+            nz5ws:noonee; nzmod5ws:noonee; nz6ws:001224; nzmod6ws:001224; has_frac_nz5:00000000;
+            nz5ws:noonee; nzmod5ws:noonee; nz6ws:noonee; nzmod6ws:012345; has_frac_nz5:00000000;
+        CONJ: also_pet + has_nzmod5=1 => odd_rcpm:0,6
+            28.05:
+                nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+                nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:10010010;
+                nz5ws:001122; nzmod5ws:001122; nz6ws:001122; nzmod6ws:001122; has_frac_nz5:00000000;
+            so here at least
+                it seems nz6 has nothing to do with this,
+                and we only need "nz5ws:001122; nzmod5ws:001122"
+
+    UPD: I got it, actually we need to filter out "nz5ws:noonee; nzmod5ws:001234":
+        wait, but it's equivalent to having nz5-flow
+
+
+
+- DONE: dominating circuit:
+    try to find a circuit, where not only all "or" vertices are on it
+    but also they have same orientation along the circuit, for at least 1 layer of o6c4c
+    not-CONJ upto 26.05: always has_dom_circ_or
+        broken on 28.05, on 28.05g712!
+        interestingly enough, these solutions have very peculiar vertices:
+        o133_o333_o133_o111_o111_o133_u333_o113_o113_u333_u333_u333_u333_o333_u333_u333_u333_o333_o133_o133_o113_o113_o133_o111_o113_o111_u333_o113
+        so t2=t4=0
+        also 28.05g2151, which has less peculiar solutions
+
+        NOTE: also peculiar is that t2or=0 in both snarks
+    so maybe:
+        t2or!=0 => has_dom_circ_or
+        UPD: no, on 38.06 we have no_dom_circ_or with t2or=3
+
+    DONE: we could also ask to have 2 layers with orientations along dom_circ
+        here we have exceptions already on 18 vertices
+        26.05: also_uvf, but no_dom2ors
+        here we don't see any patterns
+
+
+- TODO: rich_type_count=12:
+    sample of counts from 26.05
+                              12 13 14 15 16 23 24 25 26 34 35 36 45 46 56
+    rich__edge__pair__counts:__0__x__x__x__x__x__x__x__x__0__x__x__x__x__0;
+    rich__edge__pair__counts:__0__x__x__x__x__x__x__x__x__x__0__x__x__0__x;
+    rich__edge__pair__counts:__x__0__x__x__x__x__0__x__x__x__x__x__x__x__0;
+    rich__edge__pair__counts:__x__0__x__x__x__x__x__0__x__x__x__x__x__0__x;
+    rich__edge__pair__counts:__x__0__x__x__x__x__x__x__0__x__x__x__0__x__x;
+    rich__edge__pair__counts:__x__x__0__x__x__0__x__x__x__x__x__x__x__x__0;
+    rich__edge__pair__counts:__x__x__0__x__x__x__x__0__x__x__x__0__x__x__x;
+    rich__edge__pair__counts:__x__x__0__x__x__x__x__x__0__x__0__x__x__x__x;
+    rich__edge__pair__counts:__x__x__x__0__x__0__x__x__x__x__x__x__x__0__x;
+    rich__edge__pair__counts:__x__x__x__0__x__x__0__x__x__x__x__0__x__x__x;
+    rich__edge__pair__counts:__x__x__x__0__x__x__x__x__0__0__x__x__x__x__x;
+    rich__edge__pair__counts:__x__x__x__x__0__x__0__x__x__x__0__x__x__x__x;
+    rich__edge__pair__counts:__x__x__x__x__0__x__x__0__x__0__x__x__x__x__x;
+
+    so the missing 3 edge pairs form a full triple
+
+
+- TODO: t2=t4=0:
+    t1 - number of poor edges which connect oriented with oriented vertex
+    t3 - number of rich edges which connect oriented with non-oriented vertex
+    so we don't have any "uu" edges
+    upto 28.05 we probably only have 1 (non-isomorphic) solution, and it is for flower snark
+
+    TODO: 30.05
+
+
+- TODO: vertex types panorama:
+    - we know we can't have some vertex types in has_2cdcs
+        DONE: uru3=0 (no u444), no u334, uru1 even
+            easy to prove
+
+    TODO: check other stuff, e. g.
+        - nothing interesting
+            - evens=0
+            - 333-flows
+            - frac-nz5-flow
+            - or=0
+            - no_rich_chords / also_pet / also_uvf:
+                upto 26.05: no o111
+                broke on 28.05
+            - no_freq1_chords:
+                upto 26.05: no o111
+                broke on 28.05
+        - genus=0:
+            no o111, o113 (upto 28.05; no examples on 38.06)
+
+
+- TODO: uru3=0:
+    - includes has_2cdcs
+    - 24.05: s0 even
+        breaks on 26.05
+    - CONJ 26.05, 28.05, 38.06: "uru3=0" + "all_or_nonsplit" => s0 even
+
+- TODO: mappable + "all_or_nonsplit":
+    CONJ: s0 even
+
+
+- DONE: evens=0, r244odd!=0:
+    - how is that possible?
+    UPD: wow, i had a bug in "evens"
+
+
+- TODO: has_2cdcs, inconsistent:
+    check at least one of them by hand
+
+
+- TODO: rich edges in cycle of 15 layer pairs:
+    - we get this statistics:
+        r15odd:_0; r244odd:_0; s2:_0;
+        r15odd:_0; r244odd:_0; s2:_3;
+        r15odd:_0; r244odd:_10; s2:_0;
+        r15odd:_0; r244odd:_10; s2:_3;
+        r15odd:_8; r244odd:_4; s2:_1;
+        r15odd:_8; r244odd:_4; s2:_2;
+        r15odd:_8; r244odd:_6; s2:_1;
+        r15odd:_8; r244odd:_6; s2:_2;
+    so both r244odd and s2 are more informative
+
+
+- TODO: r244_no_or == or_as_unor_triples_244_count:
+    24.05:
+        r244_no_or:_0; or_as_unor_triples_244_count:_0;
+        r244_no_or:_1; or_as_unor_triples_244_count:_1;
+        r244_no_or:_2; or_as_unor_triples_244_count:_2;
+        r244_no_or:_4; or_as_unor_triples_244_count:_4;
+        r244_no_or:_10; or_as_unor_triples_244_count:_10;
+
+
+- TODO: has_2cdcs, t4 edges = rich edges covered twice in same direction:
+    easy to prove, actually
+    but we also have t5, poor edges covered twice
+        t5 < t2
+    
+
+- TODO: has_2cdcs
+    when we split into 2 cdcs
+    does every circuit touch 5 circuits from 5 different layers?
+
+
+- DONE: "has_2cdcs+mappable", look at mappable lengths:
+    what is the spectrum / possible lengths?
+    28.05: 0,1,4,5,6,7,10,11,15
+
+
+- TODO: or=b=3:
+
+
+- DONE: all_or_comps_connected (includes or=b=3):
+    24.05, 26.05 notCONJ: r244odd=0 => parity=1
+        UPD: broke on 28.05
+
+
+- TODO: "all_or_nonsplit" + "333-flows":
+    26.05, 28.05, 38.06 CONJ:
+        - parity=1
+            <=> s1+s2 is odd
+            <=> r244odd=0,4 (because s0 even)
+        NOTE: s2=0,1,2,3
+
+
+- TODO: Petersen graph duality between 244-cycles and vertices:
+    maybe we could reuse this for o6c4c-surface?
+
+
+- DONE: s0=12 + smth-else => parity=1?
+    NOTE: if we ask r244odd=0,4, we automatically get parity=1, because s0 is even
+        so we need to be more subtle
+    NOTE: and also mappable conjecturally would give parity=1 for s0 even
+
+    UPD: didnt' find anything helping to fix the parity
+
+    NOTE: this looked promising "s0 is even" + no_rich_chords => parity=1
+        but it breaks on s0=20 for 26.05, and on s0=18 for 28.05
+        so doesn't look promising anymore
+
+
+- DONE: return of orient_pm, is_pm_orientable!
+    NOTE:
+        also_uvf => pm is orientable
+        worked upto 26.05, breaks on 28.05g2314
+    but we still find a uvf-flow
+
+
+- TODO: no chords => is_pm_orientable
+    NOTE: no solutions for 28.05
+    30.05
+
+
+- TODO: having uvf-flow != also_uvf:
+    (upto 28.05) also_uvf is slightly more strict than "having uvf-flow"
+    probably because we allow for some edges to switch from rich to poor:
+        we disallow !is_petersen_vector[v_idx] && is_rich_profile[cur_edge]
+        so we allow to have is_petersen_vector on poor edge
+    and on 26.05 there's at least 1 exceptional profile,
+        which is not also_uvf,
+        but still has uvf flow:
+    26.05g280 (we've seen this graph before) + 24 graphs on 28.05
+    upto 28.05: checked that all also_uvf have uvf-flow!
+        and a lot more examples, where not also_uvf, but has uvf flow
+
+
+- TODO: simpler=9 (rich edge pair count)
+    although small amount of solutions
+    CONJ (28.05+38.06):
+        s0 even : 12,14,16 (+18,20)
+        or even : 0,2,4,6,8,10,12 (+14)
+        or_sum % 5 = 0 + nope
+        no_2cdcs, has_rich_chords
+    NOTE:
+        s1 any
+        parity any
+        nz5ws: 000113, 000122, 000123, 001122, none
+        very rarely mappable
+
+- DONE: all_or_circs != 0 (check o6c4c_surface.txt)
+
+
+- TODO: reconstruct Petersen colouring (also_pet) from simpler=rich_edge_layer_types
+
+
+- DONE: also_pet vs "has_2cdcs + no_rich_chords":
+    I tried to check uvf-flows for profiles where
+        we don't have also_pet, but have "has_2cdcs + no_rich_chords"
+        and we still find uvf-flows here!
+    UPD: 28.05g253: number of unit vector flows: 0
+    so, actually there's no also_pet for this graph
+
+
+- TODO: we can also split t1 edges into 2 types:
+    relative to the o6c4c-surface orientation
+
+- TODO: t2or=0:
+    notCONJ: s0 even
+        breaks on 30.05 (at least in onlyrich case)
+    CONJ (38.06): or_sum % 5 = 0 (+ nope)
+        26.05:
+        3544 nz5ws:001122; nzmod5ws:001122;
+          32 nz5ws:012234; nzmod5ws:001234;
+         128 nz5ws:noonee; nzmod5ws:001234;
+        1100 nz5ws:noonee; nzmod5ws:noonee;
+
+        TODO: 28.05
+
+
+- TODO: surface, genus, number of blowup regions / boundaries (+ panorama):
+    "b+s0-s1" is even!
+
+    "genus"
+        let's define it as "1 - (s0 + boundaries - rich) / 2"
+        DONE: check that it's true value of genus
+        no, it's not; 26.05 has "genus"=-2
+
+    wontdo: "genus" < 0
+        CONJ (26.05):
+            parity=1
+                s0 even
+                s1+s2 odd
+            r244odd:0,4
+
+
+- TODO: genus=0:
+    TODO: draw 1 of solutions, just for interest and fun
+
+    24.05, 26.05, 28.05, CONJ:
+        s0 even (s0=16,18,20,22,24)
+        no-t3-freq2-chords
+        t3_freq1-chords=0,2,4,6,8 => t3_freq1-chords even
+        s2=0 => evens=0 (the other direction is CONJ also in general for evens=0)
+            (but I would expect this could break)
+        s2=2 => evens=2
+            (but I would expect this could break)
+
+    there was interesting stuff going on upto 26.05
+    but most of it broke on 28.05, at least where r244odd=6 / par=0, e.g.
+        all of t4-freq2-chords are there
+
+    works upto 26.05, breaks on 28.05:
+        no-t3-chords
+        s2=evens
+        or odd
+        r244odd=0,4
+        parity=1
+        no nz-mod5 flows
+        simpler=15
+        reors >= 8
+        no-t4-freq2-chords
+
+    NOTE:
+        or=3,5,7,8
+        b=3-8,10-13
+        s2=0,1,2
+        evens=0,1,2,7,8
+        r244odd=0,4,6
+        parity=0,1
+        nz-weights:
+                8 nz5ws:001122; nzmod5ws:001122;
+            28830 nz5ws:noonee; nzmod5ws:noonee;
+        simpler=12,14,15
+        rich_type_count=15-21
+        reors >= 4
+
+    if we filter out "par=0" and "or=8 / evens=7" solutions (upto 28.05):
+        s2=evens
+        or odd
+        r244odd=0,4
+        parity=1
+        simpler=15
+        no-t4-freq2-chords
+        +
+        we still have all 8 nzmod5ws:001122 cases
+        we can have t3-chords
+        reors >= 4
+
+    NOTE: genus=1:
+        s0 even
+            26.05: s0 odd starts from genus=3
+            28.05: s0 odd starts from genus=2
+
+
+- TODO: reors, where or=!0,2, but or_counts has or=0,2:
+    (NOTE: if or=2, then we restrict to cases of s2=3)
+    (because otherwise most stuff breaks, which is also interesting)
+    CONJ (+38.06):
+        or_as_unor_triples_244_count=0
+            (NOTE: breaks, if or=2 and s2!=3)
+    CONJ (+38.06): or_sum % 5 = 0 (+ nope)
+        28.05, or_counts=0,...:
+            CONJ: frac-nz5-flow trichotomy!
+             33 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; has_frac_nz5:10010010;
+                (and so we also get 333-flows)
+                NOTE: this breaks on or_counts=2, even when s2=3
+             53 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_frac_nz5:10000000;
+            358 nz5ws:_none; nzmod5ws:_none; has_frac_nz5:00000000;
+                UPD: there's more to it (probably), e. g.
+                28.05
+                    has_frac_nz5:10010010 => or=8,10,12, or_counts don't include 6
+                        or_counts:_0_8;
+                        or_counts:_0_10;
+                        or_counts:_0_8_10;
+                        or_counts:_0_8_12;
+                    has_frac_nz5:10000000 => or=8,10,12, or_counts don't include 6
+                        or_counts:_0_8;
+                        or_counts:_0_10;
+                        or_counts:_0_12;
+                so or=6 => has_frac_nz5:00000000
+                        or_counts:_0_10;
+                        or_counts:_0_12;
+                        or_counts:_0_6;
+                        or_counts:_0_6_10;
+                        or_counts:_0_6_8;
+                        or_counts:_0_8;
+                        or_counts:_0_8_10;
+                        or_counts:_0_8_12;
+                UPD: there's more to it (probably), part2, e. g.
+                28.05
+                    has_frac_nz5:10010010 => evens=9
+                    has_frac_nz5:10000000 => evens=9,11
+                    has_frac_nz5:00000000 => evens=3,5,8,9,11
+        38.06, or_counts=0,...:
+            90 nz5ws:001122; nzmod5ws:001122; has_frac_nz5:10010010;
+             8 nz5ws:noonee; nzmod5ws:001234; has_frac_nz5:10000000;
+            20 nz5ws:noonee; nzmod5ws:noonee; has_frac_nz5:00000000;
+        28.05, or_counts=2,...:
+              97 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+               7 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+              12 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            1162 nz5ws:_none; nzmod5ws:_none;
+            (NOTE: if we don't restrict to s2=3:
+                   4 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+                 154 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+                   9 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+                  72 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+                3974 nz5ws:_none; nzmod5ws:_none;
+            )
+
+        that's very interesting, because for or=0 we have different weights:
+        28.05:
+             29 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            843 nz5ws:_none; nzmod5ws:_none;
+        or=2, (s2=1,2,3), 28.05:
+              70 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            8661 nz5ws:_none; nzmod5ws:_none;
+        and "_0_0_0_1_2_3" is exactly the weight where "weird: or_sums happen
+
+    TODO:
+        or_counts=0,...; CONJ (28.05, 38.06):
+            reors > 1
+                breaks on or_counts=2
+            t1 >= 2
+            t3 >= 12
+
+    NOTE: 333-flows can appear
+        even bal3 can be 1
+    NOTE: mismatch can become 0 or 1
+
+
+- TODO: 333-flows, construction:
+    trying to decipher old finding: "здесь 6 пар троек"
+    Petersen graph:
+        тройка даёт 6-цикл
+        две тройки дают объединение 6-циклов, то есть нужный nz3-flow
+        для 333-flows надо 3 пары троек
+        мне кажется я ошибся в прошлой фразе "здесь 6 пар троек",
+        и пар не 6, а 3
+            UPD: не, всё ок, просто терминология чуть другая там
+
+
+- TODO: 333-flows count:
+    24.05: it's either 0 or 1
+    so it's only 1 working combination or none
+
+    TODO: study this a bit more
+
+
+- TODO: 333-flows, can we create 3 nz5-flows?
+
+
+- TODO: there's a hamiltonian cycle in o6c4c for Petersen graph
+    if we pass through circuits
+        layers: 3-4-1-6-2-3-5-1-4-5-6-1-(3)
+    check other solutions
+    TODO: can it be connected to the fact that solution lives on torus?
+
+
+- TODO: "simpler" (simpler_rich_edge_layer_types):
+    24.05,26.05:
+        overall: 9-15 (same for 28.05)
+        or=0: 9,12,13,15
+        has_2cdcs: 12,14,15
+        no_rich_chords: 12,14,15
+        also_pet: 12,14,15
+            CONJ: it's same as rich_edge_layer_types (same for 28.05)
+            notCONJ: looks like it works backwards also (same for 28.05)
+                so if they are same, then we have also_pet
+                BROKEN on 38.06
+    TODO: simpler=9
+    TODO: simpler=15
+
+
+TODO: "simpler_poor" (simpler_poor_edge_layer_types):
+    24.05:
+        overall: 1-12
+        or=0: 5-9,12
+        has_2cdcs: 4-9
+        also_pet: 5-8
+
+    TODO: simpler_poor=1
+
+
+- DONE: write out all of the conjectures panorama:
+    TODO: all CONJ above this note
+    TODO: add possible nz5 / nz-mod5 weights
+    TODO: evens=0,15
+    TODO: simpler=9
+    TODO: genus=0
+    TODO: also_uvf
+    TODO: conjectures about connected components
+
+    - surface:
+        "s0+boundaries-s1" is even!
+            NOTE: we can prove this easily
+
+    - or % 2 = 1 => or_type_count >= 3
+        - which implies "or != 1"
+            UPD: i know how to prove "or != 1"
+            by "orienting" 244-cycles
+    - or = 0 (or_type_count=0):
+        - s0 = s1 (mod 2)
+            - UPD: we have a proof of this!
+        - s2 = 3 (each perfect matching has even number of rich edges)
+        - r244odd=0,10; r244odd/2 = s0 (mod 2)
+        - in reors (only for snarks, TODO: check cyc3 snarks, girth=4, girth=3):
+            - or >= 6
+            - ...
+        - s1 >= 22
+        - genus >= 5
+    - (333-flows | mismatch=1 | t2=0 | "no t4 chords" | has_2cdc):
+        - or2unor=0,1
+        - or_type_count != 0,1,2
+    - or=2:
+        - or_type_count=1
+    - or=3:
+        - t1=0
+        - or2unor=1
+    - or_type_count=1:
+        - NOTE/TODO: it's kind of related/similar to or_type_count=0
+        - or_as_unor_triples_244_count=4
+        - par=1 (s0+s1+s2 = 1 (mod 2))
+        - or even (2,4,6)
+            - t3 even (4,6,8,10,12)
+        - t2 > 0
+            - TODO: is it interesting?
+        - mismatch: 0:
+            has_nz5: 0; has_nzmod5: 0; has_nzmod6: 0; has_nzmodb: 0;
+            has_nz5: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0;
+            has_nz5: 1; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1;
+        - or_sum % 5 = 0 (nope, 5, 10)
+            actually:
+            - or_sum=5 => or=2
+            - or_sum=10 => or=4
+            - or_sum=15 => or=6 (checked on 38.06)
+        - odd_t1_2_factors 0 or 2
+            - TODO: is it interesting?
+    - or_type_count=2:
+        - or2unor=1,2
+    - or2unor=0,1,2,4,10
+        - or2unor=4 <=> or_type_count=1
+        - or2unor=10 <=> or=0
+        - or2unor=2 => or even, or>=4, or_type_count=2
+
+    - s0=12:
+        - any_chords_frequency[1] % 2 == 0
+
+    - rich_type_count=12:
+        - also_pet
+        - or: even (4, 6, 8)
+        - circuits with odd length ("col"): 12
+        - missing 3 edge pairs form a full triple (e. g. "12,34,56")
+            - so it corresponds to one of the lines in Cremona-Richmond configuration
+    - also_pet + "col=12":
+        - mismatch 0 => no flow (has_nzmodb=0)
+    - has icosidodecahedron+cuboctahedron unit vector flow ("uvf-flow") <=>
+        also_pet + or_as_unor_triples_244_count=1 + 333-flows
+    - "also_pet" (petersen 6c4c with o6c4c):
+        - has 2cdcs
+        - no t4 chords
+        - dichotomy of rich_edge_pair_evens=0,15
+    - also_pet <=> rich_type_count=simpler_rich_type_count
+    - has 2cdcs (just 6c4c):
+        - s0+s1+s2=1 (mod 2)
+        - r244odd=0
+            => s2=0,3
+    - has 2cdcs + o6c4c =>
+        - s0 even (UPD: i think i know how to prove this)
+        - or + s1 is even (same as "t4 is even") (i think i almost know how to prove this)
+        - s1 + s2 is odd
+    - RECHECK: has_2cdcs + "no rich chords"
+        ? mappable
+        - mappable has circuits of lengths % 5 = 0 (kind-of similar to also_pet)
+    - mappable:
+        - r244odd=0 (UPD: this is obvious!)
+            => s1+s2 odd (because s1+s2+r244odd/2=1)
+            => s2=0,3
+        - or_sums: nope, 5, 10, 15, 20, 25, 30
+    - r244odd is never 2 or 8
+
+    - onlyrich:
+        - we have 4k+2 vertices
+        - (s0+or-e) is even
+            - NOTE: so if we have always 4k+2 vertices, then e is odd,
+            - so s0+or = 1 (mod 2)
+    - no t4 chords:
+        - s0 even
+    - any_chords_frequency[1] = 0 ("no freq1 chords"):
+        - s0 even
+        - ? col: 12, 16, 20 (% 4 = 0)
+    ? no chords (at all):
+        ...
+
+    - various findings about possible nz5 / nz-mod5 weights in various cases
+        ...
+    - "mismatch" (...):
+        - s0 even
+    - 333-flows (with degree 3 oriented vertices):
+        s0 even
+    - "333-flows" + "all_or_nonsplit":
+        - or+s1 even / t4 even
+        - s1+s2 odd <=> r244odd=0,4
+    - (0, 0, 1/3, 2/3, 4/3, 8/3) => 333-flows
+        - NOTE: we can prove this!
+    - (0, 0, 1/3, -8/3, 2/3, -4/3) in sync with (0, 0, 1/3, -2/3, 8/3, -4/3)
+    - dichotomy in (0,0,1/3,2/3,4/3,8/3)-flows:
+        - has_frac_nz5:_1_0_0_0_0_0_0_0;
+            nz_mod5 weights: 0 0 1 2 3 4
+                TODO: I wonder why 0 0 1 1 2 2 doesn't work?
+            has_nz5: 0
+            mismatch: 1
+            has_nzmod6: 0
+            has_nzmodb: 0
+        - has_frac_nz5:_1_0_0_1_0_0_1_0;
+            nz_mod5 weights: 0 0 1 1 2 2
+                TODO: 0 0 1 2 3 4 weights also work here?
+            has_nz5: 1, nz5ws: 0 0 1 1 2 2
+            mismatch: 0
+            has_nzmod6: 1
+            has_nzmodb: 1
+            - (0, 0, 1/3, -8/3, 2/3, -4/3) => (0, 0, 1/3, 2/3, 4/3, 8/3)
+    - has nz5: max weight - min weight <= 4
+    - all "weird" or_sums are in nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+
+    ?
+    - o244-triple count:
+        - 10 <=> also_pet
+        - 9,10 => s0 even
+        - >=5 => probably smth about nz-5 / nz-mod5 weights
+        - if a snark doesn't have o333-flows, then o244-triple count <= 7
+    - t2=0, s2=0 (small selection):
+        - "or" odd
+
+
+- DONE: has 2cdcs + o6c4c:
+    if mismatch=1 => has_nzmod5=1, has_nzmod6=0
+    BROKEN on 38.06
+        g13, mismatch=1, has_nzmod5=1, has_nzmod6=1
+
+
+- DONE: has_2cdcs + "no rich chords" behaves similarly to also_pet, e. g.
+    - this construction exists for same snarks with also_pet (and not others)
+    UPD: this is broken for 28.05g253
+
+
+- TODO: uvf-flow, geometric configuration?
+    from paper "Projective, affine, and abelian colorings of cubic graphs":
+        Theorem 7.2. A cubic graph has a double cover by six perfect matchings
+            if and only if it has a CR-coloring where CR is the Cremona-Richmond
+            configuration.
+        
+        Theorem 7.3. A cubic graph has a Petersen coloring if and only if it has a
+            P-coloring, where P is the depleted Cremona-Richmond configuration.
+    can we find something analogous for uvf-flow maybe?
+
+
+- TODO: uvf-flow vs also_pet
+    - DONE: 28.05, for also_pet + 333-flows + or_as_unor_triples_244_count=1
+    - DONE: 26.05, also matched the rich/poor profiles of uvf-flow and also_pet
+    - TODO: would be interesting to try to reconstruct Petersen colouring somehow
+
+    - OUTDATED: how to detect a uvf-flow? is it possible actually?
+        - maybe it has nz-mod5 flow?
+
+    also_pet + nz-mod5 flow:
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g4, g12, g14-g18
+        24.05: g5, g8, g9, g14, g19, g24, g26, g31, g34, g35
+        NOTE: it's not true that "also_pet + has nz-mod5" => also_uvf
+            so potentially we could see a graph here without uvf-flow
+
+    uvf-flow snarks:
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g4, g11-g18
+        24.05: g2, g5, g8-g10, g13, g14, g18, g19, g24, g26, g28, g29, g31-g36, g38
+
+    also_pet + 333-flows + or_as_unor_triples_244_count=1 (+ has_nzmod6):
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g4, g11-g18
+        24.05: g2, g5, g8-g10, g13, g14, g18, g19, g24, g26, g28, g29, g31-g36, g38
+        same list as uvf-flow snarks!
+        we can't throw out any of the conditions above
+        26.05: g5, g17, g20, g24, g27, g30, g32-g34, g36-g39, g46-g48, g50, g51,
+               g53-g57, g59-g62, g66, g67, g74-g78, g82, g86-g88, g90, g93, g94,
+               g96, g97, g99, g108, g111, g120, g122, g123, g125, g128, g129, g132,
+               g136, g138, g140, g141, g143, g146, g150-g155, g157-g160, g164-g166,
+               g168-g171, g174, g177, g178, g180, g181, g183-g192, g198, g201-g205,
+               g212, g239, g242, g244-g248, g250, g255, g277, g280
+            checked all these snarks, they have a uvf-flow!
+        TODO: maybe we could also ask for nz-mod6 flow? looks like the list of snarks is same
+
+    also_pet + 333-flows:
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g3, g4, g10-g18, g20
+        24.05: g2, g5, g8-g10, g13, g14, g18-g20, g24-g26, g28-g36, g38
+
+    o6c4c, which are also Petersen 6c4c (also_pet):
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
+
+    - DONE: list rich_type_count<=15
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g5, g8-g10, g13, g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
+        same list as also_pet
+
+    - DONE: list has_2cdcs + "no rich chords"
+        same list as also_pet
+        (it includes rich_type_count 16 and 17)
+        UPD: breaks on 28.05g253
+
+    - DONE: list has_2cdcs + "no t4 chords"
+        (this was probably unnecessary to do though)
+        10.05: g1
+        18.05: -
+        20.05: g1, g4, g5
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g5, g8-g10, g12-g14, g16, g18-g20, g22, g24-g26, g28-g36, g38
+        so it's different from above, starting from 24.05
+
+    o6c4c, with 2x6cdcs (has_2cdcs):
+        10.05: g1
+        18.05: -
+        20.05: g1, g4-g6
+        22.05: g3, g4, g7, g9-g18, g20
+        24.05: g2, g4, g5, g7-g14, g16-g20, g22, g24-g26, g28-g36, g38
+
+    - DONE: list has_2richcdcs
+        10.05: g1
+        18.05: g1
+        20.05: g1-g6 (no exceptions)
+        22.05: g1-g5, g7-g20
+        24.05: g2-g22, g24-g38
+
+    - DONE: list mappable
+        10.05: g1
+        18.05: g1-g2
+        20.05: g1, g3-g6
+        22.05: g1-g4, g6-g20
+        24.05: g2-g22, g24-g38
+
+    - TODO: list "no t4 chords"
+    - TODO: list no_rich_chords
+    - TODO: list some nz-mod5 flows
+
+
+- TODO : u6c4c, no_rich_chords
+    is s0 even?
+
+- TODO: u6c4c, mappable
+
+- TODO: u6c4c, if "no rich chords" and rich_type_count<=15, then also_pet
+
+- TODO: or2unor=4 <=> or_type_count=1
+
+
+- TODO: check restrictions on nz5-flow vertex types, in panorama
+
+
+- DONE: also_pet + mismatch=1 => 333flows in sync with or_as_unor_triples_244_count:
+    works on 26.05
+    breaks on 28.05
+    but at least 333flows => or_as_unor_triples_244_count=1
+
+
+- TODO: nz3 subgraphs; 333-flows
+    - TODO: are they all used in some 333-flows?
+        ?probably no, because they could be too small?
+    - TODO: oriented vertices vs 3-valent vertices of 333-flows: are these different sets or same?
+    - TODO: do we get all nz3-subgraphs by "f1-f2" construction from o6c4c?
+
+
+- TODO: has 2cdcs, o6c4c
+    - explore oriented vertices
+    - TODO: explore the orientation of edges in each 6cdc
+    - TODO: for Petersen graph the double covered cycle is a circuit from one of the layers
+        is it true for other graphs/solutions?
+
+
+- TODO: o6c4c panorama vs 244-flows
+    does any part of panorama translate to smth about 244-flows?
+    e. g., "s0 even"
+
+
+- TODO: find same rich/poor edges ("profile"), but different s0 % 2
+
+
+- TODO: K3,3 graph as the simplest cubic graph with o6c4c with 6 different cycles
+    it's possible to find 6 different PMs
+    and o6c4c with them, where
+    oriented vertices are all in the same partition
+    or: 3, s0: 6, s1: 9, s2: 0, parity: 1
+    has 2cdc, onlyrich
+    TODO: probably not also_pet?
+
+    TODO: can we understand this example geometrically/topologically?
+
+    TODO: can we prove, that for bipartite cubic graphs we can always find the same solution?
+
+    TODO: Franklin graph
+        - it's bipartite
+        - it's trivalent
+        - it's related to Klein bottle
+
+
+- TODO: o333-flows =?> 6c4c:
+    if we have several circuits, this doesn't seem to work
+    TODO: check solutions with single circuit
+
+
+- TODO: o244flows from (0,0,1/3,2/3,4/3,8/3)-nz5 flows:
+    upto 24.05 only 20.05g1 doesn't have o244-flows from "has_frac_nz5"
+        nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_nz5:_0; has_frac_nz5:_1_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0; mismatch:_1; has_nzmod5:_1; has_nzmod6:_0
+        UPD: more examples are in 26.05
+            even with has_frac_nz5:_1_0_0_1_0_0_1_0
+            even with bal3:_1;
+        TODO: can it be because the 2-cycle is not a circuit? :D
+
+    UPD: checking the panorama, o244-triples count look a bit random everywhere
+
+
+- TODO: s0 even/odd, vs sum of some local statistics:
+    interesting cases could be:
+        s0=12
+        s0=13
+
+    what we have:
+        rov
+            or вершина, как много rich рёбер у неё: 0,1,2,3
+        ruv
+            unor вершина, как много rich рёбер у неё: 0,1,2,3
+        uon
+            unor вершина, как много oriented вершин рядом: 0,1,2,3
+        rrn
+            rich ребро, как много rich рёбер рядом: 0,1,2,3,4
+        prn
+            poor ребро, как много rich рёбер рядом: 0,1,2,3,4
+
+        t1 - number of poor edges which connect oriented with oriented vertex
+        t2 - number of poor edges which connect non-oriented with non-oriented vertex
+        t3 - number of rich edges which connect oriented with non-oriented vertex
+        t4 - number of rich edges which connect non-oriented with non-oriented vertex
+
+    UPD: added rv, and aon
+        rv: any vertex, count how many rich edges around: 0,1,2,3
+        aon: any vertex, count how many oriented vertices around: 0,1,2,3
+    
+        don't see anything interesting
+    
+    18.05, 3 poor edges (s1=24)
+        graph18g2-4, s0=12, 2 of them between unor, 1 between or (t1=1)
+        graph18g2-18, s0=13, 3 of them between unor (t1=0)
+    20.05, 3 poor edges (s1=27)
+        g4-12:  rv:_0_0_6_14; s0 13; s1 27; t1 0;
+        g4-146: rv:_0_0_6_14; s0 14; s1 27; t1 0;
+    ok, what if we restrict ourselves to "rv:_0_0_*_*" + t1=0?
+        and look at s0, s1, or
+        20.05            
+            s1:_27; s0:_14; or:_05;
+            s1:_27; s0:_13; or:_03;
+
+            s1:_25; s0:_12; or:_05;
+            s1:_25; s0:_13; or:_04;
+
+            s1:_29; s0:_14; or:_05;
+            s1:_28; s0:_14; or:_05;
+            s1:_28; s0:_14; or:_07;
+            s1:_26; s0:_14; or:_05;
+        26.05:
+            s1:_33; s0:_13; or:_04;
+            s1:_33; s0:_13; or:_05;
+            s1:_33; s0:_14; or:_03;
+            s1:_33; s0:_14; or:_04;
+        so, it's not enough information
+    TODO: how about we count local statistic per layer?
+
+
+- TODO: what's happening with onlyrich on 30.05?
+    g14094: 1790 new o6c4c:
+        or: 10; s0: 19; s1: 45; s2: 0; r244odd: 0; PAR: 0; has_all_3flows:_0;
+        or_as_unor_triples_244_count:_0; nz5ws:_none; nzmod5ws:_none; has_nz5:_0; has_frac_nz5:_0_0_0_0_0_0_0_0;
+        bal1:_0; bal2:_0; bal3:_0; mismatch:_0; has_nzmod5:_0; has_nzmod6:_0; has_nzmodb:_0;
+        flow5: nope; or_sum: nope; mappable_25_5_15_5_5_5_11_5_6_8_20_5_5_20_5_5_13_5_12;
+        even_lens: 5; zero_lens: 0; no_lens: 0; has_rich_chords; npar: 1; reors: 1;
+        em:_6_6_x_0; o2:_0_0_x_0; t1+t3: 30; or_type_count: 8; or_type_decomp:_1_1_1_1_1_1_1_3;
+        rich_type_count: 31; less: 0; or_counts:_10; t1: 0; t2: 0; t3: 30; t4: 15;
+        rv:_0_0_0_30; aon:_11_10_7_2; rrn:_0_0_0_0_45; prn:_0_0_0_0_0;
+        orverts:_1_6_8_9_12_18_23_24_26_28_; rrn024: 45; s1s0diff: 26; s1s0or: 16;
+        ruv13: 20; evens: col: 14; rrn13: 0; ruv02: 0;
+        chord_info: (22 21 2) t1(0 0 0) t2(0 0 0) t3(14 15 1) t4(8 6 1); done; onlyrich; no_2cdcs; no_2richcdcs;
+    - we have lot's of rich chords: chord_info: (22 21 2) t3(14 15 1) t4(8 6 1)
+    - and we still have or and unor vertices, which have some unknown influence
+        - and for this particular example i think we have first onlyrich with even "or" count
+    UPD: it's a case of "or+s0-s1" even!
+        TODO: but why?
+
+
+- TODO: panorama of s0 even panorama:
+    - (upto 24.05) mappable
+    - has 333-flows
+        - includes (0,0,1/3,2/3,4/3,8/3)-nz5 flows
+    - rich_edge_pair_evens=15
+    - has 2cdcs
+    - genus=0 (could break on 32.05)
+    - has_2richcdcs + mappable
+    - s1 <= s0+or
+    - nzmod5ws: 0 0 1 1 2 2
+    - nzmod5ws: 0 0 1 2 3 4
+    - mismatch=1
+    - any_chords_frequency[1] = 0
+    - no t4 chords (includes "no rich chords")
+        t4 - number of rich edges which connect non-oriented with non-oriented vertex
+        - NOTE: e. g. "no t2 chords" can have odd s0
+    +
+    - if or=0 => s0=s1 (mod 2)
+    - or_type_count=1 => s0+s1+s2=1 (mod 2) (NOTE: here we have "no_2cdcs" and "has_rich_chords")
+    +
+    NOTE: t2=0 - works upto 28.05, breaks on 30.05
+        t2 — number of poor edges which connect non-oriented with non-oriented vertex
+
+
+    TODO: judging by this panorama, can we modify some example slightly,
+        so we get, e. g., dichotomy for odd/even cases?
+        26.05:
+            - "no t4 chords"
+                t4: * 0 0 => 12915 cases, s0 even
+                t4: * 0 1 => 227 cases, s0 even
+                t4: * 0 * => 15859 cases, s0 various (12,14,15,16,18,20,22)
+                    s0=15: only 2 cases, both g43, t4(11 0 3)
+            - any_chords_frequency[1] = 0
+                - 8428 cases
+                - any_chords_frequency[1] = 1 => 208 cases, s0 even
+                - any_chords_frequency[1] = 2 => 2056 cases, s0 even
+                - any_chords_frequency[1] = 3 => 460 cases, s0 even
+                - any_chords_frequency[1] = 4 => 3525 cases, s0 even
+                - any_chords_frequency[1] = 5 => 1620 cases, s0 even
+                - any_chords_frequency[1] = 6 => 5094 cases, s0 even
+                - finally, = 7 => 920 cases; s0 various; 14,16,18,19
+                    s0=19: 36 cases, all g143
+                    chord_info: (29 7 3) t1(0 0 0) t2(2 1 0) t3(12 0 0) t4(15 6 3)
+                    chord_info: (29 7 3) t1(0 0 0) t2(3 1 0) t3(12 0 0) t4(14 6 3)
+                    chord_info: (29 7 3) t1(0 0 0) t2(4 1 0) t3(12 0 0) t4(13 6 3)
+                    chord_info: (29 7 3) t1(0 0 0) t2(5 1 0) t3(12 0 0) t4(12 6 3)
+            - t2=0
+                - 148 cases
+                - t2=1 => 302 cases, s0 various! 13,14,16,17,18,20,22
+                    - for 24.05 and smaller snarks, "t2=1" has only even s0 cases
+                    - 4 cases where s0=13
+                        this could be interesting
+                        all of them: g237, or=7, s1=36 (3 poor edges)
+                    - 7 cases where s0=17
+                        g175, g243, g257
+                28.05:
+                    - 851 case; s0 even
+                    - t2=1 => 2875 cases; s0: 12,13,14,...,19,20,22,24
+                - stop; we know that t2=0 also breaks on 30.05
+
+
+
+- TODO: panorama of s0 even, intersection of parts
+    does anything interesting happen, when we intersect 2 parts of panorama?
+    e. g.
+    333flows + has 2cdcs
+        26.05
+            - 5035 cases
+            - nothing new seems to happen
+
+
+
+- DONE! try to prove 0,0,1/3,2/3,4/3,8/3 => 333-flows
+    - basic idea is simple:
+        - we group layers into 3 pairs, (0,0), (1/3,4/3) and (2/3,8/3)
+        - each pair of layers corresponds to one of 333-flow subgraphs
+        - more precise - if layers l1,l2 have flows f1,f2, we take (f2-f1) flow as nz3-flow subgraph
+        - now, it's obvious it's an nz3-flow
+    - DONE?: why we cover each edge twice?
+        - this is a consequence of having nz5 flow, see below
+    - DONE: why only oriented vertices get degree 3?
+        - this is a consequence of having nz5 flow, see below
+    - we need to use the fact that we have nz5 flow, somehow
+        - UPD: it's useful in analysis of distribution of vertices/edges
+    - DONE: how are oriented vertices distributed?
+        - if (0,0), (1/3,4/3), (2/3,8/3): 1+4-2-8=-5, invalid
+            - so it can't be split into all 3 pairs
+        - if (0,0), (1/3,2/3), (4/3,8/3): 1+2-4-8, ok!
+            - so it can sit in 1 pair, and mixed between other 2 pairs
+        - if (0,2/3), (4/3,1/3), (0,8/3):
+            okay, we need same remainder modulo 3 in each pair
+            this seems to imply that we always have 1 original pair and a mix between other 2 layers
+            (sounds like Petersen colouring with pairs)
+        - this seems to imply that oriented vertices will have degree 3 or 0
+            - e. g., say we have (0,0), (1/3,2/3), (4/3,8/3) distribution
+            then:
+                - f1-f2=0, so it disappears in G1
+                - G2, f3-f4: there's a mismatch in edges, so we have all 3 of them
+                - same for G3
+        - and also we see that edges are covered twice around oriented vertices
+    - DONE: now we need to do same analysis for unoriented vertices
+        - it looks like we can follow from oriented vertices to neighbouring vertices
+        - and show that we always have appropriate distribution of vertices/edges between the pairs of layers
+        - DONE: I need to take a look at a bigger example, with all kinds of edges
+        - UPD: there's 1 more case at least, when the
+            unoriented vertex pm edges partition into the same pairs of layers
+        - UPD: we can prove it locally
+
+
+TODO: (0,0,1/3,2/3,4/3,8/3)-nz5 + 333-flows
+    TODO: why it's not o333-flow?
+    TODO: can we use 2 of 3 subgraphs to create nz5 flow?
+        - or, e. g., does it depend on dichotomy?
+    TODO: we still have other conjectures here:
+        - s0 is even; s0=12,14,16,18,20,22
+            - this is true for all 3flows from o6c4c solutions
+        - or_sum: 5,10,15,20,25,30,35
+            - this is also related to nz_mod5 weights
+        - dichotomy:
+            - weight sync:
+                0, 0, 1/3, -8/3, 2/3, -4/3
+                0, 0, 1/3, -2/3, 8/3, -4/3
+                TODO: is it same nz5 somehow?
+                +
+                frac_weights_in_layer_order: 0 0 1 2 4 8
+                frac_weights_in_layer_order: 0 0 1 2 -8 -4
+                frac_weights_in_layer_order: 0 0 1 8 -2 -4
+                +
+                frac_weights_in_layer_order: 0 1 4 0 2 8
+                frac_weights_in_layer_order: 1 0 0 -8 -4 2
+                frac_weights_in_layer_order: 1 0 0 -2 -4 8
+                so, actually they are not in sync with all positive weights,
+                but still imply it in some order
+                DONE: list all orders
+                ok, so only the remainder matters actually; or the pairings
+                frac_weights_in_layer_order: 0 0 1 4 2 8
+                    so we have pairing "n n m m k k" which works in all permutations
+                    frac_weights_in_layer_order: 0 0 1 -8 2 -4
+                    frac_weights_in_layer_order: 0 0 2 -4 1 -8
+                    frac_weights_in_layer_order: 0 0 -4 2 -8 1
+                    frac_weights_in_layer_order: 0 0 -8 1 -4 2
+                    frac_weights_in_layer_order: 1 -8 0 0 2 -4
+                    frac_weights_in_layer_order: 1 -8 2 -4 0 0
+                    frac_weights_in_layer_order: 2 -4 0 0 1 -8
+                    frac_weights_in_layer_order: 2 -4 1 -8 0 0
+                    frac_weights_in_layer_order: -4 2 0 0 -8 1
+                    frac_weights_in_layer_order: -4 2 -8 1 0 0
+                    frac_weights_in_layer_order: -8 1 0 0 -4 2
+                    frac_weights_in_layer_order: -8 1 -4 2 0 0
+                    UPD: so, for signed permutations only half of them work
+                    frac_weights_in_layer_order: 0 0 1 -2 8 -4
+                    frac_weights_in_layer_order: 0 0 -2 1 -4 8
+                    frac_weights_in_layer_order: 0 0 -4 8 -2 1
+                    frac_weights_in_layer_order: 0 0 8 -4 1 -2
+                    frac_weights_in_layer_order: 1 -2 0 0 8 -4
+                    frac_weights_in_layer_order: 1 -2 8 -4 0 0
+                    frac_weights_in_layer_order: -2 1 0 0 -4 8
+                    frac_weights_in_layer_order: -2 1 -4 8 0 0
+                    frac_weights_in_layer_order: -4 8 0 0 -2 1
+                    frac_weights_in_layer_order: -4 8 -2 1 0 0
+                    frac_weights_in_layer_order: 8 -4 0 0 1 -2
+                    frac_weights_in_layer_order: 8 -4 1 -2 0 0
+            - has_frac_nz5:_1_0_0_0_0_0_0_0;
+                nz_mod5 weights: 0 0 1 2 3 4
+                    TODO: I wonder why 0 0 1 1 2 2 doesn't work?
+                has_nz5: 0
+                mismatch: 1
+                has_nzmod6: 0
+                has_nzmodb: 0
+            - has_frac_nz5:_1_0_0_1_0_0_1_0;
+                nz_mod5 weights: 0 0 1 1 2 2
+                    TODO: 0 0 1 2 3 4 weights also work here?
+                has_nz5: 1, nz5ws: 0 0 1 1 2 2
+                mismatch: 0
+                has_nzmod6: 1
+                has_nzmodb: 1
+
+
+    TODO: let's look at triples of pairs
+        (12)(34)(56)
+        (12)(35)(46)
+        (12)(36)(45)
+        * 5
+        we get 15 triples, so 15 edges of Petersen graph
+        actually, from any 6c4c we should have these 15 triples
+        TODO: probably we don't get Petersen colouring from (001248)/3-nz5-333flows
+            because otherwise we would probably see "also_pet"
+            but still, what do we get?
+            is it a mapping?
+
+
+
+- TODO: write out various lists
+    graphs without 333-flows coming from o6c4c (with restriction on oriented vertices)
+        TODO:
+        26.05: g98, g134, g259-g261
+
+    has_nzmod5=0:
+        18.05: g2
+        20.05: none
+        22.05: none
+        24.05: g30
+        26.05: g6, g7, g29, g89, g100, g126, g134, g139, g167, g177, g181, g206, g208, g236, g261, g279
+        28.05: 101 graphs
+
+
+DONE: s1 <= s0+or
+    26.05: (13985 solutions)
+        - s0: even
+        - or_as_unor_triples_244_count: 0, 1
+        - nz weights:
+               14 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+              717 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            13254 nz5ws:_none; nzmod5ws:_none;
+
+
+TODO: rich type count, try some alternative calculation?
+    or maybe edges in general (rich+poor)
+    i'm interested, how are they distributed among layers
+    and is there connection to 333flows
+
+
+TODO: "weird" or_sums
+    26.05, we have this exact profile:
+        nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+        (
+            and additionally, though probably unnecessary:
+            has_frac_nz5:_0_0_0_0_0_0_0_0;
+            bal1:_0; bal2:_0; bal3:_0;
+            has_all_3flows:_0;
+            mismatch:_0;
+            has_nzmod6:_1;
+
+        )
+
+
+TODO: 6c4c, triples of pairs
+    how many do we have? is it always 15?
+
+
+TODO: do reors preserve any structures?
+
+
+TODO: can we build nz5 flow from 333-flows?
+    
+
+
+TODO: nz5 from o6c4c, using libarmadillo (solving linear algebra equations)
+    aka "fractional weights, part 1"
+
+    code: find_nz5_with_fractional_weights
+
+    TODO: are there any other possible weight combinations,
+        except for 0,0,1,2,4,8 variations?
+
+    - TODO: check weights
+        TODO: всякие вариации с весом 1/6
+            looks like all of them converge to same list of weights
+            possibly with different signs
+
+        0, 0, 1/3, 2/3, 4/3, 8/3:
+            (1/6, -1/6, -5/6, -1/6, -3/2, 5/2); sum=0
+            +1/6:
+            (1/3, 0, -2/3, 0, -4/3, 8/3)
+            also:
+            a, a + 2, a - 2/3, a + 2/3, a - 1/3, a - 2/3
+            sum: 6a+1
+            a=-1/6; so that sum=0:
+                -1/6, 11/6, -5/6, 3/6, -3/6, -5/6
+            a=2/3, so that min is 0:
+                2/3, 8/3, 0, 4/3, 1/3, 0
+
+            (5/6, 5/6, 1/6, -1/2, -11/6, 1/2)
+            5/6-v:
+                0, 0, 2/3, 4/3, 8/3, 1/3
+
+            (7/6, -5/6, -13/6, 1/2, 5/6, 1/2)
+            v-1/2 = v-3/6
+                2/3, -4/3, -8/3, 0, 1/3, 0
+
+            5/6, 17/6, 1/6, 9/6, 3/6, 1/6
+            v-1/6
+                2/3, 8/3, 0, 4/3, 1/3, 0
+
+    24.05, 26.05:
+        weights 0, 0, 1/3, 2/3, 4/3, 8/3 (all positive)
+        "has_frac_nz5"
+            - has_nzmod5=1
+                - nzmod5ws: there are 2 combinations, see below (0 0 1 1 2 2, and 0 0 1 2 3 4)
+            - nz5 weights, when they exist: 0 0 1 1 2 2
+            - has_all_3flows=1
+                wow
+            - s0 is even; s0=12,14,16,18,20,22
+            - or_sum: 5,10,15,20,25,30,35
+            - or_as_unor_triples_244_count: 0,1
+            - less: 0
+                breaks on 26.05
+
+        vs weights 0, 0, 1/3, 2/3, -4/3, -8/3
+        "has_frac2_nz5" (UPD: not in the code anymore)
+            22.05 (similar for 24.05):
+                4364 has_frac_nz5:_0; has_frac2_nz5:_0;
+                 247 has_frac_nz5:_1; has_frac2_nz5:_0;
+                 403 has_frac_nz5:_1; has_frac2_nz5:_1;
+            - so, they are different
+            - also as if frac2 => frac
+
+
+TODO: nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; frac8:_1_0_0_0_0_0_0_0;
+
+
+TODO: fractional weights, part 2
+    TODO: "0, 0, 1/3, 2/3, 4/3, 7/3"
+        specifically:
+        0, 0,  1/3, 2/3,  4/3, -7/3
+        0, 0, -1/3, 2/3,  4/3,  7/3
+        0, 0,  1/3, 2/3, -4/3,  7/3
+            UPD: 24.05: last 2 rows are in sync with each other
+    UPD: looks like it's completely in sync with "0, 0, 1/3, 2/3, 4/3, 8/3"
+        0, 0, 1/3, 2/3, 4/3, -7/3 <=> 0, 0, 1/3, 2/3, 4/3, 8/3
+        probably because 8/3 + 7/3 = 15/3 = 5
+        so i guess it's just reversing the orientations
+
+    "a, -a, b, -b, c, -c":
+        "bal1": 0, 0, 1, -1, 1, -1
+        "bal2": 0, 0, 1, -1, 2, -2
+        "bal3": 1/2, -1/2, 3/2, -3/2, 5/2, -5/2
+    
+    "000":
+        "w112": 0, 0, 0, 1, 1, 2
+            NOTE: this can be balanced, 1+1-2=0
+        "w113": 0, 0, 0, 1, 1, 3
+        "w122": 0, 0, 0, 1, 2, 2
+        "w123": 0, 0, 0, 1, 2, 3
+            NOTE: this can be balanced, 1+2-3=0
+        "w124": 0, 0, 0, 1, 2, 4
+        "w234": 0, 0, 0, 2, 3, 4
+
+    "0-5":
+        "w1122": 0, 1, 1, 2, 2, 5
+        "w1133": 0, 1, 1, 3, 3, 5
+        "w1234": 0, 1, 2, 3, 4, 5
+
+    TODO/CONJ:
+        - any frac weight nz5 => nz-mod5
+        - max(weights) - min(weights) <= 5
+        - nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            => w0123: 1
+            ...
+        - nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+            => bal1: 1
+            ...
+        - bal3: 1
+            => nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2
+            => bal1: 1
+            => bal2: 1
+            ...
+
+
+24.05
+  12 nz5ws:_0_0_0_1_1_3; nzmod5ws:_0_0_0_1_1_3; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+   3 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+  64 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+ 201 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_1; bal2:_0; bal3:_0;
+  14 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_1; bal2:_1; bal3:_0;
+ 114 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_1_0_0_1_0_0_1_0; frac7:_0_1_1_0_0_0_0_1; bal1:_1; bal2:_1; bal3:_0;
+ 193 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_1_0_0_1_0_0_1_0; frac7:_0_1_1_0_0_0_0_1; bal1:_1; bal2:_1; bal3:_1;
+  10 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_1; bal3:_0;
+  70 nz5ws:_none;        nzmod5ws:_0_0_1_2_3_4; frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+ 331 nz5ws:_none;        nzmod5ws:_0_0_1_2_3_4; frac8:_1_0_0_0_0_0_0_0; frac7:_0_1_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+8603 nz5ws:_none;        nzmod5ws:_none;        frac8:_0_0_0_0_0_0_0_0; frac7:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+
+let's reduce noise:
+  12 nz5ws:_0_0_0_1_1_3; nzmod5ws:_0_0_0_1_1_3; frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+   3 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2; frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+  64 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3; frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+ 201 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_0_0_0_0_0_0_0_0; bal1:_1; bal2:_0; bal3:_0;
+  14 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_0_0_0_0_0_0_0_0; bal1:_1; bal2:_1; bal3:_0;
+ 114 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_1_0_0_1_0_0_1_0; bal1:_1; bal2:_1; bal3:_0;
+ 193 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; frac8:_1_0_0_1_0_0_1_0; bal1:_1; bal2:_1; bal3:_1;
+  10 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4; frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_1; bal3:_0;
+  70 nz5ws:_none;        nzmod5ws:_0_0_1_2_3_4; frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+ 331 nz5ws:_none;        nzmod5ws:_0_0_1_2_3_4; frac8:_1_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+8603 nz5ws:_none;        nzmod5ws:_none;        frac8:_0_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0;
+
+    TODO: are there any more combinations?
+
+
+TODO: minimal nz5 weights, vs minimal nz-mod5 weights:
+    24.05:
+          12 nz5ws:_0_0_0_1_1_3; nzmod5ws:_0_0_0_1_1_3;
+           3 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2;
+          64 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+         522 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+          10 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+         401 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+        8603 nz5ws:_none; nzmod5ws:_none;
+
+        so, for 4 weight types they seem to coincide
+
+    26.05
+           34 nz5ws:_0_0_0_1_1_3; nzmod5ws:_0_0_0_1_1_3;
+           12 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2;
+          272 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+         6358 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+        again, these upper 4 types of weights coincide
+            2 nz5ws:_0_1_1_2_2_3; nzmod5ws:_0_0_1_2_3_3;
+            2 nz5ws:_0_1_1_2_2_3; nzmod5ws:_0_1_1_2_2_3;
+           79 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+         3177 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+        66673 nz5ws:_none; nzmod5ws:_none;
+
+
+TODO: 0, 0, 1/3, 2/3, 4/3, 8/3; 8 combinations of signs
+    0, 0, 1/3,  2/3,  4/3,  8/3 <-- works
+    0, 0, 1/3,  2/3,  4/3, -8/3
+    0, 0, 1/3,  2/3, -4/3,  8/3
+    0, 0, 1/3,  2/3, -4/3, -8/3 <-- works
+    0, 0, 1/3, -2/3,  4/3,  8/3
+    0, 0, 1/3, -2/3,  4/3, -8/3 interestingly this didn't work yet
+    0, 0, 1/3, -2/3, -4/3,  8/3 <-- works
+    0, 0, 1/3, -2/3, -4/3, -8/3
+
+    that's a lot of info
+    UPD: actually it seems, there are only 3 outcomes:
+        24.05
+        8977 has_frac_nz5:_0_0_0_0_0_0_0_0;
+         331 has_frac_nz5:_1_0_0_0_0_0_0_0;
+         307 has_frac_nz5:_1_0_0_1_0_0_1_0;
+            interestingly that 2 rows work either together or both don't work
+        26.05
+        70965 has_frac_nz5:_0_0_0_0_0_0_0_0;
+         2756 has_frac_nz5:_1_0_0_0_0_0_0_0;
+         2888 has_frac_nz5:_1_0_0_1_0_0_1_0;
+
+    TODO: (ok we know when) but why these weights are in sync?
+        0, 0, 1/3,  2/3, -4/3, -8/3
+        0, 0, 1/3, -2/3, -4/3,  8/3
+
+    DONE: when these weights are in sync?
+        0, 0, 1/3,  2/3, -4/3, -8/3
+        0, 0, 1/3, -2/3, -4/3,  8/3
+
+        UPD: precisely when has_nz5 and more
+        so
+        26.05
+            has_frac_nz5:_1_0_0_0_0_0_0_0;
+                24.05: nz_mod5 weights: 0 0 1 2 3 4
+                has_nz5: 0
+                mismatch: 1
+                has_nzmod6: 0
+                has_nzmodb: 0
+            has_frac_nz5:_1_0_0_1_0_0_1_0;
+                24.05: nz_mod5 weights: 0 0 1 1 2 2
+                has_nz5: 1, nz5ws: 0 0 1 1 2 2
+                mismatch: 0
+                has_nzmod6: 1
+                has_nzmodb: 1
+
+
+
+TODO: has_nz5, explore various weight combinations:
+    - 0 0 1 1 2 2 (probably the most popular/special in the landscape)
+        24.05,26.05:
+            - 6358 examples; it's really most popular (after nope)
+            - has_nzmod5=1
+            - has_nzmod6=1
+                wow
+            - s0: even, 12,14,16,18,20,22
+            - or_sum: 5,10,15,20,25,30,35
+            - or_as_unor_triples_244_count: 0,1
+    - 0 1 2 2 3 4 (second "popular")
+        26.05:
+            - 79 examples, not much
+            - has_nzmod5=1
+            - has_nzmod6=1
+                wow
+            - s0: even, 14,16,18
+            - or_sum: 10,15,20,25
+            - or_as_unor_triples_244_count: 0,1
+    - 0 1 1 2 2 3
+        26.05:
+            - 4 examples
+            - behaves similar to previous weights
+
+    - 0 0 0 1 2 3 (actually the second most popular)
+        26.05:
+            - 272 examples
+            - mismatch=0: has_nzmod5=1, has_nzmod6=1, has_nzmodb=1
+                interesting
+
+    has_all_3flows
+        26.05
+             2923 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             2756 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+                exactly all of them are "has_frac_nz5:_1_0_0_0_0_0_0_0:"
+            15256 nz5ws:_none; nzmod5ws:_none;
+    has_frac_nz5:_1_0_0_1_0_0_1_0
+        26.05:
+            2888 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+    has_frac_nz5:_1_0_0_0_0_0_0_0:
+        26.05:
+            2756 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+    any_chords_frequency[1] = 0
+        26.05
+             244 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             193 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            7991 nz5ws:_none; nzmod5ws:_none;
+    any_chords_frequency[2] = 0
+        26.05
+            235 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             12 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            214 nz5ws:_none; nzmod5ws:_none;
+    no_rich_chords:
+        26.05:
+              221 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+              292 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            10459 nz5ws:_none; nzmod5ws:_none;
+    no t4 chords (related to no_rich_chords):
+        26.05
+              245 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+              646 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            12024 nz5ws:_none; nzmod5ws:_none;
+    t2=0:
+        26.05
+            84 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             5 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            59 nz5ws:_none; nzmod5ws:_none;
+    also_pet:
+        26.05:
+              86 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             200 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            4622 nz5ws:_none; nzmod5ws:_none;
+    has_2cdc:
+        26.05:
+             179 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+             279 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            9391 nz5ws:_none; nzmod5ws:_none;
+        28.05:
+            nz5ws:000123; nzmod5ws:000123;
+            nz5ws:001122; nzmod5ws:001122;
+            nz5ws:012234; nzmod5ws:001234;
+            nz5ws:noonee; nzmod5ws:001234;
+            nz5ws:noonee; nzmod5ws:noonee;
+    has_2richcdcs:
+        26.05:
+              364 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+               12 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+              577 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            21714 nz5ws:_none; nzmod5ws:_none;
+    mismatch=1:
+        26.05:
+             819 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+               2 nz5ws:_0_1_1_2_2_3; nzmod5ws:_0_0_1_2_3_3;
+              50 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+            3177 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+    mismatch=0, has_nzmodb=0:
+        26.05:
+            66673 nz5ws:_none; nzmod5ws:_none;
+        so, if nzmodb=0 and mismatch=0 => no nz5 flow
+        and also, no nz5 flow => nzmodb=0
+    has_nzmodb=1:
+        26.05:
+              34 nz5ws:_0_0_0_1_1_3; nzmod5ws:_0_0_0_1_1_3;
+              12 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2;
+             272 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            5539 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+               2 nz5ws:_0_1_1_2_2_3; nzmod5ws:_0_1_1_2_2_3;
+              29 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+    mappable
+        26.05:
+             1113 nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2;
+               16 nz5ws:_0_1_2_2_3_4; nzmod5ws:_0_0_1_2_3_4;
+              855 nz5ws:_none; nzmod5ws:_0_0_1_2_3_4;
+            24391 nz5ws:_none; nzmod5ws:_none;
+    onlyrich:
+        26.05:
+            56 nz5ws:001122; nzmod5ws:001122;
+             5 nz5ws:noonee; nzmod5ws:001234;
+            21 nz5ws:noonee; nzmod5ws:noonee;
+    or=0 (BTW, same as t3=0)
+        26.05:
+            14 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            65 nz5ws:_none; nzmod5ws:_none;
+    or_as_unor_triples_244_count=2:
+        26.05:
+              2 nz5ws:_0_0_0_1_2_2; nzmod5ws:_0_0_0_1_2_2;
+            255 nz5ws:_none; nzmod5ws:_none;
+    or_as_unor_triples_244_count=4:
+        26.05:
+              7 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            731 nz5ws:_none; nzmod5ws:_none;
+    or_type_count <= 1:
+        26.05:
+             21 nz5ws:_0_0_0_1_2_3; nzmod5ws:_0_0_0_1_2_3;
+            796 nz5ws:_none; nzmod5ws:_none;
+
+    less=1: various weights (although nz5 weights = nzmod5 weights)
+    mismatch:_0; has_nzmod5:_1; has_nzmod6:_1; has_nzmodb:_1: various
+
+
+TODO: has_nzmod5, explore various weight combinations
+    24.05 (after sorting and minimizing)
+          12 nzmod5ws:_0_0_0_1_1_3;
+           3 nzmod5ws:_0_0_0_1_2_2;
+          64 nzmod5ws:_0_0_0_1_2_3;
+         522 nzmod5ws:_0_0_1_1_2_2;
+         411 nzmod5ws:_0_0_1_2_3_4;
+        8603 nzmod5ws:_none;
+    26.05
+           34 nzmod5ws:_0_0_0_1_1_3;
+           12 nzmod5ws:_0_0_0_1_2_2;
+          272 nzmod5ws:_0_0_0_1_2_3;
+         6358 nzmod5ws:_0_0_1_1_2_2;
+            2 nzmod5ws:_0_0_1_2_3_3;
+         3256 nzmod5ws:_0_0_1_2_3_4;
+            2 nzmod5ws:_0_1_1_2_2_3;
+        66673 nzmod5ws:_none;
+    28.05
+            313 nzmod5ws:_0_0_0_1_1_3;
+            194 nzmod5ws:_0_0_0_1_2_2;
+           3781 nzmod5ws:_0_0_0_1_2_3;
+          98290 nzmod5ws:_0_0_1_1_2_2;
+             41 nzmod5ws:_0_0_1_1_2_4;
+             37 nzmod5ws:_0_0_1_2_3_3;
+          57761 nzmod5ws:_0_0_1_2_3_4;
+             20 nzmod5ws:_0_1_1_2_2_3;
+        1225163 nzmod5ws:_none;
+
+TODO: has_nzmod6, explore various weight combinations
+
+
+TODO: has_nzmodb, explore various weight combinations
+    i wonder whether this would be similar to has_nz5
+
+
+TODO: ignore (mismatch:_0; has_nzmod5:_1; has_nzmod6:_1; has_nzmodb:_1) cases
+    same as "has_nzmodb=0"
+    26.05:
+        - or_sum: %5: nope, 5,10,15,20,25,30,35
+
+    so, what i want to say is that
+    in terms of nz-flows, all of the "weird" or_sums fall into 1 category:
+        mismatch:_0; has_nzmod5:_1; has_nzmod6:_1; has_nzmodb:_1
+
+
+TODO: nz5 vs nzmodb
+    they seem to be quite related to each other
+    26.05:
+        - nzmodb=0 and mismatch=0 => no nz5 flow
+        - no nz5 flow => nzmodb=0
+    mismatch=0 means
+        - either nzmod5=0
+        - or nzmod5=1, nzmod6=1, nzmodb=1
 
 
 TODO: restore 333-flows and other constructions
+    code:
+        - find_333flows_from_6c4c
+        - gen_333flows_combinations
 
-TODO: Fan-Raspaud triples
+    don't see anything quite interesting; we almost always have 333-flow, it seems
 
-TODO: построить nz5 по o6c4c (через libarmadillo)
-TODO: check weights
-?
-- просто o6c4c:
-    всякие вариации с весом 1/6:
-    (1/6, -1/6, -5/6, -1/6, -3/2, 5/2); sum=0
-        +1/6:
-        (1/3, 0, -2/3, 0, -4/3, 8/3)
-    (5/6, 5/6, 1/6, -1/2, -11/6, 1/2)
-    (7/6, -5/6, -13/6, 1/2, 5/6, 1/2)
-? пускай c = f, d = e + 1, b = a + 2
+    UPD: let's restrict the degree 3 vertices in the 333-subgraphs, as a subset of oriented vertices
+    now it looks very interesting
 
+    22.05,24.05,26.05:
+        - s0: even, 12,14,16,18,20,22
+        - or_as_unor_triples_244_count: 0,1
+        - less: 0
+            breaks on 26.05
+        - or_sum: nope,5,10,15,20,25,30,35
 
-TODO: t1,t2,t3,t4 -244_odd_counts
+    TODO: what about o333-flows?
 
 
-TODO: triples_without_ors
-    it's a bit different from what I wanted, but still interesting
+TODO/WARNING: there were 3 bugs in nz5/nzmod5 code
+    they could affect all of nz5 / nzmod5 / nzmod6 / nzmodb conclusions
+    (but probably shouldn't)
+    need to check that nothing changed
+
+
+DONE: o2: * * 0 * always?
+    odd_t3_2_factors
+    t3 — number of rich edges which connect oriented with non-oriented vertex
+    -o--[r]--u-
+    actually, it's because t1,t2 and t4 connect vertices of same type
+    t1 — number of poor edges which connect oriented with oriented vertex
+    t2 — number of poor edges which connect non-oriented with non-oriented vertex
+    t3 — number of rich edges which connect oriented with non-oriented vertex
+    t4 — number of rich edges which connect non-oriented with non-oriented vertex
+    and inside 2-factor we need to switch even times between oriented and non-oriented vertices
+    so, no odd-2-factors
+
+    UPD: same for dependency between t3 and "em: * * 3 *" or "em: * * 0 *"
+        they have complementary parities
+
+
+TODO: or_type_count=1
+    very interesting case, because always "no_2cdcs" and "has_rich_chords"
+    and because we get a lot of graphs (about 49%)
+    28.05 (+26.05):
+        CONJ: or_as_unor_triples_244_count=4
+        CONJ: has_t4_chords
+        CONJ: par=1
+            (and all of the combinations of s0,s1,s2 are realized)
+        CONJ: or: 2, 4, 6
+        CONJ: or=2 => or_type_count=1
+        CONJ: no_2cdcs
+        CONJ: t2 > 0
+        CONJ: t3: 4,6,8,10,12
+        CONJ: mismatch: 0
+            has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 0; has_nzmodb: 0;
+            has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0;
+            has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1;
+        CONJ: or_sum % 5 = 0 (5, 10, nope)
+            actually, or_sum=5 => or=2 and or_sum=10 => or=4
+        26.05: less=1 (but not all of them SEALed, yet)
+            broken on 28.05! there are some "less=0" examples
+        CONJ: o2: 0 * x * or o2: 2 * x *
+        26.05: reors <= 4
+            28.05: reors=1,2,3,4,6,8,12
+
+    graphs with or_type_count=1 (+or=0)
+        10.05: g1
+        18.05: g2
+        20.05: g1, g4, g5 (funny coincidence with another list)
+        22.05: g1, g2, g6-g8, g11, g13-g17
+        24.05: g2, g3, g5, g8, g10, g13, g14, g16, g21, g24-g26, g28-g31, g33, g35, g36
+
+
+TODO: t3
+    26.05
+        t3=0,4,6,8,9-31,33
+    TODO: t3=0,4,6
+        26.05: parity=1
 
 
 TODO: triples, where oriented vertices split, as if they are unoriented
     count them
+    code: or_as_unor_triples_244_count
+        we'll abbreviate as or2unor
+        UPD: it's actually same as triples_without_ors
+
+    obvious stuff:
+        - or == 0 => or2unor=10 (and probably the other way around also)
+
+    10.05: or2unor=1
+    18.05: maybe or2unor=0 is interesting
+    20.05:
+        - here we have or2unor=2,4,10 examples
+            - or2unor=2 => or=4
+            - or2unor=4 => or=2,4
+            - or2unor!=0,1 => parity=1
+            - or=0 <=> or2unor=10
+        - (also_pet | has_2cdc) => or2unor=0,1
+    22.05:
+        - or2unor=0,1,2,4,10
+        - or2unor=2 => or=4
+        - or2unor=4 => or=2,4
+        - or=3 => or2unor=1
+        - or=0 <=> or2unor=10
+        - or2unor!=0,1 => parity=1
+        - (mismatch=1 | t2=0 | no_rich_chords | also_pet | has_2cdc) => or2unor=0,1
+    24.05:
+        - or2unor=0,1,2,4,10
+        - or2unor=2 => or=4,6
+        - or2unor=4 => or=2,4
+        - or=3 => or2unor=1
+        - or=0 <=> or2unor=10
+        - or2unor!=0,1,2 => parity=1
+            so, here we have some break
+        - (mismatch=1 | t2=0 | no_rich_chords | also_pet | has_2cdc) => or2unor=0,1
+    26.05:
+        - CONJ: or2unor=0,1,2,4,10
+        - CONJ: or2unor=2 => or=4,6
+        - CONJ: or2unor=4 => or=2,4,6
+        - CONJ: or2unor=4 <=> or_type_count=1
+        - CONJ: or=3 => or2unor=1
+        - CONJ: or=0 <=> or2unor=10
+        - CONJ?: or2unor!=0,1,2 => parity=1
+        - CONJ: (mismatch=1 | t2=0 | no_rich_chords | also_pet | has_2cdc) => or2unor=0,1
+
+    TODO: or_type_count, or_type_decomp
+        24.05,26.05 
+            or2unor=0 => or_type_count >= 3
+            or2unor=2 => or_type_count=2
+                or_type_decomp:_2_2;
+                or_type_decomp:_2_4;
+            or2unor=4 <=> or_type_count=1
+                or_type_decomp:_2;
+                or_type_decomp:_4;
+                26.05: or_type_decomp:_6;
+
+
+
+DONE: trying to orient perfect matchings
+    code: orient_pm
+
+    - the idea is to orient perfect matchings in both directions, and
+        if we have 2 circuits in 1 layer, all pm-edges between them go in same direction
+    - we ignore chord edges, we can orient them any way that fits best
+
+    - DONE: count how many components of pm-edges we have
+    - WONTDO: we can also try to ignore poor edges
+
+    10.05g1, Petersen graph:
+        1: all inside
+        2,3,4,5,6: to convex
+
+    results:
+        until 20.05:
+            - pm_orient_comp_cnt is quite big, >= 5 for 18.05 and further
+            - if is_pm_orientable, and pm_orient_comp_cnt <= 6, then parity=1 (checked for 18.05, 20.05)
+        22.05:
+            - pm_orient_comp_cnt can be 2
+            - is_pm_orientable=1, pm_orient_comp_cnt=5 can have parity=0
+    
+    - so, probably this approach is not very interesting or fruitful
+
+    but!
+    DONE: has_2cdc => is_pm_orientable=1
+        checked on 22.05, 24.05
+        breaks on 26.05
+        same for also_pet
+    TODO: no chords => is_pm_orientable=1
+        checked on 22.05, 24.05, 26.05
+        (not many examples though)
+    DONE: t2=0 => is_pm_orientable=1
+        breaks on 24.05
+        although works on 26.05 (again, not many examples)
+
+
+
+TODO: 26.05, "no chords" solutions
+    there are only 2 graphs, which are kind of famous already
+    g255, g280
+
+
+DONE: t2=0
+    seems that this condition fixes a lot of statistics
+    e. g. looking through 28.05 it seems that
+    knowing or, s0 and s1 we can deduce t1, t3, t4 and maybe other values
+    for t1 it's obvious
+    is it obvious for t3 and t4? probably yes, because "or" number should give us t3,
+    and t4 we deduce from t3
+
+
+
+
+TODO/DONE: new parity! "npar"
+    so currently formula is:
+        (s0 + s1 + s2 + (r244odd / 2) + even_or_circuits) % 2
+    but actually
+        s0 - even_or_circuits = odd_or_circuits
+        which is always even, so
+    final formula is actually
+        (s1 + s2 + (r244odd / 2)) % 2
+        s1: number of rich edges
+        s2: half of the number of perfect matchings with even number of rich edges
+            (so in general it’s equal to 0, 1, 2 or 3) (0 for Petersen graph)
+        r244odd: we go through all 10 triples
+            we calculate the number of rich edges in the 244-cycle
+            we count number of cycles with odd number of rich edges
+            the number is 0,4,6,10
+            we divide it by 2; so we get 0,2,3,5
+    the formula works for all o6c4c solutions, upto and including 24.05
+
+    this formula has a different flavour, however;
+        we don't count poor edges anywhere
+        we don't count circuits also
+        everything is about oddness of counts of rich edges,
+        coming from 3 sources:
+            - the whole 6c4c solution
+            - distribution among 6 perfect matchings
+            - distribution among 10 244-cycles
+        - also, we don't count oriented vertices,
+            although it was never easy to add them to parity formula
+
+    DONE: check formula for (unoriented) 6c4c solutions
+        works upto and including 22.05
+    
+    DONE: btw, formula would probably also work,
+        if we just ignore the "rich" word (or replace with poor)
+    ? so, that's why it actually works:
+        - it works if we ignore all edges; or if we include all edges also
+            - s1: n*3/2; 15, 18, 21, 24, ...
+            - s2: n; 0, 3, 0, 3, ...
+            - r244odd: 0
+        - it work if we start to ignore edges one by one
+        - because parities change accordingly
+            - s1 changes parity by 1
+            - s2 changes parity by 1
+            - TODO: r244odd / 2: doesn't change parity!
+                it changes by 4, so / 2 it changes by 2
+
+    TODO: how can we get r244odd = 6 or 10? if it doesn't change parity?
+
+
+DONE: has_2richcdcs (has_2cdcs, but ignoring poor edges)
+    RESULT: it's wild
+
+    TODO: check "count_2richcdcs"
+        is it a power of 2?
+    18.05: g1
+        but not g2!
+    20.05: all
+        g5 has parity=0
+        TODO: looks like it's fixable?
+    22.05: g1-g5, g7-g20
+        not g6
+        fixable parity
+    24.05: g2-g22, g24-g38
+        not g1, g23
+        fixable parity
+        or: 2-10
+        s0: 12, 14, 16, 18, 20
+        s1: 17-31
+        s2: 0,1,2,3
+        r244odd: 0,4,6
+        or_sums: nope,3,5,6,9,10,12,15,20,25,30
+    TODO: 26.05, 28.05
+        s0 is not even!
+
+    26.05: "not fixable" parity! g111
+        it's getting more subtle
+
+    DONE: 26.05: g27, g111, g169, g265
+        we have examples of "mappable" and parity=0 (and it's "not fixable")
+
+
+TODO: mappable
+    26.05
+        parity: 0, 1
+            parity is fixable with addition of even_lens!
+            (which means that we ignore s0)
+            TODO: s1+s2 = 1 (mod 2)
+        or_sums: nope, 5, 10, 15, 20, 25, 30
+        or: 0, 2, 3-11
+        s0: 12-18, 20, 22
+        s1: 17, 19-37, 39
+        s2: 0, 3
+        r244odd: 0
+
+    DONE: mappable, no-rich-chords, not onlyrich => Petersen-like mapping?
+        (where we get 6 layers of pairs of circuits of "length" 5)
+        UPD1: we can get "lengths" 10 also;
+        UPD2: but i think it will break somewhere later, because we can get a mapping to onlyrich solution eventually
+        UPD3: no, it's more complicated, e. g. on 26.05 we can have
+            mappable_13_13_11_5_5_5_6_5_5_5_5_5_5_11_5_13_13_5_6_5_5_5
+
+    TODO: 28.05
+
+    DONE: if it's also no-rich-chords + not onlyrich + no_2cdcs => has_nz5=0?
+        breaks on 26.05g280
+        we already saw this graph before, but in a slightly different context
+
+
+
+TODO: t1,t2,t3,t4 -244_odd_counts
 
 
 TODO: reorientations
@@ -65,9 +2202,94 @@ TODO: reorientations
     and big amount of them
     have some results for 26.05
     TODO: check 28.05
+        parity=0: reors <= 40
 
 
-WONTDO: 6c4c parity formula
+TODO: possible formula, which could include "oriented" vertices
+    - The motivation is that "or" preserves parity
+        between various orientations of the same 6c4c solution
+    - has_2cdcs
+        - or >= 3
+        - s0 % 2 = 0
+        - or + s1 is even (same as "t4 is even")
+        - or + s2 is odd
+        - or + t3 is even
+    - or_type_count=1
+        26.05:
+            or: 2, 4, 6
+            t3: 4,6,8,10
+            (and see more elsewhere)
+    - t2=0
+        26.05
+        it's a bit weird, but maybe there's a pattern:
+            s2; r244odd; s0; s1; or:
+                0; 0; 16; 39; 09;
+                0; 0; 18; 31; 11;
+                0; 0; 18; 37; 07;
+                0; 0; 18; 39; 09;
+                0; 0; 20; 39; 07;
+                0; 0; 20; 39; 09;
+                0; 0; 22; 39; 07;
+                0; 0; 22; 39; 09;
+                2; 4; 18; 31; 11;
+                2; 4; 18; 35; 09;
+                2; 4; 18; 35; 11;
+                2; 4; 18; 37; 07;
+                2; 4; 20; 35; 09;
+                2; 4; 20; 37; 09;
+                1; 6; 16; 37; 09;
+                1; 6; 18; 31; 11;
+                1; 6; 18; 37; 09;
+                1; 6; 22; 37; 09;
+                first 2 columns reduce to 0 =>
+                    s1 is odd
+                    or is odd
+                1; 4; 14; 32; 11;
+                1; 4; 16; 36; 10;
+                1; 4; 18; 36; 11;
+                1; 4; 18; 38; 06;
+                1; 4; 20; 38; 07;
+                2; 6; 16; 36; 10;
+                2; 6; 18; 36; 10;
+                3; 0; 16; 36; 08;
+                first 2 columns reduce to 1 =>
+                    s1 is even
+                    or is various, but it matches (s0+s1)%2 in parity
+            28.05
+                breaks on 28.05
+                2; 4; 20; 41; 08;
+                2; 4; 20; 41; 09;
+                +
+                2; 6; 18; 40; 10;
+                2; 6; 18; 40; 11;
+                but! still CONJ:
+                first 2 columns reduce to 0 % 2 => s1 is odd
+                first 2 columns reduce to 1 % 2 => s1 is even
+                but! CONJ: if s2=0, then "or" is odd
+    - no t4 chords
+        26.05
+            kind-of-CONJ: if s2=0, then
+                - "or" is odd
+                    - breaks on 28.05, but with interesting stats:
+                    59405 0; 03;
+                    30625 0; 05;
+                       10 0; 06;
+                     4496 0; 07;
+                       28 0; 08;
+                     1084 0; 09;
+                      237 0; 11;
+                      216 0; 13;
+                      112 0; 19;
+                - s1 is odd
+                    same picture
+                28.05, CONJ: or=s1 (mod 2) (106334 cases)
+            notCONJ: if s2=3, then
+                - "or" is even
+                    - breaks on 28.05
+
+
+
+DONE: 6c4c parity formula
     - looks like formula depends only on unoriented stats:
         - s0 - number of circuits
         - s1 - number of rich edges
@@ -91,6 +2313,98 @@ WONTDO: 6c4c parity formula
     I think I won't do unoriented 6c4c, because it looks wild, without any logic
     probably even though the formula doesn't depend on orientable parameters,
     it heavily depends on the existence of o6c4c solution itself
+
+    UPD: ok, I was wrong, we only needed to remove s0
+
+
+
+TODO: no rich chords
+    26.05:
+        or: >= 3
+        s0: 12,14,16,18,20,22
+
+
+DONE: has_2cdcs vs also_pet
+    also_pet:
+        26.05:
+            or + rich_type_count = 0 (mod 2)
+            rich_type_count=12,14,15
+            no rich chords!
+            - rov[0] = 0 (i think this works for all 26.05 "no rich chords" solutions)
+            - all of the "rich_type_count=12" solutions are "also_pet"
+            - col: 12,16,20
+        has_nz5 =>
+            or: 5,7,9
+            prn: 0 0 0 * *
+            ruv: 0 * * *
+        o244_triples, 24.05: 0,1,2,3,4
+    has_2cdcs:
+        26.05:
+            if "no rich chords" and rich_type_count<=15, then also_pet
+                same for 28.05!
+            less: 0
+                breaks on 28.05!
+            em: . . x 3
+            o2: 0 0 x 0, 1 1 x 0, 2 2 x 0
+        - total_poor_comps > 1 (TODO: except for Petersen graph?)
+        - odd_poor_2-factors = 0
+        - s2 is either 0 or 3 (s2uu = 3)
+        - if the solution is orientable (so we have o6c4c) then
+            - or_sums are divisible by 5
+            - $or \ge 3$
+            - s0 is even
+            - or + s1 is even (or same as saying that t4 is even)
+            - or + s2 is odd
+            - or + t3 is even
+    
+    DONE: 28.05, also_pet
+    - reors can be 1
+    - col: 12,14,16,20
+        so, col can be 14
+    - rich_type_count=12,14,15
+    - oh wow, or + rich_type_count = 0 (mod 2) breaks
+        or=6, rich_type_count=15
+        but maybe it's okay; maybe for flower snark J5 it should be like that also
+    - no rich chords!
+        - actually, no t4 chords
+    - rov[0]=0 breaks!
+        rov[0]: 0,1,2,3,4,6
+    - all of the "rich_type_count=12" solutions are "also_pet"
+    has_nz5 =>
+        or: 6,7,9,11,14
+        prn: various
+        ruv: various
+        so, everything broke!
+
+
+DONE: also_pet, "or-s1+s0":
+    - 26.05
+    or  s1s0diff
+     3  -3,-1,1,3,  5,  7
+     4            4,  6,  8
+     5  -3,-1,1,3,  5,  7,            13
+     6            4,  6,  8,  10
+     7          3,  5,  7,       11,   13,   15
+     8                6,            12
+     9                           11,   13,   15,   17
+     or-s1+s0: 8,6,4,2,0,-2,-4,-6,-8
+
+    vs: has_2cdcs, "or-s1+s0":
+        - 26.05
+        or  s1s0diff
+        3  -3,-1,1,3,  5,  7,  9,   11
+        4            4,  6,  8
+        5  -3,-1,1,3,  5,  7,  9,   11,   13,   15
+        6            4,  6,  8,  10,   12,   14
+        7          3,  5,  7,  9,   11,   13,   15,   17,19
+        8            4,  6,      10,   12,   14,   16
+        9                           11,   13,   15,   17
+
+        or-s1+s0: 8,6,4,2,0,-2,-4,-6,-8,-10,-12
+        notCONJ: ruv[0]: 2,4,6,8,10,12,14
+            number of unoriented vertices,
+            with all its edges being poor
+            breaks on 28.05
 
 
 TODO: 6c4c
@@ -179,6 +2493,7 @@ TODO: some curiously occurring pattern in fix parity cases
     26.05:
         - or=3
             ?CONJ: or_sum: nope, 5, 10 and 3,6,9,12
+                - checked on 28.05
         - or_type_count=2
         - no t3 chords
         - rich_type_count <= 19 (but slightly arbitrary number)
@@ -215,7 +2530,8 @@ TODO: some curiously occurring pattern in fix parity cases
             r244_odd_count vs parity vs o2[1]
             a bit weirder:
             0; 1; 0;
-            0; 1; 1;                                                                                                                                           0; 1; 2;
+            0; 1; 1;
+            0; 1; 2;
             10; 1; 1;
             10; 1; 2;
             10; 1; 3;
@@ -375,17 +2691,7 @@ TODO: deeper study of or_type_count
     - TODO: how should we understand first statement then?
 
     or_type_count=1
-        26.05:
-            CONJ: par=1
-            CONJ: or_sum % 5 = 0
-            ?CONJ: or: 2, 4, 6
-            CONJ: less=1 (but not all of them SEALed, yet)
-            ?CONJ: em: 3 *
-            ?CONJ: o2: 0 * or o2: 2 *
-            ?CONJ: t3: 4,6,8,10
-            ?CONJ: mismatch: 0
-            CONJ: no_2cdcs
-            ?CONJ: reors <= 4
+        (check separate study above)
 
     26.05:
         par=1
@@ -396,7 +2702,8 @@ TODO: deeper study of or_type_count
             04; 2; or_type_decomp:_2_2; 1;
             04; 4; or_type_decomp:_1_1_1_1; 1;
             06; 3; or_type_decomp:_2_2_2; 1;
-            06; 5; or_type_decomp:_1_1_1_1_2; 1;                                                                                                                08; 3; or_type_decomp:_2_2_4; 1;
+            06; 5; or_type_decomp:_1_1_1_1_2; 1;
+            08; 3; or_type_decomp:_2_2_4; 1;
             08; 5; or_type_decomp:_1_1_1_1_4; 1;
 
         s1s0diff < 0
@@ -554,7 +2861,7 @@ TODO (kind of done!): o244=9
     seems that we have some similar conjectures as in o244=10:
         - s0 even
         - we can fix the parity
-        - em: 0 * or em: 3 *
+        - em: 0 * or em: 3 * (UPD-TODO: remove)
 
 
 TODO: o244-flows
@@ -618,7 +2925,7 @@ TODO: o244-flows
                     ruv: 0 0 4 15;
                     ruv: 0 0 8 11;
                 - reors: 14, 16, 22
-                - em: 0 2; or em: 0 3
+                - em: 0 2; or em: 0 3 (UPD-TODO: check t3)
                 - o2: 5 variations
                     0 0;
                     0 1;
@@ -663,11 +2970,6 @@ TODO: o244-flows
                 - r244even: 0, 1
                 - r244odd: 0
                 - reors: 7,9,11,13,15,16,17,19,21,22,24,28,30
-                CONJ?: - em:
-                    0 1;
-                    0 2;
-                    0 3;
-                    3 3;
                 - o2: probably almost anything possible (10 variations)
                 - u_comps:
                     1 1;
@@ -703,10 +3005,6 @@ TODO: smallest par=0 example
     g2: new o6c4c: or: 03; t1+t3: 09; s0: 13; s1: 24; s2: 1; s2uu: 2; PAR: 0 (0); npar: 0; or_type_count: 3; rich_type_count: 21; less: 0; or_counts:_3; rich244:_11_10_8_7_14_8_11_11_8_8; r244even: 0; r244odd: 0; reors: 1; em: 0 2; o2: 0 2; t1: 0; t2: 3; t3: 9; t4: 15; u_comps: 3 1; u_morecomps_undiv: 4 6 2 6; rov: 0 0 0 3; ruv: 0 0 6 9; dup_oon: 3 0 0 0; uon: 8 6 0 1; rrn: 0 0 2 8 14; prn: 0 0 0 0 3; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; or0: sames: rrn024: 16; evens: s1s0diff: 11; col: 12; rrn13: 8; ruv13: 9; ruv02: 6; chord_info: (13 11 3) t1(0 0 0) t2(2 1 0) t3(6 3 0) t4(5 7 3); chord_layers: (2 0 0) (2 4 1) (2 4 3) (2 4 4) (2 4 4) (3 1 1); no_2cdcs;
 
 
-TODO: or_type_count
-    CONJ: or=2 => or_type_count=1
-
-
 TODO: o5555-f4c, o222222-f4c
     - what if we have 5 subgraphs?
     - TODO: same question, but for non-oriented covers
@@ -725,10 +3023,10 @@ TODO: has_nz5=0 => has_nzmodb=0
     TODO: how much vertices i checked here?
 
 
-TODO: r244even=1:
+TODO: r244odd=0 (previously called "r244even=1"):
     26.05:
-        - o2: 0 0, 1 1, 2 2, 3 3
-        - em: 0 0, 0 3, 3 0, 0 3
+        - o2: 0 0 * *, 1 1 * *, 2 2 * *, 3 3 * *
+        - em: * * x 0 or em: * * x 3
         - s2: 0, 3
         - s1 >= 17
         - or_sum: nope, 0, 10, 14, 15, 17, 20, 25, 30, 35
@@ -824,6 +3122,9 @@ TODO: has_2cdcs, or_counts:_4_6
 
 
 TODO: rich_type_count = 12
+    CONJ: => also_pet
+    TODO: some of these things are more about also_pet!
+        (but not all of them)
     TODO: check 6c4c solutions
 
     - 26.05: all of them has_2cdcs!
@@ -834,7 +3135,7 @@ TODO: rich_type_count = 12
         - s1: 24, 26
             - s1s0diff: 4,6,8
         - s2: 3, s2uu: 3
-        - em: 3 3
+        - em: x 3
         - o2: 0 0 and o2: 2 2
         - taken: 9 9 and taken: 10 10
         - t3: 12,14,16,18
@@ -853,15 +3154,13 @@ TODO: rich_type_count = 12
         g1330, g1507, g1530, g1633, g1634, g1640, g1644, g1647, g1650,
         g1685, g1760, g1829, g1843, g1857, g1879, g2063, g2140, g2261,
         g2264, g2652
-        - conj: all of them has_2cdcs
         - conj: or_counts:_4_6; and or_counts:_4_6_8;
-        - conj: no rich chords
         - or: 4,6,8
         - s0: 18, 20, 22
         - s1: 24, 26
             - s1s0diff: 2,4,6,8
         - s2: 3, s2uu: 3
-        - em: 3 3
+        - em: x 3
         - o2: 0 0, 1 1, 2 2
         - taken: 9 9, 9 11, 10 10, 11 11
         - t3: 12,14,16,18
@@ -875,7 +3174,8 @@ TODO: ? has_2cdcs, s1 != 18
     - check both 6c4c, and o6c4c
 
 
-TODO: or=0, col=12 always?
+DONE: or=0, col=12 always?
+    breaks on 28.05
 
 
 TODO: or=0 + s0 even (+or=2, s2=3, s0 even?), vs has_2cdcs
@@ -966,9 +3266,6 @@ TODO: check 244-flows for each piece of landscape
     - TODO: circuits with length 5 - how many rich edges they have?
 
 
-TODO: "s1s0diff <= 0", maybe we need to check "s1-s0-or <= k"?
-
-
 TODO: has_2cdcs, "or-s1+s0":
     - 26.05
     or  s1s0diff
@@ -989,10 +3286,6 @@ TODO: has_2cdcs, "or-s1+s0":
         or: 5, s1s0diff: -3, or-s1+s0=8
             g168
             g168: new o6c4c: or: 05; t1+t3: 13; s0: 20; s1: 17; s2: 0; s2uu: 3; PAR: 1 (1); npar: 1; or_counts:_3_5; reors: 56; em: 0 3; o2: 2 2; t1: 2; t2: 20; t3: 11; t4: 6; u_comps: 2 2; u_morecomps_undiv: 0 2 2 4; rov: 0 1 2 2; ruv: 10 5 0 6; oon: 2 2 1 0; uon: 10 11 0 0; rrn: 1 2 2 2 10; prn: 10 10 0 2 0; mismatch: 1; has_nzmod5: 1; has_nzmod6: 0; has_nzmodb: 0; flow5: u244_o334_u122_u244_u334_u113_u244_u113_u113_u244_u244_o122_u113_u334_o334_u113_o334_u113_u122_u113_u244_u122_u122_u244_o244_u113_; or_sum: 15; or0: sames: rrn024: 13; evens: s1s0diff: -3; col: 12; rrn13: 4; ruv13: 11; ruv02: 10; chord_info: (34 0 5) t1(1 0 1) t2(16 0 4) t3(11 0 0) t4(6 0 0); chord_layers: (3 1 0) (3 1 0) (3 4 0) (3 4 0) (4 0 0) (4 0 0); has_2cdcs; taken: 10 10; t5: 12 8; SEAL;
-
-        conj: ruv[0]: 2,4,6,8,10,12,14
-            number of unoriented vertices,
-            with all its edges being poor
 
 
 DONE: "or-s1+s0":
@@ -1057,13 +3350,14 @@ TODO: search snarks, where or_sum is always divisible by 5
 TODO: 28.05g712
     - it's definitely highly symmetric
     - TODO: is it a flower snark?
+        UPD: it is! it has girth 6
     28.05: or: 19 - maximum number, only 1 such snark
     - 556 o6c4c solutions with such number of oriented vertices
     - or_sum: nope; 15; 20; 25; 30; 35; 40; 45; 50; 55;
 
 
 TODO: maximum number of oriented vertices
-    - 26.05: 13
+    - 26.05: 13 (1 snark: g131)
     - 28.05: 19; that's super interesting
         only 1 snark:
         g712 - 556 o6c4c solutions with such number of oriented vertices
@@ -1379,8 +3673,6 @@ done:
 
     - or > 0, малый rich_type_count
         - оказывается rich_type_count бывает 12 (меньше не бывает)
-            - который вроде бы всегда в SEAL
-            - todo: видимо с чем-то совпадает
         conjectures
             - s1s0diff <= 0
                 - 28.05
@@ -1859,9 +4151,6 @@ all_todo:
 
     - глянуть or0, 32.05; или какое-нибудь подмножество
 
-    - todo: на самом деле npar = old_par
-        - наверно это несложно доказать, и это надо сделать
-
     - (вряд ли, но) Можно ещё попробовать сделать genus формулу константой на уровне 1 графа, а не всех графов
 
     - взять or0 графы,
@@ -1967,7 +4256,7 @@ all_todo:
                     - even_t4_matchings: 1, 2, 3
                     - odd_t1_2_factors: 0, 2
                     - or_sum 5 или nope (26.05, 28.05)
-                    s2: 1; em: 3 1; o2: 0 2;
+                    s2: 1; em: 3 1; o2: 0 2; (UPD-TODO: check t3)
                     s2: 1; em: 3 1; o2: 2 0;
                     s2: 1; em: 3 1; o2: 2 3;
                     s2: 2; em: 3 2; o2: 0 1;
@@ -2065,7 +4354,7 @@ all_todo:
                     - во-вторых, контрпримеров остаётся ничтожно мало (по-крайней мере до 26.05)
 
     - бывают ли решения has 2 cdcs? (по коду - как будто бы бывают)
-        - conj: до 28.05 включительно - таких нет
+        - до 28.05 включительно - таких нет
 
     - ещё идея - мб rich ребра разбиваются на четные циклы, надо чередовать по слоям
         - надо глянуть как по слоям рёбра из perfect matching'а раскидываются
@@ -2583,5 +4872,936 @@ DONE: or=3, par=0 vs par=1
 
 
 
-g24: new o6c4c: or: 04; t1+t3: 12; s0: 15; s1: 29; s2: 0; s2uu: 0; PAR: 0; or_type_count: 4; rich_type_count: 24; less: 0; or_counts:_4; rich244:_14_12_12_14_8_10_10_12_10_14; r244odd: 0; reors: 1; em: 3 0; o2: 0 0; t1: 0; t2: 7; t3: 12; t4: 17; u_comps: 5 1; u_morecomps_undiv: 6 6 6 6; rov: 0 0 0 4; ruv: 1 0 11 8; dup_oon: 4 0 0 0; uon: 12 4 4 0; rrn: 0 0 3 16 10; prn: 0 0 3 0 4; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; or0: sames: rrn024: 13; evens: s1s0diff: 14; col: 12; rrn13: 16; ruv13: 8; ruv02: 12; chord_info: (21 12 3) t1(0 0 0) t2(5 2 0) t3(8 4 0) t4(8 6 3); chord_layers: (2 3 2) (2 5 3) (2 5 5) (3 1 0) (3 1 1) (3 3 1); no_2cdcs;
+g24: new o6c4c: or: 04; t1+t3: 12; s0: 15; s1: 29; s2: 0; s2uu: 0; PAR: 0; 
+or_type_count: 4; rich_type_count: 24; less: 0; or_counts:_4; rich244:_14_12_12_14_8_10_10_12_10_14; 
+r244odd: 0; reors: 1; em: 3 0; o2: 0 0; t1: 0; t2: 7; t3: 12; t4: 17; u_comps: 5 1; u_morecomps_undiv: 6 6 6 6; 
+rov: 0 0 0 4; ruv: 1 0 11 8; dup_oon: 4 0 0 0; uon: 12 4 4 0; rrn: 0 0 3 16 10; prn: 0 0 3 0 4; 
+has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; 
+or0: sames: rrn024: 13; evens: s1s0diff: 14; col: 12; rrn13: 16; ruv13: 8; ruv02: 12; 
+chord_info: (21 12 3) t1(0 0 0) t2(5 2 0) t3(8 4 0) t4(8 6 3); 
+chord_layers: (2 3 2) (2 5 3) (2 5 5) (3 1 0) (3 1 1) (3 3 1); 
+no_2cdcs;
 
+
+
+g2: 286 new o6c4c: or: 03; s0: 14; s1: 26; s2: 1; r244odd: 4; PAR: 1; inconsistent; even_lens: 2; zero_lens: 0; no_lens: 4; has_rich_chords; reors: 1; em:_6_2_0_2; o2:_0_2_0_4; t1+t3: 09; or_type_count: 3; or_type_decomp:_1_1_1; rich_type_count: 22; less: 0; or_counts:_3; t1: 0; t2: 10; t3: 9; t4: 17; rov: 0 0 0 3; ruv: 2 2 10 7; uon: 12 9 0 0; rrn: 0 0 6 12 8; prn: 0 2 4 2 2; orverts:_12_18_22_; has_nz5: 0; mismatch: 0; has_nzmod5: 0; has_nzmod6: 1; has_nzmodb: 0; flow5: nope; or_sum: nope; rrn024: 14; s1s0diff: 12; ruv13: 9; evens: col: 12; rrn13: 12; ruv02: 12; chord_info: (15 18 3) t1(0 0 0) t2(4 6 0) t3(7 0 2) t4(4 12 1); done; no_2cdcs; no_2richcdcs;
+
+vs
+
+g18: 120 new o6c4c: or: 03; s0: 15; s1: 27; s2: 2; r244odd: 4; PAR: 0; inconsistent; even_lens: 2; zero_lens: 0; no_lens: 4; has_rich_chords; reors: 1; em:_6_4_0_1; o2:_0_2_0_4; t1+t3: 09; or_type_count: 3; or_type_decomp:_1_1_1; rich_type_count: 24; less: 0; or_counts:_3; t1: 0; t2: 9; t3: 9; t4: 18; rov: 0 0 0 3; ruv: 1 2 11 7; uon: 15 3 3 0; rrn: 0 2 3 14 8; prn: 0 1 3 1 4; orverts:_14_19_20_; has_nz5: 1; mismatch: 0; has_nzmod5: 1; has_nzmod6: 1; has_nzmodb: 1; flow5: u113_u334_u334_u334_u244_u122_u244_u113_u122_u244_u122_u113_u244_u113_o334_u122_u122_u244_u122_o334_o334_u122_u334_u113_; or_sum: 12; rrn024: 11; s1s0diff: 12; ruv13: 9; evens: col: 12; rrn13: 16; ruv02: 12; chord_info: (21 12 3) t1(0 0 0) t2(7 2 0) t3(5 4 0) t4(9 6 3); done; no_2cdcs; no_2richcdcs;
+
+
+
+1; 4; 14; 32; 11;
+1; 4; 16; 36; 10;
+1; 4; 18; 36; 11;
+1; 4; 18; 38; 06;
+1; 4; 20; 38; 07;
+=>
+7;  16; 11
+8;  18; 10
+9;  18; 11
+9;  19; 6
+10; 19; 7
+
+
+
+0; 0; 16; 39; 09;
+0; 0; 18; 31; 11;
+0; 0; 18; 37; 07;
+0; 0; 18; 39; 09;
+0; 0; 20; 39; 07;
+0; 0; 20; 39; 09;
+0; 0; 22; 39; 07;
+0; 0; 22; 39; 09;
+2; 4; 18; 31; 11;
+2; 4; 18; 35; 09;
+2; 4; 18; 35; 11;
+2; 4; 18; 37; 07;
+2; 4; 20; 35; 09;
+2; 4; 20; 37; 09;
+1; 6; 16; 37; 09;
+1; 6; 18; 31; 11;
+1; 6; 18; 37; 09;
+1; 6; 22; 37; 09;
+first 2 columns reduce to 0 =>
+    s1 is odd
+    or is odd
+1; 4; 14; 32; 11;
+1; 4; 16; 36; 10;
+1; 4; 18; 36; 11;
+1; 4; 18; 38; 06;
+1; 4; 20; 38; 07;
+2; 6; 16; 36; 10;
+2; 6; 18; 36; 10;
+3; 0; 16; 36; 08;
+first 2 columns reduce to 1 =>
+    s1 is even
+    or is various, but it matches (s0+s1)%2 in parity
+
+
+
+
+28.05
+
+
+0; 0; 12; 27; 19;
+0; 0; 16; 39; 11;
+0; 0; 18; 39; 09;
+0; 0; 18; 39; 11;
+0; 0; 20; 33; 13;
+0; 0; 20; 37; 13;
+0; 0; 20; 39; 09;
+0; 0; 20; 39; 11;
+0; 0; 22; 39; 09;
+0; 0; 22; 39; 11;
+0; 0; 24; 39; 09;
+0; 0; 24; 39; 11;
+1; 6; 14; 37; 11;
+1; 6; 14; 37; 12;
+1; 6; 16; 35; 11;
+1; 6; 16; 37; 11;
+1; 6; 16; 39; 10;
+1; 6; 18; 35; 11;
+1; 6; 18; 37; 11;
+1; 6; 18; 39; 09;
+1; 6; 18; 39; 10;
+1; 6; 18; 39; 11;
+1; 6; 20; 37; 11;
+1; 6; 20; 39; 10;
+1; 6; 20; 39; 11;
+1; 6; 22; 39; 09;
+1; 6; 22; 39; 11;
+2; 4; 12; 35; 13;
+2; 4; 16; 37; 10;
+2; 4; 16; 37; 11;
+2; 4; 16; 37; 12;
+2; 4; 16; 39; 09;
+2; 4; 18; 35; 11;
+2; 4; 18; 37; 11;
+2; 4; 18; 37; 12;
+2; 4; 18; 39; 10;
+2; 4; 18; 39; 11;
+2; 4; 18; 41; 08;
+2; 4; 18; 41; 11;
+2; 4; 20; 35; 13;
+2; 4; 20; 37; 11;
+2; 4; 20; 39; 09;
+2; 4; 20; 41; 08;
+2; 4; 20; 41; 09;
+2; 4; 22; 41; 09;
+2; 4; 22; 41; 11;
+3; 10; 18; 39; 11;
+first 2 columns reduce to 0 =>
+    s1 is odd
+    or is various; no logic here
+
+
+1; 4; 12; 32; 13;
+1; 4; 12; 38; 10;
+1; 4; 14; 36; 12;
+1; 4; 14; 38; 10;
+1; 4; 14; 40; 08;
+1; 4; 16; 34; 14;
+1; 4; 16; 36; 11;
+1; 4; 16; 38; 10;
+1; 4; 16; 40; 07;
+1; 4; 16; 40; 08;
+1; 4; 16; 40; 09;
+1; 4; 16; 40; 11;
+1; 4; 18; 32; 13;
+1; 4; 18; 34; 12;
+1; 4; 18; 34; 13;
+1; 4; 18; 36; 11;
+1; 4; 18; 36; 12;
+1; 4; 18; 36; 13;
+1; 4; 18; 38; 09;
+1; 4; 18; 38; 10;
+1; 4; 18; 38; 11;
+1; 4; 18; 38; 12;
+1; 4; 18; 40; 07;
+1; 4; 18; 40; 08;
+1; 4; 18; 40; 09;
+1; 4; 18; 40; 10;
+1; 4; 18; 40; 11;
+1; 4; 20; 38; 11;
+1; 4; 20; 40; 07;
+1; 4; 20; 40; 08;
+1; 4; 20; 40; 09;
+1; 4; 20; 40; 11;
+1; 4; 22; 36; 13;
+1; 4; 22; 38; 09;
+1; 4; 22; 38; 11;
+1; 4; 22; 38; 12;
+1; 4; 22; 40; 09;
+1; 4; 22; 40; 11;
+1; 4; 24; 38; 11;
+1; 4; 24; 40; 09;
+1; 4; 24; 40; 11;
+2; 6; 16; 36; 12;
+2; 6; 16; 38; 09;
+2; 6; 16; 38; 10;
+2; 6; 18; 34; 12;
+2; 6; 18; 34; 13;
+2; 6; 18; 36; 11;
+2; 6; 18; 38; 09;
+2; 6; 18; 38; 10;
+2; 6; 18; 40; 10;
+2; 6; 18; 40; 11;
+2; 6; 20; 36; 11;
+2; 6; 20; 40; 08;
+2; 6; 20; 40; 10;
+2; 6; 22; 38; 12;
+3; 0; 16; 36; 11;
+3; 0; 18; 36; 10;
+3; 0; 18; 36; 11;
+3; 0; 18; 36; 12;
+3; 0; 18; 36; 13;
+3; 0; 18; 38; 11;
+3; 0; 18; 40; 07;
+3; 0; 18; 40; 09;
+3; 0; 20; 30; 14;
+3; 0; 20; 36; 12;
+3; 0; 22; 36; 13;
+
+t2=0:
+    28.05
+    or: 08; s0: 20; s1: 41; t4=19
+    or: 09; s0: 20; s1: 41; t4=16
+
+    or: 10; s0: 18; s1: 40; t4=14
+    or: 11; s0: 18; s1: 40; t4=11
+
+
+
+- s1 - number of rich edges
+- s2 - depends on rich edges in PMs
+- r244_odd_count - depends on rich edges in all possible 244-even-cycles
+so, there's some connection between s2 and r244_odd_count
+if s1 is even:
+    s2 r244_odd_count
+    0  6
+    0  10
+    1  0
+    1  4
+    2  6
+    2  10
+    3  0
+    3  4
+if s1=0 => s2=3, r244_odd_count=0; so it's a nice inductive basis
+if rich edge is in r244, then it's in 0 or 2 pms out of chosen 3
+
+
+
+-= layer_flow[cur_layer][e] * (threshold + 1)
+
+
+## o333-flows
+Some snarks (maybe more than half of them) also have o333-flows:
+- 10 vertices: g1
+- 18 vertices: g1,g2
+- 20 vertices: g2-g5
+- 22 vertices: g1,g2,g4-g6,g8-g10,g13,g15-g18
+- 24 vertices: g2,g4-g15,g18-g20,g22,g23,g26,g29,g32-g34,g38
+
+
+
+
+10.05g1-18
+frac_weights_in_layer_order: 0 1 4 0 2 8
+frac_weights_in_layer_order: 0 1 -8 0 -4 2
+frac_weights_in_layer_order: 0 1 -2 0 -4 8
+frac_weights_in_layer_order: 0 0 1 1 -1 -1
+frac_weights_in_layer_order: 0 1 -1 0 -2 2
+frac_weights_in_layer_order: 1 -3 3 -1 5 -5
+
+nz5:
+0-4: -1-4+2 => -1
+4-2: -4+2+8 => 2
+2-7: -1+2+8 => 3
+7-6: 4+2    => 2
+6-1: 1+4-8  => -1
+1-5: 1+4-2 => 1
+5-3: 4-2-8 => -2
+3-8: -1-2 => -1
+8-0: -4-8 => -4
+9-8: 1-4+2-8 => -3
+9-2: -1+4 => 1
+9-1: -2+8 => 2
+4-5: -1-8 => -3
+3-7: 1+4-8 => -1
+6-0: -1+2+8 => 3
+
+333flows:
+8+1: 8-9, 8-3, 8-0, 1-9, 1-5, 1-6, 0-4, 4-5, 6-7, 7-3
+    so, no 2-9, 2-4, 2-7, 3-5, 0-6 (also notice: 0-6, 3-5, 2-9 have same Petersen colour)
+        4-2:   +2-4+8 => 2
+        2-7: -1+2  +8 => 3
+        9-2: -1  +4   => 1
+        6-0: -1+2  +8 => 3
+        3-5:   +2-4+8 => 2
+        ok, i don't see a pattern here
+
+    let's try to look at weights in 333-flow
+    weight 1: 8-9, 9-1 + 8-0, 0-4, 4-5, 5-1
+        8-9: -1-2+4+8 => 3
+        9-1:   -2  +8 => 2
+        +
+        8-0:     -4-8 => -4
+        0-4: -1+2-4   => -1
+        4-5: -1    -8 => -3
+        5-1: -1+2-4   => -1
+    weight 2: 1-6, 6-7, 7-3, 3-8
+        1-6: -1  -4+8 => 1
+        6-7:   -2-4   => -2
+        7-3: -1  -4+8 => 1
+        3-8: -1-2     => -1
+    ok, here we have a pattern, kind-of, nice
+        if we take -1-2-4+8 mask, we get edges from weight 2, and 9-1 edge
+            and no edge from left out edges
+        if we take -1+2-4-8 mask, we get edges from 8-0-4-5-1 path
+            and no edge from left out edges
+
+8+2: TODO
+1+2: TODO
+
+frac_weights_in_layer_order: 0 1 4 0 2 8
+    oh, interesting stuff!
+    what if we take (-1,0,0,1,0,0) weights? for the 6 layers
+        - we get rid of oriented vertex 8
+            - and get rid of 2 more edges, exactly which we don't need: 4-5 and 6-7
+        - weight 2 is path 2 between oriented vertices 1 and 2: 1-9-2
+        - weight 1 is everything else, which is also what we need
+    what if we take (0,0,0,0,1,-1) weights? for the 6 layers
+        same story!
+    nice!
+
+
+
+
+18.0g1-52:
+    frac_weights_in_layer_order: 0 1 4 2 0 8
+
+    g1: 52 new o6c4c: or: 07; s0: 12; s1: 22; s2: 1; r244odd: 4; PAR: 1; has_all_3flows:_1; or_as_unor_triples_244_count:_0; nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_nz5:_0; has_frac_nz5:_1_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0; mismatch:_1; has_nzmod5:_1; has_nzmod6:_0; has_nzmodb:_0; flow5: o334_u334_u244_o122_o113_u244_u122_u334_u113_u113_u334_o244_u122_o244_u113_o244_o122_u113_; or_sum: 15; inconsistent; even_lens: 0; zero_lens: 0; no_lens: 4; has_rich_chords; npar: 1; reors: 1; em:_2_0_x_2; o2:_2_0_x_4; t1+t3: 19; or_type_count: 5; or_type_decomp:_1_1_1_2_2; rich_type_count: 20; less: 0; or_counts:_7; t1: 2; t2: 3; t3: 17; t4: 5; rov: 0 0 4 3; ruv: 0 0 6 5; uon: 0 6 4 1; rrn: 0 0 4 12 6; prn: 0 0 0 0 5; orverts:_0_3_4_11_13_15_16_; rrn024: 10; s1s0diff: 10; ruv13: 5; evens: col: 12; rrn13: 12; ruv02: 6; chord_info: (13 12 2) t1(2 0 0) t2(3 0 0) t3(8 8 1) t4(0 4 1); done; no_2cdcs; no_2richcdcs;
+
+
+
+
+20.05g1-2:
+    it doesn't have o333flows, probably
+    frac_weights_in_layer_order: 0 1 4 0 2 8
+
+    g1: 2 new o6c4c: or: 08; s0: 12; s1: 22; s2: 1; r244odd: 4; PAR: 1; has_all_3flows:_1; or_as_unor_triples_244_count:_0; nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_nz5:_0; has_frac_nz5:_1_0_0_0_0_0_0_0; bal1:_0; bal2:_0; bal3:_0; mismatch:_1; has_nzmod5:_1; has_nzmod6:_0; has_nzmodb:_0; flow5: o122_o334_o122_o244_o334_o122_u122_u113_u334_u113_u334_u244_u334_o122_u244_u334_u334_o122_u122_u113_; or_sum: 15; inconsistent; even_lens: 0; zero_lens: 0; no_lens: 8; has_rich_chords; npar: 1; reors: 1; em:_0_4_x_1; o2:_0_2_x_4; t1+t3: 21; or_type_count: 4; or_type_decomp:_1_1_1_5; rich_type_count: 18; less: 0; or_counts:_8; t1: 3; t2: 5; t3: 18; t4: 4; rov: 1 0 3 4; ruv: 0 2 6 4; uon: 0 6 6 0; rrn: 0 0 6 10 6; prn: 0 0 4 2 2; orverts:_0_1_2_3_4_5_13_17_; rrn024: 12; s1s0diff: 10; ruv13: 6; evens: col: 12; rrn13: 10; ruv02: 6; chord_info: (21 6 3) t1(3 0 0) t2(4 0 1) t3(12 6 0) t4(2 0 2); done; no_2cdcs; has_2richcdcs;
+
+
+26.05:
+rv:_0_0_10_16; aon:_12_10_4_0; s0: 12;
+rv:_0_0_10_16; aon:_12_10_4_0; s0: 13;
+
+
+nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; has_nzmod6:_1; has_nzmodb:_0; has_all_3flows:_0;
+nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; has_nzmod6:_1; has_nzmodb:_0; has_all_3flows:_1;
++
+nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; has_nzmod6:_1; has_nzmodb:_1; has_all_3flows:_0;
+nz5ws:_0_0_1_1_2_2; nzmod5ws:_0_0_1_1_2_2; has_nzmod6:_1; has_nzmodb:_1; has_all_3flows:_1;
++
+nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_nzmod6:_0; has_nzmodb:_0; has_all_3flows:_0;
+nz5ws:_none; nzmod5ws:_0_0_1_2_3_4; has_nzmod6:_0; has_nzmodb:_0; has_all_3flows:_1;
++
+nz5ws:_none; nzmod5ws:_none; has_nzmod6:_0; has_nzmodb:_0; has_all_3flows:_0;
+nz5ws:_none; nzmod5ws:_none; has_nzmod6:_0; has_nzmodb:_0; has_all_3flows:_1;
++
+nz5ws:_none; nzmod5ws:_none; has_nzmod6:_1; has_nzmodb:_0; has_all_3flows:_0;
+nz5ws:_none; nzmod5ws:_none; has_nzmod6:_1; has_nzmodb:_0; has_all_3flows:_1;
+
+but the main idea is that nz-mod5 or nz-mod6 don't guarantee 3-flows
+
+
+15-18-19-13-6
+6-13-19-16-12
+12-16-19-18-10
+10-18-19-13-14
+14-13-19-16-17
+17-16-19-18-15
+
+22.05: g1-g4, g7-g20
+
+
+1 0: 0
+    e1 e0: 10 0 14 19 18
+    18 19 14: e29 e25
+    ...
+true
+true
+true
+true
+2 0: 0
+true
+15 22: 1
+21 28: 0
+true
+23 22: 0
+true
+26 25: 1
+27 28: 1
+29 25: 0
+
+g5
+Printing graph:
+0:      14(e0)  10(e1)  3(e2)
+1:      9(e3)   5(e4)   6(e5)
+2:      7(e6)   4(e7)   9(e8)
+3:      0(e2)   5(e9)   7(e10)
+4:      2(e7)   13(e11) 5(e12)
+5:      1(e4)   3(e9)   4(e12)
+6:      1(e5)   8(e13)  7(e14)
+7:      2(e6)   3(e10)  6(e14)
+8:      6(e13)  12(e15) 15(e16)
+9:      1(e3)   2(e8)   11(e17)
+10:     0(e1)   13(e18) 18(e19)
+11:     9(e17)  15(e20) 16(e21)
+12:     8(e15)  17(e22) 13(e23)
+13:     4(e11)  10(e18) 12(e23)
+14:     0(e0)   17(e24) 19(e25)
+15:     8(e16)  11(e20) 19(e26)
+16:     11(e21) 18(e27) 17(e28)
+17:     12(e22) 14(e24) 16(e28)
+18:     10(e19) 16(e27) 19(e29)
+19:     14(e25) 15(e26) 18(e29)
+
+
+
+- TODO: rich_edge_pair_evens=0:
+    26.05:
+        parity=1
+        r244odd: 0,4
+        s0 even
+        r244odd=0 => s2=0,3
+        r244odd=4 => s2=1
+        or+s1=0 (mod 2)
+        s1+s2=1 (mod 2)
+        simpler: 12,14,15
+    +
+    also_pet => rich_edge_pair_evens=0,12,14
+        with corresponding "simpler" value
+
+
+or=0:
+    parity=1:
+        s0 = s1 (mod 2)
+        s2 = 3    
+    r244odd=0,10;
+        r244odd/2 = s0 (mod 2)
+has 2cdcs (in o6c4c):
+    parity=1:
+        s0 even
+        s1+s2=1 (mod 2)
+    or+s1=0 (mod 2)
+    r244odd=0
+rich_edge_pair_evens=0:
+    parity=1:
+        s0 even
+        s1+s2=1 (mod 2)
+    or+s1=0 (mod 2)
+    r244odd: 0,4
+        r244odd=0 => s2=0,3
+        r244odd=4 => s2=1
+mappable:
+    s1+s2 = 1 (mod 2)
+        - NOTE: parity can be anything
+    s2: 0, 3
+    r244odd=0
+
+
+26.05  +partial 28.05
+    or=0
+        nz5ws:000123; nzmod5ws:000123; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+        nz5ws:noonee; nzmod5ws:noonee; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+        nz5ws:noonee; nzmod5ws:noonee; nz6ws:000124; nzmod6ws:000124; has_frac_nz5:00000000;
+        nz5ws:noonee; nzmod5ws:noonee; nz6ws:noonee; nzmod6ws:noonee; has_frac_nz5:00000000;
+
+    or_counts=0, or!=0:
+        nz5ws:001122; nzmod5ws:001122; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:10010010;
+        nz5ws:noonee; nzmod5ws:001234; nz6ws:noonee; nzmod6ws:noonee; has_frac_nz5:10000000;
+        nz5ws:noonee; nzmod5ws:noonee; nz6ws:000123; nzmod6ws:000123; has_frac_nz5:00000000;
+        nz5ws:noonee; nzmod5ws:noonee; nz6ws:noonee; nzmod6ws:noonee; has_frac_nz5:00000000;
+
+    in general
+        nz5ws:001122; nzmod5ws:001122; has_frac_nz5:10010010;
+        nz5ws:noonee; nzmod5ws:001234; has_frac_nz5:10000000;
+        nz5ws:noonee; nzmod5ws:001234; has_frac_nz5:00000000;
+        +
+        nz5ws:000113; nzmod5ws:000113; has_frac_nz5:00000000;
+        nz5ws:000122; nzmod5ws:000122; has_frac_nz5:00000000;
+        nz5ws:000123; nzmod5ws:000123; has_frac_nz5:00000000;
+        nz5ws:001122; nzmod5ws:001122; has_frac_nz5:00000000;
+        nz5ws:011223; nzmod5ws:001124; has_frac_nz5:00000000;
+        nz5ws:011223; nzmod5ws:001233; has_frac_nz5:00000000;
+        nz5ws:011223; nzmod5ws:011223; has_frac_nz5:00000000;
+        nz5ws:012234; nzmod5ws:001234; has_frac_nz5:00000000;
+        nz5ws:noonee; nzmod5ws:noonee; has_frac_nz5:00000000;
+
+
+? or=0
+ 6 r244 0 1 2: (1,9) (3,5) (9,11) (14,19) (16,18) (18,19)
+    cycle: 1-9-11-(p)-16-18-19-14-(p)-0-(p)-3-5-(p)-1
+    "pm": 1-6, 9-2, 11-15, 16-17, 18-10, 19-15, 14-17, 0-10, 3-7, 5-4
+ 8 r244 0 1 3: (0,10) (1,9) (2,7) (2,9) (3,5) (3,7) (12,13) (14,17)
+ 8 r244 0 1 4: (1,9) (1,6) (2,4) (2,9) (3,5) (4,5) (14,19) (15,19)
+16 r244 0 1 5: (0,10) (1,9) (1,6) (3,5) (3,7) (4,13) (4,5) (6,7) (8,12) (9,11) (10,18) (11,15) (12,13) (14,17) (16,18) (16,17)
+    14-17-16-18-10-0-(p)-14
+    15-11-9-1-6-7-3-5-4-13-12-8-(p)-15
+ 6 r244 0 2 3: (1,6) (4,13) (4,5) (10,18) (15,19) (18,19)
+10 r244 0 2 4: (0,10) (2,7) (2,4) (3,7) (4,13) (10,18) (12,13) (14,17) (14,19) (18,19)
+10 r244 0 2 5: (2,7) (2,9) (6,7) (8,12) (9,11) (11,15) (15,19) (16,18) (16,17) (18,19)
+ 6 r244 0 3 4: (2,4) (2,9) (4,13) (9,11) (10,18) (16,18)
+10 r244 0 3 5: (0,10) (3,7) (6,7) (8,12) (11,15) (12,13) (14,17) (14,19) (15,19) (16,17)
+ 8 r244 0 4 5: (1,6) (2,7) (2,4) (4,5) (6,7) (8,12) (11,15) (16,17)
+
+what if we count twice covered edges too?
+    r244 0+1+2: (1,9) (3,5) (9,11) (14,19) (16,18) (18,19)
+        rich:
+            11-9-1
+            5-3
+            14-19-18-16
+        poor:
+            ...
+        twice rich:
+            8-12-13-4-2-7-6
+        twice poor:
+            ...
+    r244 0+1+3: (0,10) (1,9) (2,7) (2,9) (3,5) (3,7) (12,13) (14,17)
+        rich:
+            10-0
+            1-9-2-7-3-5
+            12-13
+            14-17
+        poor:
+            ...
+        twice rich:
+            11-15-19-18-16
+            ...
+        twice poor:
+            16-11
+            ...
+what happens when we switch between r244-cycles?
+    l1+l2+l3 vs l1+l2+l4
+    +l4-l3
+
+4*s1 = 10*oddness
+doesn't help, we need 1 more factor of 2
+
+problem: r244-cycle is not a single circuit
+
+has_2cdcs, inconsistent, 28.05g700-28
+or: 1,4,8,13,15
+r244 0 2 5: (0,4) (0,14) (1,16) (1,6) (3,5) (3,7) (4,5) (6,10) (7,15) (10,13) (12,16) (12,13) (14,17) (15,17)
+    14-0-4or-5-3-7-15-17
+    part1: 14-0, 3-7
+    part2: 5-3, 17-14
+r244 0 2 3: (1,9) (1,16) (2,4) (4,5) (8,14) (8,22) (12,16) (14,17) (15,18) (15,17)
+    9-1-16-12-5-4-...
+r244 0 1 3: (0,4) (1,9) (1,6) (2,4) (3,8) (3,7) (6,10) (7,15) (8,22) (15,18)
+r244 0 1 4: (0,4) (4,5) (6,10) (7,15) (12,16) (15,17)
+r244 0 1 5: (0,14) (3,8) (3,5) (8,14) (10,13) (12,13)
+r244 0 2 4: (1,16) (1,6) (3,8) (3,7) (8,14) (14,17)
+r244 0 3 5: (2,4) (3,8) (3,5) (4,5) (8,22) (11,13) (12,16) (12,13) (15,18) (15,17)
+r244 0 4 5: (1,9) (1,6) (3,5) (3,7) (11,13) (12,13)
+r244 0 1 2: (0,14) (1,9) (1,16) (10,13) (11,13) (14,17)
+r244 0 3 4: (0,4) (0,14) (2,4) (6,10) (7,15) (8,14) (8,22) (10,13) (11,13) (15,18)
+    14-0-4-2-
+    part1: 
+
+has_2cdcs, 22.05g10-86
+r244 0 1 2: (0,12) (0,4) (1,14) (2,7) (2,9) (4,5) (6,18) (11,16) (12,13) (13,17) (16,19) (18,19)
+or: 2, 4, 13, 18, 20
+    5-4-0-12-13-17-14-1-5
+r244 0 2 3: (0,12) (0,4) (2,7) (6,18) (10,12) (10,20) (18,21) (20,21)    
+    4-0-12-10-20-21-18-6-7-2-4
+r244 0 2 4: (0,12) (0,8) (3,7) (6,15) (10,12) (10,19) (14,15) (16,19)
+r244 0 3 5: (1,14) (2,9) (3,5) (4,5) (8,9) (10,20) (10,19) (11,16) (13,17) (13,21) (16,19) (20,21)
+    1-14-17-13-21-20-10-19-16-11-1
+    4-5-3-8-9-2-4
+    part1: 0-12, 10-19, 11-16, 14-15, 8-9, 3-7
+    part2: 1-14, 10-12, 16-19, 6-15, 0-8, 3-5
+r244 0 2 5: (0,12) (0,8) (3,5) (3,7) (6,15) (8,9) (12,13) (13,21) (15,20) (20,21)
+r244 0 1 3: (0,4) (0,8) (2,7) (3,7) (6,15) (6,18) (10,20) (10,19) (15,20) (18,19)
+r244 0 1 4: (14,15) (15,20) (16,19) (18,21) (18,19) (20,21)
+r244 0 1 5: (3,5) (8,9) (10,12) (10,19) (12,13) (13,21) (18,21) (18,19)
+r244 0 3 4: (1,14) (2,9) (4,5) (10,12) (10,20) (11,16) (12,13) (13,17) (14,15) (15,20)
+r244 0 4 5: (0,4) (0,8) (1,14) (2,7) (2,9) (3,5) (3,7) (4,5) (6,15) (6,18) (8,9) (11,16) (13,17) (13,21) (14,15) (18,21)
+
+
+has_2cdcs, or_as_unor_triples_244_count=0, 20.05g1-12
+r244 0 1 2: (0,10) (0,14) (1,9) (1,6) (2,15) (2,11) (3,8) (3,7) (6,7) (8,9) (10,13) (11,13) (14,17) (15,17)
+    10-13-11-2-15-17-14-0-10
+    6-7-3-8-9-1-6
+r244 0 1 3: (0,10) (0,4) (1,18) (1,6) (4,5) (6,7) (10,13) (12,13) (15,17) (16,17)
+    part1: 0-14, 2-11,
+    part2: 0-10, 2-15,
+    part?: 6-7, 8-9 (at least they switch)
+r244 0 1 4: (0,10) (0,14) (1,18) (1,6) (3,8) (3,19)
+r244 0 1 5: (0,10) (0,4) (1,9) (1,6) (2,4) (2,11)
+r244 0 2 3: (6,7) (8,9) (10,13) (11,13) (14,17) (15,17)
+r244 0 2 4: (0,4) (0,14) (3,8) (3,19) (4,5) (8,9) (11,13) (12,13) (14,17) (16,17)
+    14-0-4-5-16-17-14
+    11-13-12-18-19-3-8-9-11
+    ...
+r244 0 2 5: (1,9) (1,18) (2,4) (2,11) (4,5) (8,9) (11,13) (12,13) (14,17) (16,17)
+    4-5-12-13-11-2-4
+    ...
+r244 0 3 4: (1,9) (1,18) (2,15) (2,11) (3,19) (3,7)
+r244 0 3 5: (0,4) (0,14) (2,15) (2,4) (3,8) (3,7)
+r244 0 4 5: (2,15) (2,4) (3,19) (3,7) (4,5) (6,7) (10,13) (12,13) (15,17) (16,17)
+
+
+or=0, r244cycle, how is it constructed?
+    l1+l2+l3
+    (1,9) (3,5) (9,11) (14,19) (16,18) (18,19)
+    cycle: 1-9-11-(p)-16-18-19-14-(p)-0-(p)-3-5-(p)-1
+    DONE: it's always turning
+        it's easy to try out not to turn and see that it's impossible
+        let's look at some segment
+        16-18-19-14
+            l1: 10-18-16-11
+            l6: 11-16-18-19
+            l2: 19-18-16-17
+            l3: 17-16-18-10
+        NOTE: both options 16-18-19-
+    
+    DONE: segment 19-14-(p)-0-(p)-3-5-(p)-1-9-11
+        reverse it
+        11-9-1-5-3-0-14-19
+        it's all part of same circuit
+
+
+or=0, r244cycle, what is it's dual?
+    some kind of cutset
+
+
+or=0, surface, u444:
+    if we have vertex with 3 rich edges, then it converts to a triangle
+    a closed geodesic,  cycle of length 3
+    going through 3 vertices of degree 4
+    it's a handle, some kind of gluing of opposite edges of polygon, as when we glue the torus
+    so it adds to genus
+    Q: is genus related to number of u444 vertices?
+        no, it's not
+    so, in case of has_2cdcs we can't have such geodesics
+
+    vertex 18:
+    0-10-18-16-11
+    11-16-18-19-15
+    15-19-18-10-0
+
+    NOTE: we could maybe also get a length 6 cycle, if the third goes a different way
+        but it can't go a different way, exactly because all 3 edges are rich
+        NOTE: this is also related to not having has_2cdcs property,
+            because it can't have u444 vertices for similar reasons
+
+    vertex 19:
+    10-18-19-14-0
+    0-14-19-15-11
+    11-15-19-18-10
+
+    vertex 4:
+    9-2-4-13-12
+    12-13-4-5-1
+    1-5-4-2-9
+
+    odd case, 26.05g30-86:
+        vertex 24:
+        8-0-24-25-9
+        9-25-24-12-4
+        4-12-24-0-8
+
+        vertex 4:
+        13-12-4-2-11
+        11-2-4-5-14
+        14-5-4-12-13
+
+        vertex 20:
+        22-16-20-21-17
+        17-21-20-18-1
+        1-18-20-16-22
+
+
+or=0, faces, can we 2-color them?
+    NO
+    - probably not
+        - otherwise we would have has_2cdcs (or has_2richcdcs) situation
+    part1:
+        i, 6-8-15-19-14-17-12-13-4-5-1-6
+        ii, 2-9-11-15-8-12-13-10-0-3-7-6-1-5-4-2
+        iii, 17-16-18-10-13-4-2-7-6-8-12-17
+        iv, 0-14-17-16-11-15-19-18-10-0
+    part2:
+        i, 10-18-16-11-9-2-7-3-0-10
+        ii, 18-16-17-14-19-18
+        iii, 0-14-19-15-11-9-1-5-3-0
+
+
+or=0, faces, can we 3-color them?
+    UPD: no, we can't, although it's tedious to check
+    in the example below we have problem with "2-7-3" and "3-7-2", both in part2
+    we need to check the u444 vertices:
+        2, 4, 7, 9, 18, 19
+    part1:
+        i, 6-8-15-19-14-17-12-13-4-5-1-6
+        iii, 17-16-18-10-13-4-2-7-6-8-12-17
+        iv, 0-14-17-16-11-15-19-18-10-0
+    part2:
+        ii, 17-14-19-18-16-17
+        iii, 0-14-19-15-11-9-1-5-3-0
+        i, 0-10-18-16-11-9-2-7-3-0
+        v, 9-1-6-7-2-9
+        vi, 0-10-13-12-17-14-0
+        vi, 2-4-5-3-7-2
+    part3:
+        vi, 11-16-18-19-15-8-6-1-9-11
+        v, 0-3-5-4-13-10-18-19-14-0
+        iv, 1-9-2-4-13-12-8-6-7-3-5-1
+        ii, 2-9-11-15-8-12-13-10-0-3-7-6-1-5-4-2
+
+    not part1:
+        v, 8-15-11-16-17-12-8
+        
+
+- DONE: or=0, try other pms, do they also have even number of rich edges?
+    checked on 24.05, not true
+
+
+a+b=c
+a+b-c=0
+
+
+- DONE: or=0; can it be that all r244cycles "homologous" to each other?
+    NOTE: Two cycles are homologous if their symmetric difference is the boundary of a set of faces.
+    and maybe they are homologous to any of the layers of o6c4c
+
+    and probably it's obvious,
+    in the sense that any of the layers is a sum of faces
+
+    TODO: what is "boundary of a set of faces"?
+        is it just a formal Z2 sum of boundaries of faces?
+        if so, I think the proof should be easy
+
+    TODO: if they are homologous, how can I use this fact?
+        do they all have same parity of rich edges in pm?
+
+
+- TODO: can we 2-color the "pm"s by some logic?
+    layer1
+        part1: 
+        part2: 
+
+
+    vertex 18:
+    L1: 0-10-18-16-11
+        18-19
+    L6: 11-16-18-19-15
+        18-10
+    L4: 15-19-18-10-0
+        18-16
+    +
+    L2: 14-19-18-16-17
+        18-10
+    L3: 17-16-18-10-13
+        18-19
+    L5: 13-10-18-19-14
+        18-16
+
+    vertex 19:
+    L1: 8-15-19-14-17
+        19-18
+    L2: 17-14-19-18-16
+        19-15
+    L6: 16-18-19-15-8
+        19-14
+    +
+    L3: 0-14-19-15-11
+        19-18
+    L4: 11-15-19-18-10
+        19-14
+    L5: 10-18-19-14-0
+        19-15
+
+    we have ordered triples, so 20 possible triples
+        no, actually more, because we have pairs of ordered triples
+    so it's 40 possibilities
+        but maybe we can factorize, then it will be 20
+
+19-18
+    18-16
+16-17
+    17-12
+12-8
+    8-15
+15-11
+    11-9
+9-1
+    1-6
+6-7
+    7-3
+3-5
+    5-1
+1-9 second time
+    9-2
+2-4
+    4-5
+5-3 second time
+    3-0
+0-14 poor
+    14-17
+17-16 second time
+    16-11
+11-15 second time
+    15-19
+
+
+Proposition 14. Let G be a bridgeless cubic graph. Then G has an r-flow
+triangulation if and only if G has an (r, 2)-flow.
+
+Also, we noted that it is not clear if every 2-dimensional flow on a cubic graph
+can be represented through a nice flow triangulation.
+    what is nice?
+    Bold sides are of length 1 and dashed ones are always the sides with maximum length.
+    Nevertheless, we do not know
+    whether such a “nice” flow triangulation exists for every 2-dimensional flow.
+
+
+or=0, s2=3
+    what do we know?
+    - we have orientation
+    - we don't have boundaries
+    - we can orient 244-cycles
+    - we have Euler characteristic: s0-s1=2-2*g
+    - this property works for non-snarks also
+    - we can try to prove not s2=3, but for counting rich edges on 2-factor
+        that parity matches s0 or s1
+    - we know without proof that or=2 changes s2 with some kind of control/logic
+    - on the surface, rich edges have degree 4, poor edges split into 2 vertices of degree 2
+        - so we could try to count something about the surface vertex degrees
+    - for nongraph8g2-6-or0-and-has_2cdcs-genus1 we can remake the solution into onlyrich
+    - on 8 vertices there's a nice onlyrich solution
+    - if we duplicate o3cdc, in opposite directions, we get or=0 onlypoor solution
+
+
+or=0, Euler characteristic: s0-s1=2-2*g:
+    it's as if we have some construction,
+        with V=s0, E=s1, F=2*g
+        (g>=5 for snarks)
+    s0-s1+2*g = 2
+    Can we build a polyhedron?
+
+    what if we check some non-snark? with small g, g=1
+        we need to check girth >= 5 in these cases also,
+        because girth=4 is broken
+
+    - or maybe it's (s0+s1) - 2*s1 + 2*g = 2
+
+or=0:
+    - let's try some wild stuff
+    - take surface, poor vertex, degree 2
+    - let's do some surgery
+    - let's remove it actually
+    - okay, nice, we can actually do it, i think consistently,
+        and preserving having o6c4c for new graph, with or=0
+
+
+    V = rich + 2*poor
+        rich=s1=t4
+        poor=t2
+    V = s1 + 2 * t2 = e + t2 = 2*e-s1
+    F = s0
+    E = 3*v = 2*e = 2 * s1 + 2 * t2
+    V-E = t2 - e = -s1
+
+
+15 triples of pairs:
+    12+34+56
+    12+35+46
+    12+36+45
+    same for 13,14,15,16
+    3*5=15 triples
+if we distinguish cyclic order between pairs, then we get 30 triples:
+    12+34+56 different from 12+56+34
+
+
+3 principles:
+    - order inside pair doesn't matter
+        - because naively it seems we can't control it
+    - order between pairs matters
+        - if not - otherwise we have 15 triples, which is problematic
+    - we have swaps of this kind:
+        12+34+56
+        vs
+        14+23+56
+    
+    Q: is this idea even consistent?
+        12+34+56=21+34+56=12+43+56
+        vs
+        14+23+56
+        24+13+56
+        13+24+56
+    no, it's not, as 2 last rows get same color, but shouldn't
+
+okay, wrong principles, maybe
+
+12+34+56
+vs
+12+53+64
+
+
+14+25+36
+15+34+26
+12+34+65
+vs
+25+16+34
+15+34+62
+12+34+56
+
+
+okay, new approach; pair of triples
+now it resembles icosidodecahedron
+UPD: doesn't work naively
+
+how many triple pairs?
+    1a+bc+de
+    5!=120
+
+12+34+56
+vs
+12+53+64
+
+UPD: i got a consistent labeling
+    if we change color during
+        swap pairs +
+        swap 2 numbers between these pairs, which have different indices inside them
+then we get:
+    12+34+56 == 12+56+34
+    12+34+56 != 21+34+56
+    12+34+56 != 13+24+56
+    12+34+56 != 14+23+56
+but then:
+    13+25+46 == 16+23+45
+    which breaks my understanding of nongraph16.04g588-136
+
+
+mappable => r244odd=0
+    - maybe we could try to prove this, instead of or=0 or has_2cdcs?
+    r244, triples 123/456
+    - we build 3 graphs
+        - 2-flow, all circuits even
+        - nz4-flow graph, 3-edge-colourable, colours we take from pms, 123
+        - nz4-flow graph, 3-edge-colourable, colours we take from pms, 456
+    - mappable, means that each circuit has even count of poor edges
+    what does this give us?
+    - seems it doesn't depend on orientation
+        it's interesting, because it seems same for has_2cdcs
+    - TODO: oh, i think we can inductively remove poor edges, and that's it
+        - because we don't need to preserve orientations
+        - and oddness counts would be preserved for all circuits
+    - TODO: and then we just need to prove the base of induction
+
+    - TODO: maybe try 12/34/56 encoding

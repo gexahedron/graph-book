@@ -1,4 +1,12 @@
 Triple Systems (Oxford Mathematical Monographs) Hardcover – 27 May 1999
 https://www.amazon.co.uk/Triple-Systems-Oxford-Mathematical-Monographs/dp/0198535767
 
-Triple systems are among the simplest combinatorial designs, and are a natural generalization of graphs. They have connections with geometry, algebra, group theory, finite fields, and cyclotomy; they have applications in coding theory, cryptography, computer science, and statistics. Triple systems provide in many cases the prototype for deep results in combinatorial design theory; this design theory is permeated by problems that were first understood in the context of triple systems and then generalized. Such a rich set of connections has made the study of triple systems an extensive, but sometimes disjointed, field of combinatorics. This book attempts to survey current knowledge on the subject, to gather together common themes, and to provide an accurate portrait of the huge variety of problems and results. Representative samples of the major syles of proof technique are included, as is a comprehensive bibliography.
+Triple systems are among the simplest combinatorial designs, and are a natural generalization of graphs.
+They have connections with geometry, algebra, group theory, finite fields, and cyclotomy;
+they have applications in coding theory, cryptography, computer science, and statistics.
+Triple systems provide in many cases the prototype for deep results in combinatorial design theory;
+this design theory is permeated by problems that were first understood in the context of triple systems and
+then generalized. Such a rich set of connections has made the study of triple systems an extensive,
+but sometimes disjointed, field of combinatorics. This book attempts to survey current knowledge on the subject,
+to gather together common themes, and to provide an accurate portrait of the huge variety of problems and results.
+Representative samples of the major syles of proof technique are included, as is a comprehensive bibliography.
