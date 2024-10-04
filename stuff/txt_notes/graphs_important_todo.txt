@@ -41,6 +41,9 @@ main TODO:
 
 ====
 
+- ABELIAN TROPICAL COVERS
+  mentions and reformulates nowhere-zero 5-flow
+
 
 todo, поток мыслей, но что-то не склеивается:
   nowhere zero flows

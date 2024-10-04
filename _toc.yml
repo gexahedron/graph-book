@@ -6,4 +6,4 @@ root: intro
 chapters:
 - file: notes/o6c4c
 - file: notes/s2_nz5_flow_counterexample
-
+- file: notes/hypergraphs

@@ -1350,3 +1350,13 @@ o5cdc for Petersen graph:
 
     ok, looks like there are no Beltrami fields for nz5-flows
     at least in this interpretation
+
+
+or=0 => s2=3
+    no idea
+    can we use 12>34>56 encoding to help with this?
+    i don't know
+
+    we also can look at cases of or=2
+    and check how 12>34>56 encoding is affected
+    

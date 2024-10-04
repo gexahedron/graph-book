@@ -1,12 +1,35 @@
+TODO: find more unit vector flows
+    e. g. for all 20.05 graphs
+    - DONE: also check the third 18.05cyc3 graph - is it interesting?
+        (base) ➜  snarkhunter-2.0 git:(main) ✗ ./snarkhunter 18 5 S s C3
+            32 bit mode
+            ./snarkhunter 18 5 S s C2
+            All done, 3 graphs generated with 18 vertices.
+            CPU time: 0.0 seconds.
+        it's because C3, not C4
+        so it's "cyclically 3-edge-connected"
+        - ok, I checked it, looks like it's derivative of Petersen graph
+        and having cyc4 is important for non-trivialness of uvf-flow
+        - I checked one of uvf-o6c4c flows,
+            there 3-cut edges are all poor, all other edges are rich,
+            so I guess it's a gluing of 2 Petersen graphs, with a 3-cut
+
+TODO: Fano colorings of o6c4c solutions, are they interesting?
+
+TODO: colouring defect 3, optimal 3-arrays
+
 DONE! or=0 produces o6cdc
 
-DONE: or=0; rich pm edges from same layer, how are they distributed in o6cdc - in each layer we get even number of them; maybe even on each circuit; maybe it's even obvious how we prove it, actually, let's just follow the circuits and see what rich edges do
+DONE: or=0; rich pm edges from same layer, how are they distributed in o6cdc -
+    in each layer we get even number of them; maybe even on each circuit;
+    maybe it's even obvious how we prove it, actually, let's just follow the circuits and see what rich edges do
 
 
 Problem 7.2. Does there exist a nontrivial snark with defect 3 in which every core hexagon is single-core?
-This problem is particularly interesting from the point of view of Fulkerson’s conjecture. If such a snark did exist, then either its Fulkerson cover would not consist of two
-complementary optimal 3-arrays, or else the snark would provide a counterexample to
-Fulkerson’s conjecture.
+This problem is particularly interesting from the point of view of Fulkerson’s conjecture.
+    If such a snark did exist, then either its Fulkerson cover would not consist of two
+    complementary optimal 3-arrays, or else the snark would provide a counterexample to
+    Fulkerson’s conjecture.
 
 
 TODO: 12>34>56 encoding, symmetries:
@@ -58,8 +81,18 @@ TODO: Concretely, the Tutte-Coxeter graph can be defined from a 4-dimensional sy
     https://github.com/sagemath/sage/pull/38218
 
 
+TODO: or=2
+
+TODO: Fan-Raspaud triples
 
 TODO: circular flow number
+
+TODO:
+    - Snarks with circular flow number 5
+    - Snarks which require at least 5 pms to cover edges
+    + also check paper "Perfect matching index vs. circular flow number of a cubic graph"
+        https://arxiv.org/abs/2008.04775
+    ...
 
 TODO: petersen graph, 9+6+ribbon5x3: can we use it for 2d nz-flow? TODO: check all 3 versions, that are different from 96555 solution
 
@@ -105,6 +138,7 @@ TODO: has_2cdcs, inconsistent => or>=5?
 TODO: has_2cdcs, where there are no pm edges, connecting circuits from same partition
 
 - has_3cdcs
+
 - hypergraphs
 
 TODO: circuits_odd_poor=0,2,4 vs r244odd
@@ -168,3 +202,5 @@ TODO: or=0, t2unor=0: Do we extend to signed graphs? (probably not)
 TODO: or=0, study t2or and t2unor
 
 Todo: or=0, are pms related to 3-coloring?
+
+TODO: r-graphs

@@ -1,6 +1,14 @@
 # Graph Book
 
 jupyter-book stuff:
+TODOs:
+    - add navigation with arrows 
+    - add favicon
+    - remove © Copyright 2023
+    - add numeration
+    - change fonts
+
+
 ## TODO: How to add References
 https://jupyterbook.org/en/stable/content/references.html
 https://jupyterbook.org/en/stable/tutorials/references.html
@@ -17,6 +25,7 @@ https://www.tomasbeuzen.com/python-programming-for-data-science/README.html
 
 
 - understand:
+    - 6c4c progress in last years
     - nz6-flows
     - Z6-connectivity
     - TODO: maybe we could try some structures, with a+b=c?
@@ -24,6 +33,7 @@ https://www.tomasbeuzen.com/python-programming-for-data-science/README.html
         - or something with zero divisors
         - Clifford algebra
         - or something non-commutative, but associative and preserving order as in quaternions
+    - signed graphs
 
 
 - Paper2, on unit vector flows:
@@ -93,7 +103,7 @@ theorems I like:
     Solution of the bipartite analogue of the Oberwolfach problem
     Road coloring Theorem
     Smith's Theorem about hamiltonian cycles
-    Snark Theorem (probably, there's still 1 paper missing for the full proof)
+    Snark Theorem (but there's still 1 paper missing for the full proof)
     Construction of cyclically 6-connected snarks
 
 
@@ -102,7 +112,7 @@ theorems I like:
     https://www.youtube.com/watch?v=rXw1Fb93vlQ
     1. resolving quartic, 10:52
         familiar formulas
-        same as in nz4 flow <=> orientable double 4-cover (theorem 13.1.7)
+        same as in nz4 flow <=> orientable 4-cycle double cover (theorem 13.1.7)
         https://en.wikipedia.org/wiki/Quartic_equation#Galois_theory_and_factorization
     2. Schläfli graph, The intersection graph of the 27 lines on a cubic surface is a locally linear graph that is the complement of the Schläfli graph
         can we find analogue for Petersen graph? I believe we can,
@@ -117,7 +127,6 @@ theorems I like:
     TODO: or dynamically change edge order, based on bruteforce stats
 - render book
 - Work on the paper1
-- build S2 uvf for 18.05g2
 - what is the minimal possible rich-connected-component (judging by edge count)
     - for Petersen colouring
     - for 6c4c
@@ -214,8 +223,8 @@ theorems I like:
 +
 - Graceful labeling, beta+seq
 - graham-haggkvist
-- EPPDC
 - Tree packing, matrix packing
+- EPPDC (good heuristic code, but also on the border of a failure)
 - P1f stuff (mostly failures here)
 
 TODO: or=0 - https://gexahedroet.livejournal.com/18152.html
@@ -360,7 +369,8 @@ TODO: youtube
     - https://www.youtube.com/watch?v=iFNaulZV10k
 
 
-TODO: does having Petersen coloring for snarks imply in some sense having a Petersen graph minor? and if so, proving snark theorem, and if so proving 4CT?
+TODO: does having Petersen coloring for snarks imply in some sense having a Petersen graph minor?
+    and if so, proving snark theorem, and if so proving 4CT?
 
 not CQ Zhang:
 - NP-completeness
@@ -456,7 +466,6 @@ http://www.mat.savba.sk/~kochol/
 
 Open ended questions/neighbour fields:
 - some (flawed) philosophy
-- o5cdc corresponds to some gluing of faces; can we do something similar for o6c4c?
 - tropical geometry; hodge theory of matroids; chip-firing on graphs and Riemann-Roch theory
 - some other research stuff I found with googling, that is related to some keywords
 
